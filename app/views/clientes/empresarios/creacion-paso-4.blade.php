@@ -24,7 +24,7 @@
 		
 		<div class="row">
 		        <center>
-		        <a href="{{ route('atterminos.create') }}" tabindex="1" class="btn btn-info">
+		        <a href="{{ route('atPasoTerminos', $idEmpresa) }}" tabindex="1" class="btn btn-info">
 		        <span class="glyphicon glyphicon-book"> </span>
 		        Crear TDR
 		        </a>
@@ -46,7 +46,7 @@
 					    <div class="col-xs-6">
 					    	<br/>
 					        <center>
-					        <a  href="{{ route('atterminos.index') }}" tabindex="11" class="btn btn-danger">
+					        <a  href="{{ route('empresarios.index') }}" tabindex="11" class="btn btn-danger">
 					        Finalizar
 					        <span class="glyphicon glyphicon-chevron-right"></span>
 					        </a>

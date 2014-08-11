@@ -12,6 +12,10 @@
 </div>
 
 <br/>
+{{ Form::model($empresaEmpresario, array('route' => 'pasoGuardarSocios', 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form')) }}
+
+@include('errores', array('errors' => $errors))
+
 <div class="row">
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
@@ -19,21 +23,35 @@
 			<div class="panel-body">
 			<br/>
 			<br/>
-			{{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
-			
-			<div class="row">
-		        <div class="form-group">
-			        <label for="empresario" class="control-label col-xs-12 col-sm-12 col-md-3 text-right">* Empresario: </label>
-			        <div class="col-md-8">
-			            <input name="empresario" type="text" class="form-control" value="" autofocus="autofocus" tabindex="1" placeholder="Nombre del Empresario">
-			        </div>    
-			    </div>
-			</div>
-			{{ Form::close() }}
+				<div class="row">
+				<div class="col-xs-11">
+				{{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
+			        
+			        <div class="form-group">
+				        {{ Form::label('empresario_id', 'Nombre:', array('class' => 'control-label col-md-3')) }}
+				        <div class="col-md-9">
+				            {{ Form::text('empresario', null, array('placeholder' => 'Nombre del Empresario', 'class' => 'form-control getEmpresario', 'data-url' => 'empresario')) }}
+				            {{ Form::hidden('empresario_id', null) }}
+				        </div>
+				    </div>
+					
+				{{ Form::close() }}
+
+					<div class="form-group">
+		                {{ Form::label('tipo', 'Tipo:', array('class' => 'control-label col-md-3')) }}
+		                <div class="col-md-9">
+		                    {{ Form::select('tipo', array('' => '','1' => 'Empresario','2' => 'Empresaria','3' => 'Propietario','4' => 'Propietaria','5' => 'Representante'), null, array('class' => 'form-control', 'data-placeholder' => 'Seleccione un tipo')) }} 
+		                </div>
+		            </div>
+				</div>
+				</div>
 			<br/>
 			<br/>
 			<br/>
 			<br/>
+
+			{{ Form::hidden('empresa_id', $idEmpresa) }}
+
 
 			<div class="row">
 				    <div class="col-xs-6">
@@ -48,14 +66,15 @@
 				    <div class="col-xs-6">
 				    	<br/>
 				        <center>
-				        <a href="tdr" tabindex="11" class="btn btn-danger">
+				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
 				        Siguiente
 				        <span class="glyphicon glyphicon-chevron-right"></span>
-				        </a>
+				        </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
+				        </button>
 				        </center>
 				    </div>
 			</div>
-			
+			{{ Form::close() }}
 		</div>
 	</div>
 	<div class="col-xs-2"></div>

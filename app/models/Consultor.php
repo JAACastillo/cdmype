@@ -10,6 +10,7 @@ class Consultor extends Eloquent {
         'dui',
         'correo',
         'nombre',
+        'municipio_id',
         'direccion',
         'sexo',
         'telefono',
@@ -51,8 +52,10 @@ class Consultor extends Eloquent {
                 'dui' => 'required|unique:consultores',
                 'nombre' => 'required|max:100',
                 'correo' => 'email|required|max:75|unique:consultores',
+                'municipio_id' => 'required',
                 'direccion' => 'required|max:250',
-                'sexo' => 'required'
+                'sexo' => 'required',
+                'especialidad_id' => 'required'
             );
             
             if ($this->exists) 
@@ -72,7 +75,7 @@ class Consultor extends Eloquent {
         }
 
 
-	/* Relaciones */
+    /* Relaciones */
 
         //
         public function capConsultores() 
@@ -90,7 +93,8 @@ class Consultor extends Eloquent {
             return $this->hasMany('AtConsultor', 'consultor_id');
         }
 
-        public function municipio(){
-            return $this->belongTo('Municipio');
+         public function municipio() 
+        {
+            return $this->belongsTo('Municipio');
         }
 }

@@ -14,7 +14,7 @@ class pasoEmpresaController extends BaseController {
     }
     public function empresaGuardar()
     {
-        $idEmpresa = Input::get('empresario');
+        $idEmpresa = Input::get('empresa_id');
 
         $empresa = Empresa::find($idEmpresa);
         if(!is_null($empresa))

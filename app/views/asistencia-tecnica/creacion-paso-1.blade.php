@@ -22,9 +22,10 @@ AT Paso empresa
 			        
 			        
 			        <div class="form-group">
-				        {{ Form::label('empresario', '* Empresario:', array('class' => 'control-label col-md-4')) }}
+				        {{ Form::label('empresa_id', '* Empresa:', array('class' => 'control-label col-md-4')) }}
                 		<div class="col-md-8">
-                    	{{ Form::text('empresario', $idEmpresa, array('placeholder' => 'Nombre del empresario', 'class' => 'form-control getEmpresario', 'data-url' => 'empresario', 'data-cod' => 'idEmpresario')) }}
+                    	{{ Form::text('empresa_id',null) }}                		
+                    	{{ Form::text('empresa', $idEmpresa, array('placeholder' => 'Nombre de la empresa', 'class' => 'form-control getEmpresa', 'data-url' => 'empresa')) }}
                 		</div>
 				    </div>
 	            </div>
@@ -44,9 +45,11 @@ AT Paso empresa
 				    <div class="col-xs-6">
 				    	<br/>
 				        <center>
-				        <button type="submit" tabindex="11" class="btn btn-danger">
+				        <button type="submit" tabindex="11" class="btn btn-danger ladda_button" data-style="expand-right">
     			        Siguiente
     			        <span class="glyphicon glyphicon-chevron-right"></span>
+    			        <span class="ladda-spinner"></span>
+    			        <span class="lada-spinner"></span>
     			        </button>
 				        </center>
 				    </div>

@@ -50,7 +50,6 @@ class Empresa extends Eloquent {
                 'categoria' => 'required',
                 'nombre' => 'required',
                 'municipio_id' => 'required',
-                'registro_iva' => 'required',
                 'clasificacion' => 'required'
             );
             

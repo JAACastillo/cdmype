@@ -4,26 +4,25 @@
 <!-- Migas de Pan -->
 <ol class="breadcrumb">
   <li><a href="/cdmype/public">CDMYPE</a></li>
-  <li><a href="#"> @yield('cabecera', 'Inicia sesión') </a></li>
-  <li class="active">Listado</li>
+  <li class="active"> @yield('cabecera', 'Inicia sesión') </li>
 </ol>
 
 <div class="row">
-        <div class="col-xs-0 col-sm-1 col-md-1">
+        <div class="col-xs-0 col-sm-0 col-md-1">
             <!-- Izquierda -->
         </div>
-        <div class="col-xs-12 col-sm-10 col-md-12">
+        <div class="col-xs-12 col-sm-12 col-md-10">
             <!-- Panel -->
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <!-- Cabecera -->
                             <div class="row">
-                                <div class="col-xs-0 col-sm-1 col-md-2">
+                                <div class="col-xs-1 col-sm-1 col-md-2">
                                     @yield('boton')
                                 </div>
-                                <div class="col-xs-0 col-sm-1 col-md-8">
+                                <div class="col-xs-11 col-sm-11 col-md-8">
                                     <!-- Cabecera -->
-                                    <center><h1 class="panel-title"> @yield('cabecera', 'Inicia sesión') </h1></center>
+                                    <h1 class="text-center panel-title"> @yield('cabecera', 'Inicia sesión') </h1>
                                 </div>
                             </div>
                             <!-- /Cabecera -->
@@ -38,7 +37,7 @@
                         
                     </div>
         </div>
-        <div class="col-xs-1 col-sm-1 col-md-1">
+        <div class="col-xs-1 col-sm-0 col-md-1">
             <!-- derecha -->
         </div>
 </div>

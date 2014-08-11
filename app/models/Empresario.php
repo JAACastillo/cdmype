@@ -50,10 +50,10 @@ class Empresario extends Eloquent {
                 'nit' => 'required|unique:empresarios',
                 'dui' => 'required|unique:empresarios',
                 'nombre' => 'required|max:100',
-                'municipio' => 'required',
+                'municipio_id' => 'required',
                 'direccion' => 'required|max:250',
                 'sexo' => 'required',
-                'correo' => 'required|email|max:75|unique:empresarios'
+                'correo' => 'email|max:75|unique:empresarios'
             );
             
             if ($this->exists) 

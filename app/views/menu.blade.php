@@ -32,19 +32,13 @@
           </ul>
         </li>
         <li><a href="{{ route('consultores.index') }}">Consultores</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Asistencia Técnica <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ route('asistencia-tecnica.index') }}"><span class="glyphicon glyphicon-book"></span>  Terminos de Referencia</a></li>
-            <li><a href="{{ route('atcontratos.index') }}"><span class="glyphicon glyphicon-file"></span>  Contratos</a></li>
-            <li><a href="{{ route('actas.index') }}"><span class="glyphicon glyphicon-list-alt"></span>  Actas</a></li>
-          </ul>
-        </li>
+        <li><a href="{{ route('asistencia-tecnica.index') }}">Asistencia Técnica</a></li>
+        
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Capacitación <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ route('capterminos.index') }}"><span class="glyphicon glyphicon-book"></span>  Terminos de Referencia</a></li>
-            <li><a href="{{ route('capcontratos.index') }}"><span class="glyphicon glyphicon-file"></span>  Contratos</a></li>
+            <li><a href="{{ route('asistencia-tecnica.index') }}"><span class="glyphicon glyphicon-book"></span>  Terminos de Referencia</a></li>
+            <li><a href="{{ route('asistencia-tecnica.index') }}"><span class="glyphicon glyphicon-file"></span>  Contratos</a></li>
           </ul>
         </li>
       </ul>
@@ -63,11 +57,11 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $Nombre }}<span class="caret">  </span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ route('usuarios.edit', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-pencil"></span>  Editar</a></li>
+            <li><a href="{{ route('editarUsuario', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-pencil"></span>  Editar</a></li>
               @if(Auth::user()->tipo == 'Administrador')
                 <li><a href="{{ route('usuarios.index') }}"><span class="glyphicon glyphicon-user"></span>  Usuarios</a></li>
               @else
-                <li><a href="{{ route('usuarios.show', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-user"></span>  Usuarios</a></li>
+                <li><a href="{{ route('verUsuario', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-user"></span>  Usuarios</a></li>
                @endif
             <li><a href="{{ route('configuraciones.index') }}"><span class="glyphicon glyphicon-wrench"></span>  Configuración</a></li>
             <li class="divider"></li>

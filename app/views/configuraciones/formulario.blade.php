@@ -4,47 +4,53 @@
     Configuraciones
 @stop
 
+@section('nombre')
+    Configuraciones
+@stop
+
 @section('formulario')
 
-{{ Form::model($Configuraciones, array('route' => array('configuraciones.update', $Configuraciones->id), 'method' => 'PATCH', 'class' => 'form-horizontal', 'role' => 'form')) }}
-    <div class="row col-xs-12">
-
-        <div class="form-group">
-            {{ Form::label('nombre', 'Nombre Completo *', array('class' => 'control-label col-md-4')) }}
-            <div class="col-md-8">
-                {{ Form::text('nombre', null, array('placeholder' => 'Nombre Completo', 'class' => 'form-control')) }}
+{{ Form::model($configuraciones, array('route' => array('configuraciones.update', $configuraciones->id), 'method' => 'PATCH', 'class' => 'form-horizontal', 'role' => 'form')) }}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                {{ Form::label('num_bancario', 'Numero Bancario:', array('class' => 'control-label col-md-4')) }}
+                <div class="col-md-6">
+                    {{ Form::text('num_bancario', null, array('placeholder' => 'Nombre Completo', 'class' => 'form-control')) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ Form::label('institucion', 'Institución:', array('class' => 'control-label col-md-4')) }}
+                <div class="col-md-6">
+                    {{ Form::text('institucion', null, array('placeholder' => 'Institución', 'class' => 'form-control')) }}
+                </div>
+            </div>
+            <div class="form-group">
+                {{ Form::label('correo', 'Correo:', array('class' => 'control-label col-md-4')) }}
+                <div class="col-md-6">
+                    {{ Form::text('correo', null, array('placeholder' => 'Correo Electrónico', 'class' => 'form-control')) }}
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            {{ Form::label('email', 'Correo Electrónico *', array('class' => 'control-label col-md-4')) }}
-            <div class="col-md-8">
-                {{ Form::text('email', null, array('placeholder' => 'Correo Electrónico', 'class' => 'form-control')) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ Form::label('password', 'Contraseña *', array('class' => 'control-label col-md-4')) }}
-            <div class="col-md-8">
-                {{ Form::password('password', array('placeholder' => 'Contraseña', 'class' => 'form-control')) }}
-            </div>
-        </div>
-        
     </div>
     <br/>
+    <br/>
     <div class="row">
-    <div class="col-xs-0 col-sm-6 col-md-7">
+    <div class="col-xs-6">
             <!-- Izquierda -->
         <center>
-        <a href="/cdmype/public/">
+        <a href="javascript:history.back()">
         <span class="glyphicon glyphicon-chevron-left"></span>
          Cancelar
         </a>
         </center>
     </div>
-    <div class="col-xs-0 col-sm-6 col-md-5">
+    <div class="col-xs-6">
         <center>
-        <button type="submit" tabindex="11" class="btn btn-danger">
-        <span class="glyphicon glyphicon-floppy-disk"></span>
+        <button type="submit"class="btn btn-primary ladda-button" data-style="expand-right">
+        <span class="glyphicon glyphicon-floppy-disk">&nbsp</span>
          Guardar
+        </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
         </button>
         </center>
 
