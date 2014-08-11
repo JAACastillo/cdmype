@@ -22,7 +22,7 @@
     <body>
         <br/>
         <div class="container">
-
+ 
             @yield('contenido')
 
         </div>
@@ -63,6 +63,13 @@
           $('form').areYouSure( {'message':'Your profile details are not saved!'} )       
           $('form').areYouSure();
    
+   // 'Creado'
+   // 'Enviado'
+   // 'Ofertas Recibidas'
+   // 'Consultor Seleccionado'
+   // 'Contratada'
+   // 'En proceso'
+   // 'Finalizada'
         </script>
 
              <script type="text/javascript">

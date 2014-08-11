@@ -17,7 +17,7 @@
 
 
 <br/>
-{{ Form::model($acta, array('route' => 'actas.store', 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form')) }}
+{{ Form::model($acta, array('method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form')) }}
 @include('errores', array('errors' => $errors))
 <div class="row">
 	<div class="col-xs-2"></div>

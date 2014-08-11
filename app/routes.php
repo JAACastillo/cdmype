@@ -20,7 +20,7 @@
 /* Si esta Logueado */
 
     Route::group(array('before'=>'auth'), function() 
-    {
+    { 
     
     require(__DIR__ . '/routes/configuraciones.php');
     require(__DIR__ . '/routes/usuarios.php');
@@ -35,7 +35,7 @@
         });
     
     /* Cerrar Sesion */
-        Route::get('logout', 'AutenticacionController@get_logOut');
+        Route::get('/logout', 'AutenticacionController@get_logOut');
 
 
        

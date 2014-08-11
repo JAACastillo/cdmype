@@ -38,7 +38,7 @@ class AutenticacionController extends BaseController {
     public function get_logOut() 
     {
         Auth::logout();
-        return Redirect::to('login');
+        return Redirect::to('/');
     }
 
 

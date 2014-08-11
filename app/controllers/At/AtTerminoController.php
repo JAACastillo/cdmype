@@ -46,7 +46,7 @@ class AtTerminoController extends BaseController {
                 return Redirect::route('atPasoOferta', $id2);
                 break;
             case 'Ofertas Recibidas':
-                return Redirect::route('atPasoSeleccionarConsultor', $id2);
+                return Redirect::route(' ', $id2);
                 break;
             case 'Consultor Seleccionado':
                 return Redirect::route('atPasoContrato', $id2);

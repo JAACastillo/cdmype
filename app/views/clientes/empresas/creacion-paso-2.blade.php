@@ -132,8 +132,8 @@
 <script type="text/javascript">
 	
 $('.busqueda').on('click', function(){
-	$('#empresario').toggle("swing");
-	$('.buscar').toggle("swing")
+	$('#empresario').toggle("linear");
+	$('.buscar').toggle("linear")
 })
 
 </script>
