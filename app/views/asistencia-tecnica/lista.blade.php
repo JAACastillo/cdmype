@@ -24,6 +24,9 @@
                 <th>Empresa</th>
                 <th>Area</th>
                 <th>Encargado</th>
+                <th>Inicio</th>
+                <th>Finalización</th>
+                <th>Consultor</th>
                 <th>Estado</th>
                 <th>Opciones</th>
             </tr>
@@ -40,11 +43,14 @@
                 <td>{{ $attermino->empresa->nombre }}</td>
                 <td>{{ $attermino->especialidad->sub_especialidad }}</td>
                 <td>{{ $attermino->usuario->nombre }}</td>
+                <td>@if($attermino->pasoReal > 6) {{ $attermino->contrato->Inicio}} @endif</td>
+                <td>@if($attermino->pasoReal > 6){{ $attermino->contrato->final }} @endif</td>
+                <td>@if($attermino->pasoReal > 5){{ $attermino->consultorSeleccionado->consultor->nombre }} @endif</td>
                 <td>{{ $attermino->estado }}</td>
                 <td>
-                    <a href="{{ route('asistencia-tecnica.edit', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" title="Editar"> </a>
-                    <a href="{{ route('asistencia-tecnica.show', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" title="Ver"> </a>
-                    <a href="{{ route('asistencia-tecnica.destroy', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"> </a>
+                    <a href="{{ route('asistencia-tecnica.edit', array($attermino->id)) }}" class="btn btn-success btn-xs glyphicon glyphicon-pencil" title="Editar"> </a>
+                    <a href="{{ route('asistencia-tecnica.show', array($attermino->id)) }}" class="btn btn-primary btn-xs glyphicon glyphicon-user" title="Ver"> </a>
+                    <a href="{{ route('asistencia-tecnica.destroy', array($attermino->id)) }}" class="btn btn-danger btn-xs glyphicon glyphicon-remove" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"> </a>
                 </td>
             </tr>
             @endforeach

@@ -65,7 +65,7 @@ class SubEspecialidad extends Eloquent {
             return $this->hasmany('AtTermino','subespecialidad_id');
         }
 
-        public function especialidad() 
+        public function especialidades() 
         {
             return $this->belongsTo('Especialidad','especialidad_id');
         }

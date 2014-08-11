@@ -9,7 +9,7 @@
 @stop
 
 @section('boton')
-    <a href="{{ route('crearEmpresario') }}" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Crear una Empresa">
+    <a href="{{ route('empresarios.create') }}" class="btn btn-default">
     <span class="glyphicon glyphicon-briefcase"></span>
     Nuevo
     </a>
@@ -17,11 +17,10 @@
 
 @section('lista')
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-striped">
             <tr class="active">
                 <th class="text-center">Nombre</th>
                 <th class="text-center">Correo Eléctronico</th>
-                <th class="text-center">Municipio</th>
                 <th class="text-center">Opciones</th>
             </tr>
 
@@ -29,12 +28,10 @@
             <tr>
                 <td>{{ $empresario->nombre }}</td>
                 <td class="text-center">{{ $empresario->correo }}</td>
-                <td class="text-center">{{ $empresario->municipio->municipio}}</td>
                 <td class="text-center">
-                    <a href="{{ route('editarEmpresario', array($empresario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
-                    <a href="{{ route('verEmpresario', array($empresario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
-                    <a href="{{ route('eliminarEmpresario', array($empresario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"
-> </a>
+                    <a href="{{ route('empresarios.edit', array($empresario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" title="Editar"> </a>
+                    <a href="{{ route('empresarios.show', array($empresario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" title="Ver"> </a>
+                    <a href="{{ route('empresarios.destroy', array($empresario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"> </a>
                 </td>
             </tr>
             @endforeach

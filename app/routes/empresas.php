@@ -1,27 +1,17 @@
 <?php
 
+//Paso 1
+Route::get('empresas/paso/creacion', ['as' => 'pasoEmpresa', 'uses' => 'EmpresaController@empresa']);
+Route::post('empresas/paso/creacion', ['as' => 'pasoEmpresa', 'uses' => 'EmpresaController@empresaGuardar']);
 
-//Edicion
-Route::get('empresa/edicion/{idEmpresa}', ['as' => 'editarEmpresa', 'uses' => 'EmpresaController@editarEmpresa']);
-Route::post('empresa/actualizacion/{idEmpresa}', ['as' => 'actualizarEmpresa', 'uses' => 'EmpresaController@actualizarEmpresa']);
+//Paso 2
+Route::get('empresas/paso/empresario/{idEmpresa}', ['as' => 'pasoEmpresario', 'uses' => 'EmpresaController@empresario']);
+Route::post('empresas/paso/empresario', ['as' => 'pasoEmpresarioGuardar', 'uses' => 'EmpresaController@empresarioGuardar']);
 
-//Ver
-Route::get('empresa/{idEmpresa}', ['as' => 'verEmpresa', 'uses' => 'EmpresaController@verEmpresa']);
+Route::get('empresas/paso/termino/{idEmpresa}', ['as' => 'pasoTermino', 'uses' => 'EmpresaController@termino']);
 
-//Eliminar
-Route::any('empresa/eliminacion/{idEmpresa}', ['as' => 'eliminarEmpresa', 'uses' => 'EmpresaController@eliminarEmpresa']);
+
 
 Route::resource('empresas','EmpresaController');
 
-//Pasos
-
-	// Empresa
-	Route::get('empresas/paso/creacion', ['as' => 'crearEmpresa', 'uses' => 'EmpresaController@crearEmpresa']);
-	Route::post('empresas/paso/creacion', ['as' => 'guardarEmpresa', 'uses' => 'EmpresaController@guardarEmpresa']);
-
-	// Empresa-Empresario
-	Route::get('empresas/paso/empresario/{idEmpresa}', ['as' => 'pasoEmpresarios', 'uses' => 'EmpresaController@empresario']);
-	Route::post('empresas/paso/empresario', ['as' => 'pasoEmpresariosGuardar', 'uses' => 'EmpresaController@empresarioGuardar']);
-
-	// Termino
-	Route::get('empresas/paso/termino/{idEmpresa}', ['as' => 'pasoTerminoEmpresa', 'uses' => 'EmpresaController@termino']);            
+            

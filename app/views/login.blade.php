@@ -3,11 +3,11 @@
 @section('contenido')
 
     <div class="row">
-        <div class="col-xs-0 col-sm-3">
+        <div class="col-xs-0 col-sm-3 col-md-2">
             <!-- Izquierda -->
         </div>
         
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-6 col-md-8">
         
         @if(Session::has('mensaje_error'))
             <div class="alert alert-danger">
@@ -15,9 +15,11 @@
                     {{ Session::get('mensaje_error') }}
             </div>
         @endif
+
             <!-- Formulario -->
-            {{ Form::open(array('url' => '/login', 'class' => 'form-horizontal', 'id' => 'validado')) }}
+            {{ Form::open(array('url' => '/login', 'class' => 'form-horizontal')) }}
                 <!-- Emcabezado -->
+
                     <center>
                         <img class='img-responsive' src="assets/img/cdmype-logo.jpg">
                     </center>
@@ -32,26 +34,25 @@
                         <br/>
                             <!-- Correo -->                             
                             <div class="form-group">
-                                <label name="correo" class="control-label col-xs-12 col-sm-12 col-md-3">Correo Eléctronico: </label>
+                                <label for="correo" class="control-label col-xs-12 col-sm-12 col-md-3">Correo Eléctronico: </label>
                                 <div class="col-xs-12 col-sm-12 col-md-8">
                                     <div class="input-group">
                                         <span class="input-group-addon glyphicon glyphicon-envelope"></span>
-                                        <input name="correo" type="text" class="form-control" autofocus="autofocus" tabindex="1" placeholder="ejemplo@ejemplo.com" data-vreq='1'>
+                                        <input name="correo" type="text" class="form-control" value="" autofocus="autofocus" tabindex="1" placeholder="ejemplo@ejemplo.com">
                                     </div>    
                                 </div>
                             </div>
                             <!-- Contraseña -->
                             <div class="form-group">
-                                <label name="contrasena" class="control-label col-xs-12 col-sm-12 col-md-3">Contraseña: </label>
+                                <label for="contrasena" class="control-label col-xs-12 col-sm-12 col-md-3">Contraseña: </label>
                                 <div class="col-xs-12 col-sm-12 col-md-8">
                                     <div class="input-group">
                                         <span class="input-group-addon glyphicon glyphicon-lock"></span>
-                                        <input name="contrasena" type="password" class="form-control"tabindex="2" placeholder="Ingrese su contraseña" data-vreq='1'>
+                                        <input name="contrasena" type="password" class="form-control" value="" tabindex="2" placeholder="Ingrese su contraseña">
                                     </div>
                                     <br/>
                                     <div class="input-group">
-
-                                    {{ Form::checkbox('rememberme', true) }}&nbsp
+                                    {{ Form::checkbox('rememberme', true) }}  
                                     {{ Form::label('lblRememberme', 'Recordar contraseña') }}
                                     </div>
                                 </div>
@@ -63,19 +64,20 @@
                                 <div class="col-xs-2"></div>
                                 <div class="col-xs-8">
                                     <!-- Boton -->
-                                    <button type="submit" tabindex="3" class="btn btn-primary btn-lg btn-block ladda-button" data-style="zoom-in">
-                                    <span class="glyphicon glyphicon-ok">&nbsp</span>
+                                    <button type="submit" tabindex="3" class="btn btn-danger btn-lg btn-block">
+                                    <span class="glyphicon glyphicon-ok"></span>
                                      Iniciar sesión
-                                    </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span></button>
+                                    </button>
                                 </div>
                                 <div class="col-xs-2"></div>
                             </div>
                         </div>
                     </div>
             {{form::close()}}
+
         </div>
         
-        <div class="col-xs-1 col-sm-3">
+        <div class="col-xs-1 col-sm-3 col-md-2">
             <!-- derecha -->
         </div>
     </div>

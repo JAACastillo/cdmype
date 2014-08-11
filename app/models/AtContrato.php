@@ -11,13 +11,19 @@ class AtContrato extends Eloquent {
             'aporte',
             //'num_bancario',
             'lugar_firma',
-            'atconsultor_id'
+            'attermino_id'
     );
 
        /* Guardar */
 
         public function guardar($datos,$accion) 
         {
+            $date = strtotime($datos['fecha_inicio']);
+            $datos['fecha_inicio'] = date('Y-m-d', $date);
+
+            $date = strtotime($datos['fecha_final']);
+            $datos['fecha_final'] = date('Y-m-d', $date);
+
             if($this->validar($datos)) 
             {
                 $this->fill($datos);
@@ -29,7 +35,7 @@ class AtContrato extends Eloquent {
                     'usuario_id' => Auth::user()->id,
                     'tabla' => 12,
                     'tabla_id' => $id,
-                    'accion' => $accion
+                    'accion' => $accion 
                 );
                 
                 $bitacora->guardar($campos);
@@ -38,7 +44,21 @@ class AtContrato extends Eloquent {
             return false;
         }
 
-    /* Validaciones */
+
+        //atributos
+
+        public function getInicioAttribute(){
+
+            $date = strtotime($this->fecha_inicio);
+           return date('d/m/Y', $date);
+        }
+        public function getFinalAttribute(){
+
+            $date = strtotime($this->fecha_final);
+           return date('d/m/Y', $date);
+        }
+
+        /* Validaciones */
 
         public function validar($datos) 
         {
@@ -49,7 +69,7 @@ class AtContrato extends Eloquent {
                 'pago' => 'numeric|required',
                 'aporte' => 'numeric|required',
                 'lugar_firma' => 'required',
-                'atconsultor_id' => 'required'
+                'attermino_id' => 'required'
             );
             
             $validador = Validator::make($datos,$reglas);
@@ -64,9 +84,9 @@ class AtContrato extends Eloquent {
 
 	/* RELACIÓN */
 
-        public function atConsultores() 
+        public function terminos() 
         {
-            return $this->belongsTo('AtConsultor','atconsultor_id');
+            return $this->belongsTo('AtTermino','attermino_id');
         }
 
 }

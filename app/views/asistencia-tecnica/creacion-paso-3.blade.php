@@ -2,18 +2,8 @@
 
 @section('escritorio')
 
-<div class="row">
-	<div class="btn-group col-xs-12">
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 1<br/> <strong>Empresa</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 2<br/> <strong>TDR</strong></button>
-		  <button type="button" class="active btn btn-primary col-xs-1">Paso 3<br/> <strong>Consultor</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-2">Paso 4<br/> <strong>Envio de Oferta</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-2">Paso 5<br/> <strong>Agregar Oferta</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-3">Paso 6<br/> <strong>Selección del Consultor</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 7<br/> <strong>Contrato</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 8<br/> <strong>Acta</strong></button>
-	</div>
-</div>
+
+@include('asistencia-tecnica/pasos')
 
 <br/>
 <div class="row">
@@ -21,6 +11,12 @@
 	<div class="col-xs-8">
 	<div class="panel panel-default">
 		<div class="panel-body">
+<?php
+		$accion = array('route' => 'atPasoConsultorGuardar', 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form');
+?>
+		{{ Form::open($accion) }}
+
+			{{Form::hidden('idEmpresa', $id)}}
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="table-responsive">
@@ -40,10 +36,11 @@
 				                <td class="text-center">{{ $consultor->consultor->telefono }}</td>
 				                <td> {{$consultor->especialidad->sub_especialidad}}</td>
 				                <td class="text-center">
-				                    <input type="checkbox" data-content="Seleccionar" checked >
+				                    <input name="consultores[]" type="checkbox" data-content="Seleccionar" value="{{$consultor->consultor->id}}" checked >
 				                </td>
 				            </tr>
 				            @endforeach
+
 	        			</table>
 	    			</div>
     			</div>
@@ -61,13 +58,14 @@
 			    <div class="col-xs-6">
 			    	<br/>
 			        <center>
-			        <a href="attermino-envio-oferta" tabindex="2" class="btn btn-danger">
-			        Siguiente
-			        <span class="glyphicon glyphicon-chevron-right"></span>
-			        </a>
+			        	<button type="submit" tabindex="11" class="btn btn-danger">
+    			        Enviar
+    			        <span class="glyphicon glyphicon-send"></span>
+    			        </button>
 			        </center>
 			    </div>
 			</div>
+		{{ Form::close() }}
 		</div>
 	</div>
 	</div>

@@ -10,35 +10,86 @@ class EmpresarioController extends BaseController {
         return View::make('clientes.empresarios.lista', compact('empresarios'));
 	}
 
-	public function verEmpresario($id)
+	public function create()
+	{
+		$empresario = new Empresario;
+		
+        // Variables
+       $departamentos = Departamento::all()->lists('departamento', 'id');
+        $municipios = Municipio::all()->lists('municipio', 'id');
+
+        return View::make('clientes.empresarios.creacion-paso-1', compact('empresario','departamentos','municipios'));
+	}
+
+
+	public function store()
+	{
+
+        $empresario = new Empresario;
+        $datos = Input::all();
+
+        //Recuperar ultimo registro
+        $id = '1';
+        
+        if($empresario->guardar($datos,'1'))
+        {
+             Session::put('empresario_id', $id);
+             return Redirect::route('Empresario-Empresa.create');  
+        }
+        else
+        { 
+             return Redirect::route('empresarios.create')
+                 ->withInput()
+                 ->withErrors($empresario->errores);
+	    }
+    }
+
+
+	public function show($id)
 	{
         $empresario = Empresario::find($id);
         
         if(is_null($empresario)) 
             App::abort(404);
 
-        return View::make('clientes.empresarios.ver', compact('empresario'));
+        return View::make('clientes.empresarios.ver')
+            ->with('empresario',$empresario);
 	}
 
 
-	public function editarEmpresario($id)
+	public function edit($id)
 	{
         $empresario = Empresario::find($id);
         
-        $sexos = array(1 => 'Mujer', 2 => 'Hombre');
-        $tipos = array(1 => 'Empresaria', 2 => 'Propietaria', 3 => 'Representante', 4 => 'Empresario', 5 => 'Propietario');
-        $departamentos = Departamento::all()->lists('departamento', 'id');
-        $municipios = Municipio::all()->lists('municipio', 'id');
+        $sexos = array(
+            1 => 'Mujer', 
+            2 => 'Hombre'
+        );
+        
+        $tipos = array(
+            1 => 'Empresaria', 
+            2 => 'Propietaria', 
+            3 => 'Representante', 
+            4 => 'Empresario', 
+            5 => 'Propietario'
+        );
+
+        // Variables
+
+        $departamentos = array( 1 => 'Cabañas' );
+        $municipios = array( 1 => 'Ilobasco' );
 
         $empresario->sexo = array_search($empresario->sexo,$sexos);
         $empresario->tipo = array_search($empresario->tipo,$tipos);
-        $empresario->municipio = array_search($empresario->municipio_id, $municipios);
-
-        return View::make('clientes.empresarios.formulario', compact('empresario','departamentos','municipios'));
+        
+        return View::make('clientes.empresarios.formulario')
+            ->with('empresario', $empresario)
+            ->with('departamentos', $departamentos)
+            ->with('municipios', $municipios);
 	}
 
 
-	public function actualizarEmpresario($id)
+	public function update($id)
 	{
         $empresario = Empresario::find($id);
         
@@ -51,12 +102,14 @@ class EmpresarioController extends BaseController {
             return Redirect::route('empresarios.index');
         
         else 
-            return Redirect::back()->withInput()->withErrors($empresario->errores);
+            return Redirect::route('empresarios.edit', $empresario->id)
+                ->withInput()
+                ->withErrors($user->errors);
 	}
 
 
 
-	public function eliminarEmpresario($id)
+	public function destroy($id)
 	{
 		$empresario = Empresario::find($id);
         
@@ -79,112 +132,4 @@ class EmpresarioController extends BaseController {
             return Redirect::route('empresarios.index');
         }
 	}
-
-//Pasos
-
-    //Creacion de la Empresa
-    public function crearEmpresario()
-    {
-        $empresario = new Empresario;
-
-        $departamentos = Departamento::all()->lists('departamento', 'id');
-        $municipios = Municipio::all()->lists('municipio', 'id');
-
-        $accion = array('route' => 'guardarEmpresario', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form');
-
-        return View::make('clientes.empresarios.creacion-paso-1', compact('empresario', 'accion', 'departamentos','municipios'));
-    }
-
-    public function guardarEmpresario()
-    {
-
-        $empresario = new Empresario;
-        $datos = Input::all(); 
-
-        if($empresario->guardar($datos,'1'))
-        {
-            return  Redirect::route('pasoEmpresa', $empresario->id);
-        }
-        else
-        { 
-             return Redirect::back()->withInput()->withErrors($empresario->errores);
-        }
-
-    }
-
-    //Seleccion del Empresario
-    public function empresa( $idEmpresario)
-    {
-        $empresaEmpresario = new empresaEmpresario;
-
-        $empresaEmpresario->empresario_id = $idEmpresario;
-
-        return View::make('clientes.empresarios.creacion-paso-2', compact('empresaEmpresario'));
-    }
-
-
-    public function guardarEmpresa()
-    {
-        $idEmpresa = Input::get('empresa_id');
-
-        $empresa = Empresa::find($idEmpresa);
-        if(!is_null($empresa))
-        {   
-
-            $empresaEmpresario = new EmpresaEmpresario;
-            $datos = Input::all();
-            
-            if($empresaEmpresario->guardar($datos,'1')) 
-                return  Redirect::route('pasoSocios', $idEmpresa);
-            
-            else 
-                return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
-
-        }
-        
-        return Redirect::back()->withInput()->withErrors(['no-existe' => 'Lo siento no he encontrado la Empresa']);
-
-    }
-
-    public function socios($idEmpresa)
-    {
-        $empresaEmpresario = new empresaEmpresario;
-
-        $empresaEmpresario->empresa_id = $idEmpresa;
-
-        return View::make('clientes.empresarios.creacion-paso-3', compact('empresaEmpresario', 'idEmpresa'));
-
-    }
-
-    public function guardarSocios()
-    {
-        $idEmpresa = Input::get('empresa_id');
-
-        $idEmpresario = Input::get('empresario_id');
-
-        $empresario = Empresario::find($idEmpresario);
-        if(!is_null($empresario))
-        {   
-
-            $empresaEmpresario = new EmpresaEmpresario;
-            $datos = Input::all();
-            
-            if($empresaEmpresario->guardar($datos,'1')) 
-                return  Redirect::route('pasoTerminoEmpresario', $idEmpresa);
-            else 
-                return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
-
-        }
-        
-        return Redirect::back()->withInput()->withErrors(['no-existe' => 'Lo siento no he encontrado el empresario']);
-        
-    }
-
-    public function termino($idEmpresa)
-    {
-
-        return View::make('clientes.empresarios.creacion-paso-4', compact('idEmpresa'));
-
-    }
-
 }

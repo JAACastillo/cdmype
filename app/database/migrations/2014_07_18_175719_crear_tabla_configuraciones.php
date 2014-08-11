@@ -9,8 +9,7 @@ class CrearTablaConfiguraciones extends Migration {
 	public function up()
 	{
 		Schema::create('configuraciones',function($table){
-			$table->increments('id');
-			
+
 			$table->string('num_bancario',50);
 			$table->string('institucion',100);
 			$table->string('correo',50);

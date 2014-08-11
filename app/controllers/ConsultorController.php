@@ -5,34 +5,37 @@ class ConsultorController extends BaseController {
 	public function index()
 	{
         $consultores = Consultor::orderBy('nombre','asc')
-            ->with("municipio")
             ->paginate();
-
-        $consultorEspecialidad = ConsultorEspecialidad::all();
         
-        return View::make('consultores.lista', compact('consultores', 'consultorEspecialidad'));
+        return View::make('consultores.lista')
+            ->with('consultores', $consultores);
 	}
 
-	public function crearConsultor()
+	public function create()
 	{
 		$consultor = new Consultor;
-
 		$especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
-        $departamentos = Departamento::all()->lists('departamento', 'id');
-        $municipios = Municipio::all()->lists('municipio', 'id');
-        return View::make('consultores.formulario', compact('consultor','especialidades','departamentos','municipios'));
+        return View::make('consultores.formulario', compact('consultor', 'especialidades'));
 	}
 
 
-	public function guardarConsultor()
+	public function store()
 	{
 
         $consultor = new Consultor;
         $datos = Input::all();
+
+
         $subespecialidades = Input::get('especialidad_id');
+        
+
         
         if($consultor->guardar($datos,'1'))
         {
+
+            // $consultorEs = Consultor::find(1);
+            // $consultor->especialidad()->saveMany($subespecialidades);
+            
             foreach($subespecialidades as $subespecialidad) {
                 $ConsultorEspecialidad = new ConsultorEspecialidad();
                 $ConsultorEspecialidad->consultor_id = $consultor->id;
@@ -44,46 +47,43 @@ class ConsultorController extends BaseController {
         }
         else
         { 
-            return Redirect::back()->withInput()->withErrors($consultor->errores);
+            return Redirect::route('consultores.create')
+                ->withInput()
+                ->withErrors($consultor->errores);
         }
 	}
 
-	public function verConsultor($id)
+	public function show($id)
 	{
         $consultor = Consultor::find($id);
 
         if(is_null($consultor)) 
             App::abort(404);
         
-        return View::make('consultores.ver', compact('consultor'));
+        return View::make('consultores.ver')
+            ->with('consultor',$consultor);
 	}
 
 
-	public function editarConsultor($id)
+	public function edit($id)
 	{
         $consultor = Consultor::find($id);
+        
         if(is_null($consultor)) 
             App::abort(404);
         
-        $consultorEspecialidad = ConsultorEspecialidad::Where('consultor_id', '=', $id)->get();
-        $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
-        $departamentos = Departamento::all()->lists('departamento', 'id');
-        $municipios = Municipio::all()->lists('municipio', 'id');      
-        $dataSexo = array(1 => 'Mujer', 2 => 'Hombre');
-
-        foreach ($consultorEspecialidad as $item) 
-        {
-            $datos[] = $item->subespecialidad_id;
-        }
-        $consultor->especialidades = $datos;
-        $consultor->sexo = array_search($consultor->sexo, $dataSexo);
-        $consultor->municipio = array_search($consultor->municipio_id, $municipios);
-
-        return View::make('consultores.formulario', compact('consultor', 'especialidades','departamentos','municipios'));
+        $dataSexo = array(
+            1 => 'Mujer', 
+            2 => 'Hombre'
+        );
+        
+        $consultor->sexo = array_search($consultor->sexo,$dataSexo);
+        return View::make('consultores.formulario')
+            ->with('consultor',$consultor);
 	}
 
 
-	public function actualizarConsultor($id)
+	public function update($id)
 	{
         $consultor = Consultor::find($id);
         
@@ -91,22 +91,17 @@ class ConsultorController extends BaseController {
             App::abort(404);
         
         $datos = Input::all();
-        $subespecialidades = Input::get('especialidad_id');
-
-        if($consultor->guardar($datos,'2')){
-
-            if($this->actualizarEspecialidades($id,$subespecialidades)){
-                return Redirect::route('consultores.index');
-            }
-            else{
-                return Redirect::back()->withInput()->withErrors(['Error' => 'No se han podido actualizar las especialidades']);
-            }
-        }
+        
+        if($consultor->guardar($datos,'2'))
+            return Redirect::route('consultores.index');
+        
         else 
-            return Redirect::back()->withInput()->withErrors($consultor->errores);
+            return Redirect::route('consultores.edit', $consultor->id)
+                ->withInput()
+                ->withErrors($consultor->errores);
 	}
 
-	public function eliminarConsultor($id)
+	public function destroy($id)
 	{
         $consultor = Consultor::find($id);
         
@@ -116,8 +111,8 @@ class ConsultorController extends BaseController {
         else 
         {
             $consultor->delete();
-            
             $bitacora = new Bitacora;
+            
             $campos = array(
                 'usuario_id' => Auth::user()->id,
                 'tabla' => 3,
@@ -129,39 +124,4 @@ class ConsultorController extends BaseController {
             return Redirect::route('consultores.index');
         }
 	}
-
-// Ver las especialidades
-    public function verEspecialidades($id){
-
-        $consultores = ConsultorEspecialidad::Where('consultor_id', '=', $id)->get();
-        
-        foreach ($consultores as $consultor)
-        {
-             $datos[] = $consultor->subespecialidad->sub_especialidad;
-        }
-        
-        return Response::json($datos);
-    }
-
-//Actualizar las especialidades
-    public function actualizarEspecialidades($idConsultor,$subespecialidades){
-
-        //Sacamos todos las especialidades
-        $consultores = ConsultorEspecialidad::where('consultor_id', '=', $idConsultor)->get();
-        //Las eliminamos
-        foreach ($consultores as $item) {
-            $consultor = ConsultorEspecialidad::find($item->id);
-            $consultor->delete();
-        }
-        //Ingresamos las nuevas
-        foreach($subespecialidades as $subespecialidad) {
-                $ConsultorEspecialidad = new ConsultorEspecialidad();
-                $ConsultorEspecialidad->consultor_id = $idConsultor;
-                $ConsultorEspecialidad->subespecialidad_id = $subespecialidad;
-                $ConsultorEspecialidad->save();
-        }
-        
-        return true;   
-    }
-
 }

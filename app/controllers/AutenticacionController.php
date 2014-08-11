@@ -26,11 +26,10 @@ class AutenticacionController extends BaseController {
         
         if(Auth::attempt($datos, Input::get('remember-me', 0)))
             return Redirect::to('/');
-        else
+        else 
             return Redirect::to('login')
                     ->with('mensaje_error', 'Tus datos son incorrectos')
                     ->withInput();
-
     }
 
 
@@ -38,7 +37,8 @@ class AutenticacionController extends BaseController {
     public function get_logOut() 
     {
         Auth::logout();
-        return Redirect::to('login');
+        return Redirect::to('login')
+            ->with('mensaje_error','Tu sesión ha sido cerrada.');
     }
 
 

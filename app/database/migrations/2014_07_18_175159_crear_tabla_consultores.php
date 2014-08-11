@@ -14,7 +14,6 @@ class CrearTablaConsultores extends Migration {
             $table->string('dui',20)->unique();
             $table->string('correo',75)->unique();
             $table->string('nombre', 100);
-            $table->integer('municipio_id');
             $table->string('direccion', 250);
             $table->enum('sexo',array('Mujer','Hombre'));
             $table->string('telefono',20);

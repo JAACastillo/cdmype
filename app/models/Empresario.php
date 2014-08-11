@@ -50,7 +50,7 @@ class Empresario extends Eloquent {
                 'nit' => 'required|unique:empresarios',
                 'dui' => 'required|unique:empresarios',
                 'nombre' => 'required|max:100',
-                'municipio_id' => 'required',
+                'municipio' => 'required',
                 'direccion' => 'required|max:250',
                 'sexo' => 'required',
                 'correo' => 'required|email|max:75|unique:empresarios'
@@ -88,7 +88,7 @@ class Empresario extends Eloquent {
 
         public function municipio() 
         {
-            return $this->belongsTo('Municipio');
+            return $this->belongsTo('Municipio','municipio_id');
         }
     
 }

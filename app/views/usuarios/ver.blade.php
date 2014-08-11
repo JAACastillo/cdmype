@@ -15,19 +15,19 @@
         <div class="form-group">
             {{ Form::label('nombre', 'Nombre:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                <p>{{$usuario->nombre}}</p>
+                {{ Form::label('nombre', $usuario->nombre) }}
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('email', 'Correo Eléctronico:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                <p>{{$usuario->email}}</p>
+                {{ Form::label('email', $usuario->email) }}
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('tipo', 'Tipo de Usuario:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                <p>{{$usuario->tipo}}</p>
+                {{ Form::label('tipo', $usuario->tipo) }}
             </div>
         </div>
 </div>
@@ -45,7 +45,7 @@
     <div class="col-xs-6 col-sm-6 col-md-5">
         <br/>
         <center>
-        <a href="{{ route('editarUsuario', array($usuario->id)) }}" tabindex="11" class="btn btn-primary">
+        <a href="{{ route('usuarios.edit', array($usuario->id)) }}" tabindex="11" class="btn btn-danger">
         <span class="glyphicon glyphicon-pencil"> </span>
          Modificar
         </a>

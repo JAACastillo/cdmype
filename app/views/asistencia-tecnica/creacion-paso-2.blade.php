@@ -2,23 +2,10 @@
 
 @section('escritorio')
 
-<div class="row">
-	<div class="btn-group col-xs-12">
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 1<br/> <strong>Empresa</strong></button>
-		  <button type="button" class="active btn btn-primary col-xs-1">Paso 2<br/> <strong>TDR</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 3<br/> <strong>Consultor</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-2">Paso 4<br/> <strong>Envio de Oferta</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-2">Paso 5<br/> <strong>Agregar Oferta</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-3">Paso 6<br/> <strong>Selección del Consultor</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 7<br/> <strong>Contrato</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 8<br/> <strong>Acta</strong></button>
-	</div>
-</div>
-
+@include('asistencia-tecnica/pasos')
 <br/>
 
-
-
+ 
 @include('errores', array('errors' => $errors))
 
 
@@ -74,15 +61,14 @@
                     <div class="form-group">
 	                    {{ Form::label('fecha', '* Fecha límite de oferta:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-6">
-	                        {{ Form::date('fecha', $attermino->fecha,  array('class' => 'form-control', 'today' => 'true')) }}
-	                        {{$attermino->fecha}}
+	                        <input name="fecha" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$attermino->fecha}}" class="form-control" />
 	                    </div>
 	                </div>
 	                <div class="form-group">
 	                    {{ Form::label('trabajo_local', '* Trabajo Local:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-4">
 						    <div class="input-group">
-	                        	{{ Form::number('trabajo_local', $attermino->trabajo_local, array('class' => 'form-control text-center', 'min' => '1', 'max' => '100', 'step' => '1.0', 'placeholder' =>'%')) }}
+	                        	{{ Form::number('trabajo_local', $attermino->trabajo_local, array('class' => 'form-control text-center', 'min' => '1', 'max' => '100', 'step' => 'any', 'placeholder' =>'%')) }}
 	                    		
 						      <div class="input-group-addon">%</div>
 	                    	</div>
@@ -92,7 +78,7 @@
                  		{{ Form::label('tiempo_ejecucion', 'Tiempo de Ejecucion:', array('class' => 'control-label col-md-4')) }}
                 		<div class="col-md-4">
                 			<div class="input-group"> 
-                    			{{ Form::number('tiempo_ejecucion', $attermino->tiempo_ejecucion, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000', 'step' => '1.0', 'placeholder' =>'Horas')) }}
+                    			{{ Form::number('tiempo_ejecucion', $attermino->tiempo_ejecucion, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000', 'step' => '1', 'placeholder' =>'Horas')) }}
 						      <div class="input-group-addon">Horas</div>
                 			</div>
                 		</div>
@@ -102,7 +88,7 @@
 	                    <div class="col-md-4">
 						    <div class="input-group">
 						    	<div class="input-group-addon">$</div>
-                    			{{ Form::number('financiamiento', $attermino->financiamiento, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000', 'step' => '1.0', 'placeholder' =>'Horas')) }}
+                    			{{ Form::number('financiamiento', $attermino->financiamiento, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000', 'step' => 'any', 'placeholder' =>'Horas')) }}
                 			</div>
 	                    </div>
 	                </div>
@@ -110,17 +96,15 @@
 	                     {{ Form::label('aporte', '* Aporte del Empresario:', array('class' => 'control-label col-md-4')) }}
 	                   <div class="col-md-4">
 						    <div class="input-group">
-	                        	{{ Form::number('aporte', $attermino->aporte, array('class' => 'form-control text-center', 'min' => '1', 'max' => '100', 'step' => '1.0', 'placeholder' =>'%')) }}
+	                        	{{ Form::number('aporte', $attermino->aporte, array('class' => 'form-control text-center', 'min' => '1', 'max' => '100', 'step' => 'any', 'placeholder' =>'%')) }}
 						      <div class="input-group-addon">%</div>
 	                    	</div>
 	                    </div>
 	                </div>
 
-	                {{ Form::text('empresa_id', null, array('id' => 'empresa_id')) }}
-	                {{ Form::text('empresario_id', null, array('id' => 'empresario_id')) }}
-					{{-- 
-	                {{ Form::hidden('usuario_id', $usuario_id, array('id' => 'usuario_id')) }}
-					--}}
+	                {{ Form::hidden('empresa_id', null, array('id' => 'empresa_id')) }}
+	                {{ Form::hidden('empresario_id', null, array('id' => 'empresario_id')) }}
+					
                 </div>
             </div>
         </div>

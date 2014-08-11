@@ -46,7 +46,7 @@ class AtConsultor extends Eloquent {
                 'doc_oferta' => 'required',
                 'fecha_oferta' => 'required',
                 'fecha_seleccion' => 'required',
-                'attermino_id' => 'required',
+                'attermino_id' => 'required', 
                 'consultor_id' => 'required'
             );
             
@@ -81,9 +81,9 @@ class AtConsultor extends Eloquent {
             return $this->belongsTo('AtTerminos','attermino_id');
         }
 
-        public function consultores() 
+        public function consultor() 
         {
-            return $this->belongsTo('Consultor','consultor_id');
+            return $this->belongsTo('Consultor');
         }
 
 }

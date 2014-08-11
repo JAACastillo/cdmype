@@ -66,9 +66,14 @@ class ConsultorEspecialidad extends Eloquent {
         }
 
 
-        public function subespecialidad() 
+        public function especialidad()
         {
-            return $this->belongsTo('SubEspecialidad','subespecialidad_id');
+            return $this->belongsTo('subEspecialidad', 'subespecialidad_id');
+        }
+
+        public function subEspecialidades() 
+        {
+            return $this->belongsTo('Empresario','subespecialidad_id');
         }
 
 }

@@ -15,11 +15,11 @@ class UserController extends BaseController {
         }
         //Sino muestra la informacion del usuario logeado.
         else
-            return Redirect::route('verUsuario', array(Auth::user()->id));
+            return Redirect::route('usuarios.show', array(Auth::user()->id));
 	}
 
 //Crear usuario
-	public function crearUsuario()
+	public function create()
 	{
 		$usuario = new User;
         //tipos de usuario
@@ -34,7 +34,7 @@ class UserController extends BaseController {
 	}
 
 //Guardar
-	public function guardarUsuario()
+	public function store()
 	{
         $usuario = new User;
         //Recogemos todos los datos del formulario el la variable datos
@@ -43,11 +43,13 @@ class UserController extends BaseController {
         if($usuario->guardar($datos,'1'))// 1 = Accion crear bitacora
             return Redirect::route('usuarios.index');
         else
-            return Redirect::back()->withInput()->withErrors($usuario->errores);
+            return Redirect::route('usuarios.create')
+                ->withInput()
+                ->withErrors($usuario->errores);
 	}
 
 //Ver
-	public function verUsuario($id)
+	public function show($id)
 	{
         //Buscamos el usuario y lo guardamos en la variable $user
         $usuario = User::find($id);
@@ -60,7 +62,7 @@ class UserController extends BaseController {
 	}
 
 //Editar
-	public function editarUsuario($id)
+	public function edit($id)
 	{
         //Buscamos el usuario y lo guardamos en la variable $user
         $usuario = User::find($id);
@@ -87,7 +89,7 @@ class UserController extends BaseController {
 	}
 
 //Actualizar
-	public function actualizarUsuario($id)
+	public function update($id)
 	{
         //Buscamos el usuario
         $usuario = User::find($id);
@@ -100,20 +102,21 @@ class UserController extends BaseController {
         if($usuario->guardar($datos,'2')) // 2 :Modificar para la bitacora.
             return Redirect::route('usuarios.index');
         else 
-            return Redirect::back()->withInput()->withErrors($usuario->errores);
+            return Redirect::route('usuarios.edit', $usuario->id)
+                ->withInput()
+                ->withErrors($usuario->errores);
 	}
 
 //Eliminar
-	public function eliminarUsuario($id)
-    {
-
+	public function destroy($id)
+	{
         //Buscamos el usuario
         $usuario = User::find($id);
         
-        if (is_null($usuario))
-        {
+        if (is_null($usuario)) 
             App::abort(404);
-        }
+        else 
+        {
             //Se elimina el usuario
             $usuario->delete();
             //Creamos un nuevo registro en la bitacora
@@ -125,8 +128,9 @@ class UserController extends BaseController {
                 'accion' => 3
             );
             $bitacora->guardar($campos);
-
+            //Mostramos los usuarios
             return Redirect::route('usuarios.index');
+        }
     }
 
 }

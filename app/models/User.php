@@ -87,10 +87,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	    public function validar($datos) 
 	    {
 	        $reglas = array(
-	            'nombre' => 'required|max:50',
+	            'nombre' => 'required|max:100',
 	            'email' => 'email|required|max:75|unique:users',
-	            'password' => 'required|min:5|confirmed',
-	            'password_confirmation' =>'same:password',
+	            'password' => 'required|min:8|confirmed',
 	            'tipo' => 'required'
 	        );        
 	        

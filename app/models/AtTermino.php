@@ -26,6 +26,9 @@ class AtTermino extends Eloquent {
 
      public function guardar($datos,$accion) 
         {
+            $date = strtotime($datos['fecha']);
+
+            $datos['fecha'] = date('Y-m-d', $date);
             if($this->validar($datos)) 
             {
                 $this->fill($datos);
@@ -78,6 +81,61 @@ class AtTermino extends Eloquent {
         }
 
     
+
+        //Atributos
+
+        public function getOfertantesAttribute()
+        {
+
+            return $this->consultores()
+                        ->where("doc_oferta", "!=", "")
+                        ->get();
+            //Return "Ofertantes";
+        }
+
+
+        public function getConsultorSeleccionadoAttribute()
+        {
+            return $this->consultores()
+                        ->where("estado", '=', 'Seleccionado')
+                        ->orderby('updated_at', 'desc')
+                        ->first();
+        }
+
+        public function getPasoRealAttribute(){
+            switch ($this->estado) {
+            case 'Creado':                       
+                return 3;
+                break;
+            case 'Enviado':
+                return 4;
+                break;
+            case 'Ofertas Recibidas':
+                return 5;
+                break;
+            case 'Consultor Seleccionado':
+                return 6;
+                break;
+            case 'Contratada':
+                return 7;
+                break;
+            default:
+                # code...
+                break;
+        }
+
+        }
+     
+
+     
+        // public function getContratoAttribute()
+        // {
+        //     return $this->contratos()
+        //                 ->orderby('updated_at', 'desc')
+        //                 ->first();
+        // }
+
+
     /* Relaciones */
 
         //
@@ -96,9 +154,13 @@ class AtTermino extends Eloquent {
             return $this->belongsTo('Empresa');
         }
 
-        public function atConsultores() 
+        public function consultores() 
         {
-            return $this->hasmany('AtConsultor','atconsultor_id');
+            return $this->hasMany('AtConsultor','attermino_id');
+        }
+
+        public function contrato(){
+            return $this->hasOne('AtContrato', 'attermino_id');
         }
 
 }

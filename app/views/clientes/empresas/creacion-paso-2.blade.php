@@ -12,7 +12,7 @@
 
 <div>
 <br/>
-{{ Form::model($empresaEmpresario, array('route' => 'pasoEmpresariosGuardar', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form')) }}
+{{ Form::model($empresaEmpresario, array('route' => 'pasoEmpresarioGuardar', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form')) }}
 @include('errores', array('errors' => $errors))
 <div class="row">
 	<div class="col-xs-2"></div>
@@ -32,22 +32,20 @@
 			        <div class="form-group">
 				        {{ Form::label('empresario_id', 'Nombre:', array('class' => 'control-label col-md-3')) }}
 				        <div class="col-md-9">
-				        	{{ Form::text('empresario', null, array('placeholder' => 'Nombre del Empresario', 'class' => 'form-control getEmpresario', 'data-url' => 'empresario')) }}
-
-				            {{ Form::hidden('empresario_id', null) }}
+				            {{ Form::text('empresario_id', null, array('placeholder' => 'Nombre del Empresario', 'class' => 'form-control')) }}
 				        </div>
 				    </div>
 					
 					{{ Form::close() }}
 
 					<div class="form-group">
-		                {{ Form::label('tipo', 'Tipo:', array('class' => 'control-label col-md-3')) }}
+		                {{ Form::label('tipo', '* Tipo:', array('class' => 'control-label col-md-3')) }}
 		                <div class="col-md-9">
-		                    {{ Form::select('tipo', array('' => '','1' => 'Empresario','2' => 'Empresaria','3' => 'Propietario','4' => 'Propietaria','5' => 'Representante'), null, array('class' => 'form-control', 'data-placeholder' => 'Seleccione un tipo')) }} 
+		                    {{ Form::select('tipo', array('' => '','1' => 'Empresaria','2' => 'Propietaria','3' => 'Representante','4' => 'Empresario','5' => 'Propietario'), null, array('class' => 'form-control')) }} 
 		                </div>
 		            </div>
 
-	                	{{ Form::hidden('empresa_id', $empresaEmpresario->empresa_id) }}
+	                	{{ Form::text('empresa_id', $empresaEmpresario->empresa_id, array('id' => 'empresa_id')) }}
 
 	            </div>
             
@@ -65,10 +63,9 @@
 				    </div>
 				    <div class="col-xs-6">
 				        <center>
-				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
+				        <button type="submit" tabindex="11" class="btn btn-danger">
 				        Siguiente
 				        <span class="glyphicon glyphicon-chevron-right"></span>
-				        </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
 				        </button>
 				        </center>
 				    </div>
