@@ -4,6 +4,13 @@
     Consultor
 @stop
 
+@section('url')
+    <li><a href="{{ route('consultores.index') }}">Consultores</a></li>
+@stop
+@section('nombre')
+    {{$consultor->nombre}}
+@stop
+
 @section('formulario')
 
 <div class="row col-xs-12">
@@ -11,49 +18,55 @@
         <div class="form-group">
             {{ Form::label('nombre', 'Nombre:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('nombre', $consultor->nombre) }}
+                <p>{{$consultor->nombre}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('nit', 'NIT:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('nit', $consultor->nit) }}
+                <p>{{$consultor->nit}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('dui', 'DUI:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('dui', $consultor->dui) }}
+                <p>{{$consultor->dui}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('correo', 'Correo Eléctronico:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('correo', $consultor->correo) }}
+                <p>{{$consultor->correo}}</p>
+            </div>
+        </div>
+        <div class="form-group">
+            {{ Form::label('municipio_id', 'Municipio:', array('class' => 'control-label col-xs-5 text-right')) }}
+            <div class="col-xs-7">
+                <p>{{$consultor->municipio->municipio}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('direccion', 'Dirección:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('direccion', $consultor->direccion) }}
+                <p>{{$consultor->direccion}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('sexo', 'Sexo:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('sexo', $consultor->sexo) }}
+                <p>{{$consultor->sexo}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('telefono', 'Telefono:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('telefono', $consultor->telefono) }}
+                <p>{{$consultor->telefono}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('celular', 'Celular:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('celular', $consultor->celular) }}
+                <p>{{$consultor->celular}}</p>
             </div>
         </div>
 </div>
@@ -71,7 +84,7 @@
     <div class="col-xs-6">
         <br/>
         <center>
-        <a href="{{ route('consultores.edit', array($consultor->id)) }}" tabindex="11" class="btn btn-danger">
+        <a href="{{ route('editarConsultor', array($consultor->id)) }}" tabindex="11" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"> </span>
          Modificar
         </a>

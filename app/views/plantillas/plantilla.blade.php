@@ -6,12 +6,18 @@
         <meta name=description content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel='shortcut icon' href='/cdmype/public/assets/img/favicon.png'>
-
-
         <!-- CSS -->
-        {{ HTML::style('assets/css/bootstrap.min.css', array('media' => 'screen')) }}
-        {{ HTML::script('assets/js/jasny-bootstrap.min.css') }}
-
+            <!-- Bootstrap -->
+            {{ HTML::style('assets/css/jquery-ui.css', array('media' => 'screen')) }}
+            {{ HTML::style('assets/css/bootstrap.min.css', array('media' => 'screen')) }}
+            {{ HTML::style('assets/css/bootstrapValidator.min.css', array('media' => 'screen')) }}
+            <!-- Shosen --> 
+            {{ HTML::style('assets/chosen/chosen.min.css', array('media' => 'screen')) }}
+            <!-- Mascaras -->
+            {{ HTML::style('assets/css/jasny-bootstrap.min.css') }}
+            <!-- Botones Animados --> 
+            {{ HTML::style('assets/ladda/ladda-themeless.min.css', array('media' => 'screen')) }}
+            {{ HTML::style('assets/css/estilo.css', array('media' => 'screen')) }}
     </head>
     <body>
         <br/>
@@ -20,12 +26,62 @@
             @yield('contenido')
 
         </div>
-        
         <!-- JS -->
-        {{ HTML::script('assets/js/jquery-2.1.1.min.js') }}
-        {{ HTML::script('assets/js/bootstrap.min.js') }}
-        <!-- Mascaras -->
-        {{ HTML::script('assets/js/jasny-bootstrap.min.js') }}
+            <!-- Bootstrap -->
+            {{ HTML::script('assets/js/jquery.min.js') }}
+            {{ HTML::script('assets/js/jquery-ui.js') }}
+            {{ HTML::script('assets/js/bootstrap.min.js') }}
+            {{ HTML::script('assets/js/bootstrapValidator.min.js') }}
+            <!-- Mascaras -->
+            {{ HTML::script('assets/js/jasny-bootstrap.min.js') }}
+            <!-- Autocompletar -->        
+            {{ HTML::script('assets/js/script.js') }}
+            {{ HTML::script('assets/js/plugins.js') }}
+            <!-- Botones Animados -->    
+            {{ HTML::script('assets/ladda/spin.min.js') }}
+            {{ HTML::script('assets/ladda/ladda.min.js') }}
+            <!-- Shosen -->    
+            {{ HTML::script('assets/chosen/chosen.min.js') }}
+            <!-- Shosen -->    
+            {{ HTML::script('assets/validador/validate.js') }}
+            <!-- Mensajes -->    
+            {{ HTML::script('assets/js/bootstrap-growl.min.js') }}
+            
+            <!-- Libreria -->        
+            {{ HTML::script('assets/js/libreria.js') }}
+
+             <script type="text/javascript">
+            //     window.onbeforeunload = function exitAlert()
+            //         {
+            //         var texto = "Los datos que no se han guardado se perderan.";
+            //         return texto;
+            //         } 
+
+        //      function msj(){
+        //     $.bootstrapGrowl("This is a test.");
+            
+        //     setTimeout(function() {
+        //         $.bootstrapGrowl("This is another test.", { type: 'success' });
+        //     }, 1000);
+            
+        //     setTimeout(function() {
+        //         $.bootstrapGrowl("Danger, Danger!", {
+        //             type: 'danger',
+        //             align: 'center',
+        //             width: 'auto',
+        //             allow_dismiss: false
+        //         });
+        //     }, 2000);
+            
+        //     setTimeout(function() {
+        //         $.bootstrapGrowl("Danger, Danger!", {
+        //             type: 'info',
+        //             align: 'left',
+        //             stackup_spacing: 30
+        //         });
+        //     }, 3000);
+        // }
+            </script>
 
     </body>
 </html>

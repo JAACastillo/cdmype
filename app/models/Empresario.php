@@ -50,7 +50,7 @@ class Empresario extends Eloquent {
                 'nit' => 'required|unique:empresarios',
                 'dui' => 'required|unique:empresarios',
                 'nombre' => 'required|max:100',
-                'municipio' => 'required',
+                'municipio_id' => 'required',
                 'direccion' => 'required|max:250',
                 'sexo' => 'required',
                 'correo' => 'required|email|max:75|unique:empresarios'
@@ -86,9 +86,9 @@ class Empresario extends Eloquent {
             return $this->hasmany('Asistencia','empresario_id');
         }
 
-        public function municipios() 
+        public function municipio() 
         {
-            return $this->belongsTo('Municipio','municipio_id');
+            return $this->belongsTo('Municipio');
         }
     
 }

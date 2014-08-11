@@ -11,55 +11,55 @@
         <div class="form-group">
             {{ Form::label('nombre', 'Nombre:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('nombre', $empresario->nombre) }}
+                <p>{{$empresario->nombre}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('sexo', 'Sexo:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('sexo', $empresario->sexo) }}
+                <p>{{$empresario->sexo}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('nit', 'NIT:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('nit', $empresario->nit) }}
+                <p>{{$empresario->nit}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('dui', 'DUI:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('dui', $empresario->dui) }}
+                <p>{{$empresario->dui}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('municipio_id', 'Municipio:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('municipio_id', $empresario->municipio_id) }}
+                <p>{{$empresario->municipio->municipio}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('direccion', 'Dirección:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('direccion', $empresario->direccion) }}
+                <p>{{$empresario->direccion}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('correo', 'Correo Eléctronico:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('correo', $empresario->correo) }}
+                <p>{{$empresario->correo}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('telefono', 'Teléfono:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('telefono', $empresario->telefono) }}
+                <p>{{$empresario->telefono}}</p>
             </div>
         </div>
         <div class="form-group">
             {{ Form::label('celular', 'Celular:', array('class' => 'control-label col-xs-5 text-right')) }}
             <div class="col-xs-7">
-                {{ Form::label('celular', $empresario->celular) }}
+                <p>{{$empresario->celular}}</p>
             </div>
         </div>
 </div>
@@ -77,7 +77,7 @@
     <div class="col-xs-6">
         <br/>
         <center>
-        <a href="{{ route('empresarios.edit', array($empresario->id)) }}" tabindex="11" class="btn btn-danger">
+        <a href="{{ route('editarEmpresario', array($empresario->id)) }}" tabindex="11" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"> </span>
          Modificar
         </a>

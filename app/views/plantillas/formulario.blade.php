@@ -5,7 +5,7 @@
 <!-- Migas de Pan -->
 <ol class="breadcrumb">
   <li><a href="/cdmype/public">CDMYPE</a></li>
-  <li><a href="#"> @yield('cabecera', 'Inicia sesión') </a></li>
+  @yield('url')
   <li class="active"> @yield('nombre', 'Creación') </li>
 </ol>
 

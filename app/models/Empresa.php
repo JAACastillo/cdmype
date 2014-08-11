@@ -3,13 +3,14 @@ class Empresa extends Eloquent {
 
     protected $table = 'empresas';
     public $errores;
-    protected $perPage = 9;
+    protected $perPage = 8;
     protected $softDelete = true;
     protected $fillable = array(
         'categoria',
         'nombre',
         'descripcion',
         'municipio_id',
+        'direccion',
         'registro_iva',
         'constitucion',
         'clasificacion',
@@ -50,6 +51,7 @@ class Empresa extends Eloquent {
                 'categoria' => 'required',
                 'nombre' => 'required',
                 'municipio_id' => 'required',
+                'direccion' => 'required',
                 'registro_iva' => 'required',
                 'clasificacion' => 'required'
             );

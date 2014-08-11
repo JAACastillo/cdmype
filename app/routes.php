@@ -11,8 +11,6 @@
 |
 */
 
-
-
 /* Login */
 
 	Route::get('login', 'AutenticacionController@get_login');
@@ -21,12 +19,15 @@
 
 /* Si esta Logueado */
 
-require(__DIR__ . '/routes/empresas.php');
-require(__DIR__ . '/routes/atterminos.php');
-
-
     Route::group(array('before'=>'auth'), function() 
     {
+    
+    require(__DIR__ . '/routes/configuraciones.php');
+    require(__DIR__ . '/routes/usuarios.php');
+    require(__DIR__ . '/routes/empresas.php');
+    require(__DIR__ . '/routes/empresarios.php');
+    require(__DIR__ . '/routes/consultores.php');
+    require(__DIR__ . '/routes/atterminos.php');
 
     /* Index */
         Route::get('/', function() {
@@ -36,27 +37,7 @@ require(__DIR__ . '/routes/atterminos.php');
     /* Cerrar Sesion */
         Route::get('logout', 'AutenticacionController@get_logOut');
 
-    /* Usuario */
-        Route::resource('usuarios','UserController');
 
-    /* Configuraciones */
-        Route::resource('configuraciones','ConfiguracionController');
-
-    /* Clientes */
-
-
-        /* Empresarios */
-            Route::resource('empresarios','EmpresarioController');
-        
-            /* Relacion Empresario-Empresa */
-            Route::resource('Empresario-Empresa','EmpresarioEmpresaController');
-            
-            Route::any('tdr',function(){
-                    return View::make('clientes.empresarios.creacion-paso-4');
-                });
-    
-    /* Consultores */
-        Route::resource('consultores','ConsultorController');
        
     /* Asistencia Tecnica TDR */
 
@@ -129,5 +110,8 @@ require(__DIR__ . '/routes/atterminos.php');
         });
         /* Paso 7 */
         Route::resource('capcontratos','CapContratoController');
+
+    //AutoComplementar
+        Route::controller('api', 'ApiController');
 
     });

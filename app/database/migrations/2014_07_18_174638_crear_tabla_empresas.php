@@ -14,6 +14,7 @@ class CrearTablaEmpresas extends Migration {
             $table->string('nombre', 100);
             $table->string('descripcion', 3000);
             $table->integer('municipio_id');
+            $table->string('direccion', 250);
             $table->string('registro_iva', 25);
             $table->enum('constitucion',array('Informal Natural','Formal Natural','Formal Jurídica'));
             $table->enum('clasificacion',array('Emprendedor','Micro-empresa','Micro-empresa de Subsistencia','Grupo Asociativo Empresas','No definido'));

@@ -1,5 +1,5 @@
 <?php
-class Especialidades extends Eloquent {
+class Especialidad extends Eloquent {
 
     protected $table = 'especialidades';
     protected $softDelete = true;
@@ -7,7 +7,7 @@ class Especialidades extends Eloquent {
     /* Relaciones */
 
         //
-        public function subEspecialidades() 
+        public function subespecialidades() 
         {
             return $this->hasmany('SubEspecialidad','especialidad_id');
         }

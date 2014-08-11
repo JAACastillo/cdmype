@@ -4,7 +4,12 @@ class ConfiguracionController extends BaseController {
 
 	public function index()
 	{
-
+		$configuraciones = Configuracion::find(1);
+        
+        if(is_null($configuraciones)) 
+            App::abort(404);
+        
+        return View::make('configuraciones.formulario', compact('configuraciones'));
 	}
 
 	public function create()
@@ -26,19 +31,13 @@ class ConfiguracionController extends BaseController {
 
 	public function edit($id)
 	{
-        $configuraciones = Configuracion::all();
-        
-        if(is_null($configuraciones)) 
-            App::abort(404);
-        
-        return View::make('configuracion.formulario')
-            ->with('configuraciones',$configuraciones);
+
 	}
 
 
 	public function update($id)
 	{
-        $configuraciones = Configuracion::all();
+        $configuraciones = Configuracion::find($id);
         
         if(is_null($configuraciones)) 
             App::abort(404);
@@ -46,12 +45,10 @@ class ConfiguracionController extends BaseController {
         $datos = Input::all();
         
         if($configuraciones->guardar($datos,'2'))
-            return Redirect::route('/index');
+            return Redirect::to('/');
         
         else 
-            return Redirect::route('configuracion.formulario')
-                ->withInput()
-                ->withErrors($consultor->errores);
+            return Redirect::back()->withInput()->withErrors($configuraciones->errores);
 	}
 
 	public function destroy($id)
