@@ -14,10 +14,10 @@ class CrearTablaAtContratos extends Migration {
             $table->date('fecha_inicio');
             $table->date('fecha_final');
             $table->double('pago', 7, 2);
-            $table->integer('aporte');
+            $table->double('aporte',7,2);
             //$table->string('num_bancario', 15);
             $table->string('lugar_firma', 75);
-            $table->integer('atconsultor_id');
+            $table->integer('attermino_id');
             
             $table->softDeletes();
             $table->timestamps();

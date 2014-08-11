@@ -8,8 +8,7 @@
 		"barryvdh/laravel-dompdf": "0.4.*"
 	},
 	"require-dev": {
-		"barryvdh/laravel-debugbar": "1.*",
-		"anouar/fpdf": "dev-master"
+		"barryvdh/laravel-debugbar": "1.*"
 	},
 	"autoload": {
 		"classmap": [

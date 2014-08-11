@@ -126,7 +126,6 @@ return array(
 		//Providers personalizados
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
-		'Anouar\Fpdf\FpdfServiceProvider',
 
 	),
 
@@ -197,8 +196,7 @@ return array(
 
 
 		//custom facades
-		'PDF' => 'Barryvdh\DomPDF\Facade',
-		'Fpdf'    => 'Anouar\Fpdf\Fpdf',
+		'PDF' => 'Barryvdh\DomPDF\Facade'
 
 	),
 

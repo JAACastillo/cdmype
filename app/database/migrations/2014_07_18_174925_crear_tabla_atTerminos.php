@@ -19,7 +19,7 @@ class CrearTablaAtTerminos extends Migration {
             $table->date('fecha');
             $table->double('financiamiento', 7, 2);
             $table->double('aporte', 6, 2);
-            $table->enum('estado', array('Creado','Enviado','Consultor Seleccionado','Contratada','Finalizada'));
+            $table->enum('estado', array('Creado','Enviado','Ofertas Recibidas','Consultor Seleccionado','En Proceso','Contratada','Finalizada'));
             $table->integer('especialidad_id');
             $table->integer('usuario_id');
             $table->integer('empresa_id');

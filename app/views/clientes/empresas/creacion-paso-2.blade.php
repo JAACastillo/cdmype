@@ -27,7 +27,7 @@
 		</div>
 			<div class="panel-body">	
 
-			<div class="row visible buscarcol-xs-11 buscar" >
+			<div class="row visible col-xs-11 buscar" >
 				<div class="col-xs-11">
 				    <br/>
 				    <br/>
