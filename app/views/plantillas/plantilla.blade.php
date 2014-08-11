@@ -52,17 +52,15 @@
 
             
         {{ HTML::script('assets/js/areyousure.js') }}
-
-        <!-- Para las fechas -->
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
-        <!-- polyfiller file to detect and load polyfills -->
-        <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+        {{ HTML::script('assets/js/modernizar.js') }}
+        {{ HTML::script('assets/js/pollyfiller.js') }}
 
         <script>
           webshims.setOptions('waitReady', false);
           webshims.setOptions('forms-ext', {types: 'date'});
           webshims.polyfill('forms forms-ext');
-    $('form').areYouSure( {'message':'Your profile details are not saved!'} )       
+          
+          $('form').areYouSure( {'message':'Your profile details are not saved!'} )       
           $('form').areYouSure();
    
         </script>
@@ -100,5 +98,6 @@
         // }
             </script>
 
+            @yield("script")
     </body>
 </html>

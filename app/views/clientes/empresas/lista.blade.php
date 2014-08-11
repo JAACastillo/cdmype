@@ -20,6 +20,7 @@
         <table class="table table-bordered">
             <tr class="active">
                 <th class="text-center">Nombre</th>
+                <th class="text-center">Propietario</th>
                 <th class="text-center">Categoria</th>
                 <th class="text-center">Municipio</th>
                 <th class="text-center">Opciones</th>
@@ -27,7 +28,20 @@
 
             @foreach ($empresas as $empresa)
             <tr>
-                <td>{{ $empresa->nombre }}</td>
+                <td>
+                    <h5>    {{ $empresa->nombre }}</h5>
+                </td>
+
+                <td >
+                @foreach($empresa->empresarios as $empresario)
+                 
+                    <h5>{{ $empresario->empresarios->nombre }} <small>{{$empresario->tipo}}</small></h5>
+                   
+                 
+                @endforeach
+                </td>
+
+
                 <td class="text-center">{{ $empresa->categoria }}</td>
                 <td class="text-center">{{ $empresa->municipio->municipio }}</td>
                 <td class="text-center">

@@ -21,6 +21,7 @@ Route::resource('empresas','EmpresaController');
 
 	// Empresa-Empresario
 	Route::get('empresas/paso/empresario/{idEmpresa}', ['as' => 'pasoEmpresarios', 'uses' => 'EmpresaController@empresario']);
+	Route::post('empresas/paso/empresario/{idEmpresa}', ['as' => 'pasoEmpresarios', 'uses' => 'EmpresaController@empresarioNuevo']);
 	Route::post('empresas/paso/empresario', ['as' => 'pasoEmpresariosGuardar', 'uses' => 'EmpresaController@empresarioGuardar']);
 
 	// Termino

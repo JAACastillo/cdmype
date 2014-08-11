@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 class EmpresaController extends BaseController {
 
@@ -127,6 +127,28 @@ class EmpresaController extends BaseController {
             return View::make('clientes.empresas.creacion-paso-2', compact('empresaEmpresario'));
         }
 
+
+        public function empresarioNuevo($idEmpresa){
+
+            $empresario = new Empresario;
+            $datos = Input::all(); 
+
+            if($empresario->guardar($datos,'1'))
+            {
+                $empresarioEmpresa = new EmpresaEmpresario;
+                $empresarioEmpresa->tipo = 3;
+                $empresarioEmpresa->empresario_id = $empresario->id;
+                $empresarioEmpresa->empresa_id = $idEmpresa;
+
+                $empresarioEmpresa->save();
+
+                return  Redirect::route('pasoTerminoEmpresa',$idEmpresa);
+            }
+            else
+            { 
+                 return Redirect::back()->withInput()->withErrors($empresario->errores);
+            }
+        }
 
         public function empresarioGuardar()
         {

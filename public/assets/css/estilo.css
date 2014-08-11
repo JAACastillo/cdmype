@@ -1,4 +1,7 @@
 
+
+.oculto {display: none;}
+.visible {display: inline; ;}
 /* Menu */
 
 	.navbar-default {
