@@ -8,6 +8,7 @@
 
 {{ Form::model($empresario, array('route' => array('actualizarEmpresario', $empresario->id), 'method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form')) }}
 @include('errores', array('errors' => $errors))
+
 @include('clientes/empresarios/form')
 
 <div class="row">

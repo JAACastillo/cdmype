@@ -27,6 +27,11 @@ class EmpresaController extends BaseController {
     public function editarEmpresa($id)
     {
         $empresa = Empresa::find($id);
+        
+        //Pasos
+            $pasoActual = 1;
+            $pasoReal = 4;
+            $id =$id;
 
         $Categoria = array(1 => 'Empresa', 2 => 'Grupo');
         $Constitucion = array( 1 => 'Informal Natural', 2 => 'Formal Natural', 3 => 'Formal Jurídica' );
@@ -46,7 +51,10 @@ class EmpresaController extends BaseController {
         $empresa->sector_economico = array_search($empresa->sector_economico,$Sector);
         $empresa->municipio = array_search($empresa->municipio_id, $municipios);
 
-        return View::make('clientes.empresas.formulario', compact('empresa', 'municipios', 'departamentos'));
+        $accion = array('route' => array('actualizarEmpresa', $id), 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form');
+
+            return View::make('clientes.empresas.creacion-paso-1', compact('empresa', 'accion', 
+                'departamentos','municipios','id','pasoActual','pasoReal'));
     }
 
     public function actualizarEmpresa($id)
@@ -89,6 +97,10 @@ class EmpresaController extends BaseController {
     //Empresa
         public function crearEmpresa()
         {
+            //Pasos
+            $pasoActual = 1;
+            $pasoReal = 1;
+            $id =0;
             
             $empresa = new Empresa;
 
@@ -97,7 +109,8 @@ class EmpresaController extends BaseController {
 
             $accion = array('route' => 'guardarEmpresa', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form');
 
-            return View::make('clientes.empresas.creacion-paso-1', compact('empresa', 'accion', 'departamentos','municipios'));
+            return View::make('clientes.empresas.creacion-paso-1', compact('empresa', 'accion', 
+                'departamentos','municipios','id','pasoActual','pasoReal'));
         }
 
         public function guardarEmpresa()
@@ -120,11 +133,22 @@ class EmpresaController extends BaseController {
     //Empresa-Empresario
         public function empresario( $idEmpresa)
         {
-            $empresaEmpresario = new empresaEmpresario;
+            $empresaEmpresario = new EmpresaEmpresario;
+
+            //Pasos
+                $pasoActual = 2;
+                $empresaEmpresario = EmpresaEmpresario::where('empresa_id','=', $idEmpresa)->get();
+                if (is_null($empresaEmpresario)) {
+                    $pasoReal = 3;
+                }
+                else{
+                    $pasoReal = 2;
+                }
+                $id =$idEmpresa;
 
             $empresaEmpresario->empresa_id = $idEmpresa;
 
-            return View::make('clientes.empresas.creacion-paso-2', compact('empresaEmpresario'));
+            return View::make('clientes.empresas.creacion-paso-2', compact('empresaEmpresario','id','pasoActual','pasoReal'));
         }
 
 
@@ -176,8 +200,11 @@ class EmpresaController extends BaseController {
     //Termino
         public function termino($idEmpresa)
         {
+            $pasoActual = 3;
+            $pasoReal = 3;
+            $id =$idEmpresa;
 
-            return View::make('clientes.empresas.creacion-paso-3', compact('idEmpresa'));
+            return View::make('clientes.empresas.creacion-paso-3', compact('idEmpresa','id','pasoActual','pasoReal'));
 
         }
 

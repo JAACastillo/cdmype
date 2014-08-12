@@ -38,7 +38,7 @@
                     <h5>{{ $empresario->empresarios->nombre }} <small>{{$empresario->tipo}}</small></h5>
                    
                  
-                @endforeach
+            @endforeach
                 </td>
 
 

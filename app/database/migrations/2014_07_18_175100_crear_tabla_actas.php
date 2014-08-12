@@ -11,7 +11,7 @@ class CrearTablaActas extends Migration {
             $table->increments('id');
 
             $table->enum('estado', array('Conformidad','Rechazo'));
-            $table->integer('atconsultores_id');
+            $table->integer('attermino_id');
 
 
             $table->softDeletes();

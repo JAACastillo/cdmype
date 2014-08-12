@@ -91,4 +91,5 @@ class Empresa extends Eloquent {
             return $this->belongsTo('Municipio');
         }
 
+
 }

@@ -2,14 +2,7 @@
 
 @section('escritorio')
 
-<div class="row">
-    <div class="btn-group col-xs-12">
-          <button type="button" disabled="disabled" class="btn btn-default col-xs-3">Paso 1<br/> <strong>Empresario</strong></button>
-          <button type="button" disabled="disabled" class="btn btn-default col-xs-3">Paso 2<br/> <strong>Empresa</strong></button>
-          <button type="button" disabled="disabled" class="btn btn-default col-xs-3">Paso 3<br/> <strong>Socios</strong></button>
-          <button type="button" class="active btn btn-primary col-xs-3">Paso 4<br/> <strong>TDR</strong></button>
-    </div>
-</div>
+@include('clientes.empresarios/pasos')
 
 <br/>
 <div class="row">
