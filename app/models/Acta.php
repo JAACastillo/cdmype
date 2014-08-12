@@ -7,10 +7,11 @@ class Acta extends Eloquent {
     protected $softDelete = true;
     protected $fillable = array(
         'estado',
-        'atconsultor_id'
+        'fecha',
+        'attermino_id'
     );
     
-    /* Guardar */
+    /* Guardar */ 
 
         public function guardar($datos,$accion)
         {
@@ -39,7 +40,8 @@ class Acta extends Eloquent {
         {
             $reglas = array(
                 'estado' => 'required',
-                'atconsultor_id' => 'required'
+                'fecha' => 'required',
+                'attermino_id' => 'required'
             );
             
             $validador = Validator::make($datos,$reglas);

@@ -89,7 +89,7 @@ class AtTermino extends Eloquent {
 
             return $this->consultores()
                         ->where("doc_oferta", "!=", "")
-                        ->get();
+                        ->get(); 
             //Return "Ofertantes";
         }
 
@@ -118,6 +118,9 @@ class AtTermino extends Eloquent {
                 break;
             case 'Contratada':
                 return 7;
+                break;
+            case 'Finalizada':
+                return 8;
                 break;
             default:
                 # code...
@@ -161,6 +164,10 @@ class AtTermino extends Eloquent {
 
         public function contrato(){
             return $this->hasOne('AtContrato', 'attermino_id');
+        }
+
+        public function acta(){
+            return $this->hasOne('Acta','attermino_id');
         }
 
 }

@@ -26,7 +26,7 @@ class AtTerminoController extends BaseController {
 
 //inicio de los pasos.
 
-    //Redirecciona al paso en el que se encuentra la AT. 
+    //Redirecciona al paso en el que se encuent ra la AT. 
     //llamado desde el listado
     public function Paso($id) 
     {
@@ -36,7 +36,18 @@ class AtTerminoController extends BaseController {
         $id2 = $id +  100000;
         $id2 = Math::to_base($id2, 62);
 
-        //return $id;
+        //return $at->pasoReal;
+        // $pasos = array(
+
+        //                '3' =>'atPasoConsultor', 
+        //                '4' =>'atPasoOferta', 
+        //                '5' =>'atPasoConsultor',
+        //                '6' =>'atPasoSeleccionarConsultor',
+        //                '7' =>'atPasoContrato',
+        //                '8' =>'atPasoContratada',
+        //                '9' =>'atPasoActa');
+
+        // return Redirect::route($pasos[$at->pasoReal ], $id2);
 
         switch ($at->estado) {
             case 'Creado':                       
@@ -46,13 +57,16 @@ class AtTerminoController extends BaseController {
                 return Redirect::route('atPasoOferta', $id2);
                 break;
             case 'Ofertas Recibidas':
-                return Redirect::route(' ', $id2);
+                return Redirect::route('atPasoSeleccionarConsultor', $id2);
                 break;
             case 'Consultor Seleccionado':
                 return Redirect::route('atPasoContrato', $id2);
                 break;
             case 'Contratada':
-                return Redirect::route('atPasoContratada', $id2);
+                return Redirect::route('atPasoActa', $id2);
+                break;
+            case 'Finalizada':
+                return Redirect::route('atPasoActa', $id2);
                 break;
             default:
                 # code...

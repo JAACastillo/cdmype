@@ -32,7 +32,7 @@
 				    ),
 				    array(
 				        "label" => "Acta",
-				        "enlace" => "pasoEmpresa",
+				        "enlace" => "atPasoActa",
 				        "rows"   => 2
 				    ),
 				    array(

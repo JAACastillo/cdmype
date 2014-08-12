@@ -7,20 +7,40 @@
 <br/>
 @include('errores', array('errors' => $errors))
 
+
+
+<div class="row {{$oculto}} imprimir" >
+	<div class="col-xs-4"></div>
+	<div class="col-xs-4">
+	<div class="panel panel-default">
+		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar" id="cambiar"> Modificar </a></div>
+			<div class="panel-body">
+				<div class="form-group">
+				<div class="col-xs-5">
+					<a class="btn btn-success" href="{{route('atContradoPdf', $atcontrato->id)}}" target="_blank">
+						Imprimir Contrato
+					        <span class="glyphicon glyphicon-play-circle"></span>	
+					</a>
+				</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div class="col-xs-4"></div>
+</div>
+
+<div class="{{$visible}}" id="formulario">
+
 {{ Form::model($atcontrato, $action) }}
 
 <div class="row">
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
 		<div class="panel panel-default">
+		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar {{$oculto}}" id="cambiar"> Cancelar </a></div>
+		
 			<div class="panel-body">		
 			<div class="row">
-					<div class="pull-right">  
-						<a href="{{route('atContradoPdf', $atcontrato->id)}}" target ="_blank"class="btn btn-success">
-							PDF
-					        <span class="glyphicon glyphicon-play-circle"></span>							
-						</a>
-					</div>
 				<div class="col-xs-11">
 						{{Form::hidden('attermino_id', null)}}
 					<div class="form-group">
@@ -87,5 +107,15 @@
 	<div class="col-xs-2"></div>
 </div>
 			{{ Form::close() }}
+</div>
+@stop
 
+
+@section('script')
+	<script type="text/javascript">
+	$('.cambiar').on('click', function(){
+		$('#formulario').toggle();
+		$('.imprimir').toggle();
+	})
+	</script>
 @stop

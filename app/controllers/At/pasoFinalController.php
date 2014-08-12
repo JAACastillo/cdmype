@@ -106,21 +106,27 @@ class pasoFinalController extends BaseController{
         $id2 = Math::to_base_10($id) - 100000;
         
         $at = AtTermino::find($id2);
+        
 
         if($at->contrato){
             $at->estado = 5;
             $at->save();
-            return Redirect::route('atPaso', $id2);
+            return Redirect::route('atPasoContratada', $id);
         }
+
+
         $atcontrato = new AtContrato;
         $atcontrato->attermino_id = $id2;
 
+
+        $oculto = 'oculto';
+        $visible = 'visible';
         $pasoActual = 6;
         $pasoReal = $at->pasoReal;
         $method = "post";
         $action = array('method' => 'PATH', 'class' => 'form-horizontal');
         return View::make('asistencia-tecnica/creacion-paso-7', 
-                    compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal'));
+                    compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible'));
     }
 
 
@@ -129,11 +135,12 @@ class pasoFinalController extends BaseController{
         $data = Input::all();
         $contrato = new AtContrato;
         if($contrato->guardar($data, 1)){
+            $id2 = $id;
             $id = Math::to_base_10($id) - 100000;
             $at = AtTermino::find($id);
             $at->estado = 5;
             $at->save();
-            return Redirect::route('atPaso', $id);
+            return Redirect::route('atPasoContratada', $id2);
         }
 
         return Redirect::route('atPasoContrato', $id)
@@ -153,11 +160,14 @@ class pasoFinalController extends BaseController{
        // return $at;
         $atcontrato = $at->contrato;
            //return $atcontrato;
+
+        $oculto = 'visible';
+        $visible = 'oculto';
         $pasoActual = 6;
         $pasoReal = $at->pasoReal;
         $action = array('method' => 'PATH', 'class' => 'form-horizontal');
         return View::make('asistencia-tecnica/creacion-paso-7', 
-                    compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal'));
+                    compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible'));
 
     }
 
@@ -177,11 +187,6 @@ class pasoFinalController extends BaseController{
     }
 
     public function pdfContrato($id){
-        // $atterminos = AtTermino::orderBy('tema','asc')
-        //     ->with('especialidad', 'empresa', 'usuario', 'consultores')
-        //     ->paginate();
-        // $pdf = PDF::loadView('asistencia-tecnica.lista', compact('atterminos'));
-        // return $pdf->download('invoice.pdf');
         $contrato = AtContrato::find($id);
         $at =       $contrato->terminos;
 
@@ -189,21 +194,103 @@ class pasoFinalController extends BaseController{
         $empresa = $at->empresa;
         $empresario = $empresa->representante->empresarios;
 
-
-//return $empresario->empresarios;
-
         $pdf = App::make('dompdf');
         //$pdf->loadHTML('<h1>Test</h1>');
         $pdf->loadView('pdf.contratoAt', 
                 compact('at', 'consultor', 'empresa', 'empresario', 'contrato'));
         return $pdf->stream();
-
-        // $oferta = Oferta::where('attermino_id',$atContrato->attermino_id)->where('active',1)->get();
-        // return View::make('atContrato/pdf')->with('atContrato',$atContrato)->with('ofertas',$oferta);
-      //  $atContrato = AtContrato::find($id);
-       // return View::make('pdf/AtContrato', compact('atContrato'));
     
     }
+
+
+    public function acta($id){
+
+        $idAt = Math::to_base_10($id, 62) - 100000;
+
+        $at = AtTermino::find($idAt);
+
+        $oculto = 'oculto';
+        $visible = 'visible';
+
+        if($at->acta){
+            $acta = $at->acta;
+            $oculto = "visible";
+            $visible = "oculto";
+        }
+        else{
+            $acta = new acta;
+            $acta->attermino_id = $idAt;
+        }
+
+
+        $pasoReal = $at->pasoReal;
+        $pasoActual = 7;
+
+        return View::make('asistencia-tecnica/creacion-paso-8',
+            compact('acta', 'pasoActual', 'pasoReal', 'id', 'oculto', 'visible'));
+    }
+
+
+    public function actaGuardar($id){
+
+
+        $idAt = Math::to_base_10($id, 62) - 100000;
+
+        $at = AtTermino::find($idAt);
+
+        $oculto = 'oculto';
+        $visible = 'visible';
+
+        if($at->acta){
+            $acta = $at->acta;
+        }
+        else{
+            $acta = new acta;
+        }
+        $data = Input::all();
+//return $data;
+        if($acta->guardar($data, 1))
+        {
+        $at->estado = 7;
+        $at->save();
+            return Redirect::route('atPaso', $acta->attermino_id);
+        }
+
+        return Redirect::back()
+                        ->withErrors($acta->errores)
+                        ->withInput();
+    }
+
+    public function actaPdf($id){
+        $idAt = Math::to_base_10($id, 62) - 100000;
+        $at = AtTermino::with('acta', 'contrato', 'empresa')
+                        ->find($idAt);
+
+//        return $at;
+        if(!$at->acta)
+            return app::abort(404);
+
+        $empresa = $at->empresa;
+        $consultor = $at->consultorSeleccionado;
+        $empresario = $empresa->representante;
+        $contrato = $at->contrato;
+        $acta = $at->acta;
+
+
+
+        //return $empresario;
+        $pdf = App::make('dompdf');
+        //$pdf->loadHTML('<h1>Test</h1>');
+        $pdf->loadView('pdf.atActa', 
+                compact('at', 'consultor', 'empresa', 'empresario', 'contrato', 'acta'));
+        return $pdf->stream();
+
+    }
+
+
+
+
+
 
 
 

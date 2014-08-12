@@ -58,6 +58,15 @@ class AtContrato extends Eloquent {
            return date('d/m/Y', $date);
         }
 
+
+        public function getPagoCdmypeAttribute(){
+            return ($this->pago * ($this->aporte)/100);
+        }
+
+        public function getPagoEmpresarioAttribute(){
+            return ($this->pago * ((100 - $this->aporte)/100));
+        }
+
         /* Validaciones */
 
         public function validar($datos) 
