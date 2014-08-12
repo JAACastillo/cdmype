@@ -124,8 +124,13 @@
 <script type="text/javascript">
 	
 $('.busqueda').on('click', function(){
+<<<<<<< HEAD
 	$('.buscar').toggle("blind");
 	$('#empresario').toggle("blind")	
+=======
+	$('#empresario').toggle("linear");
+	$('.buscar').toggle("linear")
+>>>>>>> origin/master
 })
 
 </script>
