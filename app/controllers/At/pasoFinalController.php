@@ -106,7 +106,7 @@ class pasoFinalController extends BaseController{
         $id2 = Math::to_base_10($id) - 100000;
         
         $at = AtTermino::find($id2);
-        
+
 
         if($at->contrato){
             $at->estado = 5;
@@ -114,7 +114,7 @@ class pasoFinalController extends BaseController{
             return Redirect::route('atPasoContratada', $id);
         }
 
-
+        $ampliacion = new AmpliacionContrato;
         $atcontrato = new AtContrato;
         $atcontrato->attermino_id = $id2;
 
@@ -126,7 +126,7 @@ class pasoFinalController extends BaseController{
         $method = "post";
         $action = array('method' => 'PATH', 'class' => 'form-horizontal');
         return View::make('asistencia-tecnica/creacion-paso-7', 
-                    compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible'));
+                    compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible', 'ampliacion'));
     }
 
 
@@ -161,13 +161,19 @@ class pasoFinalController extends BaseController{
         $atcontrato = $at->contrato;
            //return $atcontrato;
 
+
+        if($at->ampliacion)
+            $ampliacion = $at->ampliacion;
+        else
+            $ampliacion = new AmpliacionContrato;
+
         $oculto = 'visible';
         $visible = 'oculto';
         $pasoActual = 6;
         $pasoReal = $at->pasoReal;
         $action = array('method' => 'PATH', 'class' => 'form-horizontal');
         return View::make('asistencia-tecnica/creacion-paso-7', 
-                    compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible'));
+                    compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible', 'ampliacion'));
 
     }
 
@@ -200,6 +206,55 @@ class pasoFinalController extends BaseController{
                 compact('at', 'consultor', 'empresa', 'empresario', 'contrato'));
         return $pdf->stream();
     
+    }
+
+    public function ampliacion($id){
+        $id2 = Math::to_base_10($id, 62) - 100000;
+
+        $at = AtTermino::find($id2);
+        //return $id
+//return $at->ampliacion;
+        if($at->ampliacion)
+            $ampliacion = $at->ampliacion;
+        else
+            $ampliacion = new AmpliacionContrato;
+//return $ampliacion;
+
+        $data = Input::all();
+        $data['attermino_id'] = $id2;
+        //return $data;
+        if($ampliacion->guardar($data,1)){
+            return Redirect::route('atPasoContratada', $id);
+        }
+
+        return Redirect::back()
+                        ->withErrors($ampliacion->errores)
+                        ->withInput();
+    }
+
+    public function ampliacionPdf($id){
+        $id2 = Math::to_base_10($id, 62) - 100000;
+        $at = AtTermino::find($id2);
+
+
+        $ampliacion = $at->ampliacion;
+
+        //$fecha = $ampliacion->fecha;
+        $nombre = $at->tema;
+
+        if($ampliacion->solicitante == "Consultor")
+            $solicitante = $at->consultorSeleccionado->consultor;
+        else
+            $solicitante = $at->empresa->representante->empresarios;
+
+        $solicitante->calidad = $ampliacion->solicitante;
+        //return $solicitante;
+        //return $empresario;
+        $pdf = App::make('dompdf');
+        //$pdf->loadHTML('<h1>Test</h1>');
+        $pdf->loadView('pdf.atAmpliacion', 
+                compact('ampliacion', 'nombre', 'solicitante'));
+        return $pdf->stream();
     }
 
 

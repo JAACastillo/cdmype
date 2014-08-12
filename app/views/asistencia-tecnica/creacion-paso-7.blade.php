@@ -10,25 +10,44 @@
 
 
 <div class="row {{$oculto}} imprimir" >
-	<div class="col-xs-4"></div>
-	<div class="col-xs-4">
+	<div class="col-xs-2"></div>
+	<div class="col-xs-8">
 	<div class="panel panel-default">
-		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar" id="cambiar"> Modificar </a></div>
+		<div class="panel-heading"> 
+			<a href="#" class="btn btn-primary cambiar" id="cambiar"> Modificar </a>
+			<a href="#" class="btn btn-primary ampliacion pull-right"> Ampliación </a>
+		</div>
 			<div class="panel-body">
 				<div class="form-group">
-				<div class="col-xs-5">
+				<div class="col-xs-6">
 					<a class="btn btn-success" href="{{route('atContradoPdf', $atcontrato->id)}}" target="_blank">
 						Imprimir Contrato
-					        <span class="glyphicon glyphicon-play-circle"></span>	
+					    <span class="glyphicon glyphicon-play-circle"></span>	
 					</a>
+					<br />
+					<br />
+					@if($atcontrato->terminos->ampliacion)
+					<a class="btn btn-warning" href="{{route('atAmpliacionPdf', $id)}}" target="_blank">
+						Imprimir Ampliación
+					    <span class="glyphicon glyphicon-play-circle"></span>	
+					</a>
+					@endif
 				</div>
 				</div>
 			</div>
 	</div>
 	</div>
-	<div class="col-xs-4"></div>
+	<div class="col-xs-2"></div>
 </div>
 
+<div class="row oculto" id="ampliacion">
+<div class="col-xs-2"></div>
+<div class="col-xs-8">
+	@include('asistencia-tecnica/ampliacion')
+</div>
+<div class="col-xs-2"></div>
+</div>
+<br>
 <div class="{{$visible}}" id="formulario">
 
 {{ Form::model($atcontrato, $action) }}
@@ -108,13 +127,21 @@
 </div>
 			{{ Form::close() }}
 </div>
+
+
 @stop
+
 
 
 @section('script')
 	<script type="text/javascript">
 	$('.cambiar').on('click', function(){
 		$('#formulario').toggle();
+		$('.imprimir').toggle();
+	})
+
+	$('.ampliacion').on('click', function(){
+		$('#ampliacion').toggle();
 		$('.imprimir').toggle();
 	})
 	</script>

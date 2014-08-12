@@ -169,5 +169,9 @@ class AtTermino extends Eloquent {
         public function acta(){
             return $this->hasOne('Acta','attermino_id');
         }
+        
+        public function ampliacion(){
+            return $this->hasOne('ampliacionContrato', 'attermino_id');
+        }
 
 }

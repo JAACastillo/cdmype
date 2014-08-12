@@ -97,5 +97,9 @@ class AtContrato extends Eloquent {
         {
             return $this->belongsTo('AtTermino','attermino_id');
         }
+        public function ampliacion(){
+            return $this->hasOne('ampliacionContrato', 'attermino_id');
+        }
+
 
 }

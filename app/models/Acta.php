@@ -7,10 +7,7 @@ class Acta extends Eloquent {
     protected $softDelete = true;
     protected $fillable = array(
         'estado',
-<<<<<<< HEAD
-=======
         'fecha',
->>>>>>> origin/master
         'attermino_id'
     );
     
