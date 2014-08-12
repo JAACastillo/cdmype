@@ -2,36 +2,53 @@
 
 @section('escritorio')
 
-<div class="row">
-	<div class="btn-group col-xs-12">
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 1<br/> <strong>Empresa</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 2<br/> <strong>TDR</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 3<br/> <strong>Consultor</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-2">Paso 4<br/> <strong>Envio de Oferta</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-2">Paso 5<br/> <strong>Agregar Oferta</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-3">Paso 6<br/> <strong>Selección del Consultor</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 7<br/> <strong>Contrato</strong></button>
-		  <button type="button" class="active btn btn-primary col-xs-1">Paso 8<br/> <strong>Acta</strong></button>
+@include('asistencia-tecnica/pasos')
+<br/>
+
+
+<div class="row {{$oculto}} imprimir" >
+	<div class="col-xs-4"></div>
+	<div class="col-xs-4">
+	<div class="panel panel-default">
+		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar" id="cambiar"> Modificar acta </a></div>
+			<div class="panel-body">
+				<div class="form-group">
+				<div class="col-xs-5">
+					<a class="btn btn-success" href="{{route('atPasoActaImprimir', $id)}}" target="_blank">
+						Imprimir Acta
+					</a>
+				</div>
+				</div>
+			</div>
 	</div>
+	</div>
+	<div class="col-xs-4"></div>
 </div>
 
 
-<br/>
-{{ Form::model($acta, array('route' => 'actas.store', 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form')) }}
+<div class="{{$visible}}" id="formulario">
+{{ Form::model($acta, array('method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form')) }}
 @include('errores', array('errors' => $errors))
 <div class="row">
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
 		<div class="panel panel-default">
+		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar {{$oculto}}" id="cambiar"> Cancelar </a></div>
 			<div class="panel-body">
 			<br/>		
 			<div class="row">
 				<div class="col-xs-11">
-
+					{{Form::hidden('attermino_id')}}
 					<div class="form-group">
 		                {{ Form::label('estado', '* Estado:', array('class' => 'control-label col-md-4')) }}
 		                <div class="col-md-8">
-		                    {{ Form::select('estado', array('' => '','1' => 'Conformidad','2' => 'Rechazo'), null, array('class' => 'form-control')) }} 
+		                    {{ Form::select('estado', array('1' => 'Conformidad','2' => 'Rechazo'), $acta->estado, array('class' => 'form-control')) }} 
+		                </div>
+		            </div>
+					<div class="form-group">
+		                {{ Form::label('fecha', '* Fecha:', array('class' => 'control-label col-md-4')) }}
+		                <div class="col-md-8">
+		                    <input type="date" name="fecha" value='{{$acta->fecha}}'class="form-control" data-date='{"startView": 2, "openOnFocus": true}'/ > 
 		                </div>
 		            </div>
 
@@ -52,10 +69,10 @@
 				    <div class="col-xs-6">
 				    	<br/>
 				        <center>
-				        <a  href="{{ route('atterminos.index') }}" tabindex="11" class="btn btn-danger">
-				        Finalizar
+				        <button type="submit" class="btn btn-danger">
+				        	Continuar
 				        <span class="glyphicon glyphicon-chevron-right"></span>
-				        </a>
+				        </button>
 				        </center>
 				    </div>
 			</div>
@@ -63,7 +80,16 @@
 	</div>
 	<div class="col-xs-2"></div>
 </div>
-
+</div>
 {{ Form::close() }}
 
+@stop
+
+@section('script')
+	<script type="text/javascript">
+	$('.cambiar').on('click', function(){
+		$('#formulario').toggle();
+		$('.imprimir').toggle();
+	})
+	</script>
 @stop

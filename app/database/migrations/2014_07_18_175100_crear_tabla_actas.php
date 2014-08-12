@@ -9,6 +9,7 @@ class CrearTablaActas extends Migration {
 	{
 		Schema::create('actas', function($table){
             $table->increments('id');
+            $table->date('fecha');
 
             $table->enum('estado', array('Conformidad','Rechazo'));
             $table->integer('attermino_id');
