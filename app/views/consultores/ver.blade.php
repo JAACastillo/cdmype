@@ -12,65 +12,50 @@
 @stop
 
 @section('formulario')
-
-<div class="row col-xs-12">
-
+<div class="row">
+<div class="col-xs-2"></div>
+<div class="col-xs-8">
+    <div class="dl-horizontal">
         <div class="form-group">
-            {{ Form::label('nombre', 'Nombre:', array('class' => 'control-label col-xs-5 text-right')) }}
-            <div class="col-xs-7">
-                <p>{{$consultor->nombre}}</p>
-            </div>
+            <dt class="text-left">{{ Form::label('nombre', 'Nombre:', array('class' => 'control-label')) }}</dt>
+                <dd><p>{{$consultor->nombre}}</p></dd>
         </div>
         <div class="form-group">
-            {{ Form::label('nit', 'NIT:', array('class' => 'control-label col-xs-5 text-right')) }}
-            <div class="col-xs-7">
-                <p>{{$consultor->nit}}</p>
-            </div>
+            <dt class="text-left">{{ Form::label('nit', 'NIT:', array('class' => 'control-label')) }}</dt>
+                <dd><p>{{$consultor->nit}}</p></dd>
         </div>
         <div class="form-group">
-            {{ Form::label('dui', 'DUI:', array('class' => 'control-label col-xs-5 text-right')) }}
-            <div class="col-xs-7">
-                <p>{{$consultor->dui}}</p>
-            </div>
+            <dt class="text-left">{{ Form::label('dui', 'DUI:', array('class' => 'control-label')) }}</dt>
+                <dd><p>{{$consultor->dui}}</p></dd>
         </div>
         <div class="form-group">
-            {{ Form::label('correo', 'Correo Eléctronico:', array('class' => 'control-label col-xs-5 text-right')) }}
-            <div class="col-xs-7">
-                <p>{{$consultor->correo}}</p>
-            </div>
+            <dt class="text-left">{{ Form::label('correo', 'Correo Eléctronico:', array('class' => 'control-label')) }}</dt>
+                <dd><p>{{$consultor->correo}}</p></dd>
         </div>
         <div class="form-group">
-            {{ Form::label('municipio_id', 'Municipio:', array('class' => 'control-label col-xs-5 text-right')) }}
-            <div class="col-xs-7">
-                <p>{{$consultor->municipio->municipio}}</p>
-            </div>
+            <dt class="text-left">{{ Form::label('municipio_id', 'Municipio:', array('class' => 'control-label')) }}</dt>
+                <dd><p>{{$consultor->municipio->municipio}}</p></dd>
         </div>
         <div class="form-group">
-            {{ Form::label('direccion', 'Dirección:', array('class' => 'control-label col-xs-5 text-right')) }}
-            <div class="col-xs-7">
-                <p>{{$consultor->direccion}}</p>
-            </div>
+            <dt class="text-left">{{ Form::label('direccion', 'Dirección:', array('class' => 'control-label')) }}</dt>
+                <dd><p>{{$consultor->direccion}}</p></dd>
         </div>
         <div class="form-group">
-            {{ Form::label('sexo', 'Sexo:', array('class' => 'control-label col-xs-5 text-right')) }}
-            <div class="col-xs-7">
-                <p>{{$consultor->sexo}}</p>
-            </div>
+            <dt class="text-left">{{ Form::label('sexo', 'Sexo:', array('class' => 'control-label')) }}<dt>
+                <dd><p>{{$consultor->sexo}}</p></dd>
         </div>
         <div class="form-group">
-            {{ Form::label('telefono', 'Telefono:', array('class' => 'control-label col-xs-5 text-right')) }}
-            <div class="col-xs-7">
-                <p>{{$consultor->telefono}}</p>
-            </div>
+            <dt class="text-left">{{ Form::label('telefono', 'Telefono:', array('class' => 'control-label')) }}<dt>
+                <dd><p>{{$consultor->telefono}}</p></dd>
         </div>
         <div class="form-group">
-            {{ Form::label('celular', 'Celular:', array('class' => 'control-label col-xs-5 text-right')) }}
-            <div class="col-xs-7">
-                <p>{{$consultor->celular}}</p>
-            </div>
+            <dt class="text-left">{{ Form::label('celular', 'Celular:', array('class' => 'control-label')) }}<dt>
+                <dd><p>{{$consultor->celular}}</p></dd>
         </div>
+    </div>
 </div>
-
+<div class="col-xs-2"></div>
+</div>
 <div class="row">
     <div class="col-xs-6">
         <br/>

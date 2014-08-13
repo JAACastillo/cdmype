@@ -41,5 +41,10 @@
        
     //AutoComplementar
         Route::controller('api', 'ApiController');
-
+    
+    //Buscar
+        Route::controller('buscar', 'ApiController');
+    
     });
+
+    

@@ -12,6 +12,16 @@ class MunicipiosTableSeeder extends Seeder {
             'departamento_id'     => '1'
             
         ));
+        Municipio::create(array(
+            'municipio'     => 'Cojutepeque',
+            'departamento_id'     => '3'
+            
+        ));
+        Municipio::create(array(
+            'municipio'     => 'San Vicente',
+            'departamento_id'     => '2'
+            
+        ));
         
     }
 }

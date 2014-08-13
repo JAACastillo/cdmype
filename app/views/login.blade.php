@@ -10,10 +10,20 @@
         <div class="col-xs-12 col-sm-6">
         
         @if(Session::has('mensaje_error'))
-            <div class="alert alert-danger">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    {{ Session::get('mensaje_error') }}
-            </div>
+            @section('script')
+
+            <script type="text/javascript">
+
+                $.growl("Tus datos son incorrectos", {
+                    type: "danger",
+                    allow_dismiss: false,
+                    animate: {
+                        enter: 'animated bounceIn',
+                        exit: 'animated bounceOut'
+                    }                               
+                });
+            </script>
+            @stop
         @endif
             <!-- Formulario -->
             {{ Form::open(array('url' => '/login', 'class' => 'form-horizontal', 'id' => 'validado')) }}
@@ -49,11 +59,6 @@
                                         <input name="contrasena" type="password" class="form-control"tabindex="2" placeholder="Ingrese su contraseña" data-vreq='1'>
                                     </div>
                                     <br/>
-                                    <div class="input-group">
-
-                                    {{ Form::checkbox('rememberme', true) }}&nbsp
-                                    {{ Form::label('lblRememberme', 'Recordar contraseña') }}
-                                    </div>
                                 </div>
                             </div>                 
                         </div>

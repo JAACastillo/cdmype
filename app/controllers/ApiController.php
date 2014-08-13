@@ -41,36 +41,66 @@ class ApiController extends BaseController {
         return $results;
     }
 
-   //CONSULTOR
-    public function getConsultor() 
-    {
-		$term =  Input::get('term');
-        
-        $consultor = Consultor::where('nombre', 'LIKE', "%" . $term . "%")
-            ->get();
-		
-        foreach ($consultor as $consultor) 
-        {
-		    $results[] = array('label' => $consultor->nombre, 'value' => $consultor->id);
-		}
-		
-        return $results;
-    }
-    
-   //AT-TDR
-    public function getAttermino() 
-    {
-		$term =  Input::get('term');
-        
-        $attermino = AtTermino::where('tema', 'LIKE', "%" . $term . "%")
-            ->get();
-		
-        foreach ($attermino as $attermino) 
-        {
-		    $results[] = array('label' => $attermino->tema, 'value' => $attermino->id);
-		}
-		
-        return $results;
-    }
+    //BUSCAR
+
+        public function postBuscar() {
+            $nombre = Input::get('buscar');
+            $tabla = Input::get('tabla');
+
+            switch ($tabla) {
+                case 'usuarios':
+                    return Redirect::to('buscar/usuarios/'.$nombre);
+                    break;
+                case 'empresarios':
+                    return Redirect::to('buscar/empresarios/'.$nombre);
+                    break;
+                case 'empresas':
+                    return Redirect::to('buscar/empresas/'.$nombre);
+                    break;
+                case 'consultores':
+                    return Redirect::to('buscar/consultores/'.$nombre);
+                    break;
+                case 'atterminos':
+                    return Redirect::to('buscar/atterminos/'.$nombre);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public function getUsuarios($nombre) {
+            $usuarios = User::where('nombre','LIKE',"%".$nombre."%")
+                ->orderBy('nombre','asc')
+                ->paginate();
+            return View::make('usuarios.lista', compact('usuarios'));
+        }
+
+        public function getEmpresarios($nombre) {
+            $empresarios = Empresario::where('nombre','LIKE',"%".$nombre."%")
+                ->orderBy('nombre','asc')
+                ->paginate();
+            return View::make('clientes.empresarios.lista', compact('empresarios'));
+        }
+
+        public function getEmpresas($nombre) {
+            $empresas = Empresa::where('nombre','LIKE',"%".$nombre."%")
+                ->orderBy('nombre','asc')
+                ->paginate();
+            return View::make('clientes.empresas.lista', compact('empresas'));
+        }
+
+        public function getConsultores($nombre) {
+            $consultores = Consultor::where('nombre','LIKE',"%".$nombre."%")
+                ->orderBy('nombre','asc')
+                ->paginate();
+            return View::make('consultores.lista', compact('consultores'));
+        }
+
+        public function getAtterminos($nombre) {
+            $atterminos = AtTermino::where('tema','LIKE',"%".$nombre."%")
+                ->orderBy('nombre','asc')
+                ->paginate();
+            return View::make('asistecia-tecnica.lista', compact('atterminos'));
+        }
 
 }

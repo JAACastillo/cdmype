@@ -25,11 +25,13 @@ class EmpresarioController extends BaseController {
 	{
         $empresario = Empresario::find($id);
         $pasoActual = 1;
-        $pasoReal = 4;
         $empresaEmpresario = EmpresaEmpresario::where('empresario_id','=', $id)->get();
-        if(is_null($empresaEmpresario)) 
-            $pasoReal = 2;
-
+        if ($empresaEmpresario == "[]"){
+         $pasoReal = 2;
+        }
+        else            {
+         $pasoReal = 4;
+        }
         $id =$id;
 
         $sexos = array(1 => 'Mujer', 2 => 'Hombre');
@@ -131,9 +133,11 @@ class EmpresarioController extends BaseController {
     {
         $pasoActual = 2;
         $empresaEmpresario = EmpresaEmpresario::where('empresario_id','=', $idEmpresario)->get();
-        if(is_null($empresaEmpresario)) 
-            $pasoReal = 2;
-            $pasoReal = 4;
+        if ($empresaEmpresario == "[]"){
+         $pasoReal = 2;
+        }
+        else            {
+         $pasoReal = 4;
         }
         $id =$idEmpresario;
 
@@ -147,6 +151,7 @@ class EmpresarioController extends BaseController {
     public function guardarEmpresa()
         {
             $idEmpresa = Input::get('empresa_id');
+            $idEmpresario = Input::get('empresario_id');
 
             $empresa = Empresa::find($idEmpresa);
             if(!is_null($empresa))
@@ -156,7 +161,7 @@ class EmpresarioController extends BaseController {
                 $datos = Input::all();
                 
                 if($empresaEmpresario->guardar($datos,'1')) 
-                    return  Redirect::route('pasoSocios', $idEmpresa);
+                    return  Redirect::route('pasoSocios', $idEmpresario);
                 
                 else 
                     return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
@@ -181,7 +186,7 @@ class EmpresarioController extends BaseController {
 
                 $empresarioEmpresa->save();
 
-                return  Redirect::route('pasoSocios',$empresa->id);
+                return  Redirect::route('pasoSocios',$idEmpresario);
             }
             else
             { 
@@ -191,8 +196,11 @@ class EmpresarioController extends BaseController {
 
     
 
-    public function socios($idEmpresa)
+    public function socios($idEmpresario)
     {
+        $var = EmpresaEmpresario::where('empresario_id','=', $idEmpresario)->first();
+        $idEmpresa = $var->empresa_id;
+
         $pasoActual = 3;
         $empresaEmpresario = EmpresaEmpresario::where('empresa_id','=', $idEmpresa)->get();
         if ($empresaEmpresario) {
@@ -201,7 +209,7 @@ class EmpresarioController extends BaseController {
         else{
             $pasoReal = 3;
         }
-        $id =$idEmpresa;
+        $id =$idEmpresario;
         $empresaEmpresario = new empresaEmpresario;
 
         $empresaEmpresario->empresa_id = $idEmpresa;
@@ -210,7 +218,9 @@ class EmpresarioController extends BaseController {
 
     }
 
-    public function nuevoSocio($idEmpresa){
+    public function nuevoSocio($idEmpresario){
+            $var = EmpresaEmpresario::where('empresario_id','=', $idEmpresario)->first();
+            $idEmpresa = $var->empresa_id;
 
             $empresario = new Empresario;
             $datos = Input::all(); 
@@ -246,7 +256,7 @@ class EmpresarioController extends BaseController {
             $datos = Input::all();
             
             if($empresaEmpresario->guardar($datos,'1')) 
-                return  Redirect::route('pasoTerminoEmpresario', $idEmpresa);
+                return  Redirect::route('pasoTerminoEmpresario', $idEmpresario);
             else 
                 return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
 
@@ -256,11 +266,14 @@ class EmpresarioController extends BaseController {
         
     }
 
-    public function termino($idEmpresa)
+    public function termino($idEmpresario)
     {
+        $var = EmpresaEmpresario::where('empresario_id','=', $idEmpresario)->first();
+        $idEmpresa = $var->empresa_id;
+
         $pasoActual = 4;
         $pasoReal = 4;
-        $id =$idEmpresa;
+        $id =$idEmpresario;
         return View::make('clientes.empresarios.creacion-paso-4', compact('idEmpresa','id','pasoActual','pasoReal'));
 
     }

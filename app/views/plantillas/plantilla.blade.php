@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name=description content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel='shortcut icon' href='/cdmype/public/assets/img/favicon.png'>
+        <link rel='shortcut icon' href='/atcdmype/public/assets/img/favicon.png'>
         <!-- CSS -->
             <!-- Bootstrap -->
             {{ HTML::style('assets/css/jquery-ui.css', array('media' => 'screen')) }}
@@ -18,6 +18,7 @@
             <!-- Botones Animados --> 
             {{ HTML::style('assets/ladda/ladda-themeless.min.css', array('media' => 'screen')) }}
             {{ HTML::style('assets/css/estilo.css', array('media' => 'screen')) }}
+            {{ HTML::style('assets/css/animate.min.css', array('media' => 'screen')) }}
     </head>
     <body>
         <br/>
@@ -64,38 +65,6 @@
  $('form').areYouSure();
 
  </script>
-             <script type="text/javascript">
-            //     window.onbeforeunload = function exitAlert()
-            //         {
-            //         var texto = "Los datos que no se han guardado se perderan.";
-            //         return texto;
-            //         } 
-
-        //      function msj(){
-        //     $.bootstrapGrowl("This is a test.");
-            
-        //     setTimeout(function() {
-        //         $.bootstrapGrowl("This is another test.", { type: 'success' });
-        //     }, 1000);
-            
-        //     setTimeout(function() {
-        //         $.bootstrapGrowl("Danger, Danger!", {
-        //             type: 'danger',
-        //             align: 'center',
-        //             width: 'auto',
-        //             allow_dismiss: false
-        //         });
-        //     }, 2000);
-            
-        //     setTimeout(function() {
-        //         $.bootstrapGrowl("Danger, Danger!", {
-        //             type: 'info',
-        //             align: 'left',
-        //             stackup_spacing: 30
-        //         });
-        //     }, 3000);
-        // }
-            </script>
 
             @yield("script")
     </body>

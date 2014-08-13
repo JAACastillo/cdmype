@@ -49,8 +49,8 @@
 		            </div>
 
 		            <!-- Tabla de Socios -->
-
-		            <div class="col-xs-12">
+		            <div class="col-xs-1"></div>
+		            <div class="col-xs-10">
 		            	<?php
     		        		$variable = EmpresaEmpresario::Where('empresa_id', '=', $id)->get();
                 		?>
@@ -72,7 +72,7 @@
 					    </div>
 
 		            </div>
-
+		            <div class="col-xs-1"></div>
 	            </div>
 
     <div id="empresario" class="oculto empresario">

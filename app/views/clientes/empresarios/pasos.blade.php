@@ -2,7 +2,7 @@
 	$pasos  = array(
 				    array(
 				        "label"  => "Empresario",
-				        "enlace" => "crearEmpresario",
+				        "enlace" => "editarEmpresario",
 				        "rows"   => 3
 				    ),
 				    array(

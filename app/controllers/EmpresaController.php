@@ -30,7 +30,13 @@ class EmpresaController extends BaseController {
         
         //Pasos
             $pasoActual = 1;
-            $pasoReal = 4;
+            $empresaEmpresario = EmpresaEmpresario::where('empresa_id','=', $id)->get();
+            if ($empresaEmpresario == "[]")            {
+             $pasoReal = 2;
+            }
+            else            {
+             $pasoReal = 3;
+            }
             $id =$id;
 
         $Categoria = array(1 => 'Empresa', 2 => 'Grupo');
@@ -138,11 +144,11 @@ class EmpresaController extends BaseController {
             //Pasos
                 $pasoActual = 2;
                 $empresaEmpresario = EmpresaEmpresario::where('empresa_id','=', $idEmpresa)->get();
-                if (is_null($empresaEmpresario)) {
-                    $pasoReal = 3;
+                if ($empresaEmpresario == "[]")            {
+                 $pasoReal = 2;
                 }
-                else{
-                    $pasoReal = 2;
+                else            {
+                 $pasoReal = 3;
                 }
                 $id =$idEmpresa;
 

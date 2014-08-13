@@ -17,7 +17,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="active navbar-brand" href="/cdmype/public/">CDMYPE</a>
+      <a class="active navbar-brand" href="/atcdmype/public/">CDMYPE</a>
     </div>
 
     <!-- Menu -->
@@ -44,13 +44,53 @@
       </ul>
 
       <!-- Buscador -->
-      <form class="navbar-form navbar-left hidden-sm hidden-xs" role="search">
-        <div class="input-group">
-          <span class="input-group-addon glyphicon glyphicon-search"></span>
-          <input type="text" class="form-control" placeholder="Buscar">
-        </div>
-        <button type="submit" class="btn btn-default">Buscar</button>
-      </form>
+      <div class="hidden-sm hidden-xs">
+          {{ Form::open(array('url' => '/buscar/buscar', 'method' => 'post', 'class' => 'navbar-form navbar-left', 'role' => 'search')) }}
+            <div class="input-group">
+              <span class="input-group-addon glyphicon glyphicon-search"></span>
+              {{ Form::text('buscar', null, array('placeholder' => 'Buscar', 'class' => 'form-control buscador')) }}
+            </div> 
+                <div class="btn-group">
+                  {{ Form::button('Buscar', array('type' => 'submit', 'class' => 'btn btn-default')) }}
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                      <span class="sr-only">Toggle Dropdown</span>
+                  </button>
+                  <div class="dropdown-menu" role="menu">
+                    <div class="radio">
+                      <label>
+                        &nbsp<input type="radio" name="tabla" value="usuarios" checked>
+                        &nbsp Usuario
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        &nbsp<input type="radio" name="tabla" value="empresarios">
+                        &nbsp Empresario
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        &nbsp<input type="radio" name="tabla" value="empresas">
+                        &nbsp Empresa
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        &nbsp<input type="radio" name="tabla" value="consultores">
+                        &nbsp Consultor
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        &nbsp<input type="radio" name="tabla" value="atterminos">
+                        &nbsp Asistencia Técnica
+                      </label>
+                    </div>
+                  </div>
+                </div>
+          {{ Form::close() }}
+      </div>
 
       <!-- Menu Derecho -->
       <ul class="nav navbar-nav navbar-right">
@@ -65,7 +105,7 @@
                @endif
             <li><a href="{{ route('configuraciones.index') }}"><span class="glyphicon glyphicon-wrench"></span>  Configuración</a></li>
             <li class="divider"></li>
-            <li><a href="/cdmype/public/logout"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
+            <li><a href="/atcdmype/public/logout"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
           </ul>
         </li>
       </ul>
