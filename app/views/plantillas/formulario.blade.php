@@ -21,10 +21,8 @@
                             <center><h1 class="panel-title"> @yield('cabecera', 'Inicia sesión') </h1></center>
                         </div>
                         <div class="panel-body">
-                        <br/>
                             @yield('formulario')
                         </div>
-                        
                     </div>
         </div>
         <div class="col-xs-1 col-sm-1 col-md-1">

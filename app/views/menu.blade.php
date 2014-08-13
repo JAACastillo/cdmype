@@ -17,7 +17,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="active navbar-brand" href="/atcdmype/public/">CDMYPE</a>
+      <a class="active navbar-brand" href="/atcdmype">CDMYPE</a>
     </div>
 
     <!-- Menu -->
@@ -105,7 +105,7 @@
                @endif
             <li><a href="{{ route('configuraciones.index') }}"><span class="glyphicon glyphicon-wrench"></span>  Configuración</a></li>
             <li class="divider"></li>
-            <li><a href="/atcdmype/public/logout"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
+            <li><a href="/atcdmype/logout"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
           </ul>
         </li>
       </ul>

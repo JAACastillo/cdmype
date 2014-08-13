@@ -21,7 +21,6 @@
 			<div class="row">
 				<div class="row visible col-xs-12 buscar" >
 				<br/>
-				<br/>	
 					<div class="col-xs-12">
 			        {{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
 			        

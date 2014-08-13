@@ -28,13 +28,8 @@
                             <!-- /Cabecera -->
                         </div>
                         <div class="panel-body">
-                        
-                        <br/>
-
                         @yield('lista')
-
                         </div>
-                        
                     </div>
         </div>
         <div class="col-xs-1 col-sm-0 col-md-1">

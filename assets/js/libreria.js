@@ -103,4 +103,51 @@
             }
         });
 
+    //Autocompletar
+        var servidor = "http://localhost/atcdmype";
+        var _servidor1 = servidor + '/api/';
+
+        $(document).ready(function(e) 
+        {
+            $('.getEmpresario').autocompletar(
+                { 
+                    hd: '#empresario_id',
+                    sv: _servidor1
+                });
+            
+            $('.getEmpresa').autocompletar(
+                { 
+                    hd: '#empresa_id',
+                    sv: _servidor1
+                });
+        });
+
+        jQuery.fn.autocompletar = function(opcion)
+        {
+        var configuracion = 
+            {
+                hd: ' ',
+                sv: ' '
+            }
+        
+        var option = $.extend(configuracion, opcion);
+        
+        $(this).autocomplete(
+            {
+                source: configuracion.sv + $(this).data('url'),
+                data: 'service=' + $(this).val(),
+                focus: function(event,ui) {
+                $(this).val(ui.item.label);
+                return false;
+            },
+            select: function(event,ui) 
+                {
+                    $(this).val(ui.item.label);
+                    if(configuracion.hd != ' ')
+                    $(configuracion.hd).val(ui.item.value);
+                    return false;
+                }
+            });
+        }
+
 })(jQuery)

@@ -35,9 +35,6 @@
             {{ HTML::script('assets/js/bootstrapValidator.min.js') }}
             <!-- Mascaras -->
             {{ HTML::script('assets/js/jasny-bootstrap.min.js') }}
-            <!-- Autocompletar -->        
-            {{ HTML::script('assets/js/script.js') }}
-            {{ HTML::script('assets/js/plugins.js') }}
             <!-- Botones Animados -->    
             {{ HTML::script('assets/ladda/spin.min.js') }}
             {{ HTML::script('assets/ladda/ladda.min.js') }}
