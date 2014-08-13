@@ -10,7 +10,8 @@ class AmpliacionContrato extends Eloquent {
         'tiempo_ampliacion',
         'periodo',
         'razonamiento',
-        'atconsultor_id'
+        'attermino_id',
+        'solicitante'
     );
     
     /* Guardar */
@@ -45,7 +46,8 @@ class AmpliacionContrato extends Eloquent {
                 'tiempo_ampliacion' => 'required',
                 'periodo' => 'required',
                 'razonamiento' => 'required',
-                'atconsultor_id' => 'required'
+                'solicitante' => 'required',
+                'attermino_id' => 'required'
 
             );
             
