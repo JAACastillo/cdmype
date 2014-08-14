@@ -7,9 +7,10 @@ class CapTermino extends Eloquent {
     protected $fillable = array(
         'encabezado',
         'tema',
+        'categoria',
         'descripcion',
-        'obj_General',
-        'obj_Especifico',
+        'obj_general',
+        'obj_especifico',
         'productos',
         'lugar',
         'fecha',
@@ -18,6 +19,7 @@ class CapTermino extends Eloquent {
         'hora_fin',
         'nota',
         'estado',
+        'especialidad_id',
         'usuario_id'
     );
     
@@ -53,6 +55,7 @@ class CapTermino extends Eloquent {
             $reglas = array(
                 'encabezado' => 'max:500',
                 'tema' => 'required|max:500',
+                'categoria' => 'required',
                 'descripcion' => 'required|max:3000',
                 'obj_general' => 'required|max:500',
                 'obj_especifico' => 'required|max:500',
@@ -62,7 +65,10 @@ class CapTermino extends Eloquent {
                 'fecha_lim' => 'required',
                 'hora_ini' => 'required',
                 'hora_fin' => 'required',
-                'nota' => 'max:3000'
+                'nota' => 'max:3000',
+                'estado' => 'required',
+                'especialidad_id' => 'required',
+                'usuario_id' => 'required'
             );
         
             $validador = Validator::make($datos,$reglas);
@@ -74,22 +80,75 @@ class CapTermino extends Eloquent {
             
             return false;
         }
+
+
+        public function getOfertantesAttribute()
+        {
+
+            return $this->consultores()
+                        ->where("doc_oferta", "!=", "")
+                        ->get(); 
+
+        }
+
+
+        public function getConsultorSeleccionadoAttribute()
+        {
+            return $this->consultores()
+                        ->where("estado", '=', 'Seleccionado')
+                        ->orderby('updated_at', 'desc')
+                        ->first();
+        }
+
+        //Pasos
+            public function getPasoRealAttribute(){
+                switch ($this->estado) {
+                    case 'Creado':                       
+                        return 3;
+                        break;
+                    case 'Enviado':
+                        return 4;
+                        break;
+                    case 'Ofertas Recibidas':
+                        return 5;
+                        break;
+                    case 'Consultor Seleccionado':
+                        return 6;
+                        break;
+                    case 'Contratada':
+                        return 7;
+                        break;
+                    case 'Finalizada':
+                        return 8;
+                        break;
+                    default:
+                        # code...
+                        break;
+                }
+
+            }
+
     
     /* Relaciones */
 
-        public function usuarios() 
+        public function usuario() 
         {
-            return $this->belongsTo('Usuario','usuario_id');
+            return $this->belongsTo('User');
         }
 
-        public function capConsultores() 
+        public function especialidad() 
         {
-            return $this->hasmany('Usuario','captermino_id');
+            return $this->belongsTo('SubEspecialidad');
         }
 
-        public function asistencias() 
+        public function consultores() 
         {
-            return $this->hasmany('Usuario','captermino_id');
+            return $this->hasMany('CapConsultor','captermino_id');
         }
+
+        public function contrato(){
+            return $this->hasOne('CapContrato', 'captermino_id');
+        }
+
 
 }

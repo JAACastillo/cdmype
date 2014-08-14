@@ -85,7 +85,7 @@
 			<div class="row buscar">
 				    <div class="col-xs-6">
 				        <center>
-				        <a href="{{ route('empresas.index') }}">
+				        <a href="javascript:history.back()">
 				        <span class="glyphicon glyphicon-chevron-left"></span>
 				         Anterior
 				        </a>

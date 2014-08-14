@@ -42,10 +42,7 @@ class CapConsultor extends Eloquent {
         public function validar($datos) 
         {
             $reglas = array(
-                'estado' => 'required'
-                'doc_oferta' => 'required',
-                'fecha_oferta' => 'required',
-                'fecha_seleccion' => 'required',
+                'estado' => 'required',
                 'captermino_id' => 'required',
                 'consultor_id' => 'required'
             );
@@ -60,20 +57,22 @@ class CapConsultor extends Eloquent {
         }
 
     /* Relaciones */
- 
+
+
         public function capContratos() 
         {
-            return $this->hasmany('CapContratos','capconsultores_id');
+            return $this->hasmany('CapContrato','capconsultor_id');
         }
+
 
         public function capTerminos() 
         {
             return $this->belongsTo('CapTerminos','captermino_id');
         }
 
-        public function consultores() 
+        public function consultor() 
         {
-            return $this->belongsTo('Consultores','consultor_id');
+            return $this->belongsTo('Consultor');
         }
 
 }

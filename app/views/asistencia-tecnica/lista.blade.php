@@ -9,15 +9,15 @@
 @stop
 
 @section('boton')
-    <a href="{{route('atPasoEmpresa') }}" class="btn btn-default">
+    <a href="{{route('atPasoEmpresa') }}" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Crear Término de Referencia">
     <span class="glyphicon glyphicon-book"></span>
-    Nuevo
+    Nueva
     </a>
 @stop
 
 @section('lista')
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-bordered">
             <tr class="active">
                 <th>ID</th>
                 <th>Tema</th>
@@ -48,9 +48,10 @@
                 <td>@if($attermino->pasoReal > 5){{ $attermino->consultorSeleccionado->consultor->nombre }} @endif</td>
                 <td>{{ $attermino->estado }}</td>
                 <td>
-                    <a href="{{ route('asistencia-tecnica.edit', array($attermino->id)) }}" class="btn btn-success btn-xs glyphicon glyphicon-pencil" title="Editar"> </a>
-                    <a href="{{ route('asistencia-tecnica.show', array($attermino->id)) }}" class="btn btn-primary btn-xs glyphicon glyphicon-user" title="Ver"> </a>
-                    <a href="{{ route('asistencia-tecnica.destroy', array($attermino->id)) }}" class="btn btn-danger btn-xs glyphicon glyphicon-remove" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"> </a>
+                    <a href="{{ route('asistencia-tecnica.edit', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
+                    <a href="{{ route('asistencia-tecnica.show', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
+                    <a href="{{ route('asistencia-tecnica.destroy', array($attermino->id)) }}" data-form="#form-usr" class="btn btn-default btn-xs glyphicon glyphicon-remove delete" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"
+> </a>
                 </td>
             </tr>
             @endforeach

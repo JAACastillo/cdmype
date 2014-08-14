@@ -172,7 +172,7 @@ class EmpresaController extends BaseController {
 
                 $empresarioEmpresa->save();
 
-                return  Redirect::route('pasoTerminoEmpresa',$idEmpresa);
+                return  Redirect::route('pasoEmpresarios',$idEmpresa);
             }
             else
             { 
@@ -192,7 +192,7 @@ class EmpresaController extends BaseController {
                 $datos = Input::all();
                 
                 if($empresaEmpresario->guardar($datos,'1')) 
-                    return  Redirect::route('pasoTerminoEmpresa', Input::get('empresa_id'));
+                    return Redirect::back();
                 
                 else 
                     return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);

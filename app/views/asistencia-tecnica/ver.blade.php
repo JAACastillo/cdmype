@@ -40,19 +40,19 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-7">
+    <div class="col-xs-6">
         <br/>
         <center>
-        <a href="{{ route('usuarios.index') }}">
+        <a href="javascript:history.back()">
         <span class="glyphicon glyphicon-chevron-left"></span>
          Volver
         </a>
         </center>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-5">
+    <div class="col-xs-6">
         <br/>
         <center>
-        <a href="{{ route('usuarios.edit', array($usuario->id)) }}" tabindex="11" class="btn btn-danger">
+        <a href="{{ route('attermino.edit', array($attermino->id)) }}" tabindex="11" class="btn btn-primary">
         <span class="glyphicon glyphicon-pencil"> </span>
          Modificar
         </a>

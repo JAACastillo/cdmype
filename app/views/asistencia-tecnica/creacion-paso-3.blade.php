@@ -45,25 +45,25 @@
 	    			</div>
     			</div>
 			</div>
+			<br/>
 			<div class="row">
 			    <div class="col-xs-6">
-			        <br/>
 			        <center>
 			        <a href="javascript:history.back()">
 			        <span class="glyphicon glyphicon-chevron-left"></span>
 			         Anterior
 			        </a>
 			        </center>
-			    </div>
-			    <div class="col-xs-6">
-			    	<br/>
+				</div>
+				<div class="col-xs-6">
 			        <center>
-			        	<button type="submit" tabindex="11" class="btn btn-danger">
-    			        Enviar
-    			        <span class="glyphicon glyphicon-send"></span>
-    			        </button>
+			        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
+			        Siguiente &nbsp
+			        <span class="glyphicon glyphicon glyphicon-send"></span>
+			        <span class="ladda-spinner"></span><span class="ladda-spinner"></span>
+			        </button>
 			        </center>
-			    </div>
+				</div>
 			</div>
 		{{ Form::close() }}
 		</div>

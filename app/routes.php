@@ -28,6 +28,7 @@
     require(__DIR__ . '/routes/empresarios.php');
     require(__DIR__ . '/routes/consultores.php');
     require(__DIR__ . '/routes/atterminos.php');
+    require(__DIR__ . '/routes/capacitaciones.php');
 
     /* Index */
         Route::get('/', function() {

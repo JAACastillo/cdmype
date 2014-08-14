@@ -40,14 +40,14 @@
 				<div class="col-xs-11">
 					{{Form::hidden('attermino_id')}}
 					<div class="form-group">
-		                {{ Form::label('estado', '* Estado:', array('class' => 'control-label col-md-4')) }}
-		                <div class="col-md-8">
+		                {{ Form::label('estado', 'Estado:', array('class' => 'control-label col-md-4')) }}
+		                <div class="col-md-7">
 		                    {{ Form::select('estado', array('1' => 'Conformidad','2' => 'Rechazo'), $acta->estado, array('class' => 'form-control')) }} 
 		                </div>
 		            </div>
 					<div class="form-group">
-		                {{ Form::label('fecha', '* Fecha:', array('class' => 'control-label col-md-4')) }}
-		                <div class="col-md-8">
+		                {{ Form::label('fecha', 'Fecha:', array('class' => 'control-label col-md-4')) }}
+		                <div class="col-md-7">
 		                    <input type="date" name="fecha" value='{{$acta->fecha}}'class="form-control" data-date='{"startView": 2, "openOnFocus": true}'/ > 
 		                </div>
 		            </div>
@@ -58,23 +58,22 @@
 <br/>
 			<div class="row">
 				    <div class="col-xs-6">
-				    	<br/>
-				        <center>
-				        <a href="javascript:history.back()">
-				        <span class="glyphicon glyphicon-chevron-left"></span>
-				         Anterior
-				        </a>
-				        </center>
-				    </div>
-				    <div class="col-xs-6">
-				    	<br/>
-				        <center>
-				        <button type="submit" class="btn btn-danger">
-				        	Continuar
-				        <span class="glyphicon glyphicon-chevron-right"></span>
-				        </button>
-				        </center>
-				    </div>
+			        <center>
+			        <a href="javascript:history.back()">
+			        <span class="glyphicon glyphicon-chevron-left"></span>
+			         Anterior
+			        </a>
+			        </center>
+			    </div>
+			    <div class="col-xs-6">
+			        <center>
+			        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
+			        Siguiente
+			        <span class="glyphicon glyphicon-chevron-right"></span>
+			        <span class="ladda-spinner"></span><span class="ladda-spinner"></span>
+			        </button>
+			        </center>
+			    </div>
 			</div>
 		</div>
 	</div>

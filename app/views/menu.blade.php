@@ -33,14 +33,7 @@
         </li>
         <li><a href="{{ route('consultores.index') }}">Consultores</a></li>
         <li><a href="{{ route('asistencia-tecnica.index') }}">Asistencia Técnica</a></li>
-        
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Capacitación <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ route('asistencia-tecnica.index') }}"><span class="glyphicon glyphicon-book"></span>  Terminos de Referencia</a></li>
-            <li><a href="{{ route('asistencia-tecnica.index') }}"><span class="glyphicon glyphicon-file"></span>  Contratos</a></li>
-          </ul>
-        </li>
+        <li><a href="{{ route('capacitaciones.index') }}">Capacitación</a></li>
       </ul>
 
       <!-- Buscador -->
@@ -102,7 +95,7 @@
                 <li><a href="{{ route('usuarios.index') }}"><span class="glyphicon glyphicon-user"></span>  Usuarios</a></li>
               @else
                 <li><a href="{{ route('verUsuario', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-user"></span>  Usuarios</a></li>
-               @endif
+              @endif
             <li><a href="{{ route('configuraciones.index') }}"><span class="glyphicon glyphicon-wrench"></span>  Configuración</a></li>
             <li class="divider"></li>
             <li><a href="/atcdmype/logout"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>

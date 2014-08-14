@@ -1,38 +1,46 @@
 @extends('plantillas.lista')
 
 @section('titulo')
-    CDMYPE - Lista de TDR
+    CDMYPE - Capacitaciones
 @stop
 
 @section('cabecera')
-    Términos de Referencias
+    Capacitaciones
 @stop
 
 @section('boton')
-    <a href="captermino-empresa" class="btn btn-default">
+    <a href="{{route('capCrearTermino') }}" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Crear Término de Referencia">
     <span class="glyphicon glyphicon-book"></span>
-    Nuevo
+    Nueva
     </a>
 @stop
 
 @section('lista')
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-bordered">
             <tr class="active">
+                <th>ID</th>
                 <th>Tema</th>
-                <th>Empresa</th>
+                <th>Encargado</th>
+                <th>Estado</th>
                 <th>Opciones</th>
             </tr>
 
             @foreach ($capterminos as $captermino)
             <tr>
-                <td>{{ $captermino->nombre }}</td>
-                <td>{{ $captermino->email }}</td>
-                <td>{{ $captermino->tipo }}</td>
                 <td>
-                    <a href="{{ route('capterminos.edit', array($captermino->id)) }}" data-content="Editar" class="glyphicon glyphicon-pencil"> </a>
-                    <a href="{{ route('capterminos.show', array($captermino->id)) }}" data-content="Ver" class="glyphicon glyphicon-book"> </a>
-                    <a href="#" data-id="{{ $captermino->id }}" data-form="#form-usr" data-content="Eliminar" class="glyphicon glyphicon-remove"> </a>
+                    {{ $captermino->id }}</td>
+                <td>
+                    <a href="{{route('capPaso', $captermino->id)}}">{{ $captermino->tema }}
+                    </a>
+                </td>
+                <td>{{ $captermino->usuarios->nombre }}</td>
+                <td>{{ $captermino->estado }}</td>
+                <td>
+                    <a href="{{ route('capModificarTermino', array($captermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
+                    <a href="{{ route('capacitaciones.show', array($captermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
+                    <a href="{{ route('capacitaciones.destroy', array($captermino->id)) }}" data-form="#form-usr" class="btn btn-default btn-xs glyphicon glyphicon-remove delete" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"
+> </a>
                 </td>
             </tr>
             @endforeach
@@ -42,7 +50,7 @@
     {{-- Paginar Con el valor Puesto en Modelo en la variable perPage--}}
     {{ $capterminos->links() }}
 
-    {{ Form::open(array('route' => array('capterminos.destroy', 'TERM_ID'), 'method' => 'DELETE', 'role' => 'form', 'id' => 'form-usr')) }}
+    {{ Form::open(array('route' => array('capacitaciones.destroy', 'TERM_ID'), 'method' => 'DELETE', 'role' => 'form', 'id' => 'form-usr')) }}
             {{ Form::close() }}
 
 @stop

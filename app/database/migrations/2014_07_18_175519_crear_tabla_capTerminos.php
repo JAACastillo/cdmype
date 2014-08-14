@@ -24,8 +24,8 @@ class CrearTablaCapTerminos extends Migration {
             $table->time('hora_ini');
             $table->time('hora_fin');
             $table->string('nota',3000);
-            $table->enum('estado', array('Creado','Enviado','Consultor Seleccionado','Finalizada'));
-            $table->integer('consultor_id');
+            $table->enum('estado', array('Creado','Enviado','Ofertas Recibidas','Consultor Seleccionado','Contratada','Finalizada'));
+            $table->integer('especialidad_id');
             $table->integer('usuario_id');
             $table->softDeletes();
             $table->timestamps();

@@ -52,8 +52,9 @@
 		            <div class="col-xs-1"></div>
 		            <div class="col-xs-10">
 		            	<?php
-    		        		$variable = EmpresaEmpresario::Where('empresa_id', '=', $id)->get();
+    		        		$empleados = EmpresaEmpresario::Where('empresa_id', '=', $id)->get();
                 		?>
+                		@if($empleados!="[]")
 		            	<div class="table-responsive">
 					        <table class="table table-bordered">
 					            <tr class="active">
@@ -61,15 +62,16 @@
 					                <th class="text-center">Tipo</th>
 					            </tr>
 
-					            @foreach ($variable as $empresario)
+					            @foreach ($empleados as $empleado)
 					            <tr>
-					                <td class="text-center">{{ $empresario->empresarios->nombre}}</td>
-					                <td class="text-center">{{ $empresario->tipo }}</td>
+					                <td class="text-center">{{ $empleado->empresarios->nombre}}</td>
+					                <td class="text-center">{{ $empleado->tipo }}</td>
 					            </tr>
 					            @endforeach
 
 					        </table>
 					    </div>
+					    @endif
 
 		            </div>
 		            <div class="col-xs-1"></div>
@@ -95,7 +97,7 @@
 			<div class="row empresario">
 				    <div class="col-xs-6">
 				        <center>
-				        <a href="{{ route('empresas.index') }}">
+				        <a href="javascript:history.back()">
 				        <span class="glyphicon glyphicon-chevron-left"></span>
 				         Anterior
 				        </a>

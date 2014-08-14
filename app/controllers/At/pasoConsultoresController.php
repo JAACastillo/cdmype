@@ -24,8 +24,6 @@ class pasoConsultoresController extends BaseController
 
     public function consultoresGuardar()
     {
-        
-       
         $consultores =  Input::get('consultores');
         $id = Input::get('idEmpresa');
 

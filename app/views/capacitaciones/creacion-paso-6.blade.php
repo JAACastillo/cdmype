@@ -2,17 +2,7 @@
 
 @section('escritorio')
 
-<div class="row">
-	<div class="btn-group col-xs-12">
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 1<br/> <strong>Empresa</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-2">Paso 2<br/> <strong>TDR</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 3<br/> <strong>Consultor</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-2">Paso 4<br/> <strong>Envio de Oferta</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-2">Paso 5<br/> <strong>Agregar Oferta</strong></button>
-		  <button type="button" class="active btn btn-primary col-xs-3">Paso 6<br/> <strong>Selección del Consultor</strong></button>
-		  <button type="button" disabled="disabled" class="btn btn-default col-xs-1">Paso 7<br/> <strong>Contrato</strong></button>
-	</div>
-</div>
+@include('capacitaciones/pasos')
 
 <br/>
 <div class="row">

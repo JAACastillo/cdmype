@@ -37,9 +37,9 @@
 	    			</div>
     			</div>
 			</div>
+			<br/>
 			<div class="row">
 			    <div class="col-xs-6">
-			        <br/>
 			        <center>
 			        <a href="javascript:history.back()">
 			        <span class="glyphicon glyphicon-chevron-left"></span>
@@ -48,11 +48,11 @@
 			        </center>
 			    </div>
 			    <div class="col-xs-6">
-			    	<br/>
 			        <center>
-			        <button type="submit" tabindex="2" class="btn btn-danger">
-			        	Guardar
-			       		<span class="glyphicon glyphicon-send"></span>
+			        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
+			        Guardar &nbsp
+			        <span class="glyphicon glyphicon glyphicon-floppy-disk"></span>
+			        <span class="ladda-spinner"></span><span class="ladda-spinner"></span>
 			        </button>
 			        </center>
 			    </div>

@@ -46,6 +46,33 @@
 		                	{{ Form::hidden('empresa_id', $empresaEmpresario->empresa_id) }}
 
 		            </div>
+		            <!-- Tabla de Socios -->
+		            <div class="col-xs-1"></div>
+		            <div class="col-xs-10">
+		            	<?php
+    		        		$empleados = EmpresaEmpresario::Where('empresa_id', '=', $id)->get();
+                		?>
+                		@if($empleados!="[]")
+		            	<div class="table-responsive">
+					        <table class="table table-bordered">
+					            <tr class="active">
+					                <th class="text-center">Nombre</th>
+					                <th class="text-center">Tipo</th>
+					            </tr>
+
+					            @foreach ($empleados as $empleado)
+					            <tr>
+					                <td class="text-center">{{ $empleado->empresarios->nombre}}</td>
+					                <td class="text-center">{{ $empleado->tipo }}</td>
+					            </tr>
+					            @endforeach
+
+					        </table>
+					    </div>
+					    @endif
+
+		            </div>
+		            <div class="col-xs-1"></div>
 	            </div>
 
     <div id="empresario" class="oculto empresario">
@@ -68,7 +95,7 @@
 			<div class="row empresario">
 				    <div class="col-xs-6">
 				        <center>
-				        <a href="{{ route('empresas.index') }}">
+				        <a href="javascript:history.back()">
 				        <span class="glyphicon glyphicon-chevron-left"></span>
 				         Anterior
 				        </a>

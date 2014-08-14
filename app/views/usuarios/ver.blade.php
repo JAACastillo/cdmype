@@ -33,7 +33,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-7">
+    <div class="col-xs-6">
         <br/>
         <center>
         <a href="javascript:history.back()">
@@ -42,7 +42,7 @@
         </a>
         </center>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-5">
+    <div class="col-xs-6">
         <br/>
         <center>
         <a href="{{ route('editarUsuario', array($usuario->id)) }}" tabindex="11" class="btn btn-primary">

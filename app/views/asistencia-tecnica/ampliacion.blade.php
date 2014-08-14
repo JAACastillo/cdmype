@@ -47,9 +47,10 @@
                     <div class="col-xs-6">
                         <br/>
                         <center>
-                        <button type="submit" tabindex="11" class="btn btn-danger">
-                            Guardar
-                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        <button type="submit"class="btn btn-primary ladda-button" data-style="expand-right">
+                        <span class="glyphicon glyphicon-floppy-disk">&nbsp</span>
+                         Guardar
+                        </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
                         </button>
                         </center>
                     </div>

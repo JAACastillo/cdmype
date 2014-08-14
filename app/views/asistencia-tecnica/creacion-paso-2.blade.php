@@ -18,25 +18,25 @@
                 <div class="row">
                     <div class="col-xs-12"> 
                         <div class="form-group">
-                     		{{ Form::label('tema', '* Tema:', array('class' => 'control-label col-md-4')) }}
+                     		{{ Form::label('tema', 'Tema:', array('class' => 'control-label col-md-4')) }}
                     		<div class="col-md-8">
                         	{{ Form::text('tema', null, array('placeholder' => 'Tema de la Asistencia Técnica', 'class' => 'form-control')) }}
 	                		</div>
 	                	</div>
 		                <div class="form-group">
-		                    {{ Form::label('obj_general', '* Objetivo General:', array('class' => 'control-label col-md-4')) }}
+		                    {{ Form::label('obj_general', 'Objetivo General:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
 		                        {{ Form::textarea('obj_general', null, array('placeholder' => 'Objetivo General', 'rows' => '2', 'class' => 'form-control')) }}
 		                    </div>
 		                </div>
 		                <div class="form-group">
-		                    {{ Form::label('obj_especifico', '* Objetivo Especifico:', array('class' => 'control-label col-md-4')) }}
+		                    {{ Form::label('obj_especifico', 'Objetivo Especifico:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
 		                        {{ Form::textarea('obj_especifico', null, array('placeholder' => 'Objetivo Especifico', 'rows' => '2', 'class' => 'form-control')) }}
 		                    </div>
 		                </div>
 		                <div class="form-group">
-		                    {{ Form::label('productos', '* Productos:', array('class' => 'control-label col-md-4')) }}
+		                    {{ Form::label('productos', 'Productos:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
 		                        {{ Form::textarea('productos', null, array('placeholder' => 'Productos Esperados', 'rows' => '2', 'class' => 'form-control')) }}
 		                    </div>
@@ -59,13 +59,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
-	                    {{ Form::label('fecha', '* Fecha límite de oferta:', array('class' => 'control-label col-md-4')) }}
+	                    {{ Form::label('fecha', 'Fecha límite de oferta:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-6">
 	                        <input name="fecha" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$attermino->fecha}}" class="form-control" />
 	                    </div>
 	                </div>
 	                <div class="form-group">
-	                    {{ Form::label('trabajo_local', '* Trabajo Local:', array('class' => 'control-label col-md-4')) }}
+	                    {{ Form::label('trabajo_local', 'Trabajo Local:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-4">
 						    <div class="input-group">
 	                        	{{ Form::number('trabajo_local', $attermino->trabajo_local, array('class' => 'form-control text-center', 'min' => '1', 'max' => '100', 'step' => 'any', 'placeholder' =>'%')) }}
@@ -84,7 +84,7 @@
                 		</div>
                 	</div>
 	                <div class="form-group">
-	                    {{ Form::label('financiamiento', '* Financiamiento de CDMYPE:', array('class' => 'control-label col-md-4')) }}
+	                    {{ Form::label('financiamiento', 'Financiamiento de CDMYPE:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-4">
 						    <div class="input-group">
 						    	<div class="input-group-addon">$</div>
@@ -93,7 +93,7 @@
 	                    </div>
 	                </div>
 	                <div class="form-group">
-	                     {{ Form::label('aporte', '* Aporte del Empresario:', array('class' => 'control-label col-md-4')) }}
+	                     {{ Form::label('aporte', 'Aporte del Empresario:', array('class' => 'control-label col-md-4')) }}
 	                   <div class="col-md-4">
 						    <div class="input-group">
 	                        	{{ Form::number('aporte', $attermino->aporte, array('class' => 'form-control text-center', 'min' => '1', 'max' => '100', 'step' => 'any', 'placeholder' =>'%')) }}
@@ -101,7 +101,7 @@
 	                    	</div>
 	                    </div>
 	                </div>
-
+	                <br/>
 	                {{ Form::hidden('empresa_id', null, array('id' => 'empresa_id')) }}
 	                {{ Form::hidden('empresario_id', null, array('id' => 'empresario_id')) }}
 					
@@ -118,25 +118,22 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-6">
-    			        <br/>
-    			        <center>
-    			        <a href="javascript:history.back()">
-    			        <span class="glyphicon glyphicon-chevron-left"></span>
-    			         Anterior
-    			        </a>
-    			        </center>
-    			    </div>
-    			    <div class="col-xs-6">
-                        <br/>
-    			        <center>
-    			        <button type="submit" tabindex="11" class="btn btn-danger">
-    			        Siguiente
-    			        <span class="glyphicon glyphicon-chevron-right"></span>
-    			        </button>
-    			        </center>
-    			    </div>
-    			</div>
-    		
+				        <center>
+				        <a href="javascript:history.back()">
+				        <span class="glyphicon glyphicon-chevron-left"></span>
+				         Anterior
+				        </a>
+				        </center>
+				    </div>
+				    <div class="col-xs-6">
+				        <center>
+				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
+				        Siguiente
+				        <span class="glyphicon glyphicon-chevron-right"></span>
+				        <span class="ladda-spinner"></span><span class="ladda-spinner"></span>
+				        </button>
+				        </center>
+				    </div>    		
     		</div>
         </div>
     </div>
