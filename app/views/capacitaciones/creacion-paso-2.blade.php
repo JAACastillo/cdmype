@@ -1,8 +1,9 @@
 @extends('menu')
 
+@section('titulo')
+Capacitaciones
+@stop
 @section('escritorio')
-
-
 @include('capacitaciones.pasos')
 
 <br/>

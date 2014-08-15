@@ -10,7 +10,7 @@ class CrearTablaCapConsultores extends Migration {
 		 Schema::create('capConsultores',function($table){
             $table->increments('id');
 
-            $table->enum('estado', array('Sin enviar','Enviado','Ofertante','Seleccionado'));
+            $table->enum('estado', array('Enviado','Seleccionado'));
             $table->string('doc_oferta');
             $table->date('fecha_oferta');
             $table->date('fecha_seleccion');

@@ -27,6 +27,12 @@ class CapTermino extends Eloquent {
 
         public function guardar($datos,$accion)
         {
+            // $fecha = strtotime($datos['fecha']);
+            // $datos['fecha'] = date('Y-m-d', $fecha);
+
+            // $fecha_lim = strtotime($datos['fecha_lim']);
+            // $datos['fecha_lim'] = date('Y-m-d', $fecha_lim);
+
             if($this->validar($datos)) 
             {
                 $this->fill($datos);
@@ -100,26 +106,33 @@ class CapTermino extends Eloquent {
                         ->first();
         }
 
+        public function getContratoAttribute()
+        {
+            return $this->contratos()
+                        ->orderby('updated_at', 'desc')
+                        ->first();
+        }
+
         //Pasos
             public function getPasoRealAttribute(){
                 switch ($this->estado) {
                     case 'Creado':                       
-                        return 3;
+                        return 2;
                         break;
                     case 'Enviado':
-                        return 4;
+                        return 3;
                         break;
                     case 'Ofertas Recibidas':
-                        return 5;
+                        return 4;
                         break;
                     case 'Consultor Seleccionado':
-                        return 6;
+                        return 5;
                         break;
                     case 'Contratada':
-                        return 7;
+                        return 6;
                         break;
                     case 'Finalizada':
-                        return 8;
+                        return 7;
                         break;
                     default:
                         # code...
@@ -146,7 +159,7 @@ class CapTermino extends Eloquent {
             return $this->hasMany('CapConsultor','captermino_id');
         }
 
-        public function contrato(){
+        public function contratos(){
             return $this->hasOne('CapContrato', 'captermino_id');
         }
 

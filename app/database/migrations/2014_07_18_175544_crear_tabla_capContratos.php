@@ -13,7 +13,7 @@ class CrearTablaCapContratos extends Migration {
             $table->double('pago', 7, 2);
             $table->string('lugar_firma', 100);
             $table->enum('firma', array('Director','Directora'));
-            $table->integer('capconsultor_id');
+            $table->integer('captermino_id');
 
             $table->softDeletes();
             $table->timestamps();

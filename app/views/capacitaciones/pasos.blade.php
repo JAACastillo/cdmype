@@ -27,7 +27,7 @@
 				    ),
 				    array(
 				        "label" => "Contrato",
-				        "enlace" => "capPasoConsultor",
+				        "enlace" => "capPasoContrato",
 				        "rows"   => 2
 				    ),
 				    array(

@@ -34,7 +34,7 @@
                     <a href="{{route('capPaso', $captermino->id)}}">{{ $captermino->tema }}
                     </a>
                 </td>
-                <td>{{ $captermino->usuarios->nombre }}</td>
+                <td>{{ $captermino->usuario->nombre }}</td>
                 <td>{{ $captermino->estado }}</td>
                 <td>
                     <a href="{{ route('capModificarTermino', array($captermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
@@ -49,8 +49,5 @@
     </div>
     {{-- Paginar Con el valor Puesto en Modelo en la variable perPage--}}
     {{ $capterminos->links() }}
-
-    {{ Form::open(array('route' => array('capacitaciones.destroy', 'TERM_ID'), 'method' => 'DELETE', 'role' => 'form', 'id' => 'form-usr')) }}
-            {{ Form::close() }}
 
 @stop

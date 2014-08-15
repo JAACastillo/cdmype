@@ -1,7 +1,9 @@
 @extends('menu')
 
+@section('titulo')
+Capacitaciones
+@stop
 @section('escritorio')
-
 @include('capacitaciones.pasos')
 
 <br/>
@@ -29,7 +31,7 @@
 				                <td class="text-center">{{ $consultor->consultor->correo }}</td>
 				                <td class="text-center">{{ $consultor->consultor->telefono }}</td>
 				                <td class="text-center"> 
-				                	<a href="{{route('atOferta', $consultor->doc_oferta)}}" target="_blank">
+				                	<a href="{{route('capOferta', $consultor->doc_oferta)}}" target="_blank">
 				                		{{ $consultor->doc_oferta}}
 				                	</a>
 				                </td>

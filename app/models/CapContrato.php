@@ -62,5 +62,9 @@ class CapContrato extends Eloquent {
         {
             return $this->belongsTo('CapConsultor','capconsultor_id');
         }
+        public function terminos() 
+        {
+            return $this->belongsTo('CapTermino','captermino_id');
+        }
 
 }
