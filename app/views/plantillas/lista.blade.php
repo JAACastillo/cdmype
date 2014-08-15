@@ -3,7 +3,7 @@
 @section('escritorio')
 <!-- Migas de Pan -->
 <ol class="breadcrumb">
-  <li><a href="/atcdmype/public">CDMYPE</a></li>
+  <li><a  href="#">CDMYPE</a></li>
   <li class="active"> @yield('cabecera', 'Inicia sesión') </li>
 </ol>
 

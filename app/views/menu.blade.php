@@ -17,7 +17,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="active navbar-brand" href="/atcdmype">CDMYPE</a>
+      <a class="active navbar-brand" href="{{url('/')}}">CDMYPE</a>
     </div>
 
     <!-- Menu -->
@@ -31,6 +31,7 @@
             <li><a href="{{ route('empresarios.index') }}"><span class="glyphicon glyphicon-user"></span>  Empresarios</a></li>
           </ul>
         </li>
+        <li><a href="{{ route('asesorias.index') }}">Materiales</a></li>
         <li><a href="{{ route('consultores.index') }}">Consultores</a></li>
         <li><a href="{{ route('asistencia-tecnica.index') }}">Asistencia Técnica</a></li>
         <li><a href="{{ route('capacitaciones.index') }}">Capacitación</a></li>

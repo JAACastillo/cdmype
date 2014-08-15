@@ -23,6 +23,7 @@
     { 
     
     require(__DIR__ . '/routes/configuraciones.php');
+    require(__DIR__ . '/routes/asesorias.php');
     require(__DIR__ . '/routes/usuarios.php');
     require(__DIR__ . '/routes/empresas.php');
     require(__DIR__ . '/routes/empresarios.php');

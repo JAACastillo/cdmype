@@ -4,7 +4,7 @@
 
 <!-- Migas de Pan -->
 <ol class="breadcrumb">
-  <li><a href="/atcdmype/public">CDMYPE</a></li>
+  <li><a href="{{url('/')}}">CDMYPE</a></li>
   @yield('url')
   <li class="active"> @yield('nombre', 'Creación') </li>
 </ol>
