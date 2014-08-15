@@ -63,7 +63,7 @@
      webshims.polyfill('forms forms-ext');
      $('form').areYouSure( {'message':'Your profile details are not saved!'} )
      $('form').areYouSure();
-    $(":file").filestyle();
+    $(":file").filestyle({buttonText: "Buscar"});
  </script>
 
             @yield("script")

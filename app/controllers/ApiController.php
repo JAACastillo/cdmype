@@ -60,10 +60,13 @@ class ApiController extends BaseController {
                 case 'consultores':
                     return Redirect::to('buscar/consultores/'.$nombre);
                     break;
-                case 'atterminos':
-                    return Redirect::to('buscar/atterminos/'.$nombre);
+                case 'terminos':
+                    return Redirect::to('buscar/terminos/'.$nombre);
+                case 'material':
+                    return Redirect::to('buscar/material/'.$nombre);
                     break;
                 default:
+                    return "There was an error";
                     break;
             }
         }
@@ -101,6 +104,13 @@ class ApiController extends BaseController {
                 ->orderBy('nombre','asc')
                 ->paginate();
             return View::make('asistecia-tecnica.lista', compact('atterminos'));
+        }
+
+        public function getMaterial($nombre){
+            $asesorias = asesorias::where('nombre','LIKE',"%".$nombre."%")
+                ->orderBy('nombre','asc')
+                ->paginate();
+            return View::make('asesorias.lista', compact('asesorias'));
         }
 
 }

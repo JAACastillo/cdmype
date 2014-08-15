@@ -34,7 +34,7 @@
                     <a href="{{route('capPaso', $captermino->id)}}">{{ $captermino->tema }}
                     </a>
                 </td>
-                <td>{{ $captermino->usuarios->nombre }}</td>
+                <td>{{ $captermino->usuarios }}</td>
                 <td>{{ $captermino->estado }}</td>
                 <td>
                     <a href="{{ route('capModificarTermino', array($captermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>

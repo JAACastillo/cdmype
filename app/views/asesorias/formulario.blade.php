@@ -31,7 +31,7 @@
                         <div class="form-group">
                             {{ Form::label('nombre', 'Nombre de asesoría:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
-                                {{ Form::text('nombre de asesoría', null, array('placeholder' => 'Nombre', 'class' => 'form-control')) }}
+                                {{ Form::text('nombre', null, array('placeholder' => 'Nombre', 'class' => 'form-control')) }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -53,9 +53,8 @@
                     <div class="col-xs-12">
                         <div class="form-group">
                             {{ Form::label('material', 'Material:', array('class' => 'control-label col-md-3')) }}
-                            <div class="col-md-9 ">
-                                {{ Form::file('material[]', array('class' => 'filestyle')) }}
-                                <div id="another"></div>
+                            <div class="col-md-9 " id="another">
+                                {{ Form::file('material[]') }}
                             </div>
                             
                         </div>
@@ -100,7 +99,20 @@
 @section('script')
     <script type="text/javascript">
     $('#addAnother').on('click', function(){
+        //<input id="filestyle-0" class="filestyle" type="file" name="material[]" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);" tabindex="-1"></input>
+        // html = "<input type='file' class='filestyle' id='filestyle' name='material[]' style='position: absolute; clip: rect(0px, 0px, 0px, 0px);' tabindex='-1' > ";
+
+        // html += "<input class='form-control ' type='text' disabled=''></input>"
+        // html += "<span class='group-span-filestyle input-group-btn' tabindex='0'>"
+        // html += "<label class='btn btn-default ' for='filestyle-0'>"
+        // html += "<span class='glyphicon glyphicon-folder-open'></span>"
+        // html += " Buscar"
+        // html += "</label>"
+        // html += "</span>"
+        // html += "</div>"
+
         $('#another').append("<input type='file' name='material[]'> ");
+        $(":file").filestyle({buttonText: "Buscar"});
     })
     </script>
 @stop

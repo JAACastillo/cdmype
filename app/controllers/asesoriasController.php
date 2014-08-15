@@ -47,13 +47,15 @@ class asesoriasController extends \BaseController {
 		if($asesoria->guardar($data, 1)){
 
 			foreach ($materiales as $material) {
-				$nombreMaterial = $this->guardarAsesoria($material);
 
-				$materialAsesoria = new asesoriaMaterial;
-				$materialAsesoria->asesoria_id = $asesoria->id;
-				$materialAsesoria->material = $nombreMaterial;
+				if(!empty($material)){
+					$nombreMaterial = $this->guardarAsesoria($material);
+					$materialAsesoria = new asesoriaMaterial;
+					$materialAsesoria->asesoria_id = $asesoria->id;
+					$materialAsesoria->material = $nombreMaterial;
 
-				$materialAsesoria->save();
+					$materialAsesoria->save();
+				}
 			}
 			return Redirect::route('asesorias.index');
 		}

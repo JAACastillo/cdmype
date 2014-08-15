@@ -11,7 +11,7 @@
         <div class="col-xs-0 col-sm-0 col-md-1">
             <!-- Izquierda -->
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-10">
+        <div class="col-xs-12 col-sm-12 col-md-12">
             <!-- Panel -->
                     <div class="panel panel-primary">
                         <div class="panel-heading">

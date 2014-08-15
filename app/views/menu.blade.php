@@ -77,8 +77,14 @@
                     </div>
                     <div class="radio">
                       <label>
-                        &nbsp<input type="radio" name="tabla" value="atterminos">
+                        &nbsp<input type="radio" name="tabla" value="terminos">
                         &nbsp Asistencia Técnica
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        &nbsp<input type="radio" name="tabla" value="material">
+                        &nbsp Material de Asesoría
                       </label>
                     </div>
                   </div>
