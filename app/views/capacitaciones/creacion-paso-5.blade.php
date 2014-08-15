@@ -1,62 +1,42 @@
 @extends('menu')
 
+@section('titulo')
+Capacitaciones
+@stop
 @section('escritorio')
-
-@include('capacitaciones/pasos')
+@include('capacitaciones.pasos')
 
 <br/>
-{{ Form::model($asistencia, array('route' => 'capPasoGuardarAsistencia', 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form')) }}
+
 @include('errores', array('errors' => $errors))
 <div class="row">
 	<div class="col-xs-1"></div>
 	<div class="col-xs-10">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<a href="#" tabindex="11" class="btn btn-default busqueda" id="crearEmpresario">
-			        <span class="glyphicon glyphicon-user"></span>
-			        Crear				        
-			    </a>		
-			</div>
 			<div class="panel-body">		
 			<div class="row">
-				<div class="row visible col-xs-12 buscar" >
-				<br/>
-					<div class="col-xs-12">
-			        {{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
-			        
+				<div class="col-xs-11">
+		           	<a href="#" id="btn1" class="btn btn-primary pull-right btn1"><span class="glyphicon glyphicon-plus"></span></a>
+				</div>
+
+		{{ Form::model($asistencia, array('route' => 'capPasoGuardarAsistencia', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form')) }}
+			
+
 			        <div class="form-group">
-				        {{ Form::label('empresario_id', 'Nombre:', array('class' => 'control-label col-md-4')) }}
-				        <div class="col-md-6">
-				            {{ Form::text('empresario', null, array('placeholder' => 'Nombre del empresario', 'class' => 'form-control getEmpresario', 'data-url' => 'empresa')) }}
-				            {{ Form::hidden('empresario_id', null) }}
+			        	{{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
+				        {{ Form::label('empresario_id', 'Empresario:', array('class' => 'control-label col-md-4')) }}
+				        <div class="col-md-6 inner">
+				            {{ Form::text('empresario', null, array('placeholder' => 'Nombre del empresario', 'class' => 'form-control getEmpresario', 'data-url' => 'empresario')) }}
+				            {{ Form::hidden('empresario_id[]', null, array('class' => 'empresario_id')) }}
 				        </div>
+				        {{ Form::close() }}
 				    </div>
-					
-					{{ Form::close() }}
-
 		            {{ Form::hidden('captermino_id', $id) }}
-	            </div>
-            
-            	</div>
 
-	<div id="empresario" class="oculto empresario">
-    	        <?php
-    		        $empresario = new Empresario;
-    		        
-    		        $sexos = array(1 => 'Mujer', 2 => 'Hombre');
-    		        $tipos = array(1 => 'Empresaria', 2 => 'Propietaria', 3 => 'Representante', 4 => 'Empresario', 5 => 'Propietario');
-    		        $departamentos = Departamento::all()->lists('departamento', 'id');
-    		        $municipios = Municipio::all()->lists('municipio', 'id');
-
-    		        $empresario->sexo = array_search($empresario->sexo,$sexos);
-    		        $empresario->tipo = array_search($empresario->tipo,$tipos);
-    		        $empresario->municipio = array_search($empresario->municipio_id, $municipios);
-                ?>
-            {{Form::open()}}
-
-               	@include('clientes/empresarios/form')
-
-			<div class="row empresario">
+    			</div>
+    			<br/>
+    			<br/>
+				<div class="row">
 				    <div class="col-xs-6">
 				        <center>
 				        <a href="javascript:history.back()">
@@ -67,43 +47,19 @@
 				    </div>
 				    <div class="col-xs-6">
 				        <center>
-				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
-				        	Guardar
-				        <span class="glyphicon glyphicon-chevron-right"></span>
-				        </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-				        </button>
-				        </center>
-				    </div>
-			</div>
-
-			{{ Form::close() }}
-	</div>
-            {{Form::close()}}
-    </div>
-
-			<div class="row buscar">
-				    <div class="col-xs-6">
-				        <center>
-				        <a href="{{ route('empresas.index') }}">
-				        <span class="glyphicon glyphicon-chevron-left"></span>
-				         Anterior
-				        </a>
-				        </center>
-				    </div>
-				    <div class="col-xs-6">
-				        <center>
-				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
+				        <a href="{{ route('capPasoContrato', array($id)) }}" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
 				        Siguiente
 				        <span class="glyphicon glyphicon-chevron-right"></span>
 				        </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-				        </button>
+				        </a>
 				        </center>
 				    </div>
-			</div>
+				</div>
 			<br/>
 			{{ Form::close() }}
 		</div>
 	</div>
+
 	<div class="col-xs-1"></div>
 </div>
 
@@ -112,12 +68,42 @@
 
 @section('script')
 
-<script type="text/javascript">
-	
-$('.busqueda').on('click', function(){
-	$('.buscar').toggle("blind");
-	$('#empresario').toggle("blind")	
-})
+<script>
+
+$(document).ready(function(){
+
+	var servidor = "http://localhost/atcdmype";
+    var _servidor1 = servidor + '/api/';
+    var idNum = 1;
+
+  $(".btn1").click(function(){
+
+  	  var html = "<input type='text' name='empresario' class='form-control getEmpresario" + idNum + "' data-url = 'empresario'>"
+  	  	  html += "<input type='hidden' name='empresario_id[]' class='idEmpresario" + idNum + "'>" 
+
+    $(".inner").append(html);
+
+   idEmpresarios = ($('.idEmpresario' + idNum))
+
+    idsEmpresarios = ($(".empresario_id" + idNum))
+    $('.getEmpresario'+ idNum).autocompletar(
+                { 
+                    hd: $(idEmpresarios) ,
+                    sv: _servidor1
+                });
+
+  	idNum++;
+   
+  });
+
+    idsEmpresarios = ($('.empresario_id'))
+    $('.getEmpresario').autocompletar(
+                { 
+                    hd: $(idsEmpresarios[0]) ,
+                    sv: _servidor1
+                });
+});
 
 </script>
+
 @stop

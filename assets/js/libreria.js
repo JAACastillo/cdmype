@@ -1,7 +1,7 @@
 (function($){
 
 // Botones animados
-
+    //Ladda.bind( 'input[type=submit]' );
     Ladda.bind( 'div:not(.progress-demo) button', { timeout: 9000 } );
     Ladda.bind( '.progress-demo button', {
         callback: function( instance ) {
@@ -134,6 +134,7 @@
         
         $(this).autocomplete(
             {
+
                 source: configuracion.sv + $(this).data('url'),
                 data: 'service=' + $(this).val(),
                 focus: function(event,ui) {

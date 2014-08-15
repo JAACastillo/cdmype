@@ -37,10 +37,10 @@ class CapTerminoController extends BaseController {
                 return Redirect::route('capPasoAsistencia', $id);
                 break;
             case 'Contratada':
-                return Redirect::route('capPasoActa', $id);
+                return Redirect::route('capPasoContrato', $id);
                 break;
             case 'Finalizada':
-                return Redirect::route('capPasoActa', $id);
+                return Redirect::route('capPasoContrato', $id);
                 break;
             default:
                 # code...
@@ -149,6 +149,8 @@ class CapTerminoController extends BaseController {
                     if(!$consul->count() > 0)
                     {
                         $consultorAT = new CapConsultor;
+                        $consultorAT->estado = 1;
+                        //Fechas
                         $consultorAT->captermino_id = $id;
                         $consultorAT->consultor_id = $consultor;
                         $consultorAT->save();
@@ -269,7 +271,7 @@ class CapTerminoController extends BaseController {
 
                 $pasoReal = 5;
                 $pasoActual = 5;
-                
+
                 return View::make('capacitaciones.creacion-paso-5', 
                         compact('asistencia','accion', 'pasoActual', 'id', 'pasoReal'));
 
@@ -278,7 +280,106 @@ class CapTerminoController extends BaseController {
 
             public function guardarAsistencia($id){
 
-                return "Guardar";
+                $asistencia = new Asistencia;
+                $datos = Input::all(); 
+                $empresarios = Input::get('empresario_id[]');
+
+                return $empresarios;
+
+                if($asistencia->guardar($datos,'1'))
+                {
+                    return  Redirect::back();
+                }
+                else
+                { 
+                     return Redirect::back()->withInput()->withErrors($empresa->errores);
+                }
 
             }
+
+        //Contrato
+            public function contrato($id){
+
+                $cap = CapTermino::find($id);
+
+                if($cap->contrato){
+                    $cap->estado = 5;
+                    $cap->save();
+                    return Redirect::route('capPasoContratada', $id);
+                }
+
+                $capcontrato = new CapContrato;
+                $capcontrato->capconsultor_id = $id;
+
+
+                $oculto = 'oculto';
+                $visible = 'visible';
+                $pasoActual = 6;
+                $pasoReal = $cap->pasoReal;
+                $method = "post";
+                $action = array('method' => 'PATH', 'class' => 'form-horizontal');
+                return View::make('capacitaciones.creacion-paso-6', 
+                            compact('capcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible'));
+            }
+
+
+            public function guardarContrato($id){
+
+                $data = Input::all();
+                $contrato = new CapContrato;
+                if($contrato->guardar($data, 1)){
+
+                    $cap = CapTermino::find($id);
+                    $cap->estado = 5;
+                    $cap->save();
+                    return Redirect::route('capPasoContratada', $id);
+                }
+
+                return Redirect::back()->withInput()->withErrors($contrato->errores);
+            }
+
+
+            public function contratada($id){
+
+                $cap = CapTermino::find($id);
+                $capcontrato = $cap->contrato;
+
+                $oculto = 'visible';
+                $visible = 'oculto';
+                $pasoActual = 6;
+                $pasoReal = $cap->pasoReal;
+                $action = array('method' => 'PATH', 'class' => 'form-horizontal');
+                return View::make('capacitaciones.creacion-paso-6', 
+                            compact('capcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible'));
+
+            }
+
+            public function editContrato($id){
+                $data = Input::all();
+
+                $cap = CapTermino::find($id);
+                $contrato = CapContrato::find($cap->contrato->id);
+                
+                if($contrato->guardar($data, 1))
+                    return Redirect::route('capPaso', $id);
+                
+
+                return Redirect::back()->withInput()->withErrors($contrato->errores);
+            }
+
+            public function pdfContrato($id){
+                $contrato = CapContrato::find($id);
+
+                $cap = $contrato->terminos;
+
+                $consultor = $cap->consultorSeleccionado->consultor;
+
+                $pdf = App::make('dompdf');
+
+                $pdf->loadView('pdf.capContrato', 
+                        compact('cap', 'consultor', 'contrato'));
+                return $pdf->stream();
+            
+            }
+
 }

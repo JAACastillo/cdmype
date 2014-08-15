@@ -8,7 +8,7 @@ class Asistencia extends Eloquent {
     protected $fillable = array(
         'empresario_id',
         'captermino_id',
-        'nota'
+        'asistio'
     );
     
     /* Guardar */
@@ -40,8 +40,7 @@ class Asistencia extends Eloquent {
         {
             $reglas = array(
                 'empresario_id' => 'required',
-                'captermino_id' => 'required',
-                'nota' => 'required'
+                'captermino_id' => 'required'
             );
             
             $validador = Validator::make($datos,$reglas);
@@ -55,12 +54,12 @@ class Asistencia extends Eloquent {
         
     /* RELACIÓN */
 
-        public function empresarios() 
+        public function empresario() 
         {
             return $this->belongsTo('Empresario','empresario_id');
         }
 
-        public function capTerminos() 
+        public function captermino() 
         {
             return $this->belongsTo('CapTermino','captermino_id');
         }

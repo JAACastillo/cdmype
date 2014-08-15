@@ -1,7 +1,9 @@
 @extends('menu')
 
+@section('titulo')
+Capacitaciones
+@stop
 @section('escritorio')
-
 @include('capacitaciones.pasos')
 <br/>
 <div class="row">

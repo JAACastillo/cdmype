@@ -22,7 +22,21 @@
 	Route::post('capacitaciones/paso/seleccionar-consultor/{id}', ['as' => 'capPasoSeleccionarConsultor', 'uses' => 'CapTerminoController@seleccionarConsultor']);
 	//Asistencia
 	Route::get('capacitaciones/paso/asistencia/{id}', ['as' => 'capPasoAsistencia', 'uses' => 'CapTerminoController@asistencia']);
-	Route::post('capacitaciones/paso/asistencia', ['as' => 'capPasoGuardarAsistencia', 'uses' => 'CapTerminoController@guardarAsistecnia']);
+	Route::post('capacitaciones/paso/asistencia/{id}', ['as' => 'capPasoGuardarAsistencia', 'uses' => 'CapTerminoController@guardarAsistencia']);
+	//Contrato
 
 
+	//PDF
+	Route::get('capacitaciones/paso/contrato/pdf/{id}', ['as' => 'capContradoPdf', 'uses' => 'CapTerminoController@pdfContrato']);
+
+	Route::get('capacitaciones/paso/contrato/{id}', ['as' => 'capPasoContrato', 'uses' => 'CapTerminoController@contrato']);
+	Route::post('capacitaciones/paso/contrato/{id}', ['as' => 'capPasoContrato', 'uses' => 'CapTerminoController@guardarContrato']);
+	Route::post('capacitaciones/paso/contratada/{id}', ['as' => 'capPasoContratada', 'uses' => 'CapTerminoController@editContrato']);
+	Route::get('capacitaciones/paso/contratada/{id}', ['as' => 'capPasoContratada', 'uses' => 'CapTerminoController@contratada']);
+
+	//
+	Route::get("capacitaciones/ofertas/{oferta}", 
+			['as' => 'capOferta', function($oferta) { return Redirect::to('assets/ofertas/' . $oferta); }]
+
+	);
 	Route::get('capacitaciones/paso/{id}', ['as' => 'capPaso', 'uses' => 'CapTerminoController@Paso']);

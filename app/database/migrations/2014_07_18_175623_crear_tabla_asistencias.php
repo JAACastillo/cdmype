@@ -12,7 +12,7 @@ public function up()
 
             $table->integer('empresario_id');
             $table->integer('captermino_id');
-            $table->string('nota',150);
+            $table->enum('sexo',array('Si','No'));
 
             $table->softDeletes();
             $table->timestamps();
