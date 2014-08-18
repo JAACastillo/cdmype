@@ -6,7 +6,7 @@
 
 <div>
 <br/>
-{{ Form::model($empresaEmpresario, array('route' => 'pasoEmpresariosGuardar', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form')) }}
+{{ Form::model($empresaEmpresario, array('route' => 'pasoEmpresariosGuardar', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form')) }}
 @include('errores', array('errors' => $errors))
 <div class="row">
 	<div class="col-xs-1"></div>
@@ -147,9 +147,8 @@
 
 
 @section('script')
-
+@include('validaciones.empresasEmpresarios')
 <script type="text/javascript">
-	
 $('.busqueda').on('click', function(){
 	$('.buscar').toggle("blind");
 	$('#empresario').toggle("blind")	

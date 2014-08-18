@@ -12,11 +12,11 @@ Capacitaciones
 	<div class="col-xs-8">
 	<div class="panel panel-default">
 		<div class="panel-body">
-<?php
+		<?php
 		$accion = array('route' => 'capPasoGuardarConsultor', 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form');
-?>
+		?>
 		{{ Form::open($accion) }}
-
+@include('errores', array('errors' => $errors))
 			{{Form::hidden('idCaptermino', $id)}}
 			<div class="row">
 				<div class="col-xs-12">

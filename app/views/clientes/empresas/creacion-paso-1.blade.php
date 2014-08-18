@@ -42,4 +42,8 @@
 	</div>
 </div>
 
+@section('script')
+@include('validaciones.empresas')
+@stop
+
 @stop

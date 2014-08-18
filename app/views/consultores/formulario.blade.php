@@ -6,12 +6,12 @@
 
 <?php
     if ($consultor->exists):
-        $formulario = array('route' => array('actualizarConsultor', $consultor->id), 'method' => 'POST', 'class' => 'form-horizontal');
+        $formulario = array('route' => array('actualizarConsultor', $consultor->id), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal');
         $action = 'Editar';
         $nombre = $consultor->nombre;
 
     else:
-        $formulario = array('route' => 'guardarConsultor', 'method' => 'POST', 'id' => 'usr-form', 'class' => 'form-horizontal');
+        $formulario = array('route' => 'guardarConsultor', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal');
         $action = 'Crear';
         $nombre = 'Creación';
     endif;
@@ -146,5 +146,9 @@
         </div>
     </div>
 </div>
+
+@section("script")
+@include("validaciones.consultores")
+@stop
 
 @stop

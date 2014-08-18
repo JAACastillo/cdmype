@@ -14,13 +14,11 @@ Capacitaciones
 	<div class="col-xs-10">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<a href="#" id="cambiar" class="btn btn-primary {{$oculto}}"><span class="glyphicon glyphicon-plus"></span> &nbsp Convocar</a>
-				<a href="{{route('capAsistenciaPdf', $id)}}" target="_blank" class="btn btn-primary pull-right {{$oculto}} "><span class="glyphicon glyphicon-print"></span> &nbsp PDF</a>
-				
-				<div class="col-xs-11 {{$oculto}}"></div>
-			    <a  href="#" class="btn btn-primary btn1 {{$oculto}} ladda-button" data-style="expand-right">
+				<a href="#" class="btn btn-primary {{$oculto}} agregar cambiar"><span class="glyphicon glyphicon-plus"></span> &nbsp Convocar</a>
+				<a href="#" class="btn btn-primary {{$visible}} agregar cambiar"><span class="glyphicon glyphicon-list"></span></span> &nbsp Convocados</a>
+				<a href="{{route('capAsistenciaPdf', $id)}}" target="_blank" class="btn btn-primary pull-right {{$oculto}} ver" style="margin-top:-6px"><span class="glyphicon glyphicon-print"></span> &nbsp PDF</a>
+			    <a  href="#" class="btn btn-primary btn1 {{$visible}} pull-right agregar" style="margin-top:-6px">
 	        	<span class="glyphicon glyphicon glyphicon-plus"></span>
-	        	<span class="ladda-spinner"></span><span class="ladda-spinner"></span>
 	        	</a>
 			</div>
 			<div class="panel-body">
@@ -32,7 +30,7 @@ Capacitaciones
 				        	{{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
 					        {{ Form::label('empresario_id', 'Empresario:', array('class' => 'control-label col-md-4')) }}
 					        <div class="col-md-6 inner">
-					            {{ Form::text('empresario', null, array('placeholder' => 'Nombre del empresario', 'class' => 'form-control getEmpresario', 'data-url' => 'empresario')) }}
+					            {{ Form::text('empresario', null, array('placeholder' => 'Nombre del empresario', 'class' => 'form-control getEmpresario', 'data-url' => 'empresario', 'autofocus')) }}
 					            {{ Form::hidden('empresario_id[]', null, array('class' => 'empresario_id')) }}
 					        </div>
 					        {{ Form::close() }}
@@ -53,7 +51,7 @@ Capacitaciones
 				    <div class="col-xs-6">
 				        <center>
 				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
-			        	Siguiente
+			        	Agregar
 			        	<span class="glyphicon glyphicon-chevron-right"></span>
 			        	<span class="ladda-spinner"></span><span class="ladda-spinner"></span>
 			        	</button>
@@ -72,7 +70,7 @@ Capacitaciones
 		            	<?php
     		        		$asistencias = Asistencia::Where('captermino_id', '=', $id)->get();
                 		?>
-
+                		@if ($asistencias != "[]")
 		            	<div class="table-responsive">
 					        <table class="table table-bordered">
 					            <tr class="active">
@@ -104,6 +102,7 @@ Capacitaciones
 
 					        </table>
 					    </div>
+
 					    <br/>
 					    <div class="row">
 						    <div class="col-xs-6">
@@ -119,6 +118,9 @@ Capacitaciones
 						        </center>
 						    </div>
 						</div>
+						@else
+					    <div class="col-xs-12"><h4 class="text-center">Ningun empresario convocado</h4></div>
+					    @endif
 						<br/>
 
 
@@ -148,10 +150,10 @@ Capacitaciones
 
   	$(".btn1").click(function(){
 
-  	  var html = "<input type='text' style='margin-top:5px' name='empresario' class='form-control getEmpresario" + idNum + "' data-url = 'empresario'>"
+  	  var html = "<input type='text' style='margin-bottom:5px' name='empresario' class='form-control getEmpresario" + idNum + "' data-url = 'empresario'>"
   	  	  html += "<input type='hidden' name='empresario_id[]' class='idEmpresario" + idNum + "'>" 
 
-    $(".inner").append(html);
+    $(".inner").prepend(html);
 
    	idEmpresarios = ($('.idEmpresario' + idNum))
 
@@ -174,7 +176,7 @@ Capacitaciones
                 });
 	});
 
-	$('#cambiar').on('click', function(){
+	$('.cambiar').on('click', function(){
 		$('.agregar').toggle();
 		$('.ver').toggle();
 		$('#btn1').toggle();

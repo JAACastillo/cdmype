@@ -12,7 +12,7 @@
 
 @section ('formulario')
 
-{{ Form::model($empresa, array('route' => array('actualizarEmpresa', $empresa->id), 'method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form')) }}
+{{ Form::model($empresa, array('route' => array('actualizarEmpresa', $empresa->id), 'id' => 'validar', 'method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form')) }}
 @include('errores', array('errors' => $errors))
 
 @include('clientes/empresas/form')
@@ -45,5 +45,9 @@
         </div>
     </div>
 </div>
+
+@section('script')
+@include('validaciones.empresas')
+@stop
 
 @stop

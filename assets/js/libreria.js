@@ -20,6 +20,9 @@
     $("[data-toggle='tooltip']").tooltip();
     $("[data-toggle='popover']").popover();
 
+// Switch
+    $("[type='checkbox']").bootstrapSwitch();
+
 //Selector
 
     var config = {

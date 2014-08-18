@@ -5,7 +5,7 @@
 @include('clientes.empresarios/pasos')
 
 <br/>
-{{ Form::model($empresaEmpresario, array('route' => 'pasoGuardarSocios', 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form')) }}
+{{ Form::model($empresaEmpresario, array('route' => 'pasoGuardarSocios', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form')) }}
 
 @include('errores', array('errors' => $errors))
 
@@ -149,7 +149,7 @@
 
 
 @section('script')
-
+@include('validaciones.empresasEmpresarios')
 <script type="text/javascript">
 	
 $('.busqueda').on('click', function(){

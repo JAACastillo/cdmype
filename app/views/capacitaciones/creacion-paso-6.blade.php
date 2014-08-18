@@ -47,7 +47,7 @@ Capacitaciones
 					<div class="form-group">
                      	{{ Form::label('lugar_firma', 'Lugar:', array('class' => 'control-label col-md-4')) }}
                     	<div class="col-md-8">
-                        	{{ Form::text('lugar_firma', null, array('placeholder' => 'Dirección', 'class' => 'form-control')) }}
+                        	{{ Form::text('lugar_firma', null, array('placeholder' => 'Dirección', 'class' => 'form-control', 'autofocus')) }}
 	                	</div>
 	                </div>
 	                <div class="form-group">
@@ -100,6 +100,9 @@ Capacitaciones
 
 
 @section('script')
+
+@include('validaciones.contratos')
+
 	<script type="text/javascript">
 	$('.cambiar').on('click', function(){
 		$('#formulario').toggle();

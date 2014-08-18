@@ -127,4 +127,8 @@
     </div>
 </div>
 
+@section('script')
+@include('validaciones.empresarios')
+@stop
+
 @stop

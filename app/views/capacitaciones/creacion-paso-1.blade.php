@@ -20,7 +20,7 @@ Capacitaciones
                         <div class="form-group">
 		                     {{ Form::label('encabezado', 'Encabezado:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
-		                        {{ Form::text('encabezado', null, array('placeholder' => 'Encabezado', 'class' => 'form-control')) }}        
+		                        {{ Form::text('encabezado', null, array('placeholder' => 'Encabezado', 'class' => 'form-control','autofocus')) }}        
 		                    </div>
 		                </div>
 		                <div class="form-group">
@@ -152,4 +152,8 @@ Capacitaciones
 
 {{ Form::close() }}
 
+
+@section("script")
+@include('validaciones.capacitaciones')
+@stop
 @stop

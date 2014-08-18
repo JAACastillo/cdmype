@@ -13,7 +13,7 @@
 
 	     .firmas {text-align: center;}
 	     .firmas .firm { display: inline-block; position: absolute; }
-	     .empresario {left: 40%}
+	     .apoderado {left: 37%}
 	     .consultor {right: 0}
 
 	     .clausula {color: #707070  }
@@ -85,7 +85,7 @@
 		$horas = $h2 - $h1;
 	?>
 
-	El presente contrato tendrá una duración de {{$horas}} HORAS, la capacitación brindada el dia {{$dia}} de {{$mes}} de {{$ano}}. Durante este período el consultor se compromete a hacer cumplir las actividades objeto de este contrato contenidas en la oferta técnica y económica y a dar fiel cumplimiento a los compromisos establecidos en los planes de trabajo aprobados y productos esperados.	
+	El presente contrato tendrá una duración de OCHO HORAS, la capacitación brindada el dia {{$dia}} de {{$mes}} de {{$ano}}. Durante este período el consultor se compromete a hacer cumplir las actividades objeto de este contrato contenidas en la oferta técnica y económica y a dar fiel cumplimiento a los compromisos establecidos en los planes de trabajo aprobados y productos esperados.	
 
 <br/>
 	<p class="clausula">TERCERA: INFORMES </p>
@@ -176,17 +176,17 @@
 
 	<div class="firmas">
 			<br><br><br>
+		<div class="firm directora">
+			F._____________________	<br/>
+			Msc.Yessenia Escobar de Hernández <br/>
+			Directora<br/>
+			CDMYPE UNICAES
+		</div>
 		<div class="firm apoderado">
 			F._____________________	<br/>
 			Lic. Roberto Antonio López <br/>
 			Apoderado Especial Administrativo <br/>
 			Universidad Católica de El Salvador
-		</div>
-		<div class="firm Directora">
-			F._____________________	<br/>
-			Msc.Yessenia Escobar de Hernández <br/>
-			Directora
-			CDMYPE UNICAES
 		</div>
 		<div class="firm consultor">
 			F._____________________	<br/>

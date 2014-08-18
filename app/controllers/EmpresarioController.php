@@ -43,7 +43,7 @@ class EmpresarioController extends BaseController {
         $empresario->tipo = array_search($empresario->tipo,$tipos);
         $empresario->municipio = array_search($empresario->municipio_id, $municipios);
 
-        $accion = array('route' => array('actualizarEmpresario', $id), 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form');
+        $accion = array('route' => array('actualizarEmpresario', $id), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
             return View::make('clientes.empresarios.creacion-paso-1', compact('empresario', 'accion', 
                 'departamentos','municipios','id','pasoActual','pasoReal'));
@@ -105,7 +105,7 @@ class EmpresarioController extends BaseController {
         $departamentos = Departamento::all()->lists('departamento', 'id');
         $municipios = Municipio::all()->lists('municipio', 'id');
 
-        $accion = array('route' => 'guardarEmpresario', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form');
+        $accion = array('route' => 'guardarEmpresario', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
         return View::make('clientes.empresarios.creacion-paso-1', compact('empresario', 
             'accion', 'departamentos','municipios','id','pasoActual','pasoReal'));

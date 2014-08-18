@@ -16,6 +16,8 @@
             {{ HTML::style('assets/chosen/chosen.min.css', array('media' => 'screen')) }}
             <!-- Mascaras -->
             {{ HTML::style('assets/css/jasny-bootstrap.min.css') }}
+            <!-- Switch -->
+            {{ HTML::style('assets/switch/css/bootstrap-switch.min.css') }}
             <!-- Botones Animados --> 
             {{ HTML::style('assets/ladda/ladda-themeless.min.css', array('media' => 'screen')) }}
             {{ HTML::style('assets/css/estilo.css', array('media' => 'screen')) }}
@@ -44,6 +46,8 @@
             {{ HTML::script('assets/chosen/chosen.min.js') }}
             <!-- Mensajes -->    
             {{ HTML::script('assets/js/bootstrap-growl.min.js') }}
+            <!-- switch -->    
+            {{ HTML::script('assets/switch/js/bootstrap-switch.min.js') }}
             
             <!-- Libreria -->        
             {{ HTML::script('assets/js/libreria.js') }}

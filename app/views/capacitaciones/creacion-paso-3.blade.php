@@ -15,6 +15,7 @@ Capacitaciones
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-xs-12">
+					@include('errores', array('errors' => $errors))
 					<div class="table-responsive"><table class="table table-bordered table-hover">
 					            <tr class="active">
 					                <th class="text-center">Nombre</th>

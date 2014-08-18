@@ -99,7 +99,7 @@ class CapTerminoController extends BaseController {
                 $captermino->fecha = $fecha;
                 $captermino->fecha_lim = $fecha;
 
-                $accion = array('route' => array('capGuardarTermino'), 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form');
+                $accion = array('route' => array('capGuardarTermino'), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
                 
                 return View::make('capacitaciones.creacion-paso-1', 
                         compact('captermino', 'especialidades', 'accion', 'pasoActual', 'id', 'pasoReal'));
@@ -138,7 +138,7 @@ class CapTerminoController extends BaseController {
                 $captermino->fechaa = $fecha;
                 $captermino->fecha_limite = $fecha;
                 
-                $accion = array('route' => array('actualizarTermino', $id), 'method' => 'PATCH', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form');
+                $accion = array('route' => array('actualizarTermino', $id), 'method' => 'PATCH', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
                 return View::make('capacitaciones.creacion-paso-1', 
                         compact('captermino', 'especialidades', 'accion', 'pasoActual', 'id', 'pasoReal'));
@@ -177,38 +177,41 @@ class CapTerminoController extends BaseController {
 
                 $consultores =  Input::get('consultores');
                 $id = Input::get('idCaptermino');
+                if (!is_null($consultores)) {
+                    $banderaConsultor = 0;
+                    $cap = CapTermino::find($id);
 
-                $banderaConsultor = 0;
-                $cap = CapTermino::find($id);
-
-                foreach ($consultores as $consultor) {
-                    $consul = $cap->consultores()
-                            ->where('consultor_id', '=', $consultor);
-                    if(!$consul->count() > 0)
-                    {
-                        $consultorAT = new CapConsultor;
-                        $consultorAT->estado = 1;
-                        //Fechas
-                        $consultorAT->captermino_id = $id;
-                        $consultorAT->consultor_id = $consultor;
-                        $consultorAT->save();
-                       
-                        $this->mailOferta('emails.capacitacion', 
-                                            $id, 
-                                            $consultorAT->consultor->correo, 
-                                            $consultorAT->consultor->nombre
-                                        );
-                        
+                    foreach ($consultores as $consultor) {
+                        $consul = $cap->consultores()
+                                ->where('consultor_id', '=', $consultor);
+                        if(!$consul->count() > 0)
+                        {
+                            $consultorAT = new CapConsultor;
+                            $consultorAT->estado = 1;
+                            //Fechas
+                            $consultorAT->captermino_id = $id;
+                            $consultorAT->consultor_id = $consultor;
+                            $consultorAT->save();
+                           
+                            $this->mailOferta('emails.capacitacion', 
+                                                $id, 
+                                                $consultorAT->consultor->correo, 
+                                                $consultorAT->consultor->nombre
+                                            );
+                            
+                        }
+                        $banderaConsultor = 1;
                     }
-                    $banderaConsultor = 1;
-                }
-                if($banderaConsultor == 1)
-                {
-                    $cap->estado = 2;
-                    $cap->save();
+                    if($banderaConsultor == 1)
+                    {
+                        $cap->estado = 2;
+                        $cap->save();
+                    }
+                    return Redirect::route('capPasoOferta', $id);
                 }
 
-                return Redirect::route('capPasoOferta', $id);
+                return Redirect::back()->withErrors(['seleccion'=>'Seleccione un consultor']);
+                
             }
 
             private function mailOferta($template, $id, $email, $nombreConsultor)
@@ -238,28 +241,26 @@ class CapTerminoController extends BaseController {
 
                 $ofertas = Input::file('ofertas');
                 $consultores = Input::get('consultores');
+                    $file = 0;
+                    $ofertantes = 0;
 
-                $file = 0;
-                $ofertantes = 0;
-
-                foreach ($consultores as $consultor) {
-                    if($ofertas[$file]){
-                        $capConsultor = CapConsultor::find($consultor);
-                        $capConsultor->doc_oferta = $this->guardarOferta($ofertas[$file]);
-                        $capConsultor->save();
-                        $ofertantes++;
+                    foreach ($consultores as $consultor) {
+                        if($ofertas[$file]){
+                            $capConsultor = CapConsultor::find($consultor);
+                            $capConsultor->doc_oferta = $this->guardarOferta($ofertas[$file]);
+                            $capConsultor->save();
+                            $ofertantes++;
+                        }
+                        $file++;
                     }
-                    $file++;
-                }
 
-                if($ofertantes > 0){
-                    $cap = CapTermino::find($id);
-                    $cap->estado = 3;
-                    $cap->save();
-                    return Redirect::route('capPaso', $id);
-                }
-                
-                return Redirect::route('capPasoOferta', $id);
+                    if($ofertantes > 0){
+                        $cap = CapTermino::find($id);
+                        $cap->estado = 3;
+                        $cap->save();
+                        return Redirect::route('capPaso', $id);
+                    }
+                return Redirect::back()->withErrors(['seleccion'=>'Agrege un documento']);
             }
 
 
@@ -287,18 +288,21 @@ class CapTerminoController extends BaseController {
 
             public function seleccionarConsultor($id){
                 $consultorID = Input::get('consultor');
+                if (!is_null($consultorID)) {
+                    if($consultorID){
+                        $consultor = CapConsultor::find($consultorID);
+                        $consultor->estado = 2;
+                        $consultor->save();
 
-                if($consultorID){
-                    $consultor = CapConsultor::find($consultorID);
-                    $consultor->estado = 2;
-                    $consultor->save();
-
-                    $cap = CapTermino::find($id);
-                    $cap->estado = 4;
-                    $cap->save();
-                    return Redirect::route('capPaso', $id);
+                        $cap = CapTermino::find($id);
+                        $cap->estado = 4;
+                        $cap->save();
+                        return Redirect::route('capPaso', $id);
+                    }
+                    return Redirect::route('capPasoSeleccionarConsultor', $id);
                 }
-                return Redirect::route('capPasoSeleccionarConsultor', $id);
+
+                return Redirect::back()->withErrors(['seleccion'=>'Seleccione un consultor']);
             }
 
         //Asistencia
@@ -398,7 +402,7 @@ class CapTerminoController extends BaseController {
                 $pasoActual = 6;
                 $pasoReal = $cap->pasoReal;
                 $method = "post";
-                $action = array('method' => 'PATH', 'class' => 'form-horizontal');
+                $action = array('method' => 'PATH', 'class' => 'form-horizontal', 'id' => 'validar');
                 return View::make('capacitaciones.creacion-paso-6', 
                             compact('capcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible'));
             }
@@ -431,7 +435,7 @@ class CapTerminoController extends BaseController {
                 $dataFirma = array('' => '','1' => 'Director','2' => 'Directora');
                 $capcontrato->firma = array_search($capcontrato->firma,$dataFirma);
 
-                $action = array('method' => 'PATH', 'class' => 'form-horizontal');
+                $action = array('method' => 'PATH', 'class' => 'form-horizontal', 'id' => 'validar');
                 return View::make('capacitaciones.creacion-paso-6', 
                             compact('capcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible'));
 
