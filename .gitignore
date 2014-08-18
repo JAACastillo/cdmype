@@ -8,3 +8,9 @@ composer.lock
 Thumbs.db
 
 app/controllers/ConsultorEspecialidadController.php
+
+*.docx
+
+*.pdf
+
+*.png
