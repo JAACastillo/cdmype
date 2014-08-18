@@ -36,12 +36,16 @@
 		                    	</div>
 		                    </div>
 		                </div>
-                        <div class="form-group">
-                            {{ Form::label('categoria', 'Categoría:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-8">
-                                {{ Form::select('categoria', array('' => '','1' => 'Empresa','2' => 'Grupo'), null, array('class' => 'form-control')) }} 
-                            </div>
-                        </div>
+		                <div class="form-group">
+		                    {{ Form::label('ventaExportacion', 'Venta Nacional:', array('class' => 'control-label col-md-4')) }}
+		                    <div class="col-md-4">
+							    <div class="input-group">
+							      <div class="input-group-addon">$</div>
+		                        	{{ Form::number('ventaExportacion', $indicador->ventaExportacion, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => 'any')) }}
+		                    		
+		                    	</div>
+		                    </div>
+		                </div>
                         <div class="form-group">
                             {{ Form::label('clasificacion', 'Clasificacion:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
