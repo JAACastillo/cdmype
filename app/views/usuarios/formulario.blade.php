@@ -6,12 +6,12 @@
 
 <?php
     if ($usuario->exists):
-        $formulario = array('route' => array('actualizarUsuario', $usuario->id), 'method' => 'POST', 'class' => 'form-horizontal');
+        $formulario = array('route' => array('actualizarUsuario', $usuario->id), 'method' => 'POST','id' => 'validar', 'class' => 'form-horizontal');
         $action = 'Editar';
         $nombre = $usuario->nombre;
 
     else:
-        $formulario = array('route' => 'guardarUsuario', 'method' => 'POST', 'id' => 'usr-form', 'class' => 'form-horizontal');
+        $formulario = array('route' => 'guardarUsuario', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal');
         $action = 'Crear';
         $nombre = 'Creación';
     endif;
@@ -89,5 +89,11 @@
 
 {{ Form::close() }}
 
+
+@section("script")
+
+@include('validaciones.usuarios')
+
 @stop
-               
+
+@stop               

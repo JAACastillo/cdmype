@@ -5,12 +5,13 @@
         <meta charset="UTF-8">
         <meta name=description content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel='shortcut icon' href='/atcdmype/public/assets/img/favicon.png'>
+        <link rel='shortcut icon' href='/atcdmype/assets/img/favicon.png'>
         <!-- CSS -->
             <!-- Bootstrap -->
             {{ HTML::style('assets/css/jquery-ui.css', array('media' => 'screen')) }}
             {{ HTML::style('assets/css/bootstrap.min.css', array('media' => 'screen')) }}
-            {{ HTML::style('assets/css/bootstrapValidator.min.css', array('media' => 'screen')) }}
+            <!-- validator -->
+            {{ HTML::style('assets/validator/css/bootstrapValidator.min.css', array('media' => 'screen')) }}
             <!-- Shosen --> 
             {{ HTML::style('assets/chosen/chosen.min.css', array('media' => 'screen')) }}
             <!-- Mascaras -->
@@ -32,7 +33,8 @@
             {{ HTML::script('assets/js/jquery.min.js') }}
             {{ HTML::script('assets/js/jquery-ui.js') }}
             {{ HTML::script('assets/js/bootstrap.min.js') }}
-            {{ HTML::script('assets/js/bootstrapValidator.min.js') }}
+            <!-- Validator -->    
+            {{ HTML::script('assets/validator/js/bootstrapValidator.min.js') }}
             <!-- Mascaras -->
             {{ HTML::script('assets/js/jasny-bootstrap.min.js') }}
             <!-- Botones Animados -->    
@@ -40,8 +42,6 @@
             {{ HTML::script('assets/ladda/ladda.min.js') }}
             <!-- Shosen -->    
             {{ HTML::script('assets/chosen/chosen.min.js') }}
-            <!-- Chosen -->    
-            {{ HTML::script('assets/validador/validate.js') }}
             <!-- Mensajes -->    
             {{ HTML::script('assets/js/bootstrap-growl.min.js') }}
             

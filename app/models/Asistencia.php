@@ -39,8 +39,7 @@ class Asistencia extends Eloquent {
         public function validar($datos) 
         {
             $reglas = array(
-                'empresario_id' => 'required',
-                'captermino_id' => 'required'
+                'asistio' => 'required'
             );
             
             $validador = Validator::make($datos,$reglas);

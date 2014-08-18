@@ -36,9 +36,8 @@
                 @foreach($empresa->empresarios as $empresario)
                  
                     <h5>{{ $empresario->empresarios->nombre }} <small>{{$empresario->tipo}}</small></h5>
-                   
-                 
-            @endforeach
+                    
+                @endforeach
                 </td>
 
 
@@ -47,8 +46,9 @@
                 <td class="text-center">
                     <a href="{{ route('editarEmpresa', array($empresa->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
                     <a href="{{ route('verEmpresa', array($empresa->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
-                    <a href="{{ route('eliminarEmpresa', array($empresa->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"
-                    > </a>
+                    @if(Auth::user()->tipo == 'Administrador')
+                    <a href="{{ route('eliminarEmpresa', array($empresa->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar la Empresa?');"> </a>
+                    @endif
                 </td>
             </tr>
             @endforeach

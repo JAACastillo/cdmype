@@ -31,13 +31,12 @@
             <td class="text-center">{{ $consultor->municipio->municipio }}</td>
             <td class="text-center">{{ $consultor->correo }}</td>
             <td class="text-center">
-                @if(Auth::user()->tipo == 'Administrador' || Auth::user()->tipo == 'Compras')
-                    <a class="btn btn-default btn-xs glyphicon glyphicon-th-list" data-toggle="modal" href='#modal-id' data-id="{{ $consultor->id }}"></a>
-
-                    <a href="{{ route('editarConsultor', array($consultor->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Editar"> </a>
-                    <a href="{{ route('verConsultor', array($consultor->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
-                    <a href="{{ route('eliminarConsultor', array($consultor->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"> </a>
-                @endif
+            <a class="btn btn-default btn-xs glyphicon glyphicon-th-list" data-toggle="modal" href='#modal-id' data-id="{{ $consultor->id }}"></a>
+            <a href="{{ route('editarConsultor', array($consultor->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Editar"> </a>
+            <a href="{{ route('verConsultor', array($consultor->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
+            @if(Auth::user()->tipo == 'Administrador')
+                <a href="{{ route('eliminarConsultor', array($consultor->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Consultor?');"> </a>
+            @endif
             </td>
         </tr>
         @endforeach

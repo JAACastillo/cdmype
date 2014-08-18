@@ -83,25 +83,25 @@ Capacitaciones
 	                <div class="form-group">
 	                    {{ Form::label('fecha', 'Fecha:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-8">
-	                        {{ Form::date('fecha', null, array('placeholder' => 'Fecha de la capacitación', 'class' => 'form-control fecha')) }}
+	                        <input name="fecha" type="date" value="{{$captermino->fecha}}" class="form-control" />
 	                    </div>                
 	                </div>
 	                <div class="form-group">
 	                    {{ Form::label('fecha_lim', 'Fecha limite:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-8">
-	                        {{ Form::date('fecha_lim', null, array('placeholder' => 'Fecha limite', 'class' => 'form-control fecha')) }}
+	                        <input name="fecha_lim" type="date" value="{{$captermino->fecha_lim}}" class="form-control" />
 	                    </div>                
 	                </div>
 	                <div class="form-group">
 	                    {{ Form::label('hora_ini', 'Hora de inicio:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-8">
-	                        {{ Form::time('hora_ini', null, array('class' => 'form-control hora')) }}
+	                        {{ Form::time('hora_ini', $captermino->hora_ini, array('class' => 'form-control hora')) }}
 	                    </div>                
 	                </div>
 	                <div class="form-group">
 	                    {{ Form::label('hora_fin', 'Hora de finalización:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-8">
-	                        {{ Form::time('hora_fin', null, array('class' => 'form-control hora')) }}
+	                        {{ Form::time('hora_fin', $captermino->hora_fin, array('class' => 'form-control hora')) }}
 	                    </div>                
 	                </div>
 	                <div class="form-group">
@@ -129,23 +129,22 @@ Capacitaciones
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-6">
-    			        <center>
-    			        <a href="javascript:history.back()">
-    			        <span class="glyphicon glyphicon-chevron-left"></span>
-    			         Anterior
-    			        </a>
-    			        </center>
-    			    </div>
-    			    <div class="col-xs-6">
-    			        <center>
-    			        <button type="submit" tabindex="11" class="btn btn-danger">
-    			        Siguiente
-    			        <span class="glyphicon glyphicon-chevron-right"></span>
-    			        </button>
-    			        </center>
-    			    </div>
-    			</div>
-    		
+				        <center>
+				        <a href="javascript:history.back()">
+				        <span class="glyphicon glyphicon-chevron-left"></span>
+				         Anterior
+				        </a>
+				        </center>
+				    </div>
+				    <div class="col-xs-6">
+				        <center>
+				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
+				        Siguiente
+				        <span class="glyphicon glyphicon-chevron-right"></span>
+				        <span class="ladda-spinner"></span><span class="ladda-spinner"></span>
+				        </button>
+				        </center>
+				    </div>    		
     		</div>
         </div>
     </div>

@@ -151,4 +151,15 @@
             });
         }
 
+        function agregado(){
+        $.growl("Tus datos son incorrectos", {
+                    type: "danger",
+                    allow_dismiss: false,
+                    animate: {
+                        enter: 'animated bounceIn',
+                        exit: 'animated bounceOut'
+                    }                               
+                });
+        }
+
 })(jQuery)

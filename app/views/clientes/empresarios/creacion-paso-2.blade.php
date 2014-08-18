@@ -42,7 +42,33 @@
 		            </div>
 
 		            	{{ Form::hidden('empresario_id', $empresaEmpresario->empresario_id) }}
-	            </div>
+	            	</div>
+
+	            	<!-- Tabla de Socios -->
+		            <div class="col-xs-1"></div>
+		            <div class="col-xs-10">
+		            	<?php
+    		        		$empresas = EmpresaEmpresario::Where('empresario_id', '=', $id)->get();
+                		?>
+                		@if($empresas!="[]")
+		            	<div class="table-responsive">
+					        <table class="table table-bordered">
+					            <tr class="active">
+					                <th class="text-center">Nombre</th>
+					            </tr>
+
+					            @foreach ($empresas as $empresa)
+					            <tr>
+					                <td class="text-center">{{ $empresa->empresas->nombre}}</td>
+					            </tr>
+					            @endforeach
+
+					        </table>
+					    </div>
+					    @endif
+
+		            </div>
+		            <div class="col-xs-1"></div>
             
             	</div>
 

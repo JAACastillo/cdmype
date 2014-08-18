@@ -31,12 +31,13 @@
             <tr>
                 <td>{{ $usuario->nombre }}</td>
                 <td>{{ $usuario->email }}</td>
-                <td>{{ $usuario->tipo }}</td>
+                <td class="text-center">{{ $usuario->tipo }}</td>
                 <td class="text-center">
                     <a href="{{ route('editarUsuario', array($usuario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
                     <a href="{{ route('verUsuario', array($usuario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
-                    <a href="#" data-id="{{ $usuario->id }}" data-form="#form-usr" class="btn btn-default btn-xs glyphicon glyphicon-remove delete" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"
-> </a>
+                    @if(Auth::user()->tipo == 'Administrador')
+                    <a href="{{ route('eliminarUsuario', array($usuario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"> </a>
+                    @endif
                 </td>
             </tr>
             @endforeach
@@ -45,8 +46,5 @@
     </div>
 
     {{ $usuarios->links() }}
-    
-    {{ Form::open(array('route' => array('eliminarUsuario', 'TERM_ID'), 'method' => 'POST', 'role' => 'form', 'id' => 'form-usr')) }}
-    {{ Form::close() }}
 
 @stop

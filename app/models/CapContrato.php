@@ -9,7 +9,7 @@ class CapContrato extends Eloquent {
         'pago',
         'lugar_firma',
         'firma',
-        'capconsultor_id'
+        'captermino_id'
     );
     
     /* Guardar */
@@ -43,7 +43,7 @@ class CapContrato extends Eloquent {
                 'pago' => 'required',
                 'lugar_firma' => 'required',
                 'firma' => 'required',
-                'capconsultor_id' => 'required'
+                'captermino_id' => 'required'
             );
             
             $validador = Validator::make($datos,$reglas);

@@ -9,7 +9,7 @@
 @stop
 
 @section('boton')
-    <a href="{{route('capCrearTermino') }}" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Crear Término de Referencia">
+    <a href="{{route('capCrearTermino') }}" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Crear Capacitación">
     <span class="glyphicon glyphicon-book"></span>
     Nueva
     </a>
@@ -19,11 +19,11 @@
     <div class="table-responsive">
         <table class="table table-bordered">
             <tr class="active">
-                <th>ID</th>
-                <th>Tema</th>
-                <th>Encargado</th>
-                <th>Estado</th>
-                <th>Opciones</th>
+                <th class="text-center">ID</th>
+                <th class="text-center">Tema</th>
+                <th class="text-center">Encargado</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Opciones</th>
             </tr>
 
             @foreach ($capterminos as $captermino)
@@ -34,17 +34,14 @@
                     <a href="{{route('capPaso', $captermino->id)}}">{{ $captermino->tema }}
                     </a>
                 </td>
-<<<<<<< HEAD
-                <td>{{ $captermino->usuarios }}</td>
-=======
                 <td>{{ $captermino->usuario->nombre }}</td>
->>>>>>> FETCH_HEAD
-                <td>{{ $captermino->estado }}</td>
-                <td>
+                <td class="text-center">{{ $captermino->estado }}</td>
+                <td class="text-center">
                     <a href="{{ route('capModificarTermino', array($captermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
-                    <a href="{{ route('capacitaciones.show', array($captermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
-                    <a href="{{ route('capacitaciones.destroy', array($captermino->id)) }}" data-form="#form-usr" class="btn btn-default btn-xs glyphicon glyphicon-remove delete" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"
-> </a>
+                    <a href="{{ route('capMostrarTermino', array($captermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
+                    @if(Auth::user()->tipo == 'Administrador')
+                    <a href="{{ route('eliminarCapacitacion', array($captermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el TDR?');"> </a>
+                    @endif
                 </td>
             </tr>
             @endforeach

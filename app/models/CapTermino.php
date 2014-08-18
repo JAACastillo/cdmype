@@ -27,11 +27,11 @@ class CapTermino extends Eloquent {
 
         public function guardar($datos,$accion)
         {
-            // $fecha = strtotime($datos['fecha']);
-            // $datos['fecha'] = date('Y-m-d', $fecha);
+            $date = strtotime($datos['fecha']);
+            $datos['fecha'] = date('Y-m-d', $date);
 
-            // $fecha_lim = strtotime($datos['fecha_lim']);
-            // $datos['fecha_lim'] = date('Y-m-d', $fecha_lim);
+            $date = strtotime($datos['fecha_lim']);
+            $datos['fecha_lim'] = date('Y-m-d', $date);
 
             if($this->validar($datos)) 
             {
@@ -72,7 +72,6 @@ class CapTermino extends Eloquent {
                 'hora_ini' => 'required',
                 'hora_fin' => 'required',
                 'nota' => 'max:3000',
-                'estado' => 'required',
                 'especialidad_id' => 'required',
                 'usuario_id' => 'required'
             );
@@ -96,8 +95,6 @@ class CapTermino extends Eloquent {
                         ->get(); 
 
         }
-
-
         public function getConsultorSeleccionadoAttribute()
         {
             return $this->consultores()
@@ -126,10 +123,10 @@ class CapTermino extends Eloquent {
                         return 4;
                         break;
                     case 'Consultor Seleccionado':
-                        return 5;
+                        return 6;
                         break;
                     case 'Contratada':
-                        return 6;
+                        return 7;
                         break;
                     case 'Finalizada':
                         return 7;
@@ -140,6 +137,17 @@ class CapTermino extends Eloquent {
                 }
 
             }
+
+        public function getFechaaAttribute(){
+
+            $date = strtotime($this->fecha);
+           return date('d/m/Y', $date);
+        }
+        public function getFecha_limiteAttribute(){
+
+            $date = strtotime($this->fecha_lim);
+           return date('d/m/Y', $date);
+        }
 
     
     /* Relaciones */
@@ -161,6 +169,10 @@ class CapTermino extends Eloquent {
 
         public function contratos(){
             return $this->hasOne('CapContrato', 'captermino_id');
+        }
+
+        public function asistencia(){
+            return $this->hasOne('Asistencia', 'captermino_id');
         }
 
 

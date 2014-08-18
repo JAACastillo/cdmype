@@ -88,7 +88,8 @@ class EmpresaController extends BaseController {
             App::abort(404);
         }
             $empresa->delete();
-            $bitacora = new Bitacora;            $campos = array(
+            $bitacora = new Bitacora;            
+            $campos = array(
                 'usuario_id' => Auth::user()->id,
                 'tabla' => 5,
                 'tabla_id' => $id,

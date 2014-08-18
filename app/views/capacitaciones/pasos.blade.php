@@ -21,18 +21,18 @@
 				        "rows"   => 2
 				    ),
 				    array(
-				        "label" => "Asistencia",
+				        "label" => "Convocatoria",
 				        "enlace" => "capPasoAsistencia",
-				        "rows"   => 1
+				        "rows"   => 2
 				    ),
 				    array(
 				        "label" => "Contrato",
 				        "enlace" => "capPasoContrato",
-				        "rows"   => 2
+				        "rows"   => 1
 				    ),
 				    array(
 				        "label" => "Finalizada",
-				        "enlace" => "capCrearTermino",
+				        "enlace" => "capacitaciones.index",
 				        "rows"   => 2
 				    )
 				);

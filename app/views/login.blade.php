@@ -26,7 +26,7 @@
             @stop
         @endif
             <!-- Formulario -->
-            {{ Form::open(array('url' => '/login', 'class' => 'form-horizontal', 'id' => 'validado')) }}
+            {{ Form::open(array('url' => '/login', 'class' => 'form-horizontal', 'id' => 'validar')) }}
                 <!-- Emcabezado -->
                     <center>
                         <img class='img-responsive' src="assets/img/cdmype-logo.jpg">
@@ -40,27 +40,26 @@
                         </div>
                         <div class="panel-body">
                         <br/>
-                            <!-- Correo -->                             
-                            <div class="form-group">
-                                <label name="correo" class="control-label col-xs-12 col-sm-12 col-md-3">Correo Eléctronico: </label>
-                                <div class="col-xs-12 col-sm-12 col-md-8">
+                            <!-- Correo -->
+                             <div class="form-group">
+                                {{ Form::label('correo', 'Correo Electrónico:', array('class' => 'control-label col-md-3')) }}
+                                <div class="col-md-8">
                                     <div class="input-group">
-                                        <span class="input-group-addon glyphicon glyphicon-envelope"></span>
-                                        <input name="correo" type="text" class="form-control" autofocus="autofocus" tabindex="1" placeholder="ejemplo@ejemplo.com" data-vreq='1'>
-                                    </div>    
-                                </div>
-                            </div>
+                                        <div class="input-group-addon glyphicon glyphicon-envelope"></div>
+                                        {{ Form::text('correo', null, array('placeholder' => 'ejemplo@ejemplo.com', 'class' => 'form-control')) }}
+                                    </div>
+                                    </div>
+                            </div>                             
                             <!-- Contraseña -->
                             <div class="form-group">
-                                <label name="contrasena" class="control-label col-xs-12 col-sm-12 col-md-3">Contraseña: </label>
-                                <div class="col-xs-12 col-sm-12 col-md-8">
+                                {{ Form::label('contrasena', 'Correo Electrónico:', array('class' => 'control-label col-md-3')) }}
+                                <div class="col-md-8">
                                     <div class="input-group">
-                                        <span class="input-group-addon glyphicon glyphicon-lock"></span>
-                                        <input name="contrasena" type="password" class="form-control"tabindex="2" placeholder="Ingrese su contraseña" data-vreq='1'>
+                                        <div class="input-group-addon glyphicon glyphicon-lock"></div>
+                                         {{ Form::password('contrasena', array('placeholder' => 'Contraseña', 'class' => 'form-control')) }}
                                     </div>
-                                    <br/>
-                                </div>
-                            </div>                 
+                                    </div>
+                            </div> 
                         </div>
                     
                         <div class="panel-footer">
@@ -84,5 +83,10 @@
             <!-- derecha -->
         </div>
     </div>
+@section("script")
+
+@include('validaciones.inicio')
+
+@stop
 
 @stop

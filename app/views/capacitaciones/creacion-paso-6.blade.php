@@ -43,7 +43,7 @@ Capacitaciones
 			<div class="panel-body">		
 			<div class="row">
 				<div class="col-xs-11">
-						{{Form::hidden('capconsultor_id', null)}}
+						{{Form::hidden('captermino_id', $id)}}
 					<div class="form-group">
                      	{{ Form::label('lugar_firma', 'Lugar:', array('class' => 'control-label col-md-4')) }}
                     	<div class="col-md-8">
@@ -55,13 +55,13 @@ Capacitaciones
 	                   <div class="col-md-4">
 						    <div class="input-group">
 						    	<div class="input-group-addon">$</div>
-	                        	{{ Form::number('pago', null, array('class' => 'form-control text-center', 'min' => '1', 'max' => '100', 'step' => 'any', 'placeholder' =>'%')) }}
+	                        	{{ Form::number('pago', $capcontrato->pago, array('class' => 'form-control text-center', 'min' => '1', 'max' => '100', 'step' => 'any', 'placeholder' =>'$')) }}
 	                    	</div>
 	                    </div>
 	                </div>
 	                <div class="form-group">
                             {{ Form::label('firma', 'Firma:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-8">
+                            <div class="col-md-4">
                                 {{ Form::select('firma', array('' => '','1' => 'Director','2' => 'Directora'), null, array('class' => 'form-control')) }} 
                             </div>
                         </div>

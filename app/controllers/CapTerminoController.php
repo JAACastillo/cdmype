@@ -13,44 +13,74 @@ class CapTerminoController extends BaseController {
         return View::make('capacitaciones.lista', compact('capterminos'));
 	}
 
+    public function verTermino(){
+
+        return "ver";
+    }
+
+    //Mostrar los terminos para editar
+
+        public function eliminarCapacitacion($id)
+        {
+            
+            $captermino = CapTermino::find($id);
+        
+            if(is_null($captermino))
+                App::abort(404);
+            
+            else 
+            {
+                $captermino->delete();
+                
+                $bitacora = new Bitacora;
+                $campos = array(
+                    'usuario_id' => Auth::user()->id,
+                    'tabla' => 20,
+                    'tabla_id' => $id,
+                    'accion' => 3
+                );
+                
+                $bitacora->Guardar($campos);
+                return Redirect::back();
+            }
+            
+        }
+
 
 
 //inicio de los pasos.
 
-    //Redirecciona al paso en el que se encuentra la Cap. 
-    //llamado desde el listado
-    public function Paso($id) 
-    {
-        $cap = CapTermino::find($id);
+    //Seleccion del paso
+        public function Paso($id) 
+        {
+            $cap = CapTermino::find($id);
 
-        switch ($cap->estado) {
-            case 'Creado':                       
-                return Redirect::route('capPasoConsultor', $id);
-                break;
-            case 'Enviado':
-                return Redirect::route('capPasoOferta', $id);
-                break;
-            case 'Ofertas Recibidas':
-                return Redirect::route('capPasoSeleccionarConsultor', $id);
-                break;
-            case 'Consultor Seleccionado':
-                return Redirect::route('capPasoAsistencia', $id);
-                break;
-            case 'Contratada':
-                return Redirect::route('capPasoContrato', $id);
-                break;
-            case 'Finalizada':
-                return Redirect::route('capPasoContrato', $id);
-                break;
-            default:
-                # code...
-                break;
+            switch ($cap->estado) {
+                case 'Creado':                       
+                    return Redirect::route('capPasoConsultor', $id);
+                    break;
+                case 'Enviado':
+                    return Redirect::route('capPasoOferta', $id);
+                    break;
+                case 'Ofertas Recibidas':
+                    return Redirect::route('capPasoSeleccionarConsultor', $id);
+                    break;
+                case 'Consultor Seleccionado':
+                    return Redirect::route('capPasoAsistencia', $id);
+                    break;
+                case 'Contratada':
+                    return Redirect::route('capPasoContrato', $id);
+                    break;
+                case 'Finalizada':
+                    return Redirect::route('capPasoContrato', $id);
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+
+            return "404";
         }
-
-        return "404";
-    }
-
-
 
     //Pasos
 
@@ -63,6 +93,11 @@ class CapTerminoController extends BaseController {
                 $id = 0;
                 $captermino = new CapTermino;
                 $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
+
+                $fecha = date('Y-m-j');
+                // $nuevafecha = strtotime ('+2 day', strtotime($fecha));
+                $captermino->fecha = $fecha;
+                $captermino->fecha_lim = $fecha;
 
                 $accion = array('route' => array('capGuardarTermino'), 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form');
                 
@@ -95,11 +130,14 @@ class CapTerminoController extends BaseController {
                     return Redirect::route('capCrearTermino');
                 $pasoActual = 1;
                 $pasoReal = $captermino->pasoReal;
-
                 $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
                 $dataCategoria = array(1 => 'Emprendedoras y empresarias de los Departamentos de Cabañas, Cuscatlán y San Vicente.', 2 => 'Empresarios de los departamentos de Cabañas, Cuscatlán y San Vicente.');
                 $captermino->categoria = array_search($captermino->categoria, $dataCategoria);
-
+                
+                $fecha = date("d/m/Y");
+                $captermino->fechaa = $fecha;
+                $captermino->fecha_limite = $fecha;
+                
                 $accion = array('route' => array('actualizarTermino', $id), 'method' => 'PATCH', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form');
 
                 return View::make('capacitaciones.creacion-paso-1', 
@@ -178,7 +216,7 @@ class CapTerminoController extends BaseController {
                 Mail::send($template,array('id' => $id),function($message) use ($id, $email, $nombreConsultor) {
                    
                     $message->to($email, $nombreConsultor)
-                            ->subject('capacitaciones - CDMYPE UNICAES');
+                            ->subject('Capacitaciones - CDMYPE UNICAES');
                 });
             }
 
@@ -268,33 +306,76 @@ class CapTerminoController extends BaseController {
             public function asistencia($id){
 
                 $asistencia = new Asistencia;
+                $cap = CapTermino::find($id);
 
-                $pasoReal = 5;
+                $pasoReal = 6;
                 $pasoActual = 5;
 
+                if ($cap->asistencia) {
+                    $oculto = 'visible';
+                    $visible = 'oculto';
+                }
+                else{
+                    $oculto = 'oculto';
+                    $visible = 'visible';
+                }
+
                 return View::make('capacitaciones.creacion-paso-5', 
-                        compact('asistencia','accion', 'pasoActual', 'id', 'pasoReal'));
+                        compact('asistencia','accion', 'pasoActual', 'id', 'pasoReal', 'oculto', 'visible'));
 
             }
 
 
-            public function guardarAsistencia($id){
+            public function guardarAsistencia(){
 
-                $asistencia = new Asistencia;
-                $datos = Input::all(); 
-                $empresarios = Input::get('empresario_id[]');
+                $captermino_id = Input::get('captermino_id');
+                $empresarios = Input::get('empresario_id');
 
-                return $empresarios;
-
-                if($asistencia->guardar($datos,'1'))
+                if(value($empresarios[0]) >= 1 )
                 {
+                    foreach ($empresarios as $empresario) {
+                         $asistencia = new Asistencia;
+                         $asistencia->empresario_id = $empresario;
+                         $asistencia->captermino_id = $captermino_id;
+                         $asistencia->asistio = 1; //No
+                         $asistencia->save();
+                    }
                     return  Redirect::back();
                 }
                 else
                 { 
-                     return Redirect::back()->withInput()->withErrors($empresa->errores);
+
+                    return Redirect::back()->withErrors(['no-existe' => 'Lo siento no he encontrado el empresario']);
                 }
 
+            }
+
+            public function actualizarAsistencia(){
+                $asistencias = Input::get('asistencias');
+                if($asistencias != "" )
+                {
+                    foreach ($asistencias as $id) {
+                         $asistencia = Asistencia::find($id);;
+                         $asistencia->asistio = 2; //Si
+                         $asistencia->save();
+                    }
+                    return  Redirect::back();
+                }
+
+            }
+
+            public function pdfAsistencia($id){
+
+                
+
+                $capacitacion = CapTermino::find($id);
+                $asistencias = Asistencia::where("captermino_id", "=", $id)->get();
+                
+
+                $pdf = App::make('dompdf');
+                $pdf->loadView('pdf.capAsistencia', compact('capacitacion', 'asistencias'))->setOrientation('landscape');
+                return $pdf->stream();
+            
             }
 
         //Contrato
@@ -302,7 +383,7 @@ class CapTerminoController extends BaseController {
 
                 $cap = CapTermino::find($id);
 
-                if($cap->contrato){
+                if($cap->contratos){
                     $cap->estado = 5;
                     $cap->save();
                     return Redirect::route('capPasoContratada', $id);
@@ -328,7 +409,6 @@ class CapTerminoController extends BaseController {
                 $data = Input::all();
                 $contrato = new CapContrato;
                 if($contrato->guardar($data, 1)){
-
                     $cap = CapTermino::find($id);
                     $cap->estado = 5;
                     $cap->save();
@@ -348,6 +428,9 @@ class CapTerminoController extends BaseController {
                 $visible = 'oculto';
                 $pasoActual = 6;
                 $pasoReal = $cap->pasoReal;
+                $dataFirma = array('' => '','1' => 'Director','2' => 'Directora');
+                $capcontrato->firma = array_search($capcontrato->firma,$dataFirma);
+
                 $action = array('method' => 'PATH', 'class' => 'form-horizontal');
                 return View::make('capacitaciones.creacion-paso-6', 
                             compact('capcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible'));
@@ -362,22 +445,21 @@ class CapTerminoController extends BaseController {
                 
                 if($contrato->guardar($data, 1))
                     return Redirect::route('capPaso', $id);
-                
 
                 return Redirect::back()->withInput()->withErrors($contrato->errores);
             }
 
             public function pdfContrato($id){
+
                 $contrato = CapContrato::find($id);
+                $capacitacion = $contrato->terminos;
 
-                $cap = $contrato->terminos;
-
-                $consultor = $cap->consultorSeleccionado->consultor;
+                $consultor = $capacitacion->consultorSeleccionado->consultor;
 
                 $pdf = App::make('dompdf');
 
                 $pdf->loadView('pdf.capContrato', 
-                        compact('cap', 'consultor', 'contrato'));
+                        compact('capacitacion', 'consultor', 'contrato'));
                 return $pdf->stream();
             
             }

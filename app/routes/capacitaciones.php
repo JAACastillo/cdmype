@@ -2,6 +2,11 @@
 
 	Route::resource('capacitaciones' , 'CapTerminoController');
 
+	//Ver
+		Route::get('capacitacion/{idTermino}', ['as' => 'capMostrarTermino', 'uses' => 'CapTerminoController@verTermino']);
+	//Eliminar
+		Route::any('capacitacion/eliminacion/{idTermino}', ['as' => 'eliminarCapacitacion', 'uses' => 'CapTerminoController@eliminarCapacitacion']);
+
 //Pasos
 
 	//Terminos
@@ -22,12 +27,14 @@
 	Route::post('capacitaciones/paso/seleccionar-consultor/{id}', ['as' => 'capPasoSeleccionarConsultor', 'uses' => 'CapTerminoController@seleccionarConsultor']);
 	//Asistencia
 	Route::get('capacitaciones/paso/asistencia/{id}', ['as' => 'capPasoAsistencia', 'uses' => 'CapTerminoController@asistencia']);
-	Route::post('capacitaciones/paso/asistencia/{id}', ['as' => 'capPasoGuardarAsistencia', 'uses' => 'CapTerminoController@guardarAsistencia']);
+	Route::post('capacitaciones/paso/asistencias', ['as' => 'capPasoGuardarAsistencia', 'uses' => 'CapTerminoController@guardarAsistencia']);
+	Route::post('capacitaciones/paso/asistencia', ['as' => 'capPasoActualizarAsistencia', 'uses' => 'CapTerminoController@actualizarAsistencia']);
 	//Contrato
 
 
 	//PDF
 	Route::get('capacitaciones/paso/contrato/pdf/{id}', ['as' => 'capContradoPdf', 'uses' => 'CapTerminoController@pdfContrato']);
+	Route::get('capacitaciones/paso/asistencia/pdf/{id}', ['as' => 'capAsistenciaPdf', 'uses' => 'CapTerminoController@pdfAsistencia']);
 
 	Route::get('capacitaciones/paso/contrato/{id}', ['as' => 'capPasoContrato', 'uses' => 'CapTerminoController@contrato']);
 	Route::post('capacitaciones/paso/contrato/{id}', ['as' => 'capPasoContrato', 'uses' => 'CapTerminoController@guardarContrato']);

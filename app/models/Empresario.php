@@ -76,9 +76,9 @@ class Empresario extends Eloquent {
     /* Relaciones */
 
         //
-        public function empresasEmpresarios() 
+        public function empresa() 
         {
-            return $this->hasmany('EmpresaEmpresario','empresa_id');
+            return $this->hasmany('EmpresaEmpresario','empresario_id');
         }
 
         public function asistencias() 
