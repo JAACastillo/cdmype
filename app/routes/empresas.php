@@ -25,4 +25,7 @@ Route::resource('empresas','EmpresaController');
 	Route::post('empresas/paso/empresario', ['as' => 'pasoEmpresariosGuardar', 'uses' => 'EmpresaController@empresarioGuardar']);
 
 	// Termino
+	Route::get('empresas/paso/indicadores/{idEmpresa}', ['as' => 'empresaPasoIndicadores', 'uses' => 'EmpresaController@indicadores']);
+
+
 	Route::get('empresas/paso/termino/{idEmpresa}', ['as' => 'pasoTerminoEmpresa', 'uses' => 'EmpresaController@termino']);            

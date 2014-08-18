@@ -8,17 +8,17 @@
 				    array(
 				        "label" => "Empresa",
 				        "enlace" => "pasoEmpresa",
-				        "rows"   => 3
+				        "rows"   => 2
 				    ),
 				    array(
 				        "label" => "Socios",
 				        "enlace" => "pasoSocios",
-				        "rows"   => 3
+				        "rows"   => 2
 				    ),
 				    array(
 				        "label" => "Terminos",
 				        "enlace" => "pasoTerminoEmpresario",
-				        "rows"   => 3
+				        "rows"   => 2
 				    )
 				);
 	$step = 1;

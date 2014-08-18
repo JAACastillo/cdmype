@@ -204,9 +204,19 @@ class EmpresaController extends BaseController {
 
         }
 
+        public function indicadores($id){
+            $indicador = new indicador;
+            $pasoReal = 3;
+            $pasoActual = 3;
+            return View::make('clientes.empresas/creacion-paso-indicadores', 
+                        compact('id', 'pasoReal', 'pasoActual', 'indicador'));
+        }
+
+
     //Termino
         public function termino($idEmpresa)
         {
+
             $pasoActual = 3;
             $pasoReal = 3;
             $id =$idEmpresa;

@@ -3,17 +3,22 @@
 				    array(
 				        "label"  => "Empresa",
 				        "enlace" => "editarEmpresa",
-				        "rows"   => 4
+				        "rows"   => 3
 				    ),
 				    array(
 				        "label" => "Empresario",
 				        "enlace" => "pasoEmpresarios",
-				        "rows"   => 4
+				        "rows"   => 3
+				    ),
+				    array(
+				        "label" => "Indicadores",
+				        "enlace" => "empresaPasoIndicadores",
+				        "rows"   => 3
 				    ),
 				    array(
 				        "label" => "Terminos",
 				        "enlace" => "pasoTerminoEmpresa",
-				        "rows"   => 4
+				        "rows"   => 3
 				    )
 				);
 	$step = 1;
