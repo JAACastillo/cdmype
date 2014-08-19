@@ -12,7 +12,7 @@
 	<div class="col-xs-10">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<a href="#" tabindex="11" class="btn btn-default busqueda" id="crearEmpresario">
+				<a href="#" tabindex="11" class="btn btn-default busqueda resetBtn" id="crearEmpresario">
 			        <span class="glyphicon glyphicon-user"></span>
 			        Crear				        
 			    </a>		
@@ -143,7 +143,10 @@
 $('.busqueda').on('click', function(){
 	$('#empresario').toggle("blind");
 	$('.buscar').toggle("blind")
-})
+});
+$('.resetBtn').click(function() {
+        $('#validar').data('bootstrapValidator').resetForm(true);
+});
 
 </script>
 @stop

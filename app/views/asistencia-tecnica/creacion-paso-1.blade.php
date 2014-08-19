@@ -7,8 +7,25 @@ AT Paso empresa
 @section('escritorio')
 @include('asistencia-tecnica/pasos')
 <br/>
-{{ Form::open(array('route' => 'atPasoEmpresa', 'method' => 'post', 'class' => 'form-horizontal', 'role' => 'form')) }}
-@include('errores', array('errors' => $errors))
+{{ Form::open(array('route' => 'atPasoEmpresa', 'id' => 'validar', 'method' => 'post', 'class' => 'form-horizontal', 'role' => 'form')) }}
+
+@if(Session::has('msj'))
+@section('script')
+
+<script type="text/javascript">
+
+    $.growl("La Empresa no pudo ser encontrada", {
+        type: "danger",
+        allow_dismiss: false,
+        animate: {
+            enter: 'animated bounceIn',
+            exit: 'animated bounceOut'
+        }                               
+    });
+</script>
+@stop
+@endif
+
 <div class="row">
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
@@ -53,4 +70,33 @@ AT Paso empresa
 	<div class="col-xs-2"></div>
 </div>
 {{Form::close()}}
+
+@section('script')
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	$('#validar').bootstrapValidator({
+        message: 'Valor no valido',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            empresa: {
+                validators: {
+                    notEmpty: {
+                        message: 'El campo es requerido.'
+                    }
+                }
+            }
+        }
+    });
+
+});
+
+</script>
+@stop
+
 @stop

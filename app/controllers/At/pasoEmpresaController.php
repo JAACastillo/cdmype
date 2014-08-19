@@ -25,7 +25,7 @@ class pasoEmpresaController extends BaseController {
 
         }
         return Redirect::route('atPasoEmpresa')
-                    ->withErrors(['no-existe' => 'La empresa no existe']);
+                    ->with(['msj' => 'La empresa no existe']);
     }
 
 }

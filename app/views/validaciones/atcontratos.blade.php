@@ -11,84 +11,48 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            nombre: {
+            duracion: {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido.'
                     }
                 }
             },
-            registro_iva: {
+            fecha_inicio: {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido'
                     }
                 }
             },
-            categoria: {
+            fecha_final: {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido'
                     }
                 }
             },
-            clasificacion: {
+            pago: {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido'
                     }
                 }
             },
-            sector_economico: {
+            aporte: {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido'
                     }
                 }
             },
-            constitucion: {
+            lugar_firma: {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido'
                     }
                 }
-            },
-            departamento: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo requerido'
-                    }
-                }
-            },
-            municipio_id: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo requerido'
-                    }
-                }
-            },
-            direccion: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo requerido'
-                    }
-                }
-            },
-            actividad: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo requerido'
-                    }  
-                }
-            },
-            descripcion:{
-                validators: {
-                    regexp: {
-                        regexp: /^[a-zñÑáéíóú -ÁÉÍÓÚA-Z0-9_\.]+$/,
-                        message: 'No se permiten caracteres especiales'
-                    }
-                }
-            }            
+            }                
         }
     });
 

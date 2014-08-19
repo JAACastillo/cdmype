@@ -55,9 +55,8 @@ class pasoFinalController extends BaseController{
             return Redirect::route('atPaso', $id2);
         }
         
-        return Redirect::route('atPasoOferta', $id);
+        return Redirect::back()->with('msj', 'Agrege un documento');
     }
-
 
     private function guardarOferta($file){
         $destinationPath = 'assets/ofertas/';
@@ -85,20 +84,24 @@ class pasoFinalController extends BaseController{
     public function consultorSeleccionar($id){
         $consultorID = Input::get('consultor');
 
-        if($consultorID){
-            $consultor = atConsultor::find($consultorID);
-            $consultor->estado = 2;
-            $consultor->save();
-        
-            $id2 = Math::to_base_10($id, 62) - 100000;
+        if (!is_null($consultorID)) {
+            if($consultorID){
+                $consultor = atConsultor::find($consultorID);
+                $consultor->estado = 2;
+                $consultor->save();
             
+                $id2 = Math::to_base_10($id, 62) - 100000;
+                
 
-            $at = AtTermino::find($id2);
-            $at->estado = 4;
-            $at->save();
-            return Redirect::route('atPaso', $id2);
+                $at = AtTermino::find($id2);
+                $at->estado = 4;
+                $at->save();
+                return Redirect::route('atPaso', $id2);
+            }
+            return Redirect::route('atPasoSeleccionarConsultor', $id);
         }
-        return Redirect::route('atPasoSeleccionarConsultor', $id);
+
+            return Redirect::back()->with('msj', 'Seleccione un consultor');
     }
 
 
@@ -109,22 +112,23 @@ class pasoFinalController extends BaseController{
 
 
         if($at->contrato){
-            $at->estado = 5;
-            $at->save();
+            // $at->estado = 5;
+            // $at->save();
             return Redirect::route('atPasoContratada', $id);
         }
 
         $ampliacion = new AmpliacionContrato;
         $atcontrato = new AtContrato;
         $atcontrato->attermino_id = $id2;
-
+        $atcontrato->fecha_inicio = date("Y-m-j");
+        $atcontrato->fecha_final = date("Y-m-j");
 
         $oculto = 'oculto';
         $visible = 'visible';
         $pasoActual = 6;
         $pasoReal = $at->pasoReal;
         $method = "post";
-        $action = array('method' => 'PATH', 'class' => 'form-horizontal');
+        $action = array('method' => 'PATH', 'id' => 'validar', 'class' => 'form-horizontal');
         return View::make('asistencia-tecnica/creacion-paso-7', 
                     compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible', 'ampliacion'));
     }
@@ -162,16 +166,22 @@ class pasoFinalController extends BaseController{
            //return $atcontrato;
 
 
-        if($at->ampliacion)
+        if($at->ampliacion){
             $ampliacion = $at->ampliacion;
-        else
+            $dataSolicitante = array('1' => 'Consultor','2' => 'Empresario');
+            $dataPerido = array('1' => 'Días','2' => 'Semanas', '3' => 'Meses');
+            $ampliacion->solicitante = array_search($ampliacion->solicitante, $dataSolicitante);
+            $ampliacion->periodo = array_search($ampliacion->periodo, $dataPerido);
+        }
+        else{
             $ampliacion = new AmpliacionContrato;
-
+            $ampliacion->fecha = date("Y-m-j");
+        }
         $oculto = 'visible';
         $visible = 'oculto';
         $pasoActual = 6;
         $pasoReal = $at->pasoReal;
-        $action = array('method' => 'PATH', 'class' => 'form-horizontal');
+        $action = array('method' => 'PATH', 'id' => 'validar', 'class' => 'form-horizontal');
         return View::make('asistencia-tecnica/creacion-paso-7', 
                     compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible', 'ampliacion'));
 
@@ -269,12 +279,15 @@ class pasoFinalController extends BaseController{
 
         if($at->acta){
             $acta = $at->acta;
+            $dataEstado = array('1' => 'Conformidad','2' => 'Rechazo');
+            $acta->estado = array_search($acta->estado, $dataEstado);
             $oculto = "visible";
             $visible = "oculto";
         }
         else{
             $acta = new acta;
             $acta->attermino_id = $idAt;
+            $acta->fecha = date('Y-m-j');
         }
 
 
@@ -306,7 +319,7 @@ class pasoFinalController extends BaseController{
 //return $data;
         if($acta->guardar($data, 1))
         {
-        $at->estado = 7;
+        $at->estado = 6;
         $at->save();
             return Redirect::route('atPaso', $acta->attermino_id);
         }

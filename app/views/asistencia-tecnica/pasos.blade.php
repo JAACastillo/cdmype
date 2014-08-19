@@ -37,7 +37,7 @@
 				    ),
 				    array(
 				        "label" => "Finalizada",
-				        "enlace" => "pasoEmpresa",
+				        "enlace" => "asistencia-tecnica.index",
 				        "rows"   => 1
 				    )
 				);

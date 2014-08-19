@@ -11,7 +11,7 @@ class CrearTablaAmpliacionesContratos extends Migration {
             $table->increments('id');
 
             $table->date('fecha');
-            $table->date('tiempo_ampliacion');
+            $table->integer('tiempo_ampliacion');
             $table->enum('periodo', array('Dias','Semanas','Meses'));
             $table->string('razonamiento', 1000);
             $table->integer('attermino_id');

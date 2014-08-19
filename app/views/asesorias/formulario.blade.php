@@ -6,11 +6,11 @@
 
 <?php
     if ($asesoria->exists):
-        $formulario = array('route' => array('asesorias.update', $asesoria->id), 'method' => 'PATCH', 'class' => 'form-horizontal', 'files' => 'true');
+        $formulario = array('route' => array('asesorias.update', $asesoria->id), 'id' => 'validar', 'method' => 'PATCH', 'class' => 'form-horizontal', 'files' => 'true');
         $action = 'Editar';
 
     else:
-        $formulario = array('route' => 'asesorias.store', 'method' => 'POST', 'id' => 'usr-form', 'class' => 'form-horizontal', 'files' => 'true');
+        $formulario = array('route' => 'asesorias.store', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal', 'files' => 'true');
         $action = 'Crear';
     endif;
 ?>
@@ -97,6 +97,8 @@
 @stop
 
 @section('script')
+
+@include('validaciones.materiales')
     <script type="text/javascript">
     $('#addAnother').on('click', function(){
         //<input id="filestyle-0" class="filestyle" type="file" name="material[]" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);" tabindex="-1"></input>

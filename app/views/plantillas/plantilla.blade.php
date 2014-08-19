@@ -10,12 +10,12 @@
             <!-- Bootstrap -->
             {{ HTML::style('assets/css/jquery-ui.css', array('media' => 'screen')) }}
             {{ HTML::style('assets/css/bootstrap.min.css', array('media' => 'screen')) }}
+            <!-- Mascaras -->
+            {{ HTML::style('assets/css/jasny-bootstrap.min.css') }}
             <!-- validator -->
             {{ HTML::style('assets/validator/css/bootstrapValidator.min.css', array('media' => 'screen')) }}
             <!-- Shosen --> 
             {{ HTML::style('assets/chosen/chosen.min.css', array('media' => 'screen')) }}
-            <!-- Mascaras -->
-            {{ HTML::style('assets/css/jasny-bootstrap.min.css') }}
             <!-- Switch -->
             {{ HTML::style('assets/switch/css/bootstrap-switch.min.css') }}
             <!-- Botones Animados --> 

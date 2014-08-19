@@ -5,6 +5,22 @@
 
 @include('asistencia-tecnica/pasos')
 
+@if(Session::has('msj'))
+@section('script')
+<script type="text/javascript">
+
+    $.growl("Seleccione al menos un Consultor", {
+        type: "danger",
+        allow_dismiss: false,
+        animate: {
+            enter: 'animated bounceIn',
+            exit: 'animated bounceOut'
+        }                               
+    });
+</script>
+@stop
+@endif
+
 <br/>
 <div class="row">
 	<div class="col-xs-2"></div>
@@ -57,11 +73,13 @@
 				</div>
 				<div class="col-xs-6">
 			        <center>
-			        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
-			        Siguiente &nbsp
-			        <span class="glyphicon glyphicon glyphicon-send"></span>
-			        <span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-			        </button>
+			        <div class="progress-demo">
+				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
+				        Siguiente &nbsp
+				        <span class="glyphicon glyphicon glyphicon-send"></span>
+				        <span class="ladda-spinner"></span><span class="ladda-spinner"></span>
+				        </button>
+				    </div>
 			        </center>
 				</div>
 			</div>

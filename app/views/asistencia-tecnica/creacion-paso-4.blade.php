@@ -3,6 +3,23 @@
 @section('escritorio')
 
 @include('asistencia-tecnica/pasos')
+
+@if(Session::has('msj'))
+@section('script')
+<script type="text/javascript">
+
+    $.growl("No a cargado ningun archivo", {
+        type: "danger",
+        allow_dismiss: false,
+        animate: {
+            enter: 'animated bounceIn',
+            exit: 'animated bounceOut'
+        }                               
+    });
+</script>
+@stop
+@endif
+
 <br/>
 <div class="row">
 {{Form::open(  array('route' => array('atPasoOfertaGuardar', $id), 'method' => 'POST', 'files' => 'true'))}}

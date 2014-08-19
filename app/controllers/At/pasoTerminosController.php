@@ -16,7 +16,7 @@ class pasoTerminosController extends BaseController{
 
 
 
-        $fecha = date("d/m/Y");
+        $fecha = date('Y-m-j');
         //$fecha = strtotime ('+2 day', strtotime($fecha));
 
         //valores por defecto
@@ -30,7 +30,7 @@ class pasoTerminosController extends BaseController{
 
 
         $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
-        $accion = array('route' => array('atCrearTDR'), 'method' => 'POST', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form');
+        $accion = array('route' => array('atCrearTDR'), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
         return View::make('asistencia-tecnica.creacion-paso-2', 
                 compact('attermino', 'accion', 'especialidades', 'pasoActual', 'id', 'pasoReal'));
@@ -68,7 +68,7 @@ class pasoTerminosController extends BaseController{
         $pasoReal = $attermino->pasoReal;
 
         $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
-        $accion = array('route' => array('atModificarTDR', $id), 'method' => 'PATCH', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form');
+        $accion = array('route' => array('atModificarTDR', $id), 'method' => 'PATCH', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
         return View::make('asistencia-tecnica.creacion-paso-2', 
                 compact('attermino', 'accion', 'especialidades', 'pasoActual', 'id', 'pasoReal'));

@@ -2,7 +2,7 @@
 
 // Botones animados
     //Ladda.bind( 'input[type=submit]' );
-    Ladda.bind( 'div:not(.progress-demo) button', { timeout: 9000 } );
+    Ladda.bind( 'div:not(.progress-demo) button', { timeout: 4000 } );
     Ladda.bind( '.progress-demo button', {
         callback: function( instance ) {
             var progress = 0;

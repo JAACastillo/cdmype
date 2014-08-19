@@ -99,6 +99,9 @@ class CapTerminoController extends BaseController {
                 $captermino->fecha = $fecha;
                 $captermino->fecha_lim = $fecha;
 
+                $captermino->hora_ini = date('08:00');;
+                $captermino->hora_fin = date('16:00');;
+
                 $accion = array('route' => array('capGuardarTermino'), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
                 
                 return View::make('capacitaciones.creacion-paso-1', 
@@ -177,7 +180,8 @@ class CapTerminoController extends BaseController {
 
                 $consultores =  Input::get('consultores');
                 $id = Input::get('idCaptermino');
-                if (!is_null($consultores)) {
+                
+                if ($consultores != "") {
                     $banderaConsultor = 0;
                     $cap = CapTermino::find($id);
 
@@ -210,7 +214,7 @@ class CapTerminoController extends BaseController {
                     return Redirect::route('capPasoOferta', $id);
                 }
 
-                return Redirect::back()->withErrors(['seleccion'=>'Seleccione un consultor']);
+                    return Redirect::back()->with('msj', 'Seleccione un consultor');
                 
             }
 
@@ -260,7 +264,7 @@ class CapTerminoController extends BaseController {
                         $cap->save();
                         return Redirect::route('capPaso', $id);
                     }
-                return Redirect::back()->withErrors(['seleccion'=>'Agrege un documento']);
+                return Redirect::back()->with('msj', 'Agrege un documento');
             }
 
 
@@ -302,7 +306,7 @@ class CapTerminoController extends BaseController {
                     return Redirect::route('capPasoSeleccionarConsultor', $id);
                 }
 
-                return Redirect::back()->withErrors(['seleccion'=>'Seleccione un consultor']);
+                return Redirect::back()->with('msj', 'Seleccione un consultor');
             }
 
         //Asistencia
@@ -349,7 +353,7 @@ class CapTerminoController extends BaseController {
                 else
                 { 
 
-                    return Redirect::back()->withErrors(['no-existe' => 'Lo siento no he encontrado el empresario']);
+                    return Redirect::back()->with(['msj' => 'Lo siento no he encontrado el empresario']);
                 }
 
             }

@@ -20,6 +20,7 @@
         <table class="table table-bordered">
             <tr class="active">
                 <th class="text-center">Nombre</th>
+                <th class="text-center">Empresa</th>
                 <th class="text-center">Correo Eléctronico</th>
                 <th class="text-center">Municipio</th>
                 <th class="text-center">Opciones</th>
@@ -28,6 +29,11 @@
             @foreach ($empresarios as $empresario)
             <tr>
                 <td>{{ $empresario->nombre }}</td>
+                <td class="text-center">
+                    @foreach($empresario->empresa as $empresa)
+                    {{ $empresa->empresas->nombre }}
+                    @endforeach
+                </td>
                 <td class="text-center">{{ $empresario->correo }}</td>
                 <td class="text-center">{{ $empresario->municipio->municipio}}</td>
                 <td class="text-center">

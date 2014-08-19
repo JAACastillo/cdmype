@@ -30,34 +30,39 @@ class pasoConsultoresController extends BaseController
         $id  = Math::to_base_10($id,62) - 100000;
         $banderaConsultor = 0;
         $at = AtTermino::find($id);
-        ///return $at;
-        foreach ($consultores as $consultor) {
-            $consul = $at->consultores()
-                    ->where('consultor_id', '=', $consultor);
-            if(!$consul->count() > 0)
-            {
-                $consultorAT = new AtConsultor;
-                $consultorAT->attermino_id = $id;
-                $consultorAT->consultor_id = $consultor;
-                $consultorAT->save();
-               
-                $this->mailOferta('emails.asistenciaTecnica', 
-                                    $id, 
-                                    $consultorAT->consultor->correo, 
-                                    $consultorAT->consultor->nombre
-                                );
-                
+        
+        if ($consultores != "") {
+
+            foreach ($consultores as $consultor) {
+                $consul = $at->consultores()
+                        ->where('consultor_id', '=', $consultor);
+                if(!$consul->count() > 0)
+                {
+                    $consultorAT = new AtConsultor;
+                    $consultorAT->attermino_id = $id;
+                    $consultorAT->consultor_id = $consultor;
+                    $consultorAT->save();
+                   
+                    $this->mailOferta('emails.asistenciaTecnica', 
+                                        $id, 
+                                        $consultorAT->consultor->correo, 
+                                        $consultorAT->consultor->nombre
+                                    );
+                    
+                }
+                $banderaConsultor = 1;
             }
-            $banderaConsultor = 1;
-        }
-        if($banderaConsultor == 1)
-        {
-            $at->estado = 2;
-            $at->save();
+            if($banderaConsultor == 1)
+            {
+                $at->estado = 2;
+                $at->save();
+            }
+
+            $id = Math::to_base($id + 100000, 62);
+            return Redirect::route('atPasoOferta', $id);
         }
 
-        $id = Math::to_base($id + 100000, 62);
-        return Redirect::route('atPasoOferta', $id);
+            return Redirect::back()->with('msj', 'Seleccione un consultor');
     }
 
 

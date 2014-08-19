@@ -17,11 +17,13 @@ Capacitaciones
 		</div>
 			<div class="panel-body">
 				<div class="form-group">
-				<div class="col-xs-6">
-					<a class="btn btn-success" href="{{route('capContradoPdf', $capcontrato->id)}}" target="_blank">
-						Imprimir Contrato &nbsp
-					    <span class="glyphicon glyphicon glyphicon-print"></span>	
-					</a>
+				<div class="col-xs-12">
+					<center>
+						<a class="btn btn-success" href="{{route('capContradoPdf', $capcontrato->id)}}" target="_blank">
+						<span class="glyphicon glyphicon glyphicon-print"></span> &nbsp
+						Imprimir Contrato
+						</a>
+					</center>
 				</div>
 				</div>
 			</div>
@@ -38,7 +40,7 @@ Capacitaciones
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
 		<div class="panel panel-default">
-		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar {{$oculto}}" id="cambiar"> Cancelar </a></div>
+		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar {{$oculto}}" id="cambiar"><span class="glyphicon glyphicon-chevron-left"></span> &nbsp Cancelar </a></div>
 		
 			<div class="panel-body">		
 			<div class="row">

@@ -16,7 +16,7 @@ class CrearTablaEmpresarios extends Migration {
             $table->integer('municipio_id');
             $table->string('direccion', 250);
             $table->enum('sexo',array('Mujer','Hombre'));
-            $table->string('correo',75)->unique();
+            $table->string('correo',75);
             $table->string('telefono',20);
             $table->string('celular',20);
 

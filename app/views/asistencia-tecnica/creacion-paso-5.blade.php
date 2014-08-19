@@ -4,6 +4,22 @@
 
 @include('asistencia-tecnica/pasos')
 
+@if(Session::has('msj'))
+@section('script')
+<script type="text/javascript">
+
+    $.growl("Seleccione un consultor", {
+        type: "danger",
+        allow_dismiss: false,
+        animate: {
+            enter: 'animated bounceIn',
+            exit: 'animated bounceOut'
+        }                               
+    });
+</script>
+@stop
+@endif
+
 <br/>
 <div class="row">
 	{{Form::open()}}
@@ -42,6 +58,7 @@
 	    			</div>
     			</div>
 			</div>
+			<br>
 			<div class="row">
 			    <div class="col-xs-6">
 			        <center>

@@ -39,17 +39,20 @@
 
       <!-- Buscador -->
       <div class="hidden-sm hidden-xs">
-          {{ Form::open(array('url' => '/buscar/buscar', 'method' => 'post', 'class' => 'navbar-form navbar-left', 'role' => 'search')) }}
+          {{ Form::open(array('url' => '/buscar/buscar', 'method' => 'post', 'id' => 'validador', 'class' => 'navbar-form navbar-left', 'role' => 'search')) }}
             <div class="input-group">
               <span class="input-group-addon glyphicon glyphicon-search"></span>
               {{ Form::text('buscar', null, array('placeholder' => 'Buscar', 'class' => 'form-control buscador')) }}
             </div> 
                 <div class="btn-group">
-                  {{ Form::button('Buscar', array('type' => 'submit', 'class' => 'btn btn-default')) }}
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <button type="submit"class="btn btn-primary ladda-button" data-style="expand-right">
+                  Buscar
+                  </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
+                  </button>
+                  <a type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                       <span class="caret"></span>
                       <span class="sr-only">Toggle Dropdown</span>
-                  </button>
+                  </a>
                   <div class="dropdown-menu" role="menu">
                     <div class="radio">
                       <label>
@@ -119,5 +122,27 @@
     <br/>
     @yield('escritorio')
   </div>
+
+@section('script')
+
+<script type="text/javascript">
+$("#validador").submit(function () {  
+    if($(".buscador").val().length < 1) {  
+        $.growl("No ha ingresado el texto a buscar!", {
+            type: "danger",
+            allow_dismiss: false,
+            animate: {
+                enter: 'animated bounceIn',
+                exit: 'animated bounceOut'
+            }                               
+        });  
+        return false;  
+    }  
+    return true;  
+});
+
+</script>
+
+@stop
 
 @stop

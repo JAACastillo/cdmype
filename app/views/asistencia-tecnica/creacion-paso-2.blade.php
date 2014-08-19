@@ -5,11 +5,8 @@
 @include('asistencia-tecnica/pasos')
 <br/>
 
- 
-@include('errores', array('errors' => $errors))
-
-
 {{ Form::model($attermino, $accion) }}
+
 
 <div class="row">
     <div class="col-xs-12 col-md-6">
@@ -141,4 +138,7 @@
 
 {{ Form::close() }}
 
+@section('script')
+@include('validaciones.asistencia')
+@stop
 @stop

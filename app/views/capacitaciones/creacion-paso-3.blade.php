@@ -5,6 +5,23 @@ Capacitaciones
 @stop
 @section('escritorio')
 @include('capacitaciones.pasos')
+
+@if(Session::has('msj'))
+@section('script')
+<script type="text/javascript">
+
+    $.growl("No a cargado ningun archivo", {
+        type: "danger",
+        allow_dismiss: false,
+        animate: {
+            enter: 'animated bounceIn',
+            exit: 'animated bounceOut'
+        }                               
+    });
+</script>
+@stop
+@endif
+
 <br/>
 <div class="row">
 {{Form::open(  array('route' => array('capPasoGuardarOferta', $id), 'method' => 'POST', 'files' => 'true'))}}
@@ -15,7 +32,6 @@ Capacitaciones
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-xs-12">
-					@include('errores', array('errors' => $errors))
 					<div class="table-responsive"><table class="table table-bordered table-hover">
 					            <tr class="active">
 					                <th class="text-center">Nombre</th>

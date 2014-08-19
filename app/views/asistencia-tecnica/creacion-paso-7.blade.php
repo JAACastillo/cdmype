@@ -19,19 +19,21 @@
 		</div>
 			<div class="panel-body">
 				<div class="form-group">
-				<div class="col-xs-6">
+				<div class="col-xs-12">
+					<center>
 					<a class="btn btn-success" href="{{route('atContradoPdf', $atcontrato->id)}}" target="_blank">
-						Imprimir Contrato &nbsp
-					    <span class="glyphicon glyphicon glyphicon-print"></span>	
+						<span class="glyphicon glyphicon glyphicon-print"></span>&nbsp
+						Imprimir Contrato	
 					</a>
 					<br />
 					<br />
 					@if($atcontrato->terminos->ampliacion)
 					<a class="btn btn-warning" href="{{route('atAmpliacionPdf', $id)}}" target="_blank">
-						Imprimir Ampliación &nbsp
-					    <span class="glyphicon glyphicon glyphicon-print"></span>	
+						<span class="glyphicon glyphicon glyphicon-print"></span>&nbsp
+						Imprimir Ampliación	
 					</a>
 					@endif
+				</center>
 				</div>
 				</div>
 			</div>
@@ -56,32 +58,32 @@
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
 		<div class="panel panel-default">
-		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar {{$oculto}}" id="cambiar"> Cancelar </a></div>
+		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar {{$oculto}}" id="cambiar"><span class="glyphicon glyphicon-chevron-left"></span> &nbsp Cancelar </a></div>
 		
 			<div class="panel-body">		
 			<div class="row">
 				<div class="col-xs-11">
 						{{Form::hidden('attermino_id', null)}}
 					<div class="form-group">
-                     	{{ Form::label('lugar_firma', '* Lugar:', array('class' => 'control-label col-md-4')) }}
+                     	{{ Form::label('lugar_firma', 'Lugar:', array('class' => 'control-label col-md-4')) }}
                     	<div class="col-md-8">
                         	{{ Form::text('lugar_firma', null, array('placeholder' => 'Dirección', 'class' => 'form-control')) }}
 	                	</div>
 	                </div>
 	                <div class="form-group">
-	                     {{ Form::label('fecha_inicio', '* Fecha de inicio:', array('class' => 'control-label col-md-4')) }}
+	                     {{ Form::label('fecha_inicio', 'Fecha de inicio:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-4">
 	                        <input name="fecha_inicio" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$atcontrato->fecha_inicio}}" class="form-control" />
 	                    </div>
 	                </div>
 	                <div class="form-group">
-	                     {{ Form::label('fecha_final', '* Fecha de finalización:', array('class' => 'control-label col-md-4', "data-date"=>'{"startView": 2, "openOnMouseFocus": true}', "placeholder"=>"yyyy-mm-dd")) }}
+	                     {{ Form::label('fecha_final', 'Fecha de finalización:', array('class' => 'control-label col-md-4', "data-date"=>'{"startView": 2, "openOnMouseFocus": true}', "placeholder"=>"yyyy-mm-dd")) }}
 	                    <div class="col-md-4">
 	                        <input name="fecha_final" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$atcontrato->fecha_final}}" class="form-control" />
 	                    </div>
 	                </div>
 	                <div class="form-group">
-	                     {{ Form::label('duracion', '* Duración:', array('class' => 'control-label col-md-4')) }}
+	                     {{ Form::label('duracion', 'Duración:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-4">
 	                    	<div class="input-group"> 
 	                    	{{ Form::number('duracion', $atcontrato->duracion, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000', 'step' => '1.0')) }}
@@ -142,6 +144,8 @@
 
 
 @section('script')
+@include('validaciones.atcontratos')
+@include('validaciones.ampliaciones')
 	<script type="text/javascript">
 	$('.cambiar').on('click', function(){
 		$('#formulario').toggle();
