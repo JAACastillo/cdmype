@@ -1,5 +1,5 @@
 <?php
-class mercadosActuales extends Eloquent {
+class productos extends Eloquent {
     
     protected $table = 'productos';    
     public $errores;

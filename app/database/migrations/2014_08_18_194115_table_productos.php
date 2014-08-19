@@ -16,7 +16,7 @@ class TableProductos extends Migration {
             $table->increments('id');
             
             $table->string('nombre'); //id usuario
-            $table->integer('empresa_id');
+            $table->integer('indicador_id');
             
             
             $table->softDeletes();

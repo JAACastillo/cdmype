@@ -87,11 +87,14 @@ class Empresa extends Eloquent {
             return $this->hasMany('EmpresaEmpresario','empresa_id');
         }
 
-
         public function municipio() 
         {
             return $this->belongsTo('Municipio');
         }
 
+
+        public function indicador(){
+            return $this->hasOne('indicador', 'empresa_id');
+        }
 
 }

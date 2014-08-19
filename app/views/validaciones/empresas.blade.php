@@ -18,13 +18,6 @@ $(document).ready(function() {
                     }
                 }
             },
-            registro_iva: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo requerido'
-                    }
-                }
-            },
             categoria: {
                 validators: {
                     notEmpty: {

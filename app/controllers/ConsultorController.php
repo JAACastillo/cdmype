@@ -14,7 +14,7 @@ class ConsultorController extends BaseController {
 	}
 
 	public function crearConsultor()
-	{
+	{ 
 		$consultor = new Consultor;
 
 		$especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
@@ -76,6 +76,8 @@ class ConsultorController extends BaseController {
             $datos[] = $item->subespecialidad_id;
         }
         $consultor->especialidades = $datos;
+
+        //return $consultor->especialidades;
         $consultor->sexo = array_search($consultor->sexo, $dataSexo);
         $consultor->municipio = array_search($consultor->municipio_id, $municipios);
 

@@ -204,13 +204,158 @@ class EmpresaController extends BaseController {
 
         }
 
+
+/* indicadores */
         public function indicadores($id){
+
+            $empresa = empresa::with('indicador')
+                                ->find($id);
+
+            if($empresa->indicador)
+                return Redirect::route('empresaPasoIndicadorE', $id);            
+
+            $mercados = array('Local', 'Regional', 'Nacional', 'Internacional');
             $indicador = new indicador;
             $pasoReal = 3;
             $pasoActual = 3;
+            $accion = array('route' => 'empresaPasoIndicadores', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form', 'id' => 'validar');
+            $indicador->empresa_id = $id;
             return View::make('clientes.empresas/creacion-paso-indicadores', 
-                        compact('id', 'pasoReal', 'pasoActual', 'indicador'));
+                        compact('id', 'pasoReal', 'pasoActual', 'indicador', 'accion', 'mercados'));
         }
+
+
+        public function indicadoresGuardar($id){
+
+            $data = Input::all();
+
+            $indicador = new indicador;
+
+            if($indicador->guardar($data, 1)){
+
+                $productos = $data['productos'];
+
+                foreach ($productos as $producto) {
+                    $product = new productos;
+                    $product->nombre = $producto;
+                    $product->indicador_id = $indicador->id;
+                    $product->save();
+                }
+
+                $mercados = $data['mercados'];
+
+                foreach ($mercados as $mercado) {
+                    $mercadoActual = new mercadosActuales;
+                    $mercadoActual->indicador_id = $indicador->id;
+                    $mercadoActual->mercados = $mercado + 1;
+
+                    $mercadoActual->save();
+                }
+
+                return Redirect::route('empresaPasoIndicadorE', $indicador->empresa_id);
+            }
+
+            return Redirect::back()
+                            ->withInput()
+                            ->withErrors($indicador->errores);
+
+        }
+
+        public function indicador($id){
+            $empresa = empresa::with('indicador')
+                                ->find($id);
+
+            //$indicador = new indicador;
+            $indicador = $empresa->indicador;
+            $mercados = array('Local' => 0, 'Regional' => 1, 'Nacional' => 2, 'Internacional' => 3);
+            $data = array();
+            foreach ($indicador->mercados as $mercado) 
+            {
+                $data[] = $mercados[$mercado->mercados];
+            }
+
+           // return $datos;
+            $indicador->merca = $data;
+            $pasoReal = 3;
+            $pasoActual = 3;
+
+            $mercados = array('Local', 'Regional', 'Nacional', 'Internacional');
+
+            $accion = array('route' => array('empresaPasoIndicador', $id), 'method' => 'PATCH', 'class' => 'form-horizontal','role' => 'form', 'id' => 'validar');
+            $indicador->empresa_id = $id;
+            $indicador->empleadosHombreFijo = 2;
+            return View::make('clientes.empresas/creacion-paso-indicadores', 
+                        compact('id', 'pasoReal', 'pasoActual', 'indicador', 'accion', 'mercados'));
+        }
+
+        public function indicadorEditar(){
+             $data = Input::all();
+
+             $empresa = empresa::with('indicador')
+                                ->find($data['empresa_id']);
+
+            $indicador = $empresa->indicador;
+            if(!isset($data['contabilidadFormal']))
+                $data['contabilidadFormal'] = 0;
+
+           // return $data['contabilidadFormal'];
+
+            if($indicador->guardar($data, 1)){
+                $productos = $data['productos'];
+                $indicador->productos()->delete();
+                foreach ($productos as $producto) {
+                    if(! empty($producto)){ 
+                        $product = new productos;
+                        $product->nombre = $producto;
+                        $product->indicador_id = $indicador->id;
+                        $product->save();
+                    }
+                }
+
+                $markets = array('Local' => 0, 'Regional' => 1, 'Nacional' => 2, 'Internacional' => 3);
+                $mercados = $data['mercados'];
+               
+                $indicador->mercados()->delete(); //eliminar todos los mercados
+               
+                foreach ($mercados as $mercado) {
+                        $mercadoActual = new mercadosActuales;
+                        $mercadoActual->indicador_id = $indicador->id;
+                        $mercadoActual->mercados = $mercado + 1;
+
+                        $mercadoActual->save();
+                }
+
+                return Redirect::route('empresaPasoIndicador', $indicador->empresa_id);
+            }
+
+            return Redirect::back()
+                            ->withInput()
+                            ->withErrors($indicador->errores);
+        }
+
+
+        public function f1($idEmpresa){
+
+            $empresa = empresa::find($idEmpresa);
+
+            //return $empresa;
+            $indicador = $empresa->indicador;
+            $empresario = $empresa->representante->empresarios;
+
+            $mercados =  array();
+            foreach ($indicador->mercados as $mercado) {
+                $mercados[] = $mercado->mercados;
+            }
+           // return $empresario;
+            //return $empresario;
+            $pdf = App::make('dompdf');
+            //$pdf->loadHTML('<h1>Test</h1>');
+            $pdf->loadView('pdf.f1', 
+                    compact('empresa', 'empresario', 'indicador', 'mercados'));
+            return $pdf->stream();
+        }
+
+/* fin indicadores */
 
 
     //Termino

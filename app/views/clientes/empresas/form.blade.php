@@ -31,7 +31,7 @@
                         <div class="form-group">
                             {{ Form::label('sector_economico', 'Sector Económico:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                                {{ Form::select('sector_economico', array('' => '','1' => 'Artesanias','2' => 'Agroindustrias Alimentaria','3' => 'Calzado','4' => 'Comercio','5' => 'Construcción','5' => 'Química Farmaceutica','6' => 'Tecnología de Información y Comunicación','7' => 'Textiles y Confección','8' => 'Turismo','9' => 'Otros'), null, array('class' => 'form-control')) }} 
+                                {{ Form::select('sector_economico', array('' => '','1' => 'Artesanias','2' => 'Agroindustrias Alimentaria','3' => 'Calzado','4' => 'Comercio','5' => 'Construcción','6' => 'Química Farmaceutica','7' => 'Tecnología de Información y Comunicación','8' => 'Textiles y Confección','9' => 'Turismo','10' => 'Otros'), null, array('class' => 'form-control')) }} 
                             </div>
                         </div>
                         <div class="form-group">

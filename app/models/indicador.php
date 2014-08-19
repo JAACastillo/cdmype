@@ -50,16 +50,18 @@ class indicador extends Eloquent {
             $reglas = array(
                 'fechaInicio'			=> 'required|date',
 
-		        'contabilidadFormal'	=> 'required',
+		        //'contabilidadFormal'	=> 'required',
 		        'ventaNacional'   		=> 'required',
-		        'costoProduccion'		=> 'required',
-		        'financiamiento'		=> 'required',
-		        'capitalSemilla'		=> 'required',
-		        'empleadosHombreTemp'	=> 'required|integer',
-		        'empleadosHombreFijo'	=> 'required|integer',
-		        'empleadosMujerTemp'	=> 'required|integer',
-		        'empleadosMujerFijo'	=> 'required|integer',
-		        'empresa_id'			=> 'required|integer',
+		        //'costoProduccion'		=> 'required',
+		        //'financiamiento'		=> 'required',
+		        //'capitalSemilla'		=> 'required',
+		       // 'empleadosHombreTemp'	=> 'required|integer',
+		        //'empleadosHombreFijo'	=> 'required|integer',
+		        //'empleadosMujerTemp'	=> 'required|integer',
+		        //'empleadosMujerFijo'	=> 'required|integer',
+		        'empresa_id'			=> 'required',
+                'productos'             => 'required',
+                'mercados'              => 'required'
             );
             
             $validador = Validator::make($datos,$reglas);
@@ -76,5 +78,12 @@ class indicador extends Eloquent {
     	return $this->belongsTo('Empresa', 'empresa_id');
     }
 
+    public function mercados(){
+        return $this->hasMany('mercadosActuales', 'indicador_id');
+    }
+
+    public function productos(){
+        return $this->hasMany('productos', 'indicador_id');
+    }
 
 }

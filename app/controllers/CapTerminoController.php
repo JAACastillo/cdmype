@@ -178,6 +178,8 @@ class CapTerminoController extends BaseController {
             public function guardarConsultores()
             {
 
+//                return Input::all();
+
                 $consultores =  Input::get('consultores');
                 $id = Input::get('idCaptermino');
                 

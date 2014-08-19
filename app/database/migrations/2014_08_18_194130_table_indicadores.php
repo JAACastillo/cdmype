@@ -25,10 +25,12 @@ class TableIndicadores extends Migration {
             $table->double('financiamiento');
             $table->double('capitalSemilla');
 
-            $table->integer('empladosHombreTemp');
-            $table->integer('empladosHombreFijo');
-            $table->integer('empladosMujerTemp');
-            $table->integer('empladosMujerFijo');
+            $table->integer('empleadosHombreTemp');
+            $table->integer('empleadosHombreFijo');
+            $table->integer('empleadosMujerTemp');
+            $table->integer('empleadosMujerFijo');
+
+            $table->integer('empresa_id');
             
             
             $table->softDeletes();

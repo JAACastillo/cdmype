@@ -24,8 +24,13 @@ Route::resource('empresas','EmpresaController');
 	Route::post('empresas/paso/empresario/{idEmpresa}', ['as' => 'pasoEmpresarios', 'uses' => 'EmpresaController@empresarioNuevo']);
 	Route::post('empresas/paso/empresario', ['as' => 'pasoEmpresariosGuardar', 'uses' => 'EmpresaController@empresarioGuardar']);
 
-	// Termino
+	// indicadores 
 	Route::get('empresas/paso/indicadores/{idEmpresa}', ['as' => 'empresaPasoIndicadores', 'uses' => 'EmpresaController@indicadores']);
+	Route::post('empresas/paso/indicadores/{idEmpresa}', ['as' => 'empresaPasoIndicadores', 'uses' => 'EmpresaController@indicadoresGuardar']);
+
+	Route::get('empresas/paso/indicador/{idEmpresa}', ['as' => 'empresaPasoIndicadorE', 'uses' => 'EmpresaController@indicador']);
+	Route::patch('empresas/paso/indicador/{idEmpresa}', ['as' => 'empresaPasoIndicador', 'uses' => 'EmpresaController@indicadorEditar']);
+	Route::get('empresas/paso/indicador/pdf/{idEmpresa}', ['as' => 'f1PDF', 'uses' => 'EmpresaController@f1']);
 
 
 	Route::get('empresas/paso/termino/{idEmpresa}', ['as' => 'pasoTerminoEmpresa', 'uses' => 'EmpresaController@termino']);            
