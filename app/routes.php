@@ -46,7 +46,18 @@
     
     //Buscar
         Route::controller('buscar', 'ApiController');
-    
+
+    //Pagina error 
+
+        App::error(function($exception, $code)
+        {
+            switch ($code)
+            {
+                case 404:
+                    return Response::view('pagina_404', array(), 404);
+            }
+        });   
+        
     });
 
     
