@@ -109,7 +109,6 @@ class Empresa extends Eloquent {
             return $this->belongsTo('Municipio');
         }
 
-
         public function indicador(){
             return $this->hasOne('indicador', 'empresa_id');
         }

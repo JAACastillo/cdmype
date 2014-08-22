@@ -8,6 +8,7 @@ class proyecto extends Eloquent {
     protected $fillable = array(
         'nombre',
         'meta',
+        'descripcion',
         'fechaInicio',
         'fechaFin',
         'empresa_id'
@@ -41,7 +42,8 @@ class proyecto extends Eloquent {
         public function validar($datos) 
         {
             $reglas = array(
-                'nombre' 		=> 'required',
+                'nombre'        => 'required',
+                'descripcion'        => 'required',
 		        'meta'			=> 'required',			
 		        'fechaInicio'	=> 'required|date',
 		        'fechaFin'		=> 'required|date',
@@ -62,5 +64,12 @@ class proyecto extends Eloquent {
         return $this->belongsTo('empresa', 'empresa_id');
     }
 
+    public function indicadores(){
+        return $this->hasMany('indicadoresProyecto', 'proyecto_id');
+    }
+
+    public function actividades(){
+        return $this->hasMany('actividadesProyecto', 'proyecto_id');
+    }
 
 }

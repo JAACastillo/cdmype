@@ -76,15 +76,44 @@
                             <div class="col-md-12 productos">
                             <div class="row">
                             	<div class="col-md-5">
-		                       		{{ Form::text('activities[0]', null,  array('class' => 'form-control ', 'placeholder' => 'Nombre de producto' )) }}
+		                       		{{ Form::text('activities[0]', null,  array('class' => 'form-control ', 'placeholder' => 'Actividad' )) }}
                             	</div>
                             	<div class="col-md-3">
-                            		{{Form::select('encargado[]', array('Asesor', 'Cliente', 'Consultor', 'Docente', 'Alumnos'), 'Asesor', array('class' => 'form-control'))}}
+                            		{{Form::select('encargado[]', array( 
+                            										1 => 'Asesor', 
+                            										2 => 'Cliente', 
+                            										3 => 'Consultor', 
+                            										4 => 'Docente', 
+                            										5 => 'Alumnos'), 
+                            						'Asesor', array('class' => 'form-control'))}}
                             	</div>
                             	<div class="col-md-4">
                             		<input type="date" name="fecha[]" class="form-control">
                             	</div>
-                            	</div>
+                            </div>
+
+                                @foreach($proyecto->actividades as $actividad)
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            {{ Form::text('activities[0]', $actividad->nombre,  array('class' => 'form-control ', 'placeholder' => 'Actividad' )) }}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{Form::select('encargado[]', array( 
+                                                                            1 => 'Asesor', 
+                                                                            2 => 'Cliente', 
+                                                                            3 => 'Consultor', 
+                                                                            4 => 'Docente', 
+                                                                            5 => 'Alumnos'), 
+                                                            $proyecto->encargado, array('class' => 'form-control'))}}
+                                        </div>
+                                        <div class="col-md-4">
+                                            <input type="date" name="fecha[]" class="form-control" value="{{$actividad->fecha}}">
+                                        </div>
+                                    </div>
+                                @endforeach
+
+
+
                             </div>
                         </div>
                     </div>
@@ -140,8 +169,8 @@
     	caja += "<input type='text' name='activities["+num+"]' class='form-control' placeholder='Actividad a desarrollar'> "
     	caja += "</div>"
     	caja += "<div class='col-md-3'>"
-    	//caja += "	{{Form::select('encargado', array('Asesor', 'Cliente', 'Consultor', 'Docente', 'Alumnos'), 'Asesor', array('class' => 'form-control'))}}"
-    	caja += "<select class='form-control' name='encargado[]'><option value='0'>Asesor</option><option value='1'>Cliente</option><option value='2'>Consultor</option><option value='3'>Docente</option><option value='4'>Alumnos</option></select>"
+    	//caja += "	{{Form::select('encargado', array('', 'Asesor', 'Cliente', 'Consultor', 'Docente', 'Alumnos'), 'Asesor', array('class' => 'form-control'))}}"
+    	caja += "<select class='form-control' name='encargado[]'><option value='1'>Asesor</option><option value='2'>Cliente</option><option value='3'>Consultor</option><option value='4'>Docente</option><option value='5'>Alumnos</option></select>"
     	caja += "</div>"
     	caja += "<div class='col-md-4'>"
     	caja += "	<input type='date' name='fecha[]' class='form-control'>"

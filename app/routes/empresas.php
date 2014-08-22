@@ -40,4 +40,11 @@ Route::get('empresas', ['as' => 'empresas', 'uses' => 'EmpresaController@index']
 
 	Route::get('empresas/paso/proyecto/{idEmpresa}', ['as' => 'empresaPasoProyecto', 'uses' => 'EmpresaController@proyecto']);
 	Route::post('empresas/paso/proyecto/', ['as' => 'empresaPasoProyectoGuardar', 'uses' => 'EmpresaController@proyectoGuardar']);
+	Route::get('empresas/paso/proyectos/{idEmpresa}', ['as' => 'empresaProyectos', 'uses' => 'EmpresaController@proyectos']);
+	Route::get('empresas/paso/proyecto/editar/{idEmpresa}', ['as' => 'empresaPasoProyectoEditar', 'uses' => 'EmpresaController@proyectoEditar']);
+	Route::patch('empresas/paso/proyecto/editar/{idEmpresa}', ['as' => 'empresaPasoProyectoEditar', 'uses' => 'EmpresaController@proyectoUpdate']);
+	Route::get('empresas/f2/{idProyecto}', ['as' => 'empresaF2', 'uses' => 'EmpresaController@f2']);
+
+
+
 

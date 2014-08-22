@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                         </div>                        
-                        <div class="form-group">
+                        <div class="form-group"> 
                             {{ Form::label('mercados', 'Mercados Actuales:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
                             {{ Form::select('mercados[]', $mercados, $indicador->merca, array('class' => 'chosen-select form-control ', 'multiple' => 'true', 'data-placeholder' => 'Mercados Actuales' )) }}

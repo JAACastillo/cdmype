@@ -17,7 +17,7 @@
 				    ),
 				    array(
 				        "label" => "Proyecto",
-				        "enlace" => "empresaPasoProyecto",
+				        "enlace" => "empresaProyectos",
 				        "rows"   => 2
 				    ),
 				    array(

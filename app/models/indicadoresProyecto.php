@@ -58,5 +58,9 @@ class indicadoresProyecto extends Eloquent {
         return $this->belongsTo('proyecto', 'proyecto_id');
     }
 
+    public function definicion(){
+        return $this->belongsTo('proyectoIndicador', 'indicadorproyecto_id');
+    }
+
 
 }
