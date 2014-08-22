@@ -1,15 +1,13 @@
 <?php
-class actividadesProyecto extends Eloquent {
+class proyectoIndicador extends Eloquent {
     
-    protected $table = 'actividadesProyecto';    
+    protected $table = 'proyectoIndicadores';    
     public $errores;
     protected $perPage = 10;
     protected $softDelete = true;
     protected $fillable = array(
         'nombre',
-        'proyecto_id',
-        'encargado',
-        'fecha'
+        'tipo'
     );
     
     /* Guardar */
@@ -41,9 +39,7 @@ class actividadesProyecto extends Eloquent {
         {
             $reglas = array(
                 'nombre'      => 'required',
-                'proyecto_id' => 'required|integer',
-                'encargado'	  => 'required',
-                'fecha'       => 'required|date'
+                'tipo' => 'required'
             );
             
             $validador = Validator::make($datos,$reglas);

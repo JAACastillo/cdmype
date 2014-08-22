@@ -6,10 +6,16 @@
 	     @page { margin: 100px 90px; }
 	     #header {margin: 0px; position: fixed; left: 0px; top: -76px; right: 0px;  text-align: center; }
 	     #header { position: fixed; left: 0px; bottom: -140px; right: 0px; height: 150px;  }
+	       #footer { position: fixed; left: 0px; bottom: -140px; right: 0px; height: 150px;  }
+	    
 	     #footer .page:after { content: counter(page, upper-roman); }
 	     #contenido {font-family: "arial black" ;margin: 0px; padding: 0px; text-align:justify; font-size: 13px; line-height: 15px}
 	     #header .left {position: absolute; float: left}
 	     #header .right {position: absolute; right: 10px}
+
+	      #footer .left {float: left}
+	     #footer .right {position: absolute; right: 10px}
+
 	     .titulo{text-align:center; margin-bottom:0px}
 	     .table, th {border: 1px solid black; margin: 0px; padding: 2px; font-size: 10px;}
 	     .table, td {border: 1px solid black; margin: 0px; padding: 2px; font-size: 13px;}
@@ -29,6 +35,14 @@
 <div id="header" >
 	<img src="assets/img/cdmype-logo.jpg" width="150px" />
 </div>
+
+<div id="footer">
+	<img src="assets/img/conamype-logo.jpg" width="150px" class="left" />
+
+	<img src="assets/img/unicaes-logo.jpg" width="75px" class="right" />
+
+</div>
+
 
 <h4 class="titulo">
 		Centro de desarrollo de Micro y Pequeñas Empresas (CDMYPE) <br>
@@ -94,7 +108,7 @@
 					<td witdh='100%' colspan="4"> Nombre de la empresa, razón social o nombre comercial: <strong>{{$empresa->nombre}} </strong></td>
 				</tr>
 				<tr>
-					<td witdh='50%' colspan="2"> NIT empresa: <strong>{{$empresario->nit }}</strong></td>
+					<td witdh='50%' colspan="2"> NIT empresa: <strong>{{$empresa->nit }}</strong></td>
 					<td witdh='50%' colspan="2"> No. IVA: <strong>{{$empresa->registro_iva}}</strong></td>
 				</tr>
 				<tr>
@@ -131,7 +145,7 @@
 								<td width="60%"> $ {{$indicador->ventaNacional}} </td>
 							</tr>
 							<tr>
-								<td width="40%"> Nacional </td>
+								<td width="40%"> Exportación </td>
 								<td width="60%"> $ {{$indicador->ventaExportacion}} </td>
 							</tr>
 							<tr>

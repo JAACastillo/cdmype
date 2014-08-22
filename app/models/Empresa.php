@@ -15,7 +15,8 @@ class Empresa extends Eloquent {
         'constitucion',
         'clasificacion',
         'sector_economico',
-        'actividad'
+        'actividad',
+        'nit'
     );
 
     /* Validaciones */
@@ -43,8 +44,24 @@ class Empresa extends Eloquent {
             return false;
         }
 
-    /* Validaciones */
+    /* FIn Validaciones */
 
+
+    /* Atributos personalizados */
+
+    public function getPasoRealAttribute(){
+
+        if($this->proyectos != '[]')
+            return 5;
+        elseif($this->indicador)
+            return 4;
+        elseif($this->empresarios != '[]')
+            return 3;
+
+        return 1;
+    }
+
+    /* Fin atributos personalizados */ 
         public function validar($datos) 
         {        
             $rules = array(
@@ -95,6 +112,10 @@ class Empresa extends Eloquent {
 
         public function indicador(){
             return $this->hasOne('indicador', 'empresa_id');
+        }
+
+        public function proyectos(){
+            return $this->hasMany('proyecto', 'empresa_id');
         }
 
 }

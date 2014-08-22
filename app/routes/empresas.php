@@ -34,3 +34,10 @@ Route::resource('empresas','EmpresaController');
 
 
 	Route::get('empresas/paso/termino/{idEmpresa}', ['as' => 'pasoTerminoEmpresa', 'uses' => 'EmpresaController@termino']);            
+
+
+
+
+	Route::get('empresas/paso/proyecto/{idEmpresa}', ['as' => 'empresaPasoProyecto', 'uses' => 'EmpresaController@proyecto']);
+	Route::post('empresas/paso/proyecto/', ['as' => 'empresaPasoProyectoGuardar', 'uses' => 'EmpresaController@proyectoGuardar']);
+

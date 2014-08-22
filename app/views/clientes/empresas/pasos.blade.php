@@ -3,7 +3,7 @@
 				    array(
 				        "label"  => "Empresa",
 				        "enlace" => "editarEmpresa",
-				        "rows"   => 3
+				        "rows"   => 2
 				    ),
 				    array(
 				        "label" => "Empresario",
@@ -13,7 +13,12 @@
 				    array(
 				        "label" => "Indicadores",
 				        "enlace" => "empresaPasoIndicadores",
-				        "rows"   => 3
+				        "rows"   => 2
+				    ),
+				    array(
+				        "label" => "Proyecto",
+				        "enlace" => "empresaPasoProyecto",
+				        "rows"   => 2
 				    ),
 				    array(
 				        "label" => "Terminos",

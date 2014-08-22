@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class TableIndicadoresProyecto extends Migration {
+class ProyectoIndicadoresTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,12 +13,11 @@ class TableIndicadoresProyecto extends Migration {
 	public function up()
 	{
 		
-		Schema::create('indicadoresProyecto',function($table){
+		Schema::create('proyectoIndicadores',function($table){
             $table->increments('id');
-            
-
-            $table->integer('indicador_id');
-            $table->string('detalles');
+            $table->string('nombre' );
+            $table->string('tipo');
+            $table->integer('prioridad');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -26,7 +25,7 @@ class TableIndicadoresProyecto extends Migration {
 	
 	public function down()
 	{
-        Schema::drop('indicadoresProyecto');
+        Schema::drop('proyectoIndicadores');
 	}
 
 }

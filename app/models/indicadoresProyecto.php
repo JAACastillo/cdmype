@@ -1,5 +1,5 @@
 <?php
-class mercadosActuales extends Eloquent {
+class indicadoresProyecto extends Eloquent {
     
     protected $table = 'indicadoresProyecto';    
     public $errores;

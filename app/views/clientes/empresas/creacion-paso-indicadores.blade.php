@@ -14,7 +14,7 @@
     {{Form::hidden('empresa_id', null)}}
 
 <div class="row">
-        @if($indicador->exists())
+        @if(isset($imprimir))
             <div class="panel-heading">
                 <a href="{{route('f1PDF', $indicador->empresa_id)}}" target="_blank">Imprimir F1</a>
             </div>
@@ -129,7 +129,7 @@
                             {{ Form::label('productos', 'Productos:', array('class' => 'control-label col-md-3')) }} 
                             <a id="addProducto" class="btn btn-primary pull-left"> + </a>
                             <div class="col-md-12 productos">
-                            {{ Form::text('productos[]', null,  array('class' => 'form-control ', 'placeholder' => 'Nombre de producto' )) }}
+                            {{ Form::text('productos[0]', null,  array('class' => 'form-control ', 'placeholder' => 'Nombre de producto' )) }}
 
                             @foreach($indicador->productos as $producto)
                                 {{ Form::text('productos[]', $producto->nombre,  array('class' => 'form-control ', 'placeholder' => 'Nombre de producto' )) }}
@@ -186,10 +186,11 @@
     	$('.buscar').toggle("blind");
     	$('#empresario').toggle("blind")	
     })
-
+var num = 1;
     $('#addProducto').on('click', function(){
-        var caja = "<input type='text' class='form-control' name='productos[]' placeholder='Nombre de producto' >"
+        var caja = "<input type='text' class='form-control' name='productos[" + num +  "]' placeholder='Nombre de producto' >"
         $('.productos').prepend(caja)
+        num++;
     })
 
 </script>

@@ -11,6 +11,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            {{ Form::label('nit', 'NIT:', array('class' => 'control-label col-md-4')) }}
+                            <div class="col-md-8">
+                                {{ Form::text('nit', null, array('placeholder' => 'NIT', 'class' => 'form-control', 'data-mask' =>'9999-999999-999-9')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {{ Form::label('registro_iva', 'Registro de IVA:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
                                 {{ Form::text('registro_iva', null, array('placeholder' => 'Registro de Iva', 'class' => 'form-control')) }}
@@ -65,7 +71,7 @@
                         <div class="form-group">
                             {{ Form::label('direccion', 'Dirección:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                                {{ Form::textarea('direccion', null, array('placeholder' => 'Dirección', 'rows' => '1', 'class' => 'form-control')) }}
+                                {{ Form::textarea('direccion', null, array('placeholder' => 'Dirección', 'rows' => '2', 'class' => 'form-control')) }}
                             </div>
                         </div>
                         <div class="form-group">
