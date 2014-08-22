@@ -23,7 +23,7 @@ Capacitaciones
 @endif
 
 <br/>
-<div class="row">
+<div class="row animated fadeIn">
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
 	<div class="panel panel-default">

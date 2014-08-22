@@ -14,7 +14,7 @@ Capacitaciones
 
 <script type="text/javascript">
 
-    $.growl("Por favor no deje campos vacios", {
+    $.growl("No se realizo la operacion. Por favor no deje campos vacios", {
         type: "danger",
         allow_dismiss: false,
         animate: {
@@ -26,7 +26,7 @@ Capacitaciones
 @stop
 @endif
 
-<div class="row">
+<div class="row animated fadeIn">
 	<div class="col-xs-1"></div>
 	<div class="col-xs-10">
 		<div class="panel panel-default">
@@ -46,7 +46,7 @@ Capacitaciones
 				        <div class="form-group">
 				        	{{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
 					        {{ Form::label('empresario_id', 'Empresario:', array('class' => 'control-label col-md-4')) }}
-					        <div class="col-md-6 inner">
+					        <div class="col-md-5 inner">
 					            {{ Form::text('empresario', null, array('placeholder' => 'Nombre del empresario', 'class' => 'form-control getEmpresario', 'data-url' => 'empresario', 'autofocus')) }}
 					            {{ Form::hidden('empresario_id[]', null, array('class' => 'empresario_id')) }}
 					        </div>
@@ -80,7 +80,7 @@ Capacitaciones
 			</div>
 		
 			<div class="{{$oculto}} ver">
-{{ Form::model($asistencia, array('route' => 'capPasoActualizarAsistencia', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form')) }}
+{{ Form::model($asistencia, array('route' => array('capPasoActualizarAsistencia', $id), 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form')) }}
 				<!-- Tabla de Socios -->
 		            <div class="col-xs-1"></div>
 		            <div class="col-xs-10">

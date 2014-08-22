@@ -11,6 +11,8 @@ class pasoFinalController extends BaseController{
 	
     public function oferta($id)
     {
+        try {
+            
         $id2 = Math::to_base_10($id, 62) - 100000;
 
         //return $id;
@@ -24,9 +26,17 @@ class pasoFinalController extends BaseController{
         $pasoReal = $at->pasoReal;
         return View::make('asistencia-tecnica/creacion-paso-4', 
                 compact('consultores', 'id', 'pasoActual', 'id', 'pasoReal'));
+
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
+
     }
 
     public function ofertasGuardar($id){
+
+        try {
+
         $id2 = Math::to_base_10($id, 62) - 100000;
         $ofertas = Input::file('ofertas');
 
@@ -56,6 +66,10 @@ class pasoFinalController extends BaseController{
         }
         
         return Redirect::back()->with('msj', 'Agrege un documento');
+
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
     }
 
     private function guardarOferta($file){
@@ -67,6 +81,7 @@ class pasoFinalController extends BaseController{
  
 
     public function consultor($id){
+        try {
 
         $id2 = Math::to_base_10($id, 62) - 100000;
         $at = AtTermino::find($id2);
@@ -79,9 +94,15 @@ class pasoFinalController extends BaseController{
         return View::make('asistencia-tecnica/creacion-paso-5', 
             compact('consultores', 'id', 'pasoActual', 'pasoReal'));
 
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
+
     }
 
     public function consultorSeleccionar($id){
+        try {
+            
         $consultorID = Input::get('consultor');
 
         if (!is_null($consultorID)) {
@@ -102,10 +123,17 @@ class pasoFinalController extends BaseController{
         }
 
             return Redirect::back()->with('msj', 'Seleccione un consultor');
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
+
     }
 
 
     public function contrato($id){
+
+        try {
+            
         $id2 = Math::to_base_10($id) - 100000;
         
         $at = AtTermino::find($id2);
@@ -131,11 +159,16 @@ class pasoFinalController extends BaseController{
         $action = array('method' => 'PATH', 'id' => 'validar', 'class' => 'form-horizontal');
         return View::make('asistencia-tecnica/creacion-paso-7', 
                     compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible', 'ampliacion'));
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
+
     }
 
 
     public function contratoGuardar($id){
-
+        try {
+            
         $data = Input::all();
         $contrato = new AtContrato;
         if($contrato->guardar($data, 1)){
@@ -150,12 +183,15 @@ class pasoFinalController extends BaseController{
         return Redirect::route('atPasoContrato', $id)
                         ->withErrors($contrato->errores)
                         ->withInput();
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
     }
 
 
     public function contratada($id){
 
-
+        try{
         //return "hoal";
         $id2 = Math::to_base_10($id) - 100000;
            
@@ -184,6 +220,10 @@ class pasoFinalController extends BaseController{
         $action = array('method' => 'PATH', 'id' => 'validar', 'class' => 'form-horizontal');
         return View::make('asistencia-tecnica/creacion-paso-7', 
                     compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible', 'ampliacion'));
+
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
 
     }
 
@@ -269,7 +309,8 @@ class pasoFinalController extends BaseController{
 
 
     public function acta($id){
-
+        try {
+            
         $idAt = Math::to_base_10($id, 62) - 100000;
 
         $at = AtTermino::find($idAt);
@@ -296,6 +337,10 @@ class pasoFinalController extends BaseController{
 
         return View::make('asistencia-tecnica/creacion-paso-8',
             compact('acta', 'pasoActual', 'pasoReal', 'id', 'oculto', 'visible'));
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
+        
     }
 
 

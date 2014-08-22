@@ -26,15 +26,15 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Clientes <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ route('empresas.index') }}"><span class="glyphicon glyphicon-briefcase"></span>  Empresas</a></li>
+            <li><a href="{{ route('empresas') }}"><span class="glyphicon glyphicon-briefcase"></span>  Empresas</a></li>
             <li class="divider"></li>
-            <li><a href="{{ route('empresarios.index') }}"><span class="glyphicon glyphicon-user"></span>  Empresarios</a></li>
+            <li><a href="{{ route('empresarios') }}"><span class="glyphicon glyphicon-user"></span>  Empresarios</a></li>
           </ul>
         </li>
-        <li><a href="{{ route('asesorias.index') }}">Materiales</a></li>
-        <li><a href="{{ route('consultores.index') }}">Consultores</a></li>
-        <li><a href="{{ route('asistencia-tecnica.index') }}">Asistencia Técnica</a></li>
-        <li><a href="{{ route('capacitaciones.index') }}">Capacitación</a></li>
+        <li><a href="{{ route('asesorias') }}">Materiales</a></li>
+        <li><a href="{{ route('consultores') }}">Consultores</a></li>
+        <li><a href="{{ route('asistencia-tecnica') }}">Asistencia Técnica</a></li>
+        <li><a href="{{ route('capacitaciones') }}">Capacitación</a></li>
       </ul>
 
       <!-- Buscador -->
@@ -102,11 +102,11 @@
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ route('editarUsuario', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-pencil"></span>  Editar</a></li>
               @if(Auth::user()->tipo == 'Administrador')
-                <li><a href="{{ route('usuarios.index') }}"><span class="glyphicon glyphicon-user"></span>  Usuarios</a></li>
+                <li><a href="{{ route('usuarios') }}"><span class="glyphicon glyphicon-user"></span>  Usuarios</a></li>
               @else
                 <li><a href="{{ route('verUsuario', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-user"></span>  Mi Perfil</a></li>
               @endif
-            <li><a href="{{ route('configuraciones.index') }}"><span class="glyphicon glyphicon-wrench"></span>  Configuración</a></li>
+            <li><a href="{{ route('configuraciones') }}"><span class="glyphicon glyphicon-wrench"></span>  Configuración</a></li>
             <li class="divider"></li>
             <li><a href="/atcdmype/logout"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
           </ul>
@@ -120,6 +120,8 @@
 	<div>
     <br/>
     <br/>
+    <!-- <div id="fondoLoader"></div> -->
+    <div id="loader"></div>
     @yield('escritorio')
   </div>
 

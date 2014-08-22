@@ -9,7 +9,7 @@
 @stop
 
 @section('boton')
-    <a href="{{route('capCrearTermino') }}" class="btn btn-default" data-toggle="tooltip" data-placement="right" title="Crear Capacitación">
+    <a href="{{route('capCrearTermino') }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Crear Capacitación">
     <span class="glyphicon glyphicon-book"></span>
     Nueva
     </a>
@@ -17,7 +17,8 @@
 
 @section('lista')
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered datatable">
+            <thead>
             <tr class="active">
                 <th class="text-center">ID</th>
                 <th class="text-center">Tema</th>
@@ -25,7 +26,8 @@
                 <th class="text-center">Estado</th>
                 <th class="text-center">Opciones</th>
             </tr>
-
+            </thead>
+            <tbody>
             @foreach ($capterminos as $captermino)
             <tr>
                 <td>
@@ -45,10 +47,10 @@
                 </td>
             </tr>
             @endforeach
-
+            </tbody>
         </table>
     </div>
     {{-- Paginar Con el valor Puesto en Modelo en la variable perPage--}}
-    {{ $capterminos->links() }}
+    {{-- $capterminos->links() --}}
 
 @stop

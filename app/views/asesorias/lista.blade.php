@@ -9,7 +9,7 @@
 @stop
 
 @section('boton')
-    <a href="{{ route('asesorias.create') }}" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Crear asesoria">
+    <a href="{{ route('asesorias.create') }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Crear asesoria">
     <span class="glyphicon glyphicon-user"></span>
     Nueva
     </a>
@@ -18,7 +18,8 @@
 @section('lista')
 
 <div class="table-responsive">
-    <table class="table table-bordered">
+    <table class="table table-bordered datatable">
+        <thead>
         <tr class="active">
             <th class="text-center">Asesoría</th>
             <th class="text-center">Descripción</th>
@@ -27,6 +28,8 @@
             <th class="text-center">Material</th>
             <th class="text-center">Opciones</th>
         </tr>
+        </thead>
+        <tbody>
         @foreach ($asesorias as $asesoria)
         <tr>
             <td>{{ $asesoria->nombre  }}</td>
@@ -51,8 +54,9 @@
             </td>
         </tr>
         @endforeach
+        </tbody>
     </table>
-    {{ $asesorias->links() }}
+    {{-- $asesorias->links() --}}
     
 </div>
         

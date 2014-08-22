@@ -14,6 +14,8 @@ class pasoEmpresaController extends BaseController {
     }
     public function empresaGuardar()
     {
+        try {
+            
         $idEmpresa = Input::get('empresa_id');
 
         $empresa = Empresa::find($idEmpresa);
@@ -26,6 +28,11 @@ class pasoEmpresaController extends BaseController {
         }
         return Redirect::route('atPasoEmpresa')
                     ->with(['msj' => 'La empresa no existe']);
+
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
+        
     }
 
 }

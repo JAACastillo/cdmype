@@ -2,7 +2,7 @@
 
 @section('contenido')
 
-    <div class="row">
+    <div class="row animated flipInY">
         <div class="col-xs-0 col-sm-3">
             <!-- Izquierda -->
         </div>
@@ -46,7 +46,7 @@
                                 <div class="col-md-8">
                                     <div class="input-group">
                                         <div class="input-group-addon glyphicon glyphicon-envelope"></div>
-                                        {{ Form::text('correo', null, array('placeholder' => 'ejemplo@ejemplo.com', 'class' => 'form-control')) }}
+                                        {{ Form::text('correo', null, array('placeholder' => 'ejemplo@ejemplo.com', 'class' => 'form-control', 'autofocus')) }}
                                     </div>
                                     </div>
                             </div>                             

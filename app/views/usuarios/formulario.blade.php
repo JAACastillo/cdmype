@@ -18,7 +18,7 @@
 ?>
 
 @section('url')
-    <li><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
+    <li><a href="{{ route('usuarios') }}">Usuarios</a></li>
 @stop
 @section('nombre')
     {{$nombre}}
@@ -33,7 +33,7 @@
             <div class="form-group">
                 {{ Form::label('nombre', 'Nombre Completo:', array('class' => 'control-label col-md-4')) }}
                 <div class="col-md-6">
-                    {{ Form::text('nombre', null, array('placeholder' => 'Nombre Completo', 'class' => 'form-control')) }}
+                    {{ Form::text('nombre', null, array('placeholder' => 'Nombre Completo', 'class' => 'form-control', 'autofocus')) }}
                 </div>
             </div>
             <div class="form-group">

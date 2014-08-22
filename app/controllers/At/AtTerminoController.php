@@ -14,15 +14,34 @@ class AtTerminoController extends BaseController {
             ->with('atterminos', $attermino);
 	}
 
-//Crear
-	public function create()
-	{
-        $attermino = new AtTermino;
-       
-        return View::make('asistencia-tecnica.creacion-paso-2')
-            ->with('attermino', $attermino);
-	}
+    public function eliminarAsistencia($id)
+    {
+        $attermino = AtTermino::find($id);
+        
+            if(is_null($attermino))
+                App::abort(404);
+            
+            else 
+            {
+                $attermino->delete();
+                
+                $bitacora = new Bitacora;
+                $campos = array(
+                    'usuario_id' => Auth::user()->id,
+                    'tabla' => 10,
+                    'tabla_id' => $id,
+                    'accion' => 3
+                );
+                
+                $bitacora->Guardar($campos);
+                return Redirect::back();
+            }
+    }
 
+    public function verAsistencia()
+    {
+        return Redirect::route('atPasoTermino');
+    }
 
 //inicio de los pasos.
 
@@ -36,19 +55,8 @@ class AtTerminoController extends BaseController {
         $id2 = $id +  100000;
         $id2 = Math::to_base($id2, 62);
 
-        //return $at->pasoReal;
-        // $pasos = array(
-
-        //                '3' =>'atPasoConsultor', 
-        //                '4' =>'atPasoOferta', 
-        //                '5' =>'atPasoConsultor',
-        //                '6' =>'atPasoSeleccionarConsultor',
-        //                '7' =>'atPasoContrato',
-        //                '8' =>'atPasoContratada',
-        //                '9' =>'atPasoActa');
-
-        // return Redirect::route($pasos[$at->pasoReal ], $id2);
-
+        try {
+            
         switch ($at->estado) {
             case 'Creado':                       
                 return Redirect::route('atPasoConsultor', $id2);
@@ -72,8 +80,11 @@ class AtTerminoController extends BaseController {
                 # code...
                 break;
         }
+        
+        } catch (Exception $e) {
+            App::abort(404);            
+        }
 
-        return "404";
     }
 
 

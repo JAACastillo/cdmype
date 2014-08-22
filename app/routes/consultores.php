@@ -17,5 +17,4 @@ Route::any('consultor/eliminacion/{idConsultor}', ['as' => 'eliminarConsultor', 
 //Ver Especialidades
 Route::post('consultor/especialidades/{idConsultor}', ['as' => 'verEspecialidades', 'uses' => 'ConsultorController@verEspecialidades']);
 
-
-Route::resource('consultores','ConsultorController');
+Route::get('consultores', ['as' => 'consultores', 'uses' => 'ConsultorController@index']);

@@ -40,7 +40,6 @@
         Route::get('/logout', 'AutenticacionController@get_logOut');
 
 
-       
     //AutoComplementar
         Route::controller('api', 'ApiController');
     
@@ -56,7 +55,7 @@
                 case 404:
                     return Response::view('pagina_404', array(), 404);
             }
-        });   
+        });
         
     });
 

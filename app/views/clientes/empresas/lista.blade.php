@@ -9,7 +9,7 @@
 @stop
 
 @section('boton')
-    <a href="{{ route('crearEmpresa') }}" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Crear una Empresa">
+    <a href="{{ route('crearEmpresa') }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Crear una Empresa">
     <span class="glyphicon glyphicon-briefcase"></span>
     Nueva
     </a>
@@ -17,7 +17,8 @@
 
 @section('lista')
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered datatable">
+            <thead>
             <tr class="active">
                 <th class="text-center">Nombre</th>
                 <th class="text-center">Propietario</th>
@@ -25,12 +26,11 @@
                 <th class="text-center">Municipio</th>
                 <th class="text-center">Opciones</th>
             </tr>
-
+            </thead>
+            <tbody>
             @foreach ($empresas as $empresa)
             <tr>
-                <td>
-                    <h5>    {{ $empresa->nombre }}</h5>
-                </td>
+                <td>{{ $empresa->nombre }}</td>
 
                 <td >
                 @foreach($empresa->empresarios as $empresario)
@@ -52,10 +52,10 @@
                 </td>
             </tr>
             @endforeach
-
+            </tbody>
         </table>
     </div>
     {{-- Paginar Con el valor Puesto en Modelo en la variable perPage--}}
-    {{ $empresas->links() }}
+    {{-- $empresas->links() --}}
 
 @stop

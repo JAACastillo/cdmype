@@ -12,7 +12,7 @@ legend{
 </style>
 
 <br><br><br>
-<div class="row">
+<div class="row animated flipInY">
 
 	<div class="col-xs-12">
 		<center>

@@ -9,7 +9,7 @@
   <li class="active"> @yield('nombre', 'Creación') </li>
 </ol>
 @include('errores', array('errors' => $errors))
-    <div class="row">
+    <div class="row animated fadeIn">
         <div class="col-xs-0 col-sm-1 col-md-1">
             <!-- Izquierda -->
         </div>

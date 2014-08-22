@@ -1,7 +1,13 @@
 (function($){
 
+    $(window).load(function(){ //patch fix size of select box
+        $('.chosen-container').css('width', '100%');
+        // $('#fondoLoader').fadeOut(1000);
+        $('#loader').fadeOut(1000);
+    });
+
 // Botones animados
-    //Ladda.bind( 'input[type=submit]' );
+
     Ladda.bind( 'div:not(.progress-demo) button', { timeout: 4000 } );
     Ladda.bind( '.progress-demo button', {
         callback: function( instance ) {
@@ -23,6 +29,47 @@
 // Switch
     $("[type='checkbox']").bootstrapSwitch();
 
+//DataTable
+    $(document).ready(function() {
+    
+    function animar() {
+        var animacion="fadeInDown";
+        $('td').addClass("animated " +  animacion);
+
+        setTimeout(function() {
+            $('td').removeClass("animated " +  animacion);
+        }, 1000);
+    }
+    
+ 
+    $('.datatable')
+        .on( 'search.dt', function () { animar(); } )
+        .dataTable();
+    } );
+
+    $('.datatable').dataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ .",
+            "zeroRecords": "No hay considencias encontradas para la busqueda.",
+            "info": "Mostrando desde _START_ hasta _END_ de _TOTAL_ registros",
+            "infoEmpty": "No hay registros.",
+            "infoFiltered": "(Filtrado de _MAX_ Registros.)",
+            "search": "Buscar:",
+            "oPaginate": {
+            "sFirst": "<span class='glyphicon glyphicon-chevron-left'></span>",
+            "sLast": "<span class='glyphicon glyphicon-chevron-right'></span>",
+            "sNext": "<span>»</span>",
+            "sPrevious": "<span>«</span>"
+            }
+        },
+        "aLengthMenu": [[7, 15, 30, -1], [7, 15, 30, "Todos"]],
+        "iDisplayLength": 7,
+        "pagingType": "full_numbers",
+        "paging":   true,
+        "ordering": true,
+        "info":     true
+    });
+
 //Selector
 
     var config = {
@@ -35,10 +82,6 @@
     for (var selector in config) {
       $(selector).chosen(config[selector]);
     }
-
-    $(window).load(function(){ //patch fix size of select box
-        $('.chosen-container').css('width', '100%');
-    });
 
 // Popup Especialidades-Consultores
               
@@ -154,15 +197,5 @@
             });
         }
 
-        function agregado(){
-        $.growl("Tus datos son incorrectos", {
-                    type: "danger",
-                    allow_dismiss: false,
-                    animate: {
-                        enter: 'animated bounceIn',
-                        exit: 'animated bounceOut'
-                    }                               
-                });
-        }
 
 })(jQuery)

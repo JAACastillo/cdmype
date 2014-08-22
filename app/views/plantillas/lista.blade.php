@@ -7,7 +7,7 @@
   <li class="active"> @yield('cabecera', 'Inicia sesión') </li>
 </ol>
 
-<div class="row">
+<div class="row animated fadeIn">
         <div class="col-xs-0 col-sm-0 col-md-1">
             <!-- Izquierda -->
         </div>

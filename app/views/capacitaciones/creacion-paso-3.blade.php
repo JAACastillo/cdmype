@@ -23,7 +23,7 @@ Capacitaciones
 @endif
 
 <br/>
-<div class="row">
+<div class="row animated fadeIn">
 {{Form::open(  array('route' => array('capPasoGuardarOferta', $id), 'method' => 'POST', 'files' => 'true'))}}
 		        			
 	<div class="col-xs-2"></div>

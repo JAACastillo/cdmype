@@ -12,30 +12,8 @@ class ConfiguracionController extends BaseController {
         return View::make('configuraciones.formulario', compact('configuraciones'));
 	}
 
-	public function create()
-	{
 
-	}
-
-
-	public function store()
-	{
-        
-	}
-
-	public function show($id)
-	{
-        
-	}
-
-
-	public function edit($id)
-	{
-
-	}
-
-
-	public function update($id)
+	public function actualizarConfiguraciones($id)
 	{
         $configuraciones = Configuracion::find($id);
         
@@ -49,10 +27,5 @@ class ConfiguracionController extends BaseController {
         
         else 
             return Redirect::back()->withInput()->withErrors($configuraciones->errores);
-	}
-
-	public function destroy($id)
-	{
-        
 	}
 }

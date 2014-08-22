@@ -9,7 +9,7 @@
 @stop
 
 @section('boton')
-    <a href="{{route('atPasoEmpresa') }}" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Crear Término de Referencia">
+    <a href="{{route('atPasoEmpresa') }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Crear Término de Referencia">
     <span class="glyphicon glyphicon-book"></span>
     Nueva
     </a>
@@ -17,7 +17,8 @@
 
 @section('lista')
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered datatable">
+            <thead>
             <tr class="active">
                 <th>ID</th>
                 <th>Tema</th>
@@ -30,13 +31,12 @@
                 <th>Estado</th>
                 <th>Opciones</th>
             </tr>
-
+            </thead>
+            <tbody>
             @foreach ($atterminos as $attermino)
             <tr>
+                <td class="text-center">{{ $attermino->id }}</td>
                 <td>
-                    {{ $attermino->id }}</td>
-                <td>
-
                     <a href="{{route('atPaso', $attermino->id)}}">{{ $attermino->tema }}
                     </a>
                 </td>
@@ -48,20 +48,18 @@
                 <td>@if($attermino->pasoReal > 5){{ $attermino->consultorSeleccionado->consultor->nombre }} @endif</td>
                 <td>{{ $attermino->estado }}</td>
                 <td>
-                    <a href="{{ route('asistencia-tecnica.edit', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
-                    <a href="{{ route('asistencia-tecnica.show', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
-                    <a href="{{ route('asistencia-tecnica.destroy', array($attermino->id)) }}" data-form="#form-usr" class="btn btn-default btn-xs glyphicon glyphicon-remove delete" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el Usuario?');"
-> </a>
+                    <a href="{{ route('atPaso', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
+                    <a href="{{ route('verAsistencia', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
+                    @if(Auth::user()->tipo == 'Administrador')
+                    <a href="{{ route('eliminarAsistencia', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el TDR?');"> </a>
+                    @endif
                 </td>
             </tr>
             @endforeach
-
+            </tbody>
         </table>
     </div>
     {{-- Paginar Con el valor Puesto en Modelo en la variable perPage--}}
-    {{ $atterminos->links() }}
-
-    {{ Form::open(array('route' => array('asistencia-tecnica.destroy', 'TERM_ID'), 'method' => 'DELETE', 'role' => 'form', 'id' => 'form-usr')) }}
-            {{ Form::close() }}
+    {{-- $atterminos->links() --}}
 
 @stop

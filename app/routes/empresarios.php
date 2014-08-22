@@ -10,7 +10,7 @@ Route::get('empresario/{idEmpresario}', ['as' => 'verEmpresario', 'uses' => 'Emp
 //Eliminar
 Route::any('empresario/eliminacion/{idEmpresario}', ['as' => 'eliminarEmpresario', 'uses' => 'EmpresarioController@eliminarEmpresario']);
 
-Route::resource('empresarios','EmpresarioController');
+Route::get('empresarios', ['as' => 'empresarios', 'uses' => 'EmpresarioController@index']);
 
 //Pasos
 

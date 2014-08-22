@@ -1,5 +1,10 @@
 <?php
 
+	//Ver
+		Route::get('asistencia-tecnica/ver/{idTermino}', ['as' => 'verAsistencia', 'uses' => 'AtTerminoController@verAsistencia']);
+	//Eliminar
+		Route::any('asistencia-tecnica/eliminar/{idTermino}', ['as' => 'eliminarAsistencia', 'uses' => 'AtTerminoController@eliminarAsistencia']);
+
 //return View::make('asistencia-tecnica.creacion-paso-1');
 Route::get('asistencia-tecnica/paso/empresa', ['as' => 'atPasoEmpresa', 'uses' => 'pasoEmpresaController@empresa']);
 Route::post('asistencia-tecnica/paso/empresa', ['as' => 'atPasoEmpresa', 'uses' => 'pasoEmpresaController@empresaGuardar']);
@@ -50,7 +55,7 @@ Route::get("asistencia-tecnica/ofertas/{oferta}",
 
 	);
 
-Route::resource('asistencia-tecnica' , 'AtTerminoController');
+Route::get('asistencias-tecnicas', ['as' => 'asistencia-tecnica', 'uses' => 'AtTerminoController@index']);
 
 /*
 	Route::get('asistencia-tecnica/paso/empresa', ['as' => 'atPasoEmpresa', 'uses' => 'AtTerminoController@empresa']);

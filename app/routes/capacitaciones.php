@@ -1,6 +1,6 @@
 <?php
 
-	Route::resource('capacitaciones' , 'CapTerminoController');
+	Route::get('capacitaciones', ['as' => 'capacitaciones', 'uses' => 'CapTerminoController@index']);
 
 	//Ver
 		Route::get('capacitacion/{idTermino}', ['as' => 'capMostrarTermino', 'uses' => 'CapTerminoController@verTermino']);
@@ -28,7 +28,7 @@
 	//Asistencia
 	Route::get('capacitaciones/paso/asistencia/{id}', ['as' => 'capPasoAsistencia', 'uses' => 'CapTerminoController@asistencia']);
 	Route::post('capacitaciones/paso/asistencias', ['as' => 'capPasoGuardarAsistencia', 'uses' => 'CapTerminoController@guardarAsistencia']);
-	Route::post('capacitaciones/paso/asistencia', ['as' => 'capPasoActualizarAsistencia', 'uses' => 'CapTerminoController@actualizarAsistencia']);
+	Route::post('capacitaciones/paso/asistencias/{id}', ['as' => 'capPasoActualizarAsistencia', 'uses' => 'CapTerminoController@actualizarAsistencia']);
 	//Contrato
 
 

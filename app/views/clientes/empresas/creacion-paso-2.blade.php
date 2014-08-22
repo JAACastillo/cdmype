@@ -19,7 +19,6 @@
 		    </a>		
 		</div>
 			<div class="panel-body">	
-
 				<div class="row visible col-xs-12 buscar" >
 					<div class="col-xs-12">
 					    <br/>

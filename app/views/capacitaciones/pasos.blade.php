@@ -32,7 +32,7 @@
 				    ),
 				    array(
 				        "label" => "Finalizada",
-				        "enlace" => "capacitaciones.index",
+				        "enlace" => "capacitaciones",
 				        "rows"   => 2
 				    )
 				);

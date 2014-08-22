@@ -11,7 +11,7 @@ Capacitaciones
 
 {{ Form::model($captermino, $accion) }}
 @include('errores', array('errors' => $errors))
-<div class="row">
+<div class="row animated fadeIn">
     <div class="col-xs-12 col-md-6">
         <div class="panel panel-default">
             <div class="panel-body">

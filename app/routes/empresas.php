@@ -11,7 +11,7 @@ Route::get('empresa/{idEmpresa}', ['as' => 'verEmpresa', 'uses' => 'EmpresaContr
 //Eliminar
 Route::any('empresa/eliminacion/{idEmpresa}', ['as' => 'eliminarEmpresa', 'uses' => 'EmpresaController@eliminarEmpresa']);
 
-Route::resource('empresas','EmpresaController');
+Route::get('empresas', ['as' => 'empresas', 'uses' => 'EmpresaController@index']);
 
 //Pasos
 

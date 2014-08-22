@@ -2,6 +2,7 @@
 
 Route::resource('asesorias', 'asesoriasController');
 
+Route::get('asesorias', ['as' => 'asesorias', 'uses' => 'asesoriasController@index']);
 
 //devolver el material de las asesorias
 

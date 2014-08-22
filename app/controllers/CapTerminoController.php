@@ -53,6 +53,9 @@ class CapTerminoController extends BaseController {
     //Seleccion del paso
         public function Paso($id) 
         {
+            try {
+                
+            
             $cap = CapTermino::find($id);
 
             switch ($cap->estado) {
@@ -79,7 +82,9 @@ class CapTerminoController extends BaseController {
                     break;
             }
 
-            return "404";
+            } catch (Exception $e) {
+                App::abort(404);
+            }
         }
 
     //Pasos
@@ -177,9 +182,6 @@ class CapTerminoController extends BaseController {
 
             public function guardarConsultores()
             {
-
-//                return Input::all();
-
                 $consultores =  Input::get('consultores');
                 $id = Input::get('idCaptermino');
                 
@@ -222,11 +224,17 @@ class CapTerminoController extends BaseController {
 
             private function mailOferta($template, $id, $email, $nombreConsultor)
             {
+                try {
+                    
                 Mail::send($template,array('id' => $id),function($message) use ($id, $email, $nombreConsultor) {
                    
                     $message->to($email, $nombreConsultor)
                             ->subject('Capacitaciones - CDMYPE UNICAES');
                 });
+                
+                } catch (Exception $e) {
+                    
+                }
             }
 
         //Ofertas
@@ -318,7 +326,7 @@ class CapTerminoController extends BaseController {
                 $asistencia = new Asistencia;
                 $cap = CapTermino::find($id);
 
-                $pasoReal = 6;
+                $pasoReal = $cap->pasoReal;
                 $pasoActual = 5;
 
                 if ($cap->asistencia) {
@@ -340,7 +348,6 @@ class CapTerminoController extends BaseController {
 
                 $captermino_id = Input::get('captermino_id');
                 $empresarios = Input::get('empresario_id');
-
                 if(value($empresarios[0]) >= 1 )
                 {
                     foreach ($empresarios as $empresario) {
@@ -360,18 +367,29 @@ class CapTerminoController extends BaseController {
 
             }
 
-            public function actualizarAsistencia(){
+            public function actualizarAsistencia($id){
+                
+                $capasistencias = Asistencia::where('captermino_id', '=', $id)->get();
                 $asistencias = Input::get('asistencias');
+
+
+                foreach ($capasistencias as $id1) {
+                         $asistencia = Asistencia::find($id1->id);
+                         $asistencia->asistio = 1; //No
+                         $asistencia->save();
+                }
+
                 if($asistencias != "" )
                 {
-                    foreach ($asistencias as $id) {
-                         $asistencia = Asistencia::find($id);;
+                    
+                    foreach ($asistencias as $id2) {
+                         $asistencia = Asistencia::find($id2);
                          $asistencia->asistio = 2; //Si
                          $asistencia->save();
                     }
                     return  Redirect::back();
                 }
-
+                return  Redirect::back();
             }
 
             public function pdfAsistencia($id){
@@ -394,8 +412,8 @@ class CapTerminoController extends BaseController {
                 $cap = CapTermino::find($id);
 
                 if($cap->contratos){
-                    $cap->estado = 5;
-                    $cap->save();
+                    // $cap->estado = 5;
+                    // $cap->save();
                     return Redirect::route('capPasoContratada', $id);
                 }
 

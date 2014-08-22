@@ -23,7 +23,7 @@ Capacitaciones
 @endif
 
 <br/>
-<div class="row">
+<div class="row animated fadeIn">
 	{{Form::open()}}
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">

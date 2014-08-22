@@ -9,7 +9,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	
 	protected $table = 'users';
     public $errores;
-    protected $perPage = 9;
+    protected $perPage = 8;
     protected $softDelete = true;
     protected $hidden = array('password');
     protected $fillable = array(

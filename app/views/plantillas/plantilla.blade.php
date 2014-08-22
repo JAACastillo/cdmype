@@ -22,6 +22,10 @@
             {{ HTML::style('assets/ladda/ladda-themeless.min.css', array('media' => 'screen')) }}
             {{ HTML::style('assets/css/estilo.css', array('media' => 'screen')) }}
             {{ HTML::style('assets/css/animate.min.css', array('media' => 'screen')) }}
+             <!-- DataTable --> 
+            {{ HTML::style('assets/datatable/css/dataTables.min.css', array('media' => 'screen')) }}
+            {{ HTML::style('assets/datatable/css/dataTables.bootstrap.css', array('media' => 'screen')) }}
+
     </head>
     <body>
         <br/>
@@ -48,7 +52,9 @@
             {{ HTML::script('assets/js/bootstrap-growl.min.js') }}
             <!-- switch -->    
             {{ HTML::script('assets/switch/js/bootstrap-switch.min.js') }}
-            
+            <!-- DataTable -->        
+            {{ HTML::script('assets/datatable/js/dataTables.min.js') }}
+            {{ HTML::script('assets/datatable/js/dataTables.bootstrap.js') }}
             <!-- Libreria -->        
             {{ HTML::script('assets/js/libreria.js') }}
 

@@ -17,7 +17,7 @@
 
 @section('lista')
     <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-bordered datatable">
             <thead>
             <tr class="active">
                 <th class="text-center">Nombre</th>
@@ -45,6 +45,6 @@
         </table>
     </div>
 
-    {{ $usuarios->links() }}
+    {{-- $usuarios->links() --}}
 
 @stop

@@ -5,10 +5,9 @@ class pasoConsultoresController extends BaseController
 
     public function consultores($id)
     {
-        // $data = '/assets/ofertas/pdf.pdf';
-        // $path = public_path() . $data;
-        //return $path . $data;
-        // return File::put($path , $data);
+        try {
+            
+        
         $id2 = (Math::to_base_10($id, 62) ) - 100000;
         $at = AtTermino::find($id2);
 
@@ -20,10 +19,16 @@ class pasoConsultoresController extends BaseController
                         ->paginate();
         return View::make('asistencia-tecnica/creacion-paso-3', 
                 compact('consultores', 'id', 'pasoActual', 'pasoReal'));
+
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
     }
 
     public function consultoresGuardar()
     {
+        try {
+            
         $consultores =  Input::get('consultores');
         $id = Input::get('idEmpresa');
 
@@ -63,17 +68,30 @@ class pasoConsultoresController extends BaseController
         }
 
             return Redirect::back()->with('msj', 'Seleccione un consultor');
+
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
+
     }
 
 
 //fin de los pasos
     private function mailOferta($template, $id, $email, $nombreConsultor)
     {
+        try {
+            
+        
         Mail::send($template,array('id' => $id),function($message) use ($id, $email, $nombreConsultor) {
            
             $message->to($email, $nombreConsultor)
                     ->subject('Términos de referencia - CDMYPE UNICAES');
         });
+        
+        } catch (Exception $e) {
+            App::abort(404);    
+        }
+
     }
 
 }

@@ -16,4 +16,4 @@ Route::get('usuario/{idUsuario}', ['as' => 'verUsuario', 'uses' => 'UserControll
 Route::any('usuario/eliminacion/{idUsuario}', ['as' => 'eliminarUsuario', 'uses' => 'UserController@eliminarUsuario']);
 
 
-Route::resource('usuarios','UserController');
+Route::any('usuarios', ['as' => 'usuarios', 'uses' => 'UserController@index']);
