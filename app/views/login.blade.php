@@ -52,7 +52,7 @@
                             </div>                             
                             <!-- Contraseña -->
                             <div class="form-group">
-                                {{ Form::label('contrasena', 'Correo Electrónico:', array('class' => 'control-label col-md-3')) }}
+                                {{ Form::label('contrasena', 'Contraseña:', array('class' => 'control-label col-md-3')) }}
                                 <div class="col-md-8">
                                     <div class="input-group">
                                         <div class="input-group-addon glyphicon glyphicon-lock"></div>

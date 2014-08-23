@@ -49,8 +49,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
-                    <a href="#" id="addAnother" class="btn btn-primary pull-right">+</a>
-                    <div class="col-xs-12">
+                    <div class="col-xs-10">
                         <div class="form-group">
                             {{ Form::label('material', 'Material:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9 " id="another">
@@ -59,6 +58,7 @@
                             
                         </div>
                     </div>
+                    <div class="col-xs-2"><a href="#" id="addAnother" class="btn btn-primary pull-right">+</a></div>
                 </div>
             </div>
         </div>
@@ -101,18 +101,6 @@
 @include('validaciones.materiales')
     <script type="text/javascript">
     $('#addAnother').on('click', function(){
-        //<input id="filestyle-0" class="filestyle" type="file" name="material[]" style="position: absolute; clip: rect(0px, 0px, 0px, 0px);" tabindex="-1"></input>
-        // html = "<input type='file' class='filestyle' id='filestyle' name='material[]' style='position: absolute; clip: rect(0px, 0px, 0px, 0px);' tabindex='-1' > ";
-
-        // html += "<input class='form-control ' type='text' disabled=''></input>"
-        // html += "<span class='group-span-filestyle input-group-btn' tabindex='0'>"
-        // html += "<label class='btn btn-default ' for='filestyle-0'>"
-        // html += "<span class='glyphicon glyphicon-folder-open'></span>"
-        // html += " Buscar"
-        // html += "</label>"
-        // html += "</span>"
-        // html += "</div>"
-
         $('#another').append("<input type='file' name='material[]'> ");
         $(":file").filestyle({buttonText: "Buscar"});
     })

@@ -40,7 +40,7 @@ class ConsultorController extends BaseController {
                 $ConsultorEspecialidad->save();
             }
 
-            return Redirect::route('consultores.index');  
+            return Redirect::route('consultores');  
         }
         else
         { 
@@ -98,7 +98,7 @@ class ConsultorController extends BaseController {
         if($consultor->guardar($datos,'2')){
 
             if($this->actualizarEspecialidades($id,$subespecialidades)){
-                return Redirect::route('consultores.index');
+                return Redirect::route('consultores');
             }
             else{
                 return Redirect::back()->withInput()->withErrors(['Error' => 'No se han podido actualizar las especialidades']);
@@ -128,7 +128,7 @@ class ConsultorController extends BaseController {
             );
             
             $bitacora->Guardar($campos);
-            return Redirect::route('consultores.index');
+            return Redirect::route('consultores');
         }
 	}
 

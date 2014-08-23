@@ -2,11 +2,6 @@
 
 class asesoriasController extends \BaseController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		//
@@ -57,7 +52,7 @@ class asesoriasController extends \BaseController {
 					$materialAsesoria->save();
 				}
 			}
-			return Redirect::route('asesorias.index');
+			return Redirect::route('asesorias');
 		}
 
 		return Redirect::back()
@@ -66,10 +61,17 @@ class asesoriasController extends \BaseController {
 	}
 
     private function guardarAsesoria($file){
+    	try {
+    		
+    	
         $destinationPath = 'assets/asesorias/';
         $fileName = $file->getClientOriginalName();
         $file->move($destinationPath, $fileName);
         return $fileName;
+
+    	} catch (Exception $e) {
+    		App::abort(404);
+    	}
     }
  
 

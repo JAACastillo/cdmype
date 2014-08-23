@@ -41,7 +41,7 @@ class UserController extends BaseController {
         $datos = Input::all();
         
         if($usuario->guardar($datos,'1'))// 1 = Accion crear bitacora
-            return Redirect::route('usuarios.index');
+            return Redirect::route('usuarios');
         else
             return Redirect::back()->withInput()->withErrors($usuario->errores);
 	}
@@ -98,7 +98,7 @@ class UserController extends BaseController {
         $datos = Input::all();
 
         if($usuario->guardar($datos,'2')) // 2 :Modificar para la bitacora.
-            return Redirect::route('usuarios.index');
+            return Redirect::route('usuarios');
         else 
             return Redirect::back()->withInput()->withErrors($usuario->errores);
 	}
@@ -126,7 +126,7 @@ class UserController extends BaseController {
             );
             $bitacora->guardar($campos);
 
-            return Redirect::route('usuarios.index');
+            return Redirect::route('usuarios');
     }
 
 }

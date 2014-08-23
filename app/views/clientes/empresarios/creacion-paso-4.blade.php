@@ -37,7 +37,7 @@
 				    </div>
 				    <div class="col-xs-6">
 				        <center>
-				        <a href="{{ route('empresarios.index') }}" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
+				        <a href="{{ route('empresarios') }}" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
 				        Finalizar
 				        <span class="glyphicon glyphicon-chevron-right"></span>
 				        </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>

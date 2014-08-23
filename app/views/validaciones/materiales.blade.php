@@ -20,7 +20,14 @@ $(document).ready(function() {
             descripcion: {
                 validators: {
                     notEmpty: {
-                        message: 'Campo requerida.'
+                        message: 'Campo requerido.'
+                    }
+                }
+            },
+            'material[]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo requerido.'
                     }
                 }
             }

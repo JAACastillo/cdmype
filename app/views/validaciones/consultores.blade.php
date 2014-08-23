@@ -79,16 +79,12 @@ $(document).ready(function() {
             },
             telefono: {
                 validators: {
-                    emailAddress: {
-                        message: 'Campo invalido.'
-                    }
+                    
                 }
             },
             celular: {
                 validators: {
-                    emailAddress: {
-                        message: 'Campo invalido.'
-                    }
+                    
                 }
             }
             

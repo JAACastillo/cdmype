@@ -60,7 +60,7 @@ class EmpresarioController extends BaseController {
         $data = Input::all();
         
         if($empresario->guardar($data,'2')) 
-            return Redirect::route('empresarios.index');
+            return Redirect::route('empresarios');
         
         else 
             return Redirect::back()->withInput()->withErrors($empresario->errores);

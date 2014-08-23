@@ -69,7 +69,7 @@ class EmpresaController extends BaseController {
         $data = Input::all();
         
         if($empresa->guardar($data,'2')) 
-            return Redirect::route('empresas.index');
+            return Redirect::route('empresas');
         
         else 
             return Redirect::back()->withInput()->withErrors($empresa->errores);
@@ -92,7 +92,7 @@ class EmpresaController extends BaseController {
                 'accion' => 3
             );
             $bitacora->guardar($campos);
-            return Redirect::route('empresas.index');
+            return Redirect::route('empresas');
     }
 
 // Pasos.
