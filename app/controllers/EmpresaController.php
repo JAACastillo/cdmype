@@ -366,8 +366,8 @@ class EmpresaController extends BaseController {
 
             $indicadores = proyectoIndicador::all()->lists('nombre', 'id');
             $proyecto = new proyecto;
-            $pasoReal = 4;
-            $pasoActual = $empresa->pasoReal;
+            $pasoReal = $empresa->pasoReal;
+            $pasoActual = 4;
             $accion = array('route' => 'empresaPasoProyectoGuardar', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form', 'id' => 'validar');
             $proyecto->empresa_id = $id;
             return View::make('clientes.empresas/creacion-paso-proyecto', 
@@ -377,19 +377,13 @@ class EmpresaController extends BaseController {
 
 
     public function proyectoGuardar(){
+        // return Input::get('activities');
         $data = Input::only('empresa_id', 'nombre', 'descripcion', 'meta', 'fechaInicio', 'fechaFin');
 
         $proyecto = new proyecto;
-
-        //return Input::get('activities');
-
-            //return $encargado;
-        //return $data;
         if($proyecto->guardar($data,1)){
            return $this->saveProyecto($proyecto);
         }
-
-        //return $proyecto->errores;
         return Redirect::route('empresaPasoProyecto', $data['empresa_id'])
                         ->withInput()
                         ->withErrors($proyecto->errores);
@@ -398,28 +392,46 @@ class EmpresaController extends BaseController {
     public function proyectoEditar($id){
         $proyecto = proyecto::find($id);
         $indicadores = proyectoIndicador::all()->lists('nombre', 'id');
-        $pasoActual = 4;
         $empresa = $proyecto->empresa; 
-        $id = $empresa->id;   
-        //return $empresa;
+        $indicadoresDelProyecto = $proyecto->indicadores;
 
-        $indicadores = proyectoIndicador::all()->toArray('nombre', 'id');
-        return $indicadores;
-        foreach ($variable as $key => $value) {
-            # code...
+        $indicator = array();
+
+        foreach ($indicadoresDelProyecto as $indicador) {
+            $indicator[] = $indicador->indicadorproyecto_id;
         }
-
+        $proyecto->indicator = $indicator;
+        $pasoActual = 4;
         $pasoReal = $empresa->pasoReal;
+        $id = $empresa->id;   
         $accion = array( 'method' => 'PATCH', 'class' => 'form-horizontal','role' => 'form', 'id' => 'validar');
         $proyecto->empresa_id = $id;
         return View::make('clientes.empresas/creacion-paso-proyecto', 
                     compact('id', 'pasoReal', 'pasoActual', 'proyecto', 'accion', 'indicadores'));
-        
-
     }
 
 
-    private function saveProyecto($proyecto){
+    public function proyectoUpdate($id){
+        //return Input::get('activities');
+        $proyecto = proyecto::find($id);
+
+        if($proyecto->actividadesCompletas == '0'){
+           // return $proyecto->actividadesCompletas;
+            $data = Input::only('empresa_id', 'nombre', 'descripcion', 'meta', 'fechaInicio', 'fechaFin');
+            if($proyecto->guardar($data,1)){
+                $proyecto->indicadores()->delete();
+                $proyecto->actividades()->delete();
+               return $this->saveProyecto($proyecto);
+            }
+        }
+        $proyecto->errores = array('Error' => 'El proyecto no puede ser editado por que ya tiene actividades completas');
+        return Redirect::back()
+                        ->withInput()
+                        ->withErrors($proyecto->errores);
+    }
+
+
+    private function saveProyecto($proyecto){ //guarda las actividades y los indicadores del proyecto;
         $actividades = Input::get('activities');
         $encargado = Input::get('encargado');
         $fecha = Input::get('fecha');
@@ -434,8 +446,8 @@ class EmpresaController extends BaseController {
                 $activity->fecha = $fecha[$posicion];
                 $activity->proyecto_id = $proyecto->id;
                 $activity->save();
-                $posicion++;
             } 
+            $posicion++;
         } 
         foreach ($indicadores as $indicador) {
             $indicator = new indicadoresProyecto;
@@ -443,11 +455,13 @@ class EmpresaController extends BaseController {
             $indicator->indicadorproyecto_id = $indicador;
             $indicator->save();
         }
+
         return Redirect::route('empresaProyectos', $proyecto->empresa_id);
     }
 
     public function proyectos($id){
-        $empresa = empresa::find($id);
+        $empresa = empresa::with('proyectos.indicadores', 'proyectos.actividades')
+                    ->find($id);
         $proyectos = $empresa->proyectos;
         $pasoReal = $empresa->pasoReal;
         $pasoActual = 4;
@@ -468,14 +482,43 @@ class EmpresaController extends BaseController {
             return $pdf->stream();
     }
 
+    public function seguimientoProyecto($idProyecto){
+        $proyecto = proyecto::with('indicadores.definicion', 'actividades', 'empresa')
+                            ->find($idProyecto);
+        $empresa = $proyecto->empresa;
 
+        $pasoReal = $empresa->pasoReal;
+        $pasoActual = 4;
+        $id = $empresa->id;
+        return View::make('clientes.empresas.seguimientoProyecto', 
+                        compact('id', 'pasoReal', 'pasoActual', 'proyecto'));
+    }
+
+
+    public function seguimientoProyectoGuardar($idProyecto){
+        $proyecto = proyecto::with('actividades', 'empresa', 'indicadores')
+                            ->find($idProyecto);
+        //$input = array();
+        foreach ($proyecto->actividades as $actividad) {
+            $input = Input::get("actividad" . $actividad->id);
+            $actividad->completo = (is_null($input))?'0':'1';
+            $actividad->save();
+        }
+        foreach ($proyecto->indicadores as $indicador) {
+            $input = Input::get("indicador" . $indicador->id);
+            $indicador->detalles = (is_null($input))?'':$input;
+            $indicador->save();            
+        }
+        return Redirect::back();
+
+    }
 /* Fin paso proyecto */
 
     //Termino
         public function termino($idEmpresa)
         {
             $empresa = empresa::find($idEmpresa);
-            $pasoActual = 3;
+            $pasoActual = 5;
             $pasoReal = $empresa->pasoReal;
             $id =$idEmpresa;
 

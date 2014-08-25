@@ -19,11 +19,9 @@ class TableActividadesProyecto extends Migration {
             $table->string('nombre');
             $table->integer('proyecto_id');
             $table->date('fecha');
-            
-
+            $table->boolean('completo');
+            $table->text('descripcion');
             $table->enum( 'Encargado', array('Asesor', 'Cliente', 'Consultor', 'Docente', 'Alumnos'));
-
-
             $table->date('fechaInicio');
             $table->date('fechaFin');
 

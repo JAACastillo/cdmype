@@ -22,12 +22,17 @@
                 <th class="text-center">Actividades</th>
                 <th class="text-center">Fecha Inicio</th>
                 <th class="text-center">Fecha Fin</th>
+                <th class="text-center">Completado</th>
                 <th class="text-center">Opciones</th>
             </tr>
 
             @foreach ($proyectos as $proyecto)
             <tr>
-                <td>{{ $proyecto->nombre }}</td>
+                <td>
+                    <a href="{{route('empresaPasoSeguimientoProyecto', $proyecto->id)}}">
+                    {{ $proyecto->nombre }}
+                    </a>
+                </td>
                 <td>{{ $proyecto->meta }}</td>
                 <td >
                 	<ul>
@@ -44,10 +49,13 @@
                     </ul>
                 </td>
                 <td class="text-center">{{ $proyecto->fechaInicio }}</td>
-                <td class="text-center">{{ $proyecto->fechaFin}}</td>
+                <td class="text-center">{{ $proyecto->fechaFin }}</td>
+                <td class="text-center">{{ $proyecto->avance}} %</td>
                 <td>
                 	<a href="{{route('empresaF2', $proyecto->id)}}" target="_blank" class="btn btn-default"> F2</a>
-                    <a href="{{ route('empresaPasoProyectoEditar', $proyecto->id) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
+                    @if($proyecto->actividadesCompletas == '0')
+                        <a href="{{ route('empresaPasoProyectoEditar', $proyecto->id) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
+                    @endif
                 </td>
                 
             </tr>

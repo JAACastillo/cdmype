@@ -84,7 +84,7 @@
 		@foreach($actividades as $actividad)
 			<tr>
 				<td class="acuerdo"> <strong>{{$actividad->nombre}}</strong></td>
-				<td> <strong>{{$actividad->Encargado}}</strong></td>
+				<td> <strong>{{$actividad->encargado}}</strong></td>
 				<td> <strong>{{$actividad->fecha}}</strong></td>
 				<td> </td>
 			</tr>

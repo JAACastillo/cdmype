@@ -57,4 +57,21 @@ class proyectoIndicador extends Eloquent {
     }
 
 
+
+    //atributos personalizados
+
+    public function getInputAttribute(){
+        if($this->tipo == 'Boolean')
+            return "<input type='checkbox' name='detalles'>";
+        elseif($this->tipo == 'Dinero')
+            return "<input type='number' step='any' name='detalles'>";
+        elseif($this->tipo == 'Numero')
+            return "<input type='number' name='detalles'>";
+        elseif($this->tipo == 'text')
+            return "<input type='text' name='detalles'>";
+
+        return "<input type='text' name='detalles'>";
+    }
+
+
 }

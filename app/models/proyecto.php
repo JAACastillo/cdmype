@@ -60,6 +60,21 @@ class proyecto extends Eloquent {
         }
         
 
+//custom attributes
+        public function getActividadesCompletasAttribute(){
+            return $this->actividades()->where('completo', '=', '1')->count();
+        }
+
+        public function getTotalActividadesAttribute(){
+            return $this->actividades()->count();
+        }
+
+        public function getAvanceAttribute(){
+            if($this->getActividadesCompletasAttribute() == 0 || $this->getTotalActividadesAttribute() == 0 )
+                return 0;
+            return (( $this->getActividadesCompletasAttribute() / $this->getTotalActividadesAttribute()) * 100);
+        }
+
     public function empresa(){
         return $this->belongsTo('empresa', 'empresa_id');
     }
