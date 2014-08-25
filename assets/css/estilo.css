@@ -93,7 +93,7 @@
 
 /*Loading*/
 
-	/*#fondoLoader
+	#fondoLoader
 	{
 	   	position: absolute;
 		top: 0%;
@@ -104,9 +104,9 @@
 		z-index:100;
 		-moz-opacity: 0.09;
 		opacity: 0.09;
-	}*/
+	}
 	#loader {
-		background: url("/atcdmype/assets/img/loader.gif");
+		background: url("/atcdmype/assets/img/loader2.gif");
 		background-repeat: no-repeat;
 		height: 100px;
 		width: 100px;

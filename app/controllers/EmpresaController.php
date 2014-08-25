@@ -44,13 +44,14 @@ class EmpresaController extends BaseController {
             6 => 'Química Farmaceutica', 7 => 'Tecnología de Información y Comunicación', 8 => 'Textiles y Confección', 9 => 'Turismo',
             10 => 'Otros' );
 
-        $departamentos = Departamento::all()->lists('departamento', 'id');
-        $municipios = Municipio::all()->lists('municipio', 'id');
+        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
+        $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id');  
         
         $empresa->categoria = array_search($empresa->categoria,$Categoria);
         $empresa->constitucion = array_search($empresa->constitucion,$Constitucion);
         $empresa->clasificacion = array_search($empresa->clasificacion,$Clasificacion);
         $empresa->sector_economico = array_search($empresa->sector_economico,$Sector);
+        $empresa->departamento = $empresa->municipio->departamento_id;
         $empresa->municipio = array_search($empresa->municipio_id, $municipios);
 
         $accion = array('route' => array('actualizarEmpresa', $id), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
@@ -107,8 +108,8 @@ class EmpresaController extends BaseController {
             
             $empresa = new Empresa;
 
-            $departamentos = Departamento::all()->lists('departamento', 'id');
-            $municipios = Municipio::all()->lists('municipio', 'id');
+            $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
+            $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id');  
 
             $accion = array('route' => 'guardarEmpresa', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 

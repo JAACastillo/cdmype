@@ -4,33 +4,21 @@ class asesoriasController extends \BaseController {
 
 	public function index()
 	{
-		//
+
 		$asesorias = asesorias::paginate();
 		return View::make('asesorias.lista', compact('asesorias'));
 	}
 
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create()
 	{
-		//
 		$asesoria = new asesorias;
 		return View::make('asesorias.formulario', compact('asesoria'));
 	}
 
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
-		//
+
 		$data = Input::get();
 		$data['creador'] = Auth::user()->id;
 		$data['material'] = Input::file('material');
@@ -62,12 +50,11 @@ class asesoriasController extends \BaseController {
 
     private function guardarAsesoria($file){
     	try {
-    		
     	
-        $destinationPath = 'assets/asesorias/';
-        $fileName = $file->getClientOriginalName();
-        $file->move($destinationPath, $fileName);
-        return $fileName;
+	        $destinationPath = 'assets/asesorias/';
+	        $fileName = $file->getClientOriginalName();
+	        $file->move($destinationPath, $fileName);
+	        return $fileName;
 
     	} catch (Exception $e) {
     		App::abort(404);
@@ -75,26 +62,12 @@ class asesoriasController extends \BaseController {
     }
  
 
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function show($id)
 	{
 		//
 	}
 
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function edit($id)
 	{
 		//
@@ -104,12 +77,6 @@ class asesoriasController extends \BaseController {
 	}
 
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function update($id)
 	{
 		//
@@ -119,12 +86,13 @@ class asesoriasController extends \BaseController {
 
 		$data['creador'] = $asesoria->creador;
 		$data['modificado'] = Auth::user()->id;
-		$data['material'] = 'Yes';
 		
 		if($asesoria->guardar($data, 1)){
 			$materiales = Input::file('material');
 			if(count($materiales)>0){
+				
 				foreach ($materiales as $material) {
+					if ($material != "") {
 					$nombreMaterial = $this->guardarAsesoria($material);
 
 					$materialAsesoria = new asesoriaMaterial;
@@ -132,8 +100,10 @@ class asesoriasController extends \BaseController {
 					$materialAsesoria->material = $nombreMaterial;
 
 					$materialAsesoria->save();
+					}
 				}
 			}
+			
 			return Redirect::route('asesorias.index');
 		}
 
@@ -143,12 +113,6 @@ class asesoriasController extends \BaseController {
 	}
 
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
 	public function destroy($id)
 	{
 		//

@@ -42,7 +42,6 @@ class asesorias extends Eloquent {
             $reglas = array(
                 'nombre' => 'required',
                 'descripcion' => 'required',
-                'material' => 'required',
                 'creador' => 'required'
             );
             

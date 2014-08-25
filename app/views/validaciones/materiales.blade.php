@@ -23,13 +23,6 @@ $(document).ready(function() {
                         message: 'Campo requerido.'
                     }
                 }
-            },
-            'material[]': {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo requerido.'
-                    }
-                }
             }
         }
     });

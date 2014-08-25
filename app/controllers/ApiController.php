@@ -41,6 +41,21 @@ class ApiController extends BaseController {
         return $results;
     }
 
+    //EMPRESA
+    public function getMunicipios($id) 
+    {
+        if (!empty($id)) {
+            $opciones = "<option value=''> Elige un Municipio</option>";
+            $municipios = Municipio::where('departamento_id', '=', $id )->get();
+
+            foreach ($municipios as $fila) {
+               $opciones .= "<option value=' $fila->id '> $fila->municipio</option>";
+            }
+             return $opciones;
+         }
+
+    }
+
     //BUSCAR
 
         public function postBuscar() {

@@ -18,8 +18,8 @@ class ConsultorController extends BaseController {
 		$consultor = new Consultor;
 
 		$especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
-        $departamentos = Departamento::all()->lists('departamento', 'id');
-        $municipios = Municipio::all()->lists('municipio', 'id');
+        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
+        $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id');
         return View::make('consultores.formulario', compact('consultor','especialidades','departamentos','municipios'));
 	}
 
@@ -67,9 +67,9 @@ class ConsultorController extends BaseController {
         
         $consultorEspecialidad = ConsultorEspecialidad::Where('consultor_id', '=', $id)->get();
         $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
-        $departamentos = Departamento::all()->lists('departamento', 'id');
-        $municipios = Municipio::all()->lists('municipio', 'id');      
-        $dataSexo = array(1 => 'Mujer', 2 => 'Hombre');
+        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
+        $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id');      
+        $dataSexo = array('' => 'Seleccione el sexo', 1 => 'Mujer', 2 => 'Hombre');
 
         foreach ($consultorEspecialidad as $item) 
         {
@@ -77,11 +77,12 @@ class ConsultorController extends BaseController {
         }
         $consultor->especialidades = $datos;
 
-        //return $consultor->especialidades;
+        $consultor->departamento = $consultor->municipio->departamento_id;
         $consultor->sexo = array_search($consultor->sexo, $dataSexo);
         $consultor->municipio = array_search($consultor->municipio_id, $municipios);
+        
 
-        return View::make('consultores.formulario', compact('consultor', 'especialidades','departamentos','municipios'));
+        return View::make('consultores.formulario', compact('consultor', 'especialidades','departamentos', 'municipios'));
 	}
 
 

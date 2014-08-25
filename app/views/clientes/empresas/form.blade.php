@@ -59,13 +59,13 @@
                         <div class="form-group">
                         {{ Form::label('departamento', 'Departamento:', array('class' => 'control-label col-md-4')) }}
                         <div class="col-md-8">
-                            {{ Form::select('departamento', $departamentos, null, array('class' => 'form-control')) }} 
+                            {{ Form::select('departamento', $departamentos, null, array('class' => 'form-control select1')) }} 
                         </div>
                         </div>
                         <div class="form-group">
                             {{ Form::label('municipio_id', 'Municipio:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                                {{ Form::select('municipio_id', $municipios, null, array('class' => 'form-control')) }}
+                                {{ Form::select('municipio_id', $municipios, null, array('class' => 'form-control select2')) }}
                             </div>
                         </div>
                         <div class="form-group">

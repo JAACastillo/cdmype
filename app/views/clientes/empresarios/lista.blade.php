@@ -33,7 +33,7 @@
                 <td>{{ $empresario->nombre }}</td>
                 <td class="text-center">
                     @foreach($empresario->empresa as $empresa)
-                    {{ $empresa->empresas->nombre }}
+                    <h5>{{ $empresa->empresas->nombre }}</h5>
                     @endforeach
                 </td>
                 <td class="text-center">{{ $empresario->correo }}</td>

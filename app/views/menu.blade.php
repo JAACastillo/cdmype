@@ -120,7 +120,7 @@
 	<div>
     <br/>
     <br/>
-    <!-- <div id="fondoLoader"></div> -->
+    <div id="fondoLoader"></div>
     <div id="loader"></div>
     @yield('escritorio')
   </div>

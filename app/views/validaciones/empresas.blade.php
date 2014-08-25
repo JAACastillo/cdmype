@@ -18,6 +18,20 @@ $(document).ready(function() {
                     }
                 }
             },
+            nit: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo requerido.'
+                    }
+                }
+            },
+            registro_iva: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo requerido.'
+                    }
+                }
+            },
             categoria: {
                 validators: {
                     notEmpty: {

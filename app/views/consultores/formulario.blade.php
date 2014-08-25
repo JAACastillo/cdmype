@@ -43,31 +43,31 @@
                         <div class="form-group">
                             {{ Form::label('sexo', 'Sexo:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
-                                {{ Form::select('sexo', array('' => '','1' => 'Mujer','2' => 'Hombre'), null, array('class' => 'form-control')) }} 
+                                {{ Form::select('sexo', array('' => 'Seleccione el sexo','1' => 'Mujer','2' => 'Hombre'), null, array('class' => 'form-control')) }} 
                             </div>
                         </div>
                         <div class="form-group">
                             {{ Form::label('nit', 'NIT:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9 ">
-                                {{ Form::text('nit', null, array('placeholder' => 'NIT', 'class' => 'form-control', 'data-mask' =>'9999-999999-999-9')) }}
+                                {{ Form::text('nit', null, array('placeholder' => 'XXXX-XXXXXX-XXX-X', 'class' => 'form-control')) }}
                             </div>
                         </div>
                         <div class="form-group">
                             {{ Form::label('dui', 'DUI:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
-                                {{ Form::text('dui', null, array('placeholder' => 'DUI', 'class' => 'form-control', 'data-mask' =>'99999999-9')) }}
+                                {{ Form::text('dui', null, array('placeholder' => 'XXXXXXXX-X', 'class' => 'form-control')) }}
                             </div>
                         </div>
                         <div class="form-group">
                              {{ Form::label('correo', 'Correo:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
-                                {{ Form::email('correo', null, array('placeholder' => 'Correo Electrónico', 'class' => 'form-control')) }}
+                                {{ Form::email('correo', null, array('placeholder' => 'ejemplo@ejemplo.com', 'class' => 'form-control')) }}
                             </div>
                         </div>
                         <div class="form-group">
                         {{ Form::label('departamento', 'Departamento:', array('class' => 'control-label col-md-3')) }}
                         <div class="col-md-9">
-                            {{ Form::select('departamento', $departamentos, null, array('class' => 'form-control')) }} 
+                            {{ Form::select('departamento', $departamentos, null, array('class' => 'form-control select1')) }} 
                         </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                         <div class="form-group">
                             {{ Form::label('municipio_id', 'Municipio:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
-                                {{ Form::select('municipio_id',$municipios, null, array('class' => 'form-control')) }}
+                                {{ Form::select('municipio_id',$municipios, null, array('class' => 'form-control select2')) }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -95,19 +95,19 @@
                         <div class="form-group">
                             {{ Form::label('especialidad_id', 'Especialidad:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
-                            {{ Form::select('especialidad_id[]', $especialidades, $consultor->especialidades, array('class' => 'chosen-select form-control ', 'multiple' => 'true', 'data-placeholder' => 'Especialidades' )) }}
+                            {{ Form::select('especialidad_id[]', $especialidades, $consultor->especialidades, array('class' => 'chosen-select form-control ', 'multiple' => 'true', 'data-placeholder' => '  Especialidades' )) }}
                             </div>
                         </div>
                         <div class="form-group">
                              {{ Form::label('telefono', 'Teléfono: ', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-6">
-                                {{ Form::text('telefono', null, array('placeholder' => 'Teléfono', 'class' => 'form-control', 'data-mask' =>'9999-9999')) }}
+                                {{ Form::text('telefono', null, array('placeholder' => 'xxxx-xxxx', 'class' => 'form-control')) }}
                             </div>
                         </div>
                         <div class="form-group">
                             {{ Form::label('celular', 'Celular: ', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-6">
-                                {{ Form::text('celular', null, array('placeholder' => 'Celular', 'class' => 'form-control', 'data-mask' =>'9999-9999')) }}
+                                {{ Form::text('celular', null, array('placeholder' => 'xxxx-xxxx', 'class' => 'form-control')) }}
                             </div>
                         </div>
                         <br/>

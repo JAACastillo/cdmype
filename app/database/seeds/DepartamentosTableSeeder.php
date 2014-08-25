@@ -12,11 +12,11 @@ class DepartamentosTableSeeder extends Seeder {
             
         ));
         Departamento::create(array(
-            'departamento'     => 'San Vicente'
+            'departamento'     => 'Cuscatlan'
             
         ));
         Departamento::create(array(
-            'departamento'     => 'Cuscatlan'
+            'departamento'     => 'San Vicente'
             
         ));
         

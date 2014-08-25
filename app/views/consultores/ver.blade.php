@@ -5,7 +5,7 @@
 @stop
 
 @section('url')
-    <li><a href="{{ route('consultores.index') }}">Consultores</a></li>
+    <li><a href="{{ route('consultores') }}">Consultores</a></li>
 @stop
 @section('nombre')
     {{$consultor->nombre}}
@@ -60,7 +60,7 @@
     <div class="col-xs-6">
         <br/>
         <center>
-        <a href="{{ route('consultores.index') }}">
+        <a href="{{ route('consultores') }}">
         <span class="glyphicon glyphicon-chevron-left"></span>
          Volver
         </a>

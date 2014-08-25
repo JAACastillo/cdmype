@@ -36,11 +36,12 @@ class EmpresarioController extends BaseController {
 
         $sexos = array(1 => 'Mujer', 2 => 'Hombre');
         $tipos = array(1 => 'Empresaria', 2 => 'Propietaria', 3 => 'Representante', 4 => 'Empresario', 5 => 'Propietario');
-        $departamentos = Departamento::all()->lists('departamento', 'id');
-        $municipios = Municipio::all()->lists('municipio', 'id');
+        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
+            $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id'); 
 
         $empresario->sexo = array_search($empresario->sexo,$sexos);
         $empresario->tipo = array_search($empresario->tipo,$tipos);
+        $empresario->departamento = $empresario->municipio->departamento_id;
         $empresario->municipio = array_search($empresario->municipio_id, $municipios);
 
         $accion = array('route' => array('actualizarEmpresario', $id), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
@@ -102,8 +103,8 @@ class EmpresarioController extends BaseController {
         $pasoActual = 1;
         $pasoReal = 1;
         $id =0;
-        $departamentos = Departamento::all()->lists('departamento', 'id');
-        $municipios = Municipio::all()->lists('municipio', 'id');
+        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
+        $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id'); 
 
         $accion = array('route' => 'guardarEmpresario', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 

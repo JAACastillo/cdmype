@@ -34,7 +34,7 @@
             <td class="text-center">{{ $consultor->municipio->municipio }}</td>
             <td class="text-center">{{ $consultor->correo }}</td>
             <td class="text-center">
-            <a class="btn btn-default btn-xs glyphicon glyphicon-th-list" data-toggle="modal" href='#modal-id' data-id="{{ $consultor->id }}"></a>
+            <a class="btn btn-default btn-xs glyphicon glyphicon-th-list" data-toggle="modal" id="especialidades" href='#modal-id' data-id="{{ $consultor->id }}" data-placement="top" title="Ver Especialidades"></a>
             <a href="{{ route('editarConsultor', array($consultor->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Editar"> </a>
             <a href="{{ route('verConsultor', array($consultor->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>
             @if(Auth::user()->tipo == 'Administrador')
@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                <a class="btn btn-primary" data-dismiss="modal">Cerrar</a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

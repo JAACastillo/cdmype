@@ -2,7 +2,7 @@
 
     $(window).load(function(){ //patch fix size of select box
         $('.chosen-container').css('width', '100%');
-        // $('#fondoLoader').fadeOut(1000);
+        $('#fondoLoader').fadeOut(1000);
         $('#loader').fadeOut(1000);
     });
 
@@ -25,6 +25,7 @@
 
     $("[data-toggle='tooltip']").tooltip();
     $("[data-toggle='popover']").popover();
+    $("#especialidades").tooltip();
 
 // Switch
     $("[type='checkbox']").bootstrapSwitch();
@@ -195,7 +196,19 @@
                     return false;
                 }
             });
-        }
+        };
+
+        $(".select1").change(function(){
+            if ($(".select1").val()) {
+            $.ajax({
+              url: _servidor1 + "municipios/" + $(".select1").val() ,
+              type: "GET",
+              success: function(municipios){
+                $(".select2").html(municipios);
+              }
+            })
+            };
+          });
 
 
 })(jQuery)
