@@ -5,7 +5,7 @@ class AtTerminoController extends BaseController {
 //Listar
 	public function index()
 	{
-
+ 
         $attermino = AtTermino//::orderBy('tema','asc')
             ::with('especialidad', 'empresa', 'usuario', 'consultores', 'contrato')
             ->paginate();
@@ -77,6 +77,9 @@ class AtTerminoController extends BaseController {
                 return Redirect::route('atPasoActa', $id2);
                 break;
             default:
+                case 'Finalizada':
+                    return Redirect::route('atPasoActa', $id2);
+                    break;
                 # code...
                 break;
         }
@@ -154,6 +157,8 @@ class AtTerminoController extends BaseController {
                 ->withInput()
                 ->withErrors($attermino->errores);
 	}
+
+
 
 //Eliminar
 	public function destroy($id)

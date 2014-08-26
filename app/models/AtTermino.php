@@ -123,7 +123,9 @@ class AtTermino extends Eloquent {
                 return 8;
                 break;
             default:
-                # code...
+            
+                return 8;
+            
                 break;
         }
 

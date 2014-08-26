@@ -19,6 +19,7 @@ class TableProyecto extends Migration {
             $table->string('meta');
             $table->text('descripcion');
             $table->integer('empresa_id');
+            $table->integer('asesor');
             
             $table->integer('creador');
             

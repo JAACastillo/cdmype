@@ -33,13 +33,7 @@
                         <div class="form-group">
                             {{ Form::label('descripcion', 'Impacto:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                                {{Form::textarea('descripcion', null, array('class' => 'form-control', 'rows' => '2'))}}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            {{ Form::label('meta', 'Meta propuesta:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-8">
-                                {{Form::text('meta', null, array('class' => 'form-control'))}}
+                                {{Form::textarea('descripcion', null, array('class' => 'form-control', 'rows' => '4'))}}
                             </div>
                         </div>
                         <div class="form-group">
@@ -69,7 +63,13 @@
                             <div class="col-md-9">
                             {{ Form::select('indicadores[]', $indicadores, $proyecto->indicator, array('class' => 'chosen-select form-control ', 'multiple' => 'true', 'data-placeholder' => 'Indicadores Proyecto' )) }}
                             </div>
-                        </div>                     
+                        </div>        
+                        <div class="form-group">
+                            {{ Form::label('meta', 'Meta:', array('class' => 'control-label col-md-3')) }}
+                            <div class="col-md-9">
+                                {{Form::textarea('meta', null, array('class' => 'form-control', 'rows' => '3'))}}
+                            </div>
+                        </div>             
                         <div class="form-group">
                             {{ Form::label('actividades', 'Actividades:', array('class' => 'control-label col-md-3')) }} 
                             <a id="addActividad" class="btn btn-primary pull-left"> + </a>
@@ -93,27 +93,6 @@
                                         </div>
                                     </div>
                                 @endforeach
-
-                        @if($proyecto->actividades == [])
-                            <div class="row">
-                                <div class="col-md-5">
-                                    {{ Form::text('activities[$proyecto->actividades->count()]', null,  array('class' => 'form-control ', 'placeholder' => 'Actividad' )) }}
-                                </div>
-                                <div class="col-md-3">
-                                    {{Form::select('encargado[0]', array( 
-                                                                    1 => 'Asesor', 
-                                                                    2 => 'Cliente', 
-                                                                    3 => 'Consultor', 
-                                                                    4 => 'Docente', 
-                                                                    5 => 'Alumnos'), 
-                                                    'Docente', array('class' => 'form-control'))}}
-                                </div>
-                                <div class="col-md-4">
-                                    <input type="date" name="fecha[]" class="form-control">
-                                </div>
-                            </div>
-
-                        @endif
                             </div>
                         </div>
                     </div>
@@ -184,7 +163,7 @@
         num++;
     }
 
-    caja()
+   caja()
 
 </script>
 

@@ -91,4 +91,21 @@ class pasoTerminosController extends BaseController{
                     ->withInput();
     }
 
+
+//pdf de los tdr
+
+    public function pdf($id){
+        $at = AtTermino::with('empresa')
+                        ->find($id);
+        $empresa = $at->empresa;
+        $asesor = $at->usuario;
+        $pdf = App::make('dompdf');
+        //$pdf->loadHTML('<h1>Test</h1>');
+        $pdf->loadView('pdf.tdrAt', 
+                compact('at', 'empresa', 'asesor'));
+        return $pdf->stream();
+
+    }
+
+
 }

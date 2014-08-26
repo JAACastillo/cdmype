@@ -57,7 +57,7 @@ Capacitaciones
 		                   <div class="col-md-4">
 							    <div class="input-group">
 							    	<div class="input-group-addon">$</div>
-		                        	{{ Form::number('pago', $capcontrato->pago, array('class' => 'form-control text-center', 'min' => '1', 'max' => '100', 'step' => 'any', 'placeholder' =>'$')) }}
+		                        	{{ Form::number('pago', $capcontrato->pago, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000', 'step' => 'any', 'placeholder' =>'$')) }}
 		                    	</div>
 		                    </div>
 		                </div>

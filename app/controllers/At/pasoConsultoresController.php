@@ -29,45 +29,48 @@ class pasoConsultoresController extends BaseController
     {
         try {
             
-        $consultores =  Input::get('consultores');
-        $id = Input::get('idEmpresa');
+            $consultores =  Input::get('consultores');
+            $id = Input::get('idEmpresa');
 
-        $id  = Math::to_base_10($id,62) - 100000;
-        $banderaConsultor = 0;
-        $at = AtTermino::find($id);
-        
-        if ($consultores != "") {
+            $id  = Math::to_base_10($id,62) - 100000;
+            $banderaConsultor = 0;
+            $at = AtTermino::find($id);
+            
+            if ($consultores != []) {
 
-            foreach ($consultores as $consultor) {
-                $consul = $at->consultores()
-                        ->where('consultor_id', '=', $consultor);
-                if(!$consul->count() > 0)
-                {
-                    $consultorAT = new AtConsultor;
-                    $consultorAT->attermino_id = $id;
-                    $consultorAT->consultor_id = $consultor;
-                    $consultorAT->save();
-                   
-                    $this->mailOferta('emails.asistenciaTecnica', 
-                                        $id, 
-                                        $consultorAT->consultor->correo, 
-                                        $consultorAT->consultor->nombre
-                                    );
-                    
+                foreach ($consultores as $consultor) {
+                    $consul = $at->consultores()
+                            ->where('consultor_id', '=', $consultor);
+                    if(!$consul->count() > 0)
+                    {
+                        $consultorAT = new AtConsultor;
+                        $consultorAT->attermino_id = $id;
+                        $consultorAT->consultor_id = $consultor;
+                       
+                       if( $this->mailOferta('emails.asistenciaTecnica', 
+                                            $id, 
+                                            $consultorAT->consultor->correo, 
+                                            $consultorAT->consultor->nombre
+                                        )
+                        )
+                        {
+                            $consultorAT->save();
+                        }
+                        
+                    }
+                    $banderaConsultor = 1;
                 }
-                $banderaConsultor = 1;
-            }
-            if($banderaConsultor == 1)
-            {
-                $at->estado = 2;
-                $at->save();
+                if($banderaConsultor == 1)
+                {
+                    $at->estado = 2;
+                    $at->save();
+                }
+
+                $id = Math::to_base($id + 100000, 62);
+                return Redirect::route('atPasoOferta', $id);
             }
 
-            $id = Math::to_base($id + 100000, 62);
-            return Redirect::route('atPasoOferta', $id);
-        }
-
-            return Redirect::back()->with('msj', 'Seleccione un consultor');
+                return Redirect::back()->with('msj', 'Seleccione un consultor');
 
         } catch (Exception $e) {
             App::abort(404);    
@@ -80,16 +83,15 @@ class pasoConsultoresController extends BaseController
     private function mailOferta($template, $id, $email, $nombreConsultor)
     {
         try {
-            
-        
-        Mail::send($template,array('id' => $id),function($message) use ($id, $email, $nombreConsultor) {
-           
-            $message->to($email, $nombreConsultor)
-                    ->subject('Términos de referencia - CDMYPE UNICAES');
-        });
-        
+                    
+            Mail::send($template,array('id' => $id),function($message) use ($id, $email, $nombreConsultor) {
+               
+                $message->to($email, $nombreConsultor)
+                        ->subject('Términos de referencia - CDMYPE UNICAES');
+            });
+            return 1;
         } catch (Exception $e) {
-            App::abort(404);    
+            return 0;  
         }
 
     }

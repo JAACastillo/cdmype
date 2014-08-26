@@ -11,6 +11,7 @@ class proyecto extends Eloquent {
         'descripcion',
         'fechaInicio',
         'fechaFin',
+        'asesor',
         'empresa_id'
     );
     
@@ -47,7 +48,8 @@ class proyecto extends Eloquent {
 		        'meta'			=> 'required',			
 		        'fechaInicio'	=> 'required|date',
 		        'fechaFin'		=> 'required|date',
-		        'empresa_id'	=> 'required'
+                'empresa_id'    => 'required',
+                'asesor'    => 'required'
             );
             
             $validador = Validator::make($datos,$reglas);
@@ -85,6 +87,10 @@ class proyecto extends Eloquent {
 
     public function actividades(){
         return $this->hasMany('actividadesProyecto', 'proyecto_id');
+    }
+
+    public function encargado(){
+        return $this->belongsTo('User', 'asesor');
     }
 
 }

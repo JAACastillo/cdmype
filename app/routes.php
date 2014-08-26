@@ -13,10 +13,15 @@
 
 /* Login */
 
-	Route::get('login', 'AutenticacionController@get_login');
+	Route::get('login', ['as' => 'login'  ,'uses' => 'AutenticacionController@get_login']);
     
 	Route::post('login', 'AutenticacionController@post_login');
+    Route::get('asistencia-tecnica/tdr/{id}', ['as' => 'pdfAt', 'uses' => 'pasoTerminosController@pdf']);
 
+    Route::get("formato/{oferta}", 
+            ['as' => 'formatoF7', function($oferta) { return Redirect::to('assets/formatos/' . $oferta); }]
+
+    );
 /* Si esta Logueado */
 
     Route::group(array('before'=>'auth'), function() 

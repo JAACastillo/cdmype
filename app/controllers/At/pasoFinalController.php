@@ -232,7 +232,9 @@ class pasoFinalController extends BaseController{
         $id = Math::to_base_10($id) - 100000;
 
         $at = AtTermino::find($id);
-        $contrato = AtContrato::find($at->contrato->id);
+        $contrato = AtContrato::find($at->contrato->id);  
+        $at->estado = 5;
+        $at->save();
         if($contrato->guardar($data, 1))
             return Redirect::route('atPaso', $id);
         
@@ -324,8 +326,7 @@ class pasoFinalController extends BaseController{
             $acta->estado = array_search($acta->estado, $dataEstado);
             $oculto = "visible";
             $visible = "oculto";
-        }
-        else{
+        }else{
             $acta = new acta;
             $acta->attermino_id = $idAt;
             $acta->fecha = date('Y-m-j');
