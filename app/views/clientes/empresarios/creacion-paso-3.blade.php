@@ -63,7 +63,7 @@
 
 					            @foreach ($empleados as $empleado)
 					            <tr>
-					                <td class="text-center">{{ $empleado->empresarios->nombre}}</td>
+					                <td>&nbsp &nbsp &nbsp{{ $empleado->empresarios->nombre}}</td>
 					                <td class="text-center">{{ $empleado->tipo }}</td>
 					            </tr>
 					            @endforeach

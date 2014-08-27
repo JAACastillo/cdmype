@@ -44,7 +44,6 @@
                             {{ Form::label('meta', 'Meta propuesta:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
                                 {{Form::text('meta', null, array('class' => 'form-control', 'placeholder' => 'Meta del Proyecto'))}}
-                                {{Form::textarea('descripcion', null, array('class' => 'form-control', 'rows' => '4'))}}
                             </div>
                         </div>
                         <div class="form-group">

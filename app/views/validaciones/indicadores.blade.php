@@ -4,6 +4,7 @@
 $(document).ready(function() {
 
 	$('#validar').bootstrapValidator({
+        excluded: ':disabled',
         message: 'Valor no valido',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -32,7 +33,7 @@ $(document).ready(function() {
                     }
                 }
             },  
-            mercados: {
+            'mercados[]': {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido.'

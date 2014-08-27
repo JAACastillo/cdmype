@@ -4,6 +4,7 @@
 $(document).ready(function() {
 
 	$('#validar').bootstrapValidator({
+        excluded: ':disabled',
         message: 'Valor no valido',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',

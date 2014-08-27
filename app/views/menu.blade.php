@@ -87,7 +87,7 @@
                     <div class="radio">
                       <label>
                         &nbsp<input type="radio" name="tabla" value="material">
-                        &nbsp Material de Asesoría
+                        &nbsp Material Asesoría
                       </label>
                     </div>
                   </div>

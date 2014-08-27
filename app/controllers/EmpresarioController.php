@@ -257,7 +257,7 @@ class EmpresarioController extends BaseController {
             $datos = Input::all();
             
             if($empresaEmpresario->guardar($datos,'1')) 
-                return  Redirect::route('pasoTerminoEmpresario', $idEmpresa);
+                return  Redirect::back();
             else 
                 return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
 

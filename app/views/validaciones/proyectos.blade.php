@@ -3,6 +3,7 @@
 $(document).ready(function() {
 
 	$('#validar').bootstrapValidator({
+        excluded: ':disabled',
         message: 'Valor no valido',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -39,6 +40,13 @@ $(document).ready(function() {
                 }
             },
             fechaFin: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo requerido.'
+                    }
+                }
+            },
+            'indicadores[]': {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido.'

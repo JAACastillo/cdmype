@@ -6,9 +6,9 @@ class indicadoresProyecto extends Eloquent {
     protected $perPage = 10;
     protected $softDelete = true;
     protected $fillable = array(
-        'indicador',
+        'indicadorproyecto_id',
         'proyecto_id',
-        'detalles'
+        'meta'
     );
     
     /* Guardar */
@@ -39,9 +39,9 @@ class indicadoresProyecto extends Eloquent {
         public function validar($datos) 
         {
             $reglas = array(
-                'indicador'      => 'required',
+                'indicadorproyecto_id'      => 'required',
                 'proyecto_id'    => 'required|integer',
-                'detalles'       => 'required'
+                'meta'       => 'required'
             );
             
             $validador = Validator::make($datos,$reglas);

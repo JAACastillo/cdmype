@@ -37,7 +37,7 @@
                 <td>{{ $proyecto->encargado->nombre }}</td>
                 <td >
 	                    @foreach($proyecto->indicadores as $indicador)
-	                    	<div class="row">
+	                    	<div class="row col-md-12">
                                 <div class="col-md-9">{{ $indicador->definicion->nombre }} </div>
                                 <div class="col-md-3">{{$indicador->meta}} </div>
                             </div>
@@ -56,8 +56,8 @@
                 <td class="text-center">{{ $proyecto->fechaInicio }}</td>
                 <td class="text-center">{{ $proyecto->fechaFin }}</td>
                 <td class="text-center">{{ $avance}} %</td>
-                <td>
-                	<a href="{{route('empresaF2', $proyecto->id)}}" target="_blank" class="btn btn-default"> F2</a>
+                <td class="text-center">
+                	<a href="{{route('empresaF2', $proyecto->id)}}" target="_blank" class="btn btn-default btn-xs"> F2</a>
                     @if($avance == '0')
                         <a href="{{ route('empresaPasoProyectoEditar', $proyecto->id) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
                     @endif
