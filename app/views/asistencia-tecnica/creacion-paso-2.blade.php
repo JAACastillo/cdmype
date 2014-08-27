@@ -17,7 +17,7 @@
                         <div class="form-group">
                      		{{ Form::label('tema', 'Tema:', array('class' => 'control-label col-md-4')) }}
                     		<div class="col-md-8">
-                        	{{ Form::text('tema', null, array('placeholder' => 'Tema de la Asistencia Técnica', 'class' => 'form-control')) }}
+                        	{{ Form::text('tema', null, array('placeholder' => 'Tema de la Asistencia Técnica', 'class' => 'form-control', 'autofocus')) }}
 	                		</div>
 	                	</div>
 		                <div class="form-group">
@@ -35,7 +35,7 @@
 		                <div class="form-group">
 		                    {{ Form::label('productos', 'Productos:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
-		                        {{ Form::textarea('productos', null, array('placeholder' => 'Productos Esperados', 'rows' => '2', 'class' => 'form-control')) }}
+		                        {{ Form::textarea('productos', null, array('placeholder' => 'Productos Esperados', 'rows' => '2', 'class' => 'form-control', 'data-toggle'=>'popover'	)) }}
 		                    </div>
 		                </div>
 		                <div class="form-group">

@@ -123,7 +123,7 @@
 				</tr>
 				<tr>
 					<td witdh='50%' colspan="2"> Género del propietario/a: <strong>{{$empresario->sexo }}</strong></td>
-					<td witdh='50%' colspan="2"> Fecha de inicio de operaciones: <strong>{{$indicador->fechaInicio }}</strong></td>
+					<td witdh='50%' colspan="2"> Fecha de inicio de operaciones: <strong>{{ date("d-m-Y",strtotime($indicador->fechaInicio));}} </strong></td>
 				</tr>
 				<tr>
 					<td witdh='100%'  colspan="4"> Lleva contabilidad formal: <strong>{{($indicador->contabilidadFormal?'Si':'No')}} </strong></td>

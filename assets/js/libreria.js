@@ -24,7 +24,11 @@
 // Bootstrap
 
     $("[data-toggle='tooltip']").tooltip();
-    $("[data-toggle='popover']").popover();
+    $("[data-toggle='popover']").popover({
+        trigger: 'focus',
+        content: 'Introduzca cada producto en una linea diferente.',
+        placement: 'top'
+    });
     $("#especialidades").tooltip();
 
 // Switch
@@ -51,7 +55,7 @@
     $('.datatable').dataTable({
         "language": {
             "lengthMenu": "Mostrar _MENU_ .",
-            "zeroRecords": "No hay considencias encontradas para la busqueda.",
+            "zeroRecords": "Ningun registro encontrado.",
             "info": "Mostrando desde _START_ hasta _END_ de _TOTAL_ registros",
             "infoEmpty": "No hay registros.",
             "infoFiltered": "(Filtrado de _MAX_ Registros.)",

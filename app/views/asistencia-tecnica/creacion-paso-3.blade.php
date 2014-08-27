@@ -23,8 +23,8 @@
 
 <br/>
 <div class="row">
-	<div class="col-xs-2"></div>
-	<div class="col-xs-8">
+	<div class="col-xs-1"></div>
+	<div class="col-xs-10">
 	<div class="panel panel-default">
 		<div class="panel-body">
 <?php
@@ -36,7 +36,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="table-responsive">
-	        			<table class="table table-bordered table-hover">
+	        			<table class="table table-bordered">
 				            <tr class="active">
 				                <th class="text-center">Nombre</th>
 				                <th class="text-center">Correo</th>
@@ -49,9 +49,9 @@
 				            <tr>
 				                <td>{{ $consultor->consultor->nombre }}</td>
 				                <td class="text-center">{{ $consultor->consultor->correo }}</td>
-				                <td class="text-center">{{ $consultor->consultor->telefono }}</td>
-				                <td> {{$consultor->especialidad->sub_especialidad}}</td>
-				                <td class="text-center">
+				                <td class="text-center" style="width:100px">{{ $consultor->consultor->telefono }}</td>
+				                <td class="text-center"> {{$consultor->especialidad->sub_especialidad}}</td>
+				                <td class="text-center" style="width:100px">
 				                    <input name="consultores[]" type="checkbox" data-content="Seleccionar" value="{{$consultor->consultor->id}}" checked >
 				                </td>
 				            </tr>
@@ -87,7 +87,7 @@
 		</div>
 	</div>
 	</div>
-	<div class="col-xs-2"></div>
+	<div class="col-xs-1"></div>
 </div>
 
 {{ $consultores->links() }}

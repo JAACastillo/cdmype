@@ -10,7 +10,7 @@
 
 @section('formulario')
 
-{{ Form::model($configuraciones, array('route' => array('actualizarConfiguraciones', $configuraciones->id), 'method' => 'PATCH', 'class' => 'form-horizontal', 'role' => 'form')) }}
+{{ Form::model($configuraciones, array('route' => array('actualizarConfiguraciones'),'id' => 'validar', 'method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form')) }}
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group">
@@ -59,6 +59,10 @@
     </div>
 
 {{ Form::close() }}
+
+@section('script')
+@include('validaciones.configuraciones')
+@stop
 
 @stop
                

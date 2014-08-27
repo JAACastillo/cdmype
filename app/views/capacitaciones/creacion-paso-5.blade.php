@@ -7,7 +7,6 @@ Capacitaciones
 @include('capacitaciones.pasos')
 
 <br/>
-{{ Form::model($asistencia, array('route' => 'capPasoGuardarAsistencia', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form')) }}
 
 @if(Session::has('msj'))
 @section('script')
@@ -25,74 +24,27 @@ Capacitaciones
 </script>
 @stop
 @endif
-
+{{ Form::model($asistencia, array('route' => array('capPasoActualizarAsistencia', $id), 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form')) }}
 <div class="row animated fadeIn">
 	<div class="col-xs-1"></div>
 	<div class="col-xs-10">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<a href="#" class="btn btn-primary {{$oculto}} agregar cambiar resetBtn"><span class="glyphicon glyphicon-plus"></span> &nbsp Convocar</a>
-				<a href="#" class="btn btn-primary {{$visible}} agregar cambiar"><span class="glyphicon glyphicon-list"></span></span> &nbsp Convocados</a>
-				<a href="{{route('capAsistenciaPdf', $id)}}" target="_blank" class="btn btn-primary pull-right {{$oculto}} ver" style="margin-top:-6px"><span class="glyphicon glyphicon-print"></span> &nbsp PDF</a>
-			    <a  href="#" class="btn btn-primary btn1 {{$visible}} pull-right agregar" style="margin-top:-6px">
-	        	<span class="glyphicon glyphicon glyphicon-plus"></span>
-	        	</a>
+				<a href="{{route('capAsistenciaPdf', $id)}}" target="_blank" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Imprimir convocatoria"><span class="glyphicon glyphicon-print"></span> &nbsp PDF</a>
 			</div>
 			<div class="panel-body">
-
-			<div class="{{$visible}} agregar">
-				<div class="row">
-					<br>
-				        <div class="form-group">
-				        	{{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
-					        {{ Form::label('empresario_id', 'Empresario:', array('class' => 'control-label col-md-4')) }}
-					        <div class="col-md-5 inner">
-					            {{ Form::text('empresario', null, array('placeholder' => 'Nombre del empresario', 'class' => 'form-control getEmpresario', 'data-url' => 'empresario', 'autofocus')) }}
-					            {{ Form::hidden('empresario_id[]', null, array('class' => 'empresario_id')) }}
-					        </div>
-					        {{ Form::close() }}
-					    </div>
-			            {{ Form::hidden('captermino_id', $id) }}
-	    		</div>
-	    			<br/>
-	    			<br/>
-				<div class="row">
-				    <div class="col-xs-6">
-				        <center>
-				        <a href="javascript:history.back()">
-				        <span class="glyphicon glyphicon-chevron-left"></span>
-				         Anterior
-				        </a>
-				        </center>
-				    </div>
-				    <div class="col-xs-6">
-				        <center>
-				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
-			        	Agregar
-			        	<span class="glyphicon glyphicon-chevron-right"></span>
-			        	<span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-			        	</button>
-				        </center>
-				    </div>
-				</div>
-				<br/>
-{{ Form::close() }}	
-			</div>
-		
-			<div class="{{$oculto}} ver">
-{{ Form::model($asistencia, array('route' => array('capPasoActualizarAsistencia', $id), 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form')) }}
-				<!-- Tabla de Socios -->
+				<!-- Tabla de Asistencia -->
 		            <div class="col-xs-1"></div>
 		            <div class="col-xs-10">
 		            	<?php
-    		        		$asistencias = Asistencia::Where('captermino_id', '=', $id)->get();
+    		        		$asistencias = Asistencia::Where('captermino_id', '=', $id)->Where('asistira', '=', 'Si')->get();
                 		?>
                 		@if ($asistencias != "[]")
 		            	<div class="table-responsive">
 					        <table class="table table-bordered">
 					            <tr class="active">
 					                <th class="text-center">Nombre</th>
-					                <th class="text-center">Empresa</th>
+					                <th class="text-center">Empresa/s</th>
 					                <th class="text-center">Teléfono</th>
 					                <th class="text-center">Asistio</th>
 					            </tr>
@@ -102,7 +54,7 @@ Capacitaciones
 					                <td>{{ $asistencia->empresario->nombre}}</td>
 					                <td class="text-center">
 										@foreach($asistencia->empresario->empresa as $empresario)
-                    					{{ $empresario->empresas->nombre }}
+                    					<h5 style="margin:0px">{{ $empresario->empresas->nombre }}</h5>
                 						@endforeach
 					                </td>
 					                <td class="text-center">{{ $asistencia->empresario->telefono}}</td>
@@ -141,95 +93,19 @@ Capacitaciones
 
 		            </div>
 		            <div class="col-xs-1"></div>
-{{ Form::close() }}
-			</div>
 
+			</div>
 		</div>
 	</div>
-
+	</div>
 	<div class="col-xs-1"></div>
+	</div>
 </div>
-
+{{ Form::close() }}
 @stop
 
 
 @section('script')
 
-	<script>
-
-	$(document).ready(function(){
-
-	var servidor = "http://localhost/atcdmype";
-    var _servidor1 = servidor + '/api/';
-    var idNum = 1;
-
-  	$(".btn1").click(function(){
-
-  	  var html = "<input type='text' style='margin-bottom:5px' name='empresario' class='form-control getEmpresario" + idNum + "' data-url = 'empresario'>"
-  	  	  html += "<input type='hidden' name='empresario_id[]' class='idEmpresario" + idNum + "'>" 
-
-	  	if($(".getEmpresario").val().length < 1) {  
-	        $.growl("Solo puede ingresar un empresario a la vez!", {
-	            type: "danger",
-	            allow_dismiss: false,
-	            animate: {
-	                enter: 'animated bounceIn',
-	                exit: 'animated bounceOut'
-	            }                               
-	        });  
-        return false;  
-    	}  
-    	$(".inner").prepend(html);
-
-	   	idEmpresarios = ($('.idEmpresario' + idNum))
-
-	    idsEmpresarios = ($(".empresario_id" + idNum))
-	    $('.getEmpresario'+ idNum).autocompletar(
-	                { 
-	                    hd: $(idEmpresarios) ,
-	                    sv: _servidor1
-	                });
-
-	  	idNum++;  
-	});
-
-    idsEmpresarios = ($('.empresario_id'))
-    $('.getEmpresario').autocompletar(
-                { 
-                    hd: $(idsEmpresarios[0]) ,
-                    sv: _servidor1
-                });
-	});
-
-	$('.cambiar').on('click', function(){
-		$('.agregar').toggle();
-		$('.ver').toggle();
-		$('#btn1').toggle();
-	})
-
-	//Validar
-	$('#validar').bootstrapValidator({
-        message: 'Valor no valido',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            empresario: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo requerido'
-                    }
-                }
-            }
-        }
-    });
-	//Reset Validacion
-	$('.resetBtn').click(function() {
-        $('#validar').data('bootstrapValidator').resetForm(true);
-	});
-
-	</script>
 
 @stop

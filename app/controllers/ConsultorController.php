@@ -18,8 +18,8 @@ class ConsultorController extends BaseController {
 		$consultor = new Consultor;
 
 		$especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
-        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
-        $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id');
+        $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
+        $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');
         return View::make('consultores.formulario', compact('consultor','especialidades','departamentos','municipios'));
 	}
 
@@ -67,8 +67,8 @@ class ConsultorController extends BaseController {
         
         $consultorEspecialidad = ConsultorEspecialidad::Where('consultor_id', '=', $id)->get();
         $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
-        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
-        $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id');      
+        $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
+        $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');      
         $dataSexo = array('' => 'Seleccione el sexo', 1 => 'Mujer', 2 => 'Hombre');
 
         foreach ($consultorEspecialidad as $item) 

@@ -23,14 +23,14 @@
 <br/>
 <div class="row">
 	{{Form::open()}}
-	<div class="col-xs-2"></div>
-	<div class="col-xs-8">
+	<div class="col-xs-1"></div>
+	<div class="col-xs-10">
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="table-responsive">
-	        			<table class="table table-bordered table-hover">
+	        			<table class="table table-bordered">
 				            <tr class="active">
 				                <th class="text-center">Nombre</th>
 				                <th class="text-center">Correo</th>
@@ -43,14 +43,14 @@
 				            <tr>
 				                <td>{{ $consultor->consultor->nombre }}</td>
 				                <td class="text-center">{{ $consultor->consultor->correo }}</td>
-				                <td class="text-center">{{ $consultor->consultor->telefono }}</td>
+				                <td class="text-center" style="width:100px">{{ $consultor->consultor->telefono }}</td>
 				                <td class="text-center"> 
 				                	<a href="{{route('atOferta', $consultor->doc_oferta)}}" target="_blank">
 				                		{{ $consultor->doc_oferta}}
 				                	</a>
 				                </td>
-				                <td class="text-center">
-				                    <input type="radio" name="consultor" value="{{$consultor->id}}" data-content="Seleccionar" >
+				                <td class="text-center" style="width:70px">
+				                    <input type="radio" name="consultor" value="{{$consultor->id}}" data-content="Seleccionar" data-toggle="tooltip" data-placement="bottom" title="Seleccionar">
 				                </td>
 				            </tr>
 				            @endforeach
@@ -82,7 +82,7 @@
 		{{Form::close()}}
 	</div>
 	</div>
-	<div class="col-xs-2"></div>
+	<div class="col-xs-1"></div>
 </div>
 
 

@@ -5,7 +5,15 @@
 @include('clientes.empresas/pasos')
 
 <div>
-<br/>
+
+<style type="text/css">
+input[name="productos[]"]{
+    margin-bottom:5px;
+}
+input[name="productos[0]"]{
+    margin-bottom:5px;
+}
+</style>
 
 @include('errores', array('errors' => $errors))
 {{ Form::model($indicador, $accion) }}
@@ -16,7 +24,7 @@
 <div class="row">
         @if(isset($imprimir))
             <div class="panel-heading">
-                <a href="{{route('f1PDF', $indicador->empresa_id)}}" target="_blank">Imprimir F1</a>
+                <a class="btn btn-default" href="{{route('f1PDF', $indicador->empresa_id)}}" data-toggle="tooltip" data-placement="bottom" title="Imprimir F1" target="_blank"> <span class="glyphicon glyphicon-print"></span>&nbsp F1</a>
             </div>
         @endif
     <div class="col-xs-12 col-md-6">
@@ -98,20 +106,17 @@
                     <div class="col-xs-12">                    
                         <div class="form-group">
                             {{ Form::label('empleadosHombreFijo', 'Empleados Hombre:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="input-group">
-
                                   <div class="input-group-addon">#</div>
-                                    {{ Form::number('empleadosHombreFijo', $indicador->empleadosHombreFijo, array('placeholder' => 'Fijos', 'class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => '1')) }}
-                                   
+                                    {{ Form::number('empleadosHombreFijo', $indicador->empleadosHombreFijo, array('placeholder' => 'Fijos', 'class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => '1')) }}                                   
                                     {{ Form::number('empleadosHombreTemp', $indicador->empleadosHombreTemp, array('placeholder' => 'Temporales', 'class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => '1')) }}
-                                    
                                 </div>
                             </div>
                         </div>                    
                         <div class="form-group">
                             {{ Form::label('empleadosMujerFijo', 'Empleadas:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="input-group">
                                     <div class="input-group-addon">#</div>
                                     {{ Form::number('empleadosMujerFijo', $indicador->empleadosMujerFijo, array('placeholder' => 'Fijos', 'class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => '1')) }}
@@ -120,22 +125,24 @@
                             </div>
                         </div>                        
                         <div class="form-group"> 
-                            {{ Form::label('mercados', 'Mercados Actuales:', array('class' => 'control-label col-md-3')) }}
-                            <div class="col-md-9">
-                            {{ Form::select('mercados[]', $mercados, $indicador->merca, array('class' => 'chosen-select form-control ', 'multiple' => 'true', 'data-placeholder' => 'Mercados Actuales' )) }}
+                            {{ Form::label('mercados', 'Mercados Actuales:', array('class' => 'control-label col-md-4')) }}
+                            <div class="col-md-8">
+                            {{ Form::select('mercados[]', $mercados, $indicador->merca, array('class' => 'chosen-select form-control ', 'multiple' => 'true', 'data-placeholder' => '  Mercados Actuales' )) }}
                             </div>
                         </div>                    
                         <div class="form-group">
-                            {{ Form::label('productos', 'Productos:', array('class' => 'control-label col-md-3')) }} 
-                            <a id="addProducto" class="btn btn-primary pull-left"> + </a>
-                            <div class="col-md-12 productos">
-                            {{ Form::text('productos[0]', null,  array('class' => 'form-control ', 'placeholder' => 'Nombre de producto' )) }}
+                            {{ Form::label('productos', 'Productos:', array('class' => 'control-label col-md-4')) }} 
+                            <div class="col-md-6 productos">
+                            {{ Form::text('productos[0]', null,  array('class' => 'form-control ', 'placeholder' => 'Nombre del producto' )) }}
 
                             @foreach($indicador->productos as $producto)
-                                {{ Form::text('productos[]', $producto->nombre,  array('class' => 'form-control ', 'placeholder' => 'Nombre de producto' )) }}
+                                {{ Form::text('productos[]', $producto->nombre,  array('class' => 'form-control ', 'placeholder' => 'Nombre del producto' )) }}
                             @endforeach
                             </ul>
                             </div>
+                            <div class="col-md-2">
+                            <a id="addProducto" class="btn btn-primary pull-left"> + </a>
+                        </div>
                         </div>
                     </div>
                 </div>
@@ -188,7 +195,7 @@
     })
 var num = 1;
     $('#addProducto').on('click', function(){
-        var caja = "<input type='text' class='form-control' name='productos[" + num +  "]' placeholder='Nombre de producto' >"
+        var caja = "<input type='text' style='margin-bottom:5px' class='form-control' name='productos[" + num +  "]' placeholder='Nombre del producto' >"
         $('.productos').prepend(caja)
         num++;
     })

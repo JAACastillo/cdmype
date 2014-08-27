@@ -19,15 +19,19 @@
 	//seleccionar consultores
 	Route::get('capacitaciones/paso/consultores/{id}', ['as' => 'capPasoConsultor', 'uses' => 'CapTerminoController@consultores']);
 	Route::post('capacitaciones/paso/consultores', ['as' => 'capPasoGuardarConsultor', 'uses' => 'CapTerminoController@guardarConsultores']);
+	//Convocatoria
+	Route::get('capacitaciones/paso/convocatoria/{id}', ['as' => 'capPasoConvocatoria', 'uses' => 'CapTerminoController@convocatoria']);
+	Route::post('capacitaciones/paso/convocatoria', ['as' => 'capPasoGuardarConvocatoria', 'uses' => 'CapTerminoController@guardarConvocatoria']);
+
 	//Ofertas
 	Route::get('capacitaciones/paso/agregar-oferta/{id}', ['as' => 'capPasoOferta', 'uses' => 'CapTerminoController@oferta']);
 	Route::post('capacitaciones/paso/guardar-oferta/{id}', ['as' => 'capPasoGuardarOferta', 'uses' => 'CapTerminoController@guardarOfertas']);
 	
 	Route::get('capacitaciones/paso/seleccionar-consultor/{id}', ['as' => 'capPasoSeleccionarConsultor', 'uses' => 'CapTerminoController@consultor']);
 	Route::post('capacitaciones/paso/seleccionar-consultor/{id}', ['as' => 'capPasoSeleccionarConsultor', 'uses' => 'CapTerminoController@seleccionarConsultor']);
+	
 	//Asistencia
-	Route::get('capacitaciones/paso/asistencia/{id}', ['as' => 'capPasoAsistencia', 'uses' => 'CapTerminoController@asistencia']);
-	Route::post('capacitaciones/paso/asistencias', ['as' => 'capPasoGuardarAsistencia', 'uses' => 'CapTerminoController@guardarAsistencia']);
+	Route::get('capacitaciones/paso/asistencias/{id}', ['as' => 'capPasoAsistencia', 'uses' => 'CapTerminoController@asistencia']);
 	Route::post('capacitaciones/paso/asistencias/{id}', ['as' => 'capPasoActualizarAsistencia', 'uses' => 'CapTerminoController@actualizarAsistencia']);
 	//Contrato
 

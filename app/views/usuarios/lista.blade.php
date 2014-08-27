@@ -9,8 +9,8 @@
 @stop
 
 @section('boton')
-    <a href="{{ route('crearUsuario') }}" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Crear usuario">
-    <span class="glyphicon glyphicon-user"></span>
+    <a href="{{ route('crearUsuario') }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Crear un nuevo usuario">
+    <span class="glyphicon glyphicon-plus"></span>
     Nuevo
     </a>
 @stop

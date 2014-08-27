@@ -33,7 +33,7 @@ Capacitaciones
 		                    {{ Form::label('categoria', 'Categoria:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
 		                        {{ Form::select('categoria', array(
-		                                              '' => '',
+		                                              '' => 'Seleccione una opción',
 		                                              '1' => 'Emprendedoras y empresarias de los Departamentos de Cabañas, Cuscatlán y San Vicente.',
 		                                              '2' => 'Empresarios de los departamentos de Cabañas, Cuscatlán y San Vicente.'), null, array('class' => 'form-control')) }}
 		                    </div>
@@ -76,7 +76,7 @@ Capacitaciones
                 	<div class="form-group">
 		                    {{ Form::label('productos', 'Productos Esperados:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
-		                        {{ Form::textarea('productos', null, array('placeholder' => 'Productos Esperados', 'rows' => '2', 'class' => 'form-control')) }}
+		                        {{ Form::textarea('productos', null, array('placeholder' => 'Productos Esperados', 'rows' => '2', 'class' => 'form-control', 'data-toggle'=>'popover')) }}
 		                    </div>                
 		            </div>
                     

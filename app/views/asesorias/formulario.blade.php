@@ -16,7 +16,7 @@
 ?>
 
 @section('url')
-    <li><a href="{{ route('asesorias.index') }}">Material Asesoría</a></li>
+    <li><a href="{{ route('asesorias') }}">Material Asesoría</a></li>
 @stop
 
 @section('formulario')
@@ -58,7 +58,7 @@
                             
                         </div>
                     </div>
-                    <div class="col-xs-2"><a href="#" id="addAnother" class="btn btn-primary pull-right">+</a></div>
+                    <div class="col-xs-2"><a href="#" id="addAnother" class="btn btn-primary pull-right" data-toggle="tooltip" data-placement="top" title="Agregar otro material">+</a></div>
                 </div>
             </div>
         </div>

@@ -44,8 +44,8 @@ class EmpresaController extends BaseController {
             6 => 'Química Farmaceutica', 7 => 'Tecnología de Información y Comunicación', 8 => 'Textiles y Confección', 9 => 'Turismo',
             10 => 'Otros' );
 
-        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
-        $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id');  
+        $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
+        $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');  
         
         $empresa->categoria = array_search($empresa->categoria,$Categoria);
         $empresa->constitucion = array_search($empresa->constitucion,$Constitucion);
@@ -108,8 +108,8 @@ class EmpresaController extends BaseController {
             
             $empresa = new Empresa;
 
-            $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
-            $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id');  
+            $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
+            $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');  
 
             $accion = array('route' => 'guardarEmpresa', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
@@ -210,6 +210,7 @@ class EmpresaController extends BaseController {
 
             $mercados = array('Local', 'Regional', 'Nacional', 'Internacional');
             $indicador = new indicador;
+            $indicador->fechaInicio = date('Y-m-j');
             $pasoReal = 3;
             $pasoActual = $empresa->pasoReal;
             $accion = array('route' => 'empresaPasoIndicadores', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form', 'id' => 'validar');
@@ -367,6 +368,8 @@ class EmpresaController extends BaseController {
 
             $indicadores = proyectoIndicador::all()->lists('nombre', 'id');
             $proyecto = new proyecto;
+            $proyecto->fechaInicio = date('Y-m-j');
+            $proyecto->fechaFin = date('Y-m-j');
             $pasoReal = $empresa->pasoReal;
             $pasoActual = 4;
             $accion = array('route' => 'empresaPasoProyectoGuardar', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form', 'id' => 'validar');

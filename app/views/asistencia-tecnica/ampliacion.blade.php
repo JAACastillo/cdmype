@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
-                            {{ Form::label('fecha', 'fecha:', array('class' => 'control-label col-md-4')) }}
+                            {{ Form::label('fecha', 'Fecha:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-6">
                                 <input type="date" class="form-control" value="{{$ampliacion->fecha}}" name="fecha" >
                             </div>
@@ -17,25 +17,25 @@
                         <div class="form-group">
                             {{ Form::label('solicitante', 'Solicitante:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-6">
-                                {{ Form::select('solicitante', array('' => '', '1' => 'Consultor','2' => 'Empresario'), $ampliacion->solicitante, array('class' => 'form-control')) }} 
+                                {{ Form::select('solicitante', array('' => 'Seleccione una opción', '1' => 'Consultor','2' => 'Empresario'), $ampliacion->solicitante, array('class' => 'form-control')) }} 
                             </div>
                         </div>
                         <div class="form-group">
-                            {{ Form::label('tiempo_ampliacion', 'Tiempo:', array('class' => 'control-label col-md-4')) }}
+                            {{ Form::label('razonamiento', 'Razonamiento:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-6">
-                                {{ Form::number('tiempo_ampliacion', $ampliacion->tiempo_ampliacion, array('class' => 'form-control')) }}
+                                {{ Form::textarea('razonamiento', $ampliacion->razonamiento, array('placeholder' => 'Razonamiento', 'class' => 'form-control', 'rows' => '3')) }}
                             </div>
                         </div>
                         <div class="form-group">
                         {{ Form::label('periodo', 'Periodo:', array('class' => 'control-label col-md-4')) }}
                         <div class="col-md-6">
-                            {{ Form::select('periodo', array('' => '', '1' => 'Días','2' => 'Semanas', '3' => 'Meses'), $ampliacion->periodo, array('class' => 'form-control')) }} 
+                            {{ Form::select('periodo', array('' => 'Seleccione una opción', '1' => 'Días','2' => 'Semanas', '3' => 'Meses'), $ampliacion->periodo, array('class' => 'form-control text-center')) }} 
                         </div>
                         </div>
                         <div class="form-group">
-                            {{ Form::label('razonamiento', 'Razonamiento:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-6">
-                                {{ Form::text('razonamiento', $ampliacion->razonamiento, array('placeholder' => 'Razonamiento', 'class' => 'form-control')) }}
+                            {{ Form::label('tiempo_ampliacion', 'Tiempo:', array('class' => 'control-label col-md-4')) }}
+                            <div class="col-md-4">
+                                {{ Form::number('tiempo_ampliacion', $ampliacion->tiempo_ampliacion, array('class' => 'form-control text-center')) }}
                             </div>
                         </div>
                     </div>

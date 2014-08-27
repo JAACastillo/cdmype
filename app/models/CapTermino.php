@@ -117,19 +117,19 @@ class CapTermino extends Eloquent {
                         return 2;
                         break;
                     case 'Enviado':
-                        return 3;
-                        break;
-                    case 'Ofertas Recibidas':
                         return 4;
                         break;
+                    case 'Ofertas Recibidas':
+                        return 5;
+                        break;
                     case 'Consultor Seleccionado':
-                        return 6;
+                        return 7;
                         break;
                     case 'Contratada':
-                        return 7;
+                        return 8;
                         break;
                     case 'Finalizada':
-                        return 7;
+                        return 8;
                         break;
                     default:
                         # code...

@@ -9,8 +9,8 @@
 @stop
 
 @section('boton')
-    <a href="{{ route('asesorias.create') }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Crear asesoria">
-    <span class="glyphicon glyphicon-list-alt"></span>
+    <a href="{{ route('asesorias.create') }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Crear nueva asesoria">
+    <span class="glyphicon glyphicon-plus"></span>
     Nueva
     </a>
 @stop

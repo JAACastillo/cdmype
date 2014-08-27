@@ -8,6 +8,7 @@ class Asistencia extends Eloquent {
     protected $fillable = array(
         'empresario_id',
         'captermino_id',
+        'asistira',
         'asistio'
     );
     

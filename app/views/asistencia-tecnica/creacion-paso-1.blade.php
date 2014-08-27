@@ -38,7 +38,7 @@ AT Paso empresa
 				        {{ Form::label('empresa_id', 'Empresa:', array('class' => 'control-label col-md-4')) }}
                 		<div class="col-md-7">
                     	{{ Form::hidden('empresa_id',null) }}                		
-                    	{{ Form::text('empresa', null, array('placeholder' => 'Nombre de la empresa', 'class' => 'form-control getEmpresa', 'data-url' => 'empresa')) }}
+                    	{{ Form::text('empresa', null, array('placeholder' => 'Nombre de la empresa', 'class' => 'form-control getEmpresa', 'data-url' => 'empresa', 'autofocus')) }}
                 		</div>
 				    </div>
 	            </div>

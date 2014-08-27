@@ -8,6 +8,10 @@
     {{$usuario->nombre}}
 @stop
 
+@section('url')
+    <li><a href="{{ route('usuarios') }}">Usuarios</a></li>
+@stop
+
 @section('formulario')
 
 <div class="row col-xs-12">

@@ -22,6 +22,10 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido.'
+                    },
+                    regexp: {
+                        regexp: /(^([0-9]{4,4}[-]{1,1}[0-9]{6,6}[-]{1,1}[0-9]{3,3}[-]{1,1}[0-9]{1,1})|^)$/,
+                        message: 'NIT invalido'
                     }
                 }
             },

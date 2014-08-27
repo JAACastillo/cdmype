@@ -47,7 +47,7 @@
 					<div class="form-group">
 		                {{ Form::label('estado', 'Estado:', array('class' => 'control-label col-md-4')) }}
 		                <div class="col-md-7">
-		                    {{ Form::select('estado', array('' => '', '1' => 'Conformidad','2' => 'Rechazo'), $acta->estado, array('class' => 'form-control')) }} 
+		                    {{ Form::select('estado', array('' => 'Seleccione una opción', '1' => 'Conformidad','2' => 'Rechazo'), $acta->estado, array('class' => 'form-control')) }} 
 		                </div>
 		            </div>
 					<div class="form-group">

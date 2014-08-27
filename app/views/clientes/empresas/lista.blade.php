@@ -9,8 +9,8 @@
 @stop
 
 @section('boton')
-    <a href="{{ route('crearEmpresa') }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Crear una Empresa">
-    <span class="glyphicon glyphicon-briefcase"></span>
+    <a href="{{ route('crearEmpresa') }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Crear una nueva empresa">
+    <span class="glyphicon glyphicon-plus"></span>
     Nueva
     </a>
 @stop

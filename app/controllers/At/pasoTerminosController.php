@@ -29,7 +29,7 @@ class pasoTerminosController extends BaseController{
         $attermino->financiamiento = 800;
 
 
-        $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
+        $especialidades = array('' => 'Seleccione una opción') + SubEspecialidad::all()->lists('sub_especialidad', 'id');
         $accion = array('route' => array('atCrearTDR'), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
         return View::make('asistencia-tecnica.creacion-paso-2', 

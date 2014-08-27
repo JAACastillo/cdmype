@@ -129,7 +129,7 @@ class AtTerminoController extends BaseController {
 	public function edit($id)
 	{
 		$attermino = AtTermino::find($id);
-        $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
+        $especialidades = array('' => 'Seleccione una opción') + SubEspecialidad::all()->lists('sub_especialidad', 'id');
         $accion = array('route' => array('asistencia-tecnica.update', $id), 'method' => 'PATCH', 'id' => 'empr-form', 'class' => 'form-horizontal','role' => 'form');
 
         return View::make('asistencia-tecnica.creacion-paso-2', compact('attermino', 'accion', 'especialidades'));

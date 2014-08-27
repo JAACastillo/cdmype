@@ -13,9 +13,9 @@ class ConfiguracionController extends BaseController {
 	}
 
 
-	public function actualizarConfiguraciones($id)
+	public function actualizarConfiguraciones()
 	{
-        $configuraciones = Configuracion::find($id);
+        $configuraciones = Configuracion::find(1);
         
         if(is_null($configuraciones)) 
             App::abort(404);

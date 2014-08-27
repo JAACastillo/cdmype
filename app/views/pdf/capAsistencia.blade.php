@@ -48,7 +48,7 @@
 				<tr>
 					<th>N°</th>
 					<th>NOMBRE</th>
-					<th>EMPRESA</th>
+					<th>EMPRESA/S</th>
 					<th>TELÉFONO</th>
 					<th>CORREO ELÉCTRONICO</th>
 					<th>DUI</th>
@@ -62,18 +62,18 @@
 				?>
 				@foreach ($asistencias as $asistencia)
 				<tr>
-						<td style="text-align:center">{{ $num }}</td>
-						<td style="width:200px">{{ $asistencia->empresario->nombre }}</td>
+						<td style="text-align:center; width:20px">{{ $num }}</td>
+						<td style="width:170px">{{ $asistencia->empresario->nombre }}</td>
 						<td style="text-align:center; width:100px">
 							@foreach($asistencia->empresario->empresa as $empresario)
-                    			{{ $empresario->empresas->nombre }}
+                    			<h5 style="margin:0px; width:100px">{{ $empresario->empresas->nombre }}</h5>
                 			@endforeach
 						</td>
 						<td style="text-align:center; width:70px">{{ $asistencia->empresario->telefono }}</td>
 						<td style="text-align:center; width:100px">{{ $asistencia->empresario->correo }}</td>
 						<td style="text-align:center; width:70px">{{ $asistencia->empresario->dui }}</td>
 						<td style="text-align:center; width:110px">{{ $asistencia->empresario->nit }}</td>
-						<td style="text-align:center">{{ $asistencia->asistio }}</td>					
+						<td style="text-align:center; width:100px">{{ $asistencia->asistio }}</td>					
 				</tr>
 				<?php 
 				$num++;

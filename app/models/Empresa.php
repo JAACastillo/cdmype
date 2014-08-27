@@ -58,7 +58,7 @@ class Empresa extends Eloquent {
         elseif($this->empresarios != '[]')
             return 3;
 
-        return 1;
+        return 2;
     }
 
     /* Fin atributos personalizados */ 

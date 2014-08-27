@@ -11,31 +11,27 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            fechaInicio: {
+            num_bancario: {
                 validators: {
                     notEmpty: {
-                        message: 'Campo requerido'
+                        message: 'Campo requerido.'
                     }
                 }
             },
-            ventaNacional: {
+            correo: {
                 validators: {
                     notEmpty: {
-                        message: 'Campo requerido.'
+                        message: 'Campo requerido'
+                    },
+                    emailAddress: {
+                        message: 'Campo invalido.'
                     }
                 }
-            },  
-            'productos[]': {
+            },
+            institucion: {
                 validators: {
                     notEmpty: {
-                        message: 'Campo requerido.'
-                    }
-                }
-            },  
-            mercados: {
-                validators: {
-                    notEmpty: {
-                        message: 'Campo requerido.'
+                        message: 'Campo requerido'
                     }
                 }
             }            

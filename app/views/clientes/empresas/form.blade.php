@@ -13,7 +13,7 @@
                         <div class="form-group">
                             {{ Form::label('nit', 'NIT:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                                {{ Form::text('nit', null, array('placeholder' => 'NIT', 'class' => 'form-control', 'data-mask' =>'9999-999999-999-9')) }}
+                                {{ Form::text('nit', null, array('placeholder' => 'XXXX-XXXXXX-XXX-X', 'class' => 'form-control')) }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -25,25 +25,25 @@
                         <div class="form-group">
                             {{ Form::label('categoria', 'Categoría:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                                {{ Form::select('categoria', array('' => '','1' => 'Empresa','2' => 'Grupo'), null, array('class' => 'form-control')) }} 
+                                {{ Form::select('categoria', array('' => 'Seleccione una opción','1' => 'Empresa','2' => 'Grupo'), null, array('class' => 'form-control')) }} 
                             </div>
                         </div>
                         <div class="form-group">
                             {{ Form::label('clasificacion', 'Clasificacion:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                                {{ Form::select('clasificacion', array('' => '','1' => 'Emprendedor','2' => 'Micro-empresa','3' => 'Micro-empresa de Subsistencia','4' => 'Grupo Asociativo Empresas','5' => 'No Definido'), null, array('class' => 'form-control')) }} 
+                                {{ Form::select('clasificacion', array('' => 'Seleccione una opción','1' => 'Emprendedor','2' => 'Micro-empresa','3' => 'Micro-empresa de Subsistencia','4' => 'Grupo Asociativo Empresas','5' => 'No Definido'), null, array('class' => 'form-control')) }} 
                             </div>
                         </div>
                         <div class="form-group">
                             {{ Form::label('sector_economico', 'Sector Económico:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                                {{ Form::select('sector_economico', array('' => '','1' => 'Artesanias','2' => 'Agroindustrias Alimentaria','3' => 'Calzado','4' => 'Comercio','5' => 'Construcción','6' => 'Química Farmaceutica','7' => 'Tecnología de Información y Comunicación','8' => 'Textiles y Confección','9' => 'Turismo','10' => 'Otros'), null, array('class' => 'form-control')) }} 
+                                {{ Form::select('sector_economico', array('' => 'Seleccione una opción','1' => 'Artesanias','2' => 'Agroindustrias Alimentaria','3' => 'Calzado','4' => 'Comercio','5' => 'Construcción','6' => 'Química Farmaceutica','7' => 'Tecnología de Información y Comunicación','8' => 'Textiles y Confección','9' => 'Turismo','10' => 'Otros'), null, array('class' => 'form-control')) }} 
                             </div>
                         </div>
                         <div class="form-group">
                             {{ Form::label('constitucion', 'Constitución:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                                {{ Form::select('constitucion', array('' => '','1' => 'Informal Natural','2' => 'Formal Natural','3' => 'Formal Jurídica'), null, array('class' => 'form-control')) }}
+                                {{ Form::select('constitucion', array('' => 'Seleccione una opción','1' => 'Informal Natural','2' => 'Formal Natural','3' => 'Formal Jurídica'), null, array('class' => 'form-control')) }}
                             </div>
                         </div>
                     </div>

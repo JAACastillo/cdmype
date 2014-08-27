@@ -82,6 +82,8 @@ class UserController extends BaseController {
         
         elseif(Auth::user()->tipo == 'Asesor')
             $tipos = array('2' => 'Asesor');
+
+        $usuario->tipo = array_search($usuario->tipo, $tipos);
         //Creamos la vista con los datos del usuario
         return View::make('usuarios.formulario', compact('usuario'), compact('tipos'));
 	}

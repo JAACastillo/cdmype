@@ -3,11 +3,16 @@
 				    array(
 				        "label"  => "TDR",
 				        "enlace" => "capModificarTermino",
-				        "rows"   => 2
+				        "rows"   => 1
 				    ),
 				    array(
 				        "label" => "Consultores",
 				        "enlace" => "capPasoConsultor",
+				        "rows"   => 2
+				    ),
+				    array(
+				        "label" => "Convocatoria",
+				        "enlace" => "capPasoConvocatoria",
 				        "rows"   => 2
 				    ),
 				    array(
@@ -21,9 +26,9 @@
 				        "rows"   => 2
 				    ),
 				    array(
-				        "label" => "Convocatoria",
+				        "label" => "Asistencia",
 				        "enlace" => "capPasoAsistencia",
-				        "rows"   => 2
+				        "rows"   => 1
 				    ),
 				    array(
 				        "label" => "Contrato",

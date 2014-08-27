@@ -36,8 +36,8 @@ class EmpresarioController extends BaseController {
 
         $sexos = array(1 => 'Mujer', 2 => 'Hombre');
         $tipos = array(1 => 'Empresaria', 2 => 'Propietaria', 3 => 'Representante', 4 => 'Empresario', 5 => 'Propietario');
-        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
-            $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id'); 
+        $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
+            $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id'); 
 
         $empresario->sexo = array_search($empresario->sexo,$sexos);
         $empresario->tipo = array_search($empresario->tipo,$tipos);
@@ -103,8 +103,8 @@ class EmpresarioController extends BaseController {
         $pasoActual = 1;
         $pasoReal = 1;
         $id =0;
-        $departamentos = array('' => 'Elige un Departamento') + Departamento::all()->lists('departamento', 'id');
-        $municipios = array('' => 'Elige un Municipio') + Municipio::all()->lists('municipio', 'id'); 
+        $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
+        $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id'); 
 
         $accion = array('route' => 'guardarEmpresario', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
@@ -210,7 +210,7 @@ class EmpresarioController extends BaseController {
         else{
             $pasoReal = 3;
         }
-        $id =$idEmpresario;
+        $id =$idEmpresa;
         $empresaEmpresario = new empresaEmpresario;
 
         $empresaEmpresario->empresa_id = $idEmpresa;
@@ -257,7 +257,7 @@ class EmpresarioController extends BaseController {
             $datos = Input::all();
             
             if($empresaEmpresario->guardar($datos,'1')) 
-                return  Redirect::route('pasoTerminoEmpresario', $idEmpresario);
+                return  Redirect::route('pasoTerminoEmpresario', $idEmpresa);
             else 
                 return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
 
@@ -267,14 +267,12 @@ class EmpresarioController extends BaseController {
         
     }
 
-    public function termino($idEmpresario)
+    public function termino($idEmpresa)
     {
-        $var = EmpresaEmpresario::where('empresario_id','=', $idEmpresario)->first();
-        $idEmpresa = $var->empresa_id;
 
         $pasoActual = 4;
         $pasoReal = 4;
-        $id =$idEmpresario;
+        $id =$idEmpresa;
         return View::make('clientes.empresarios.creacion-paso-4', compact('idEmpresa','id','pasoActual','pasoReal'));
 
     }

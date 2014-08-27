@@ -5,7 +5,7 @@
 @stop
 
 @section('url')
-    <li><a href="{{ route('consultores.index') }}">Consultores</a></li>
+    <li><a href="{{ route('asesorias') }}">Asesorias</a></li>
 @stop
 @section('nombre')
     {{$consultor->nombre}}

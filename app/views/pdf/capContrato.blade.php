@@ -11,7 +11,7 @@
 	     #footer .left {float: left}
 	     #footer .right {position: absolute; right: 10px}
 
-	     .firmas {text-align: center;}
+	     .firmas {text-align: center; margin-top: 100px;}
 	     .firmas .firm { display: inline-block; position: absolute; }
 	     .apoderado {left: 37%}
 	     .consultor {right: 0}
@@ -68,7 +68,7 @@
 	Los productos esperados a realizar por el consultor son los siguientes de acuerdo a los solicitados en los TDR:
 	
 		<?php
-			$productos = explode(",", $capacitacion->productos)
+			$productos = explode("\r\n", $capacitacion->productos)
 		?>
 		<ul>
 			@foreach($productos as $producto)
@@ -173,9 +173,9 @@
 			En fe de lo cual firmamos el presente contrato en original, en la ciudad de {{$contrato->lugar_firma}} a los {{$dia}} días del mes
 			de {{$mes}} de {{$ano}}.
 	</p>
-
+	<br>
 	<div class="firmas">
-			<br><br><br>
+			
 		<div class="firm directora">
 			F._____________________	<br/>
 			Msc.Yessenia Escobar de Hernández <br/>

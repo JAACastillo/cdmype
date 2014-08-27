@@ -7,13 +7,14 @@
 <div>
 <br/>
 
-    <a href="{{ route('empresaPasoProyecto', $id) }}" class="btn btn-default" data-toggle="tooltip" data-placement="left" title="Nuevo Proyecto">
-    <span class="glyphicon glyphicon-briefcase"></span>
+    <a href="{{ route('empresaPasoProyecto', $id) }}" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="Nuevo Proyecto">
+    <span class="glyphicon glyphicon-plus"></span>
     Nuevo
     </a>
 
 
     <div class="table-responsive">
+        <br>
         <table class="table table-bordered">
             <tr class="active">
                 <th class="text-center">Nombre</th>

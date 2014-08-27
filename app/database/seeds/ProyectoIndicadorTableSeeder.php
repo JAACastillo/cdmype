@@ -4,7 +4,7 @@
 * Agregamos un usuario nuevo a la base de datos.
 */
 
-class proyectoIndicador extends Seeder {
+class ProyectoIndicadorTableSeeder extends Seeder {
     public function run(){
 
         proyectoIndicador::create(array(

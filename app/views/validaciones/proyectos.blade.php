@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
 
 $(document).ready(function() {
@@ -11,37 +10,43 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
-            fechaInicio: {
+            nombre: {
                 validators: {
                     notEmpty: {
-                        message: 'Campo requerido'
+                        message: 'Campo requerido.'
                     }
                 }
             },
-            ventaNacional: {
+            descripcion: {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido.'
                     }
                 }
-            },  
-            'productos[]': {
+            },
+            meta: {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido.'
                     }
                 }
-            },  
-            mercados: {
+            },
+            fechaInicio: {
                 validators: {
                     notEmpty: {
                         message: 'Campo requerido.'
                     }
                 }
-            }            
+            },
+            fechaFin: {
+                validators: {
+                    notEmpty: {
+                        message: 'Campo requerido.'
+                    }
+                }
+            }
         }
     });
-
 
 });
 

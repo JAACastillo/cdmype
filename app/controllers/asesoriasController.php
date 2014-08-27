@@ -104,7 +104,7 @@ class asesoriasController extends \BaseController {
 				}
 			}
 			
-			return Redirect::route('asesorias.index');
+			return Redirect::route('asesorias');
 		}
 
 		return Redirect::back()

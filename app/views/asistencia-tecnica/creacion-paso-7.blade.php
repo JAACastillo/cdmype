@@ -4,10 +4,8 @@
 
 
 @include('asistencia-tecnica/pasos')
-<br/>
+
 @include('errores', array('errors' => $errors))
-
-
 
 <div class="row {{$oculto}} imprimir" >
 	<div class="col-xs-2"></div>
@@ -67,7 +65,7 @@
 					<div class="form-group">
                      	{{ Form::label('lugar_firma', 'Lugar:', array('class' => 'control-label col-md-4')) }}
                     	<div class="col-md-8">
-                        	{{ Form::text('lugar_firma', null, array('placeholder' => 'Dirección', 'class' => 'form-control')) }}
+                        	{{ Form::text('lugar_firma', null, array('placeholder' => 'Dirección donde se firma el contrato', 'class' => 'form-control')) }}
 	                	</div>
 	                </div>
 	                <div class="form-group">

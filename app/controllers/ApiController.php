@@ -45,7 +45,7 @@ class ApiController extends BaseController {
     public function getMunicipios($id) 
     {
         if (!empty($id)) {
-            $opciones = "<option value=''> Elige un Municipio</option>";
+            $opciones = "<option value=''> Seleccione una opción</option>";
             $municipios = Municipio::where('departamento_id', '=', $id )->get();
 
             foreach ($municipios as $fila) {
