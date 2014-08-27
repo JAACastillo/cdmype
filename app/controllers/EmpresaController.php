@@ -70,7 +70,7 @@ class EmpresaController extends BaseController {
         $data = Input::all();
         
         if($empresa->guardar($data,'2')) 
-            return Redirect::route('empresas');
+            return Redirect::route('pasoEmpresarios', $empresa->id);
         
         else 
             return Redirect::back()->withInput()->withErrors($empresa->errores);
@@ -326,7 +326,7 @@ class EmpresaController extends BaseController {
                         $mercadoActual->save();
                 }
 
-                return Redirect::route('empresaPasoIndicador', $indicador->empresa_id);
+                return Redirect::route('empresaProyectos', $indicador->empresa_id);
             }
 
             return Redirect::back()
@@ -383,8 +383,10 @@ class EmpresaController extends BaseController {
     public function proyectoGuardar(){
         // return Input::get('activities');
         $data = Input::only('empresa_id', 'nombre', 'descripcion', 'meta', 'fechaInicio', 'fechaFin');
+        $data['asesor'] = Auth::user()->id;
 
         $proyecto = new proyecto;
+
         if($proyecto->guardar($data,1)){
            return $this->saveProyecto($proyecto);
         }
@@ -419,16 +421,23 @@ class EmpresaController extends BaseController {
         //return Input::get('activities');
         $proyecto = proyecto::find($id);
 
-        if($proyecto->actividadesCompletas == '0'){
-           // return $proyecto->actividadesCompletas;
-            $data = Input::only('empresa_id', 'nombre', 'descripcion', 'meta', 'fechaInicio', 'fechaFin');
-            if($proyecto->guardar($data,1)){
-                $proyecto->indicadores()->delete();
-                $proyecto->actividades()->delete();
-               return $this->saveProyecto($proyecto);
-            }
+        if($proyecto->asesor == Auth::user()->id) {    
+                $data = Input::only('empresa_id', 'nombre', 'descripcion', 'meta', 'fechaInicio', 'fechaFin');
+                $data['asesor'] = $proyecto->asesor;
+                if($proyecto->guardar($data,1)){
+                    $proyecto->indicadores()->delete();
+                    $proyecto->actividades()->delete();
+                   return $this->saveProyecto($proyecto);
+                }
         }
-        $proyecto->errores = array('Error' => 'El proyecto no puede ser editado por que ya tiene actividades completas');
+        else{
+            $proyecto->errores = array(
+                                        'Permisos'      => 'No tienes permisos para editar este proyecto',
+                                        'Recordatorio'  => 'Recuerda que el proyecto solo puede ser editado por su asesor'
+                                    );
+            return Redirect::back()
+                        ->withErrors($proyecto->errores);
+        }
         return Redirect::back()
                         ->withInput()
                         ->withErrors($proyecto->errores);
@@ -441,30 +450,48 @@ class EmpresaController extends BaseController {
         $fecha = Input::get('fecha');
         $indicadores = Input::get('indicadores');  
 
-        $posicion = 0;
-        foreach ($actividades as $actidad) {
-            if(!empty($actidad)){
-                $activity = new actividadesProyecto;
-                $activity->nombre = $actidad;
-                $activity->encargado = $encargado[$posicion];
-                $activity->fecha = $fecha[$posicion];
-                $activity->proyecto_id = $proyecto->id;
-                $activity->save();
+
+        if($actividades != []){
+            $posicion = 0;
+            foreach ($actividades as $actidad) {
+                if(!empty($actidad)){
+                    $activity = new actividadesProyecto;
+                    $activity->nombre = $actidad;
+                    $activity->encargado = $encargado[$posicion];
+                    $activity->fecha = $fecha[$posicion];
+                    $activity->proyecto_id = $proyecto->id;
+
+
+                    $activity->save();
+                } 
+                $posicion++;
             } 
-            $posicion++;
-        } 
-        foreach ($indicadores as $indicador) {
-            $indicator = new indicadoresProyecto;
-            $indicator->proyecto_id = $proyecto->id;
-            $indicator->indicadorproyecto_id = $indicador;
-            $indicator->save();
+        }
+//Agregando la meta para cada una de los indicadores
+        $metas = explode("\r\n", $proyecto->meta);
+        $posicionMeta = 0; 
+
+        if($indicadores != []){
+            foreach ($indicadores as $indicador) {
+                $indicator = new indicadoresProyecto;
+                $indicator->proyecto_id = $proyecto->id;
+                $indicator->indicadorproyecto_id = $indicador;
+                try {
+                    
+                $indicator->meta = $metas[$posicionMeta];
+                } catch (Exception $e) {
+                    
+                }
+                $indicator->save();
+                $posicionMeta++;
+            }
         }
 
-        return Redirect::route('empresaProyectos', $proyecto->empresa_id);
+        return Redirect::route('empresaPasoProyectoEditar', $proyecto->id);
     }
 
     public function proyectos($id){
-        $empresa = empresa::with('proyectos.indicadores', 'proyectos.actividades')
+        $empresa = empresa::with('proyectos.indicadores','proyectos.indicadores.definicion' ,'proyectos.actividades', 'proyectos.encargado')
                     ->find($id);
         $proyectos = $empresa->proyectos;
         $pasoReal = $empresa->pasoReal;
@@ -503,15 +530,18 @@ class EmpresaController extends BaseController {
         $proyecto = proyecto::with('actividades', 'empresa', 'indicadores')
                             ->find($idProyecto);
         //$input = array();
-        foreach ($proyecto->actividades as $actividad) {
-            $input = Input::get("actividad" . $actividad->id);
-            $actividad->completo = (is_null($input))?'0':'1';
-            $actividad->save();
-        }
-        foreach ($proyecto->indicadores as $indicador) {
-            $input = Input::get("indicador" . $indicador->id);
-            $indicador->detalles = (is_null($input))?'':$input;
-            $indicador->save();            
+
+        if($proyecto->asesor == Auth::user()->id) {  
+            foreach ($proyecto->actividades as $actividad) {
+                $input = Input::get("actividad" . $actividad->id);
+                $actividad->completo = (is_null($input))?'0':'1';
+                $actividad->save();
+            }
+            foreach ($proyecto->indicadores as $indicador) {
+                $input = Input::get("indicador" . $indicador->id);
+                $indicador->detalles = (is_null($input))?'':$input;
+                $indicador->save();            
+            }
         }
         return Redirect::back();
 

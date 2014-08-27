@@ -31,16 +31,16 @@
                         <div class="form-group">
                             {{ Form::label('descripcion', 'Impacto:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
-                               {{$proyecto->descripcion}}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12">
-                        <div class="form-group">
-                            {{ Form::label('meta', 'Meta propuesta:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-8">
-                              {{$proyecto->meta}}
+                              <?php
+                                $impactos = explode("\r\n", $proyecto->descripcion);
+                                ?>
+                                <ul>
+                                    @foreach($impactos as $impacto)
+                                            <li> 
+                                                {{$impacto}}
+                                            </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -102,6 +102,9 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             {{$indicador->definicion->nombre}}
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{$indicador->meta}}
                                         </div>
                                         <div class="col-md-3">
                                            <?php

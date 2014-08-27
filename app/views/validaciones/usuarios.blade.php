@@ -28,29 +28,29 @@ $(document).ready(function() {
                     }
                 }
             },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: 'La Contraseña es requerida.'
-                    },
-                     stringLength: {
-                        min: 6,
-                        max: 10,
-                        message: 'La Contraseña debe tener mas de 6 caracteres'
-                    }
-                }
-            },
-            password_confirmation: {
-                validators: {
-                    notEmpty: {
-                        message: 'La confirmacion de la Contraseña es requerida.'
-                    },
-                    identical: {
-                        field: 'password',
-                        message: 'Las contraseñas no son iguales.'
-                    }
-                }
-            },
+            // password: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'La Contraseña es requerida.'
+            //         },
+            //          stringLength: {
+            //             min: 6,
+            //             max: 10,
+            //             message: 'La Contraseña debe tener mas de 6 caracteres'
+            //         }
+            //     }
+            // },
+            // password_confirmation: {
+            //     validators: {
+            //         notEmpty: {
+            //             message: 'La confirmacion de la Contraseña es requerida.'
+            //         },
+            //         identical: {
+            //             field: 'password',
+            //             message: 'Las contraseñas no son iguales.'
+            //         }
+            //     }
+            // },
             tipo: {
                 validators: {
                     notEmpty: {

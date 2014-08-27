@@ -39,9 +39,20 @@ class UserController extends BaseController {
         $usuario = new User;
         //Recogemos todos los datos del formulario el la variable datos
         $datos = Input::all();
+        $pass = "123456787657657569";
+
+        $datos['password'] = $pass;
+        $datos['password_confirmation'] = $pass;
+        //$pass = Math::to_base_62()
         
         if($usuario->guardar($datos,'1'))// 1 = Accion crear bitacora
+        {
+            $pass = Math::to_base($usuario->id + 123456787657657569);
+            $usuario->password = $pass;
+            $usuario->save();
+             $this->mail('emails.usuarioCreado', $usuario, $pass);
             return Redirect::route('usuarios');
+        }
         else
             return Redirect::back()->withInput()->withErrors($usuario->errores);
 	}
@@ -104,6 +115,24 @@ class UserController extends BaseController {
         else 
             return Redirect::back()->withInput()->withErrors($usuario->errores);
 	}
+
+
+
+    private function mail($template, $usuario, $pass)
+    {
+       
+        // try {
+            Mail::send($template,array('usuario' => $usuario, 'pass' => $pass),function($message) use ($usuario) {
+               
+                $message->to($usuario->email, $usuario->nombre)
+                        ->subject('Usuario sistema CDMYPE');
+            });
+                 
+             // } catch (Exception $e) {
+             //     App::abort('404');
+             // }     
+        
+    }
 
 //Eliminar
 	public function eliminarUsuario($id)

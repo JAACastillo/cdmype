@@ -5,9 +5,11 @@
 @include('asistencia-tecnica/pasos')
 <br/>
 
+ 
+@if($attermino->exists)
+	<a href="{{route('pdfAt', $attermino->id)}}" target="_blank">Imprimir</a>
+@endif
 {{ Form::model($attermino, $accion) }}
-
-
 <div class="row">
     <div class="col-xs-12 col-md-6">
         <div class="panel panel-default">

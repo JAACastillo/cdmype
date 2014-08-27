@@ -57,6 +57,9 @@ Route::get("asistencia-tecnica/ofertas/{oferta}",
 
 Route::get('asistencias-tecnicas', ['as' => 'asistencia-tecnica', 'uses' => 'AtTerminoController@index']);
 
+
+
+
 /*
 	Route::get('asistencia-tecnica/paso/empresa', ['as' => 'atPasoEmpresa', 'uses' => 'AtTerminoController@empresa']);
 	Route::get('asistencia-tecnica/paso/empresa', ['as' => 'atPasoEmpresa', 'uses' => 'AtTerminoController@empresa']);
