@@ -48,7 +48,7 @@ class UserController extends BaseController {
         if($usuario->guardar($datos,'1'))// 1 = Accion crear bitacora
         {
             $pass = Math::to_base($usuario->id + 123456787657657569);
-            $usuario->password = $pass;
+            $usuario->password = Hash::make($pass);
             $usuario->save();
              $this->mail('emails.usuarioCreado', $usuario, $pass);
             return Redirect::route('usuarios');
@@ -98,7 +98,7 @@ class UserController extends BaseController {
         //Creamos la vista con los datos del usuario
         return View::make('usuarios.formulario', compact('usuario'), compact('tipos'));
 	}
-
+ 
 //Actualizar
 	public function actualizarUsuario($id)
 	{

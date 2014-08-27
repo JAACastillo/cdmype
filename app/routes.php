@@ -22,6 +22,12 @@
             ['as' => 'formatoF7', function($oferta) { return Redirect::to('assets/formatos/' . $oferta); }]
 
     );
+
+    Route::get('correo', function(){
+        $usuario = User::find(1);
+        $pass = "11231123";
+        return View::make('emails.usuarioCreado', compact('usuario', 'pass'));
+    });
 /* Si esta Logueado */
 
     Route::group(array('before'=>'auth'), function() 
