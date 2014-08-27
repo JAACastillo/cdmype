@@ -19,3 +19,7 @@ app/views/asistencia-tecnica/lista.blade.php
 app/views/capacitaciones/creacion-paso-6.blade.php
 app/views/clientes/empresas/creacion-paso-proyecto.blade.php
 app/views/capacitaciones/creacion-paso-6.blade.php
+app/views/asistencia-tecnica/lista.blade.php
+app/views/asistencia-tecnica/lista.blade.php
+*.php
+*.php

@@ -37,6 +37,7 @@
                         <div class="form-group">
                             {{ Form::label('descripcion', 'Impacto:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
+<<<<<<< HEAD
                                 {{Form::textarea('descripcion', null, array('class' => 'form-control', 'rows' => '2', 'placeholder' => 'Descripción del Proyecto'))}}
                             </div>
                         </div>
@@ -44,6 +45,9 @@
                             {{ Form::label('meta', 'Meta propuesta:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
                                 {{Form::text('meta', null, array('class' => 'form-control', 'placeholder' => 'Meta del Proyecto'))}}
+=======
+                                {{Form::textarea('descripcion', null, array('class' => 'form-control', 'rows' => '4'))}}
+>>>>>>> 6f20d5fafce641ef3a0725bbd40ad058cea62ac0
                             </div>
                         </div>
                         <div class="form-group">
@@ -73,7 +77,13 @@
                             <div class="col-md-9">
                             {{ Form::select('indicadores[]', $indicadores, $proyecto->indicator, array('class' => 'chosen-select form-control ', 'multiple' => 'true', 'data-placeholder' => '  Indicadores del proyecto' )) }}
                             </div>
-                        </div>                     
+                        </div>        
+                        <div class="form-group">
+                            {{ Form::label('meta', 'Meta:', array('class' => 'control-label col-md-3')) }}
+                            <div class="col-md-9">
+                                {{Form::textarea('meta', null, array('class' => 'form-control', 'rows' => '3'))}}
+                            </div>
+                        </div>             
                         <div class="form-group">
                             <div class="col-xs-12">
                             {{ Form::label('actividades', 'Actividades:', array('class' => 'control-label col-md-3')) }} 
@@ -99,6 +109,7 @@
                                         </div>
                                     </div>
                                 @endforeach
+<<<<<<< HEAD
 
                         @if($proyecto->actividades == [])
                             <div class="row actividades">
@@ -120,6 +131,8 @@
                             </div>
 
                         @endif
+=======
+>>>>>>> 6f20d5fafce641ef3a0725bbd40ad058cea62ac0
                             </div>
                         </div>
                     </div>
@@ -190,7 +203,7 @@
         num++;
     }
 
-    caja()
+   caja()
 
 </script>
 
