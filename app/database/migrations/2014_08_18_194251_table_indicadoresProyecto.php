@@ -15,9 +15,8 @@ class TableIndicadoresProyecto extends Migration {
 		
 		Schema::create('indicadoresProyecto',function($table){
             $table->increments('id');
-            
-
             $table->integer('indicador_id');
+            $table->integer('proyecto_id');
             $table->string('detalles');
             $table->softDeletes();
             $table->timestamps();

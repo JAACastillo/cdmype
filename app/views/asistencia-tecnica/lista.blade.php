@@ -28,12 +28,8 @@
                 <th class="text-center">Inicio</th>
                 <th class="text-center">Finalización</th>
                 <th>Consultor</th>
-<<<<<<< HEAD
                 <th class="text-center">Estado</th>
                 <th class="text-center">Opciones</th>
-=======
-                <th>Estado</th>
->>>>>>> 6f20d5fafce641ef3a0725bbd40ad058cea62ac0
             </tr>
             </thead>
             <tbody>
@@ -50,7 +46,6 @@
                 <td class="text-center">@if($attermino->pasoReal > 6) {{ $attermino->contrato->Inicio}} @endif</td>
                 <td class="text-center">@if($attermino->pasoReal > 6){{ $attermino->contrato->final }} @endif</td>
                 <td>@if($attermino->pasoReal > 5){{ $attermino->consultorSeleccionado->consultor->nombre }} @endif</td>
-<<<<<<< HEAD
                 <td class="text-center">{{ $attermino->estado }}</td>
                 <td class="text-center">
                     <a href="{{ route('atPaso', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
@@ -61,10 +56,6 @@
                     <a href="{{ route('eliminarAsistencia', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-remove" data-toggle="tooltip" data-placement="right" title="Eliminar" onClick = "return confirm('¿Desea eliminar el TDR?');"> </a>
                     @endif
                 </td>
-=======
-                <td>{{ $attermino->estado }}</td>
-                
->>>>>>> 6f20d5fafce641ef3a0725bbd40ad058cea62ac0
             </tr>
             @endforeach
             </tbody>
