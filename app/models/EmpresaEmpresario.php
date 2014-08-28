@@ -3,7 +3,7 @@ class EmpresaEmpresario extends Eloquent {
 
     /* Atributos */
 
-    protected $table = 'empresasEmpresarios';
+    protected $table = 'empresasempresarios';
     public $errores;
     protected $perPage = 9;
     protected $softDelete = true;

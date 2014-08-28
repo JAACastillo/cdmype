@@ -1,7 +1,7 @@
 <?php
 class AmpliacionContrato extends Eloquent {
     
-    protected $table = 'ampliacionesContratos';
+    protected $table = 'ampliacionescontratos';
     public $errores;
     protected $perPage = 9;
     protected $softDelete = true;

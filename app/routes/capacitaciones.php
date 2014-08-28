@@ -22,6 +22,7 @@
 	//Convocatoria
 	Route::get('capacitaciones/paso/convocatoria/{id}', ['as' => 'capPasoConvocatoria', 'uses' => 'CapTerminoController@convocatoria']);
 	Route::post('capacitaciones/paso/convocatoria', ['as' => 'capPasoGuardarConvocatoria', 'uses' => 'CapTerminoController@guardarConvocatoria']);
+	Route::get('capacitaciones/paso/convocatoria/pdf/{id}', ['as' => 'capConvocatoriaPdf', 'uses' => 'CapTerminoController@pdfConvocatoria']);
 
 	//Ofertas
 	Route::get('capacitaciones/paso/agregar-oferta/{id}', ['as' => 'capPasoOferta', 'uses' => 'CapTerminoController@oferta']);

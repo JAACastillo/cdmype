@@ -1,7 +1,7 @@
 <?php
 class actividadesProyecto extends Eloquent {
     
-    protected $table = 'actividadesProyecto';    
+    protected $table = 'actividadesproyecto';    
     public $errores;
     protected $perPage = 10;
     protected $softDelete = true;

@@ -1,7 +1,7 @@
 <?php
 class ConsultorEspecialidad extends Eloquent {
     
-    protected $table = 'consultoresEspecialidades';
+    protected $table = 'consultoresespecialidades';
     public $errores;
     protected $perPage = 9;
     protected $softDelete = true;
@@ -68,7 +68,7 @@ class ConsultorEspecialidad extends Eloquent {
 
         public function especialidad()
         {
-            return $this->belongsTo('subEspecialidad', 'subespecialidad_id');
+            return $this->belongsTo('SubEspecialidad', 'subespecialidad_id');
         }
 
         public function subEspecialidades() 

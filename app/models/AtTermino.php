@@ -1,7 +1,7 @@
 <?php
 class AtTermino extends Eloquent {
 
-    protected $table = 'atTerminos';
+    protected $table = 'atterminos';
     public $errores;
     protected $perPage = 9;
     protected $softDelete = true;
@@ -173,7 +173,7 @@ class AtTermino extends Eloquent {
         }
         
         public function ampliacion(){
-            return $this->hasOne('ampliacionContrato', 'attermino_id');
+            return $this->hasOne('AmpliacionContrato', 'attermino_id');
         }
 
 }

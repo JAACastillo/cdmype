@@ -138,7 +138,7 @@ class ConsultorController extends BaseController {
 
         $especialidadesConsultor = ConsultorEspecialidad::Where('consultor_id', '=', $id)->get();
         $datos[] = array();
-        //return $especialidadesConsultor;
+
        array_shift($datos);
         foreach ($especialidadesConsultor as $especialidad)
         {
@@ -160,7 +160,7 @@ class ConsultorController extends BaseController {
         }
         //Ingresamos las nuevas
         foreach($subespecialidades as $subespecialidad) {
-                $ConsultorEspecialidad = new ConsultorEspecialidad();
+                $ConsultorEspecialidad = new ConsultorEspecialidad;
                 $ConsultorEspecialidad->consultor_id = $idConsultor;
                 $ConsultorEspecialidad->subespecialidad_id = $subespecialidad;
                 $ConsultorEspecialidad->save();

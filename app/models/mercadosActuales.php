@@ -1,7 +1,7 @@
 <?php
 class mercadosActuales extends Eloquent {
     
-    protected $table = 'mercadosActuales';    
+    protected $table = 'mercadosactuales';    
     public $errores;
     protected $perPage = 10;
     protected $softDelete = true;

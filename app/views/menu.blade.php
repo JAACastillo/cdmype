@@ -108,7 +108,7 @@
               @endif
             <li><a href="{{ route('configuraciones') }}"><span class="glyphicon glyphicon-wrench"></span>  Configuración</a></li>
             <li class="divider"></li>
-            <li><a href="/atcdmype/logout"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
+            <li><a href="/cdmype/sistema/logout"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
           </ul>
         </li>
       </ul>

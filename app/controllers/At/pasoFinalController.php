@@ -39,18 +39,12 @@ class pasoFinalController extends BaseController{
 
         $id2 = Math::to_base_10($id, 62) - 100000;
         $ofertas = Input::file('ofertas');
-
-        //return $ofertas;
-
         $consultores = Input::get('consultores');
-
-        //return $consultores;
-       // $fil = "";
         $file = 0;
         $ofertantes = 0;
         foreach ($consultores as $consultor) {
             if($ofertas[$file]){
-                $atConsultor = atConsultor::find($consultor);
+                $atConsultor = AtConsultor::find($consultor);
                 $atConsultor->doc_oferta = $this->guardarOferta($ofertas[$file]);
                 $atConsultor->save();
                 $ofertantes++;
@@ -107,7 +101,7 @@ class pasoFinalController extends BaseController{
 
         if (!is_null($consultorID)) {
             if($consultorID){
-                $consultor = atConsultor::find($consultorID);
+                $consultor = AtConsultor::find($consultorID);
                 $consultor->estado = 2;
                 $consultor->save();
             
@@ -192,15 +186,10 @@ class pasoFinalController extends BaseController{
     public function contratada($id){
 
         try{
-        //return "hoal";
         $id2 = Math::to_base_10($id) - 100000;
            
         $at = AtTermino::find($id2);
-
-       // return $at;
         $atcontrato = $at->contrato;
-           //return $atcontrato;
-
 
         if($at->ampliacion){
             $ampliacion = $at->ampliacion;

@@ -142,7 +142,7 @@ class EmpresaController extends BaseController {
             //Pasos
                 $pasoActual = 2;
                // $empresaEmpresario = EmpresaEmpresario::where('empresa_id','=', $idEmpresa)->get();
-                $empresa = empresa::find($idEmpresa);
+                $empresa = Empresa::find($idEmpresa);
                 $empresaEmpresario = $empresa->empresarios;
                 $pasoReal = $empresa->pasoReal;
                 $id =$idEmpresa;
@@ -202,7 +202,7 @@ class EmpresaController extends BaseController {
 /* indicadores */
         public function indicadores($id){
 
-            $empresa = empresa::with('indicador')
+            $empresa = Empresa::with('indicador')
                                 ->find($id);
 
             if($empresa->indicador)
@@ -257,7 +257,7 @@ class EmpresaController extends BaseController {
         }
 
         public function indicador($id){
-            $empresa = empresa::with('indicador')
+            $empresa = Empresa::with('indicador')
                                 ->find($id);
 
             //$indicador = new indicador;
@@ -292,7 +292,7 @@ class EmpresaController extends BaseController {
              $data = Input::all();
 
 
-             $empresa = empresa::with('indicador')
+             $empresa = Empresa::with('indicador')
                                 ->find($data['empresa_id']);
 
             $indicador = $empresa->indicador;
@@ -337,7 +337,7 @@ class EmpresaController extends BaseController {
 
         public function f1($idEmpresa){
 
-            $empresa = empresa::find($idEmpresa);
+            $empresa = Empresa::find($idEmpresa);
 
             //return $empresa;
             $indicador = $empresa->indicador;
@@ -363,7 +363,7 @@ class EmpresaController extends BaseController {
 /* Paso proyecto */
 
     public function proyecto($id){
-         $empresa = empresa::with('proyectos')
+         $empresa = Empresa::with('proyectos')
                                 ->find($id);
 
             $indicadores = proyectoIndicador::all()->lists('nombre', 'id');
@@ -491,7 +491,7 @@ class EmpresaController extends BaseController {
     }
 
     public function proyectos($id){
-        $empresa = empresa::with('proyectos.indicadores','proyectos.indicadores.definicion' ,'proyectos.actividades', 'proyectos.encargado')
+        $empresa = Empresa::with('proyectos.indicadores','proyectos.indicadores.definicion' ,'proyectos.actividades', 'proyectos.encargado')
                     ->find($id);
         $proyectos = $empresa->proyectos;
         $pasoReal = $empresa->pasoReal;
@@ -551,7 +551,7 @@ class EmpresaController extends BaseController {
     //Termino
         public function termino($idEmpresa)
         {
-            $empresa = empresa::find($idEmpresa);
+            $empresa = Empresa::find($idEmpresa);
             $pasoActual = 5;
             $pasoReal = $empresa->pasoReal;
             $id =$idEmpresa;

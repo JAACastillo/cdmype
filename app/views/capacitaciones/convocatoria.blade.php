@@ -31,7 +31,7 @@ Capacitaciones
 	<div class="col-xs-10">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<a href="{{route('capAsistenciaPdf', $id)}}" target="_blank" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Imprimir convocatoria"><span class="glyphicon glyphicon-print"></span> &nbsp PDF</a>
+				<a href="{{route('capConvocatoriaPdf', $id)}}" target="_blank" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Imprimir convocatoria"><span class="glyphicon glyphicon-print"></span> &nbsp PDF</a>
 			</div>
 			<div class="panel-body">
 				<button type="submit" tabindex="11" class="btn btn-primary ladda-button pull-right" data-style="expand-right" data-toggle="tooltip" data-placement="right" title="Guardar empresario">
@@ -49,7 +49,7 @@ Capacitaciones
 					        </div>
 					        {{ Form::close() }}
 
-					        {{ Form::label('asistio', 'Asistira:', array('class' => 'control-label col-md-1')) }}
+					        {{ Form::label('asistio', 'Asistirá:', array('class' => 'control-label col-md-1')) }}
 					    	 <div class="col-md-2">
 					    	<input name="asistio" type="checkbox" data-content="Seleccionar" checked >
 					    	</div>

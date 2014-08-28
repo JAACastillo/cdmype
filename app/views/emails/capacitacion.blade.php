@@ -10,6 +10,6 @@
 	En los siguientes enlaces se encuentran los formatos con los cuales podrán presentar la oferta técnica y económica. La fecha limite para la presentación de la oferta es {{ $fecha }}.
 </p>
 <br/>
-<a href="http://www.cri.catolica.edu.sv/cdmype/sistema/public/asistencia-tecnica/pdf/{{$id}}" target="_blank">TERMINOS DE REFENCIA (PDF)</a>
+<a href="http://www.cri.catolica.edu.sv/cdmype/sistema/capacitaciones/pdf/{{$id}}" target="_blank">TERMINOS DE REFENCIA (PDF)</a>
 <br/>
-<a href="http://www.cri.catolica.edu.sv/cdmype/sistema/public/assets/F7 FORMATO OFERTA TÉCNICA Y ECONÓMICA.docx">FORMATO OFERTA TÉCNICA Y ECONÓMICA (WORD)</a>
+<a href="http://www.cri.catolica.edu.sv/cdmype/sistema/assets/F7 FORMATO OFERTA TÉCNICA Y ECONÓMICA.docx">FORMATO OFERTA TÉCNICA Y ECONÓMICA (WORD)</a>

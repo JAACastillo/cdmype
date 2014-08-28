@@ -15,6 +15,6 @@ Route::get('consultor/{idConsultor}', ['as' => 'verConsultor', 'uses' => 'Consul
 Route::any('consultor/eliminacion/{idConsultor}', ['as' => 'eliminarConsultor', 'uses' => 'ConsultorController@eliminarConsultor']);
 
 //Ver Especialidades
-Route::post('consultor/especialidades/{idConsultor}', ['as' => 'verEspecialidades', 'uses' => 'ConsultorController@verEspecialidades']);
+Route::get('consultor/especialidades/{idConsultor}', ['as' => 'verEspecialidades', 'uses' => 'ConsultorController@verEspecialidades']);
 
 Route::get('consultores', ['as' => 'consultores', 'uses' => 'ConsultorController@index']);

@@ -1,7 +1,7 @@
 <?php
 class AtContrato extends Eloquent {
 
-    protected $table = 'atContratos';
+    protected $table = 'atcontratos';
     protected $softDelete = true;
     protected $fillable = array(
             'duracion',
@@ -98,7 +98,7 @@ class AtContrato extends Eloquent {
             return $this->belongsTo('AtTermino','attermino_id');
         }
         public function ampliacion(){
-            return $this->hasOne('ampliacionContrato', 'attermino_id');
+            return $this->hasOne('AmpliacionContrato', 'attermino_id');
         }
 
 

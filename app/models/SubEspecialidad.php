@@ -1,7 +1,7 @@
 <?php
 class SubEspecialidad extends Eloquent {
 
-    protected $table = 'subEspecialidades';
+    protected $table = 'subespecialidades';
     protected $softDelete = true;
     public $errores;
     protected $perPage = 10;

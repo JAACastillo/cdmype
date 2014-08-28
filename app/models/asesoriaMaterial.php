@@ -1,7 +1,7 @@
 <?php
 class asesoriaMaterial extends Eloquent {
 
-    protected $table = 'asesoriaMateriales';
+    protected $table = 'asesoriamateriales';
     public $errores;
     protected $perPage = 10;
     protected $softDelete = true;

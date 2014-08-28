@@ -346,6 +346,14 @@ class CapTerminoController extends BaseController {
 
             }
 
+             public function pdfConvocatoria($id){
+                $capacitacion = CapTermino::find($id);
+                $asistencias = Asistencia::where("captermino_id", "=", $id)->get();
+                $pdf = App::make('dompdf');
+                $pdf->loadView('pdf.capConvocatoria', compact('capacitacion', 'asistencias'))->setOrientation('landscape');
+                return $pdf->stream();
+            
+            }
 
             public function guardarConvocatoria(){
 
@@ -413,13 +421,8 @@ class CapTerminoController extends BaseController {
             }
 
             public function pdfAsistencia($id){
-
-                
-
                 $capacitacion = CapTermino::find($id);
                 $asistencias = Asistencia::where("captermino_id", "=", $id)->Where('asistira', '=', 'Si')->get();
-                
-
                 $pdf = App::make('dompdf');
                 $pdf->loadView('pdf.capAsistencia', compact('capacitacion', 'asistencias'))->setOrientation('landscape');
                 return $pdf->stream();

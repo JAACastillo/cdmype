@@ -7,10 +7,12 @@
 
  
 @if($attermino->exists)
-	<a href="{{route('pdfAt', $attermino->id)}}" target="_blank">Imprimir</a>
+	<a class="btn btn-default" href="{{route('pdfAt', $attermino->id)}}" data-toggle="tooltip" data-placement="bottom" title="Imprimir F1" target="_blank"> <span class="glyphicon glyphicon-print"></span>&nbsp TDR</a>
 @endif
+
 {{ Form::model($attermino, $accion) }}
 <div class="row">
+	<br/>
     <div class="col-xs-12 col-md-6">
         <div class="panel panel-default">
             <div class="panel-body">

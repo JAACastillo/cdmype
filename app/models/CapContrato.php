@@ -1,7 +1,7 @@
 <?php
 class CapContrato extends Eloquent {
     
-    protected $table = 'capContratos';    
+    protected $table = 'capcontratos';    
     public $errores;
     protected $perPage = 9;
     protected $softDelete = true;

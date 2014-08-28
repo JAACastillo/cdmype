@@ -16,12 +16,12 @@ legend{
 
 	<div class="col-xs-12">
 		<center>
-			<img src="/atcdmype/assets/img/cdmype-logo.jpg">
+			<img src="/cdmype/sistema/assets/img/cdmype-logo.jpg">
 		</center>
 	</div>
 	<center><legend></legend></center>
 	<div class="col-xs-12">
-		<h1 class="text-center">Pagina no encontrada</h1>
+		<h1 class="text-center">Página no encontrada</h1>
 	</div>
 
 </div>

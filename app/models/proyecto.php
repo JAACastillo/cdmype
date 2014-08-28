@@ -78,7 +78,7 @@ class proyecto extends Eloquent {
         }
 
     public function empresa(){
-        return $this->belongsTo('empresa', 'empresa_id');
+        return $this->belongsTo('Empresa', 'empresa_id');
     }
 
     public function indicadores(){

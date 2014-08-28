@@ -1,7 +1,7 @@
 <?php
 class AtConsultor extends Eloquent {
     
-    protected $table = 'atConsultores';
+    protected $table = 'atconsultores';
     public $errores;
     protected $perPage = 9;
     protected $softDelete = true;

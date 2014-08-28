@@ -1,5 +1,7 @@
 (function($){
-
+    var servidor = "http://www.cri.catolica.edu.sv/cdmype/sistema";
+    var _servidor1 = servidor + '/api/';
+    
     $(window).load(function(){ //patch fix size of select box
         $('.chosen-container').css('width', '100%');
         $('#fondoLoader').fadeOut(1000);
@@ -93,7 +95,7 @@
     $("[data-toggle='modal']").click(function(){
       $.ajax({
             url: servidor + "/consultor/especialidades/" + $(this).data('id'),
-            type: 'POST',
+            type: 'GET',
             dataType: 'JSON',
             beforeSend: function() {
                 $("#tabla").html('Cargando...');
@@ -155,8 +157,6 @@
         });
 
     //Autocompletar
-        var servidor = "http://localhost/atcdmype";
-        var _servidor1 = servidor + '/api/';
 
         $(document).ready(function(e) 
         {

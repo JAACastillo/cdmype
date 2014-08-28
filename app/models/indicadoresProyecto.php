@@ -1,7 +1,7 @@
 <?php
 class indicadoresProyecto extends Eloquent {
     
-    protected $table = 'indicadoresProyecto';    
+    protected $table = 'indicadoresproyecto';    
     public $errores;
     protected $perPage = 10;
     protected $softDelete = true;

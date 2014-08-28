@@ -1,7 +1,7 @@
 <?php
 class CapTermino extends Eloquent {
 
-    protected $table = 'capTerminos';
+    protected $table = 'capterminos';
     public $errores;
     protected $perPage = 9;
     protected $fillable = array(
