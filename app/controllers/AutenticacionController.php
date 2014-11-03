@@ -4,18 +4,18 @@ class AutenticacionController extends BaseController {
 
 
 	//Mostramos el formulario de ingreso al sistema
-    public function get_login() 
-    {   
-        if(Auth::check()) 
+    public function get_login()
+    {
+        if(Auth::check())
             return Redirect::to('/');
-        
-        else 
+
+        else
             return View::make('login');
     }
 
-    
+
     //Comprobamos los datos del usuario
-    public function post_login() 
+    public function post_login()
     {
 
         //Optenemos los datos del formulario
@@ -23,7 +23,7 @@ class AutenticacionController extends BaseController {
             'email' => Input::get('correo'),
             'password' => Input::get('contrasena')
         );
-        
+
         if(Auth::attempt($datos, Input::get('remember-me', 0)))
             return Redirect::to('/');
         else
@@ -35,7 +35,7 @@ class AutenticacionController extends BaseController {
 
 
     //CERRAR SESION
-    public function get_logOut() 
+    public function get_logOut()
     {
         Auth::logout();
         return Redirect::to('/');

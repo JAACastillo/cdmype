@@ -37,7 +37,7 @@
 		  	<a href="{{route($paso['enlace'], $id)}}" type="button"  
 		  		{{($step > $pasoReal ? 'disabled' : '')}} 
 		  		class="{{($pasoActual == $step ? 'active btn btn-primary' : 'btn btn-default')}}  
-		  		col-xs-{{$paso['rows']}}">
+		  		col-sm-{{$paso['rows']}}">
 		  		Paso {{$step++}}<br/> 
 		  		<strong> {{$paso['label']}} </strong>
 		  	</a>

@@ -3,7 +3,7 @@ class Empresario extends Eloquent {
 
     protected $table = 'empresarios';
     public $errores;
-    protected $perPage = 9;
+    // protected $perPage = 9;
     protected $softDelete = true;
     protected $fillable = array(
         'nit',

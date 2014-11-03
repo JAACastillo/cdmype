@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name=description content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel='shortcut icon' href='/atcdmype/assets/img/favicon.png'>
+        <link rel='shortcut icon' href='/cdmype/sistema/assets/img/favicon.png'>
         <!-- CSS -->
             <!-- Bootstrap -->
             {{ HTML::style('assets/css/jquery-ui.css', array('media' => 'screen')) }}
@@ -14,23 +14,23 @@
             {{ HTML::style('assets/css/jasny-bootstrap.min.css') }}
             <!-- validator -->
             {{ HTML::style('assets/validator/css/bootstrapValidator.min.css', array('media' => 'screen')) }}
-            <!-- Shosen --> 
+            <!-- Shosen -->
             {{ HTML::style('assets/chosen/chosen.min.css', array('media' => 'screen')) }}
             <!-- Switch -->
             {{ HTML::style('assets/switch/css/bootstrap-switch.min.css') }}
-            <!-- Botones Animados --> 
+            <!-- Botones Animados -->
             {{ HTML::style('assets/ladda/ladda-themeless.min.css', array('media' => 'screen')) }}
             {{ HTML::style('assets/css/estilo.css', array('media' => 'screen')) }}
             {{ HTML::style('assets/css/animate.min.css', array('media' => 'screen')) }}
-             <!-- DataTable --> 
+             <!-- DataTable -->
             {{ HTML::style('assets/datatable/css/dataTables.min.css', array('media' => 'screen')) }}
             {{ HTML::style('assets/datatable/css/dataTables.bootstrap.css', array('media' => 'screen')) }}
 
     </head>
     <body>
         <br/>
-        <div class="container">
- 
+        <div id="cont" class="container">
+
             @yield('contenido')
 
         </div>
@@ -39,35 +39,35 @@
             {{ HTML::script('assets/js/jquery.min.js') }}
             {{ HTML::script('assets/js/jquery-ui.js') }}
             {{ HTML::script('assets/js/bootstrap.min.js') }}
-            <!-- Validator -->    
+            <!-- Validator -->
             {{ HTML::script('assets/validator/js/bootstrapValidator.min.js') }}
             <!-- Mascaras -->
             {{ HTML::script('assets/js/jasny-bootstrap.min.js') }}
-            <!-- Botones Animados -->    
+            <!-- Botones Animados -->
             {{ HTML::script('assets/ladda/spin.min.js') }}
             {{ HTML::script('assets/ladda/ladda.min.js') }}
-            <!-- Shosen -->    
+            <!-- Shosen -->
             {{ HTML::script('assets/chosen/chosen.min.js') }}
-            <!-- Mensajes -->    
+            <!-- Mensajes -->
             {{ HTML::script('assets/js/bootstrap-growl.min.js') }}
-            <!-- switch -->    
+            <!-- switch -->
             {{ HTML::script('assets/switch/js/bootstrap-switch.min.js') }}
-            <!-- DataTable -->        
+            <!-- DataTable -->
             {{ HTML::script('assets/datatable/js/dataTables.min.js') }}
             {{ HTML::script('assets/datatable/js/dataTables.bootstrap.js') }}
-            <!-- Libreria -->        
+            <!-- Libreria -->
             {{ HTML::script('assets/js/libreria.js') }}
 
             {{ HTML::script('assets/js/areyousure.js') }}
             {{ HTML::script('assets/js/modernizr.js') }}
             {{ HTML::script('assets/js/pollyfiller.js') }}
-        
-            {{ HTML::script('assets/js/bootstrap-filestyle.js') }} 
 
-       <!-- Para las fechas -->
+            {{ HTML::script('assets/js/bootstrap-filestyle.js') }}
+
+       <!-- Para las fechas
  <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
 
- <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+ <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>-->
 
          <script>
              webshims.setOptions('waitReady', false);

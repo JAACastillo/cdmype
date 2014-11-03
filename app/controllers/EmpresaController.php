@@ -6,7 +6,7 @@ class EmpresaController extends BaseController {
 	public function index()
 	{
         $empresas = Empresa::orderBy('nombre','asc')
-            ->paginate();
+            ->paginate(1000000000);
         
         $empresario = Empresario::All()->count();
         
@@ -35,10 +35,14 @@ class EmpresaController extends BaseController {
             $pasoReal = $empresa->pasoReal;
            // $id =$id;
 
-        $Categoria = array(1 => 'Empresa', 2 => 'Grupo');
-        $Constitucion = array( 1 => 'Informal Natural', 2 => 'Formal Natural', 3 => 'Formal Jurídica' );
-        $Clasificacion = array( 1 => 'Emprendedor', 2 => 'Micro-empresa', 3 => 'Micro-empresa de Subsistencia', 4 => 'Grupo Asociativo Empresas',
-            5 => 'No definido');
+        $Categoria = array('' => 'Seleccione una opción','1' => 'Empresa','2' => 'Grupo','3' => 'Individual','4' => 'Emprendedor', '5' => 'Cooperativa');
+        $constitucion = array('' => 'Seleccione una opción', 1 => 'Persona Natural', 2 => 'Persona Juridica', 3 => 'Gpo de empresas', 4 => 'Gpo de Emprendedores', 5 => 'UDP', 6 => 'Informal Natural' );
+        $Clasificacion = array( 
+        						1 => 'Emprendedor', 
+        						2 => 'Micro-empresa', 
+        						3 => 'Subsistencia', 
+        						4 => 'Grupo Asociativo Empresas',
+            					5 => 'Pequeña Empresa');
 
         $Sector = array( 1 => 'Artesanias', 2 => 'Agroindustrias Alimentaria', 3 => 'Calzado', 4 => 'Comercio', 5 => 'Construcción',
             6 => 'Química Farmaceutica', 7 => 'Tecnología de Información y Comunicación', 8 => 'Textiles y Confección', 9 => 'Turismo',
@@ -48,7 +52,7 @@ class EmpresaController extends BaseController {
         $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');  
         
         $empresa->categoria = array_search($empresa->categoria,$Categoria);
-        $empresa->constitucion = array_search($empresa->constitucion,$Constitucion);
+        $empresa->constitucion = array_search($empresa->constitucion,$constitucion);
         $empresa->clasificacion = array_search($empresa->clasificacion,$Clasificacion);
         $empresa->sector_economico = array_search($empresa->sector_economico,$Sector);
         $empresa->departamento = $empresa->municipio->departamento_id;
@@ -57,7 +61,7 @@ class EmpresaController extends BaseController {
         $accion = array('route' => array('actualizarEmpresa', $id), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
             return View::make('clientes.empresas.creacion-paso-1', compact('empresa', 'accion', 
-                'departamentos','municipios','id','pasoActual','pasoReal'));
+                'departamentos','municipios','id','pasoActual','pasoReal', 'constitucion', 'Clasificacion', 'Categoria'));
     }
 
     public function actualizarEmpresa($id)
@@ -107,6 +111,14 @@ class EmpresaController extends BaseController {
             $id =0;
             
             $empresa = new Empresa;
+	 		$Categoria = array('' => 'Seleccione una opción','1' => 'Empresa','2' => 'Grupo','3' => 'Individual','4' => 'Emprendedor', '5' => 'Cooperativa');
+	        $constitucion = array('' => 'Seleccione una opción', 1 => 'Persona Natural', 2 => 'Persona Juridica', 3 => 'Gpo de empresas', 4 => 'Gpo de Emprendedores', 5 => 'UDP', 6 => 'Informal Natural' );
+	        $Clasificacion = array( 
+	        						1 => 'Emprendedor', 
+	        						2 => 'Micro-empresa', 
+	        						3 => 'Subsistencia', 
+	        						4 => 'Grupo Asociativo Empresas',
+	            					5 => 'Pequeña Empresa');
 
             $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
             $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');  
@@ -114,7 +126,7 @@ class EmpresaController extends BaseController {
             $accion = array('route' => 'guardarEmpresa', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
             return View::make('clientes.empresas.creacion-paso-1', compact('empresa', 'accion', 
-                'departamentos','municipios','id','pasoActual','pasoReal'));
+                'departamentos','municipios','id','pasoActual','pasoReal', 'Categoria', 'constitucion', 'Clasificacion'));
         }
 
         public function guardarEmpresa()
@@ -146,7 +158,13 @@ class EmpresaController extends BaseController {
                 $empresaEmpresario = $empresa->empresarios;
                 $pasoReal = $empresa->pasoReal;
                 $id =$idEmpresa;
-
+            $tipo = EmpresaEmpresario::where('empresa_id', '=', $idEmpresa)->get();
+            if ($tipo == "[]") {
+                $empresaEmpresario->tipos = array('' => 'Seleccione una opción','3' => 'Propietario','4' => 'Propietaria');
+            }
+            else{
+                $empresaEmpresario->tipos = array('' => 'Seleccione una opción','1' => 'Empresario','2' => 'Empresaria','3' => 'Propietario','4' => 'Propietaria','5' => 'Representante');
+            }
             $empresaEmpresario->empresa_id = $idEmpresa;
 
             return View::make('clientes.empresas.creacion-paso-2', compact('empresaEmpresario','id','pasoActual','pasoReal'));
@@ -178,24 +196,40 @@ class EmpresaController extends BaseController {
         public function empresarioGuardar()
         {
             $idEmpresario = Input::get('empresario_id');
-
+            $idEmpresa = Input::get('empresa_id');
+            $tipo = Input::get('tipo');
             $empresario = Empresario::find($idEmpresario);
-            if(!is_null($empresario))
-            {   
-
-                $empresaEmpresario = new EmpresaEmpresario;
-                $datos = Input::all();
-                
-                if($empresaEmpresario->guardar($datos,'1')) 
-                    return Redirect::back();
-                
-                else 
-                    return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
-
-            }
+            $empresarioExiste = EmpresaEmpresario::where('empresario_id', '=', $idEmpresario)->where('empresa_id', '=', $idEmpresa)->get();
+            $propietario = EmpresaEmpresario::whereRaw('empresa_id = ? and tipo = ? or Tipo = ?', array($idEmpresa,'Propietario', 'Propietaria'))->get();
             
+            if(!is_null($empresario)){
+                if ($empresarioExiste == "[]") {
+                    if (($tipo == 3) || ($tipo == 4)) {
+                        if (($propietario == "[]")) {
+                                $empresaEmpresario = new EmpresaEmpresario;
+                                $datos = Input::all();
+                                if($empresaEmpresario->guardar($datos,'1')) 
+                                    return Redirect::back();
+                                
+                                else 
+                                    return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);                        
+                        }
+                        return Redirect::back()->withInput()->withErrors(['no-existe' => 'La empresa ya tiene asignado un propietario o Propietaria.']);
+                    }
+                    else{
+                        $empresaEmpresario = new EmpresaEmpresario;
+                        $datos = Input::all();
+                        if($empresaEmpresario->guardar($datos,'1')) 
+                            return Redirect::back();
+                        
+                        else 
+                            return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
+                    }
+                    
+                }
+                return Redirect::back()->withInput()->withErrors(['no-existe' => 'El Empresario ya existe']);
+            }
             return Redirect::back()->withInput()->withErrors(['no-existe' => 'El Empresario no ha sido encontrado']);
-
         }
 
 
@@ -210,9 +244,9 @@ class EmpresaController extends BaseController {
 
             $mercados = array('Local', 'Regional', 'Nacional', 'Internacional');
             $indicador = new indicador;
-            $indicador->fechaInicio = date('Y-m-j');
-            $pasoReal = 3;
-            $pasoActual = $empresa->pasoReal;
+            $indicador->fechaInicio = date('Y-m-d');
+            $pasoActual = 3;
+            $pasoReal = $empresa->pasoReal;
             $accion = array('route' => 'empresaPasoIndicadores', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form', 'id' => 'validar');
             $indicador->empresa_id = $id;
             return View::make('clientes.empresas/creacion-paso-indicadores', 
@@ -231,10 +265,12 @@ class EmpresaController extends BaseController {
                 $productos = $data['productos'];
 
                 foreach ($productos as $producto) {
-                    $product = new productos;
-                    $product->nombre = $producto;
-                    $product->indicador_id = $indicador->id;
-                    $product->save();
+                     if(! empty($producto)){ 
+                        $product = new productos;
+                        $product->nombre = $producto;
+                        $product->indicador_id = $indicador->id;
+                        $product->save();
+                    }
                 }
 
                 $mercados = $data['mercados'];
@@ -280,7 +316,6 @@ class EmpresaController extends BaseController {
 
             $accion = array('route' => array('empresaPasoIndicador', $id), 'method' => 'PATCH', 'class' => 'form-horizontal','role' => 'form', 'id' => 'validar');
             $indicador->empresa_id = $id;
-            $indicador->empleadosHombreFijo = 2;
             $imprimir = 'si';
             return View::make('clientes.empresas/creacion-paso-indicadores', 
                         compact('id', 'pasoReal', 'pasoActual', 'indicador', 'accion', 'mercados', 'imprimir'));
@@ -368,8 +403,8 @@ class EmpresaController extends BaseController {
 
             $indicadores = proyectoIndicador::all()->lists('nombre', 'id');
             $proyecto = new proyecto;
-            $proyecto->fechaInicio = date('Y-m-j');
-            $proyecto->fechaFin = date('Y-m-j');
+            $proyecto->fechaInicio = date('Y-m-d');
+            $proyecto->fechaFin = date('Y-m-d');
             $pasoReal = $empresa->pasoReal;
             $pasoActual = 4;
             $accion = array('route' => 'empresaPasoProyectoGuardar', 'method' => 'POST', 'class' => 'form-horizontal','role' => 'form', 'id' => 'validar');

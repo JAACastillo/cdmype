@@ -11,8 +11,8 @@ class CrearTablaAtTerminos extends Migration {
             $table->increments('id');
 
             $table->string('tema', 500);
-            $table->string('obj_general', 500);
-            $table->string('obj_especifico', 500);
+            $table->string('obj_general', 2000);
+            $table->string('obj_especifico', 2000);
             $table->string('productos',3000);
             $table->integer('tiempo_ejecucion');
             $table->integer('trabajo_local');

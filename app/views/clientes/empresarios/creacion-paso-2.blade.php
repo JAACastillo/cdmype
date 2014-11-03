@@ -16,15 +16,15 @@
 		<div class="panel-heading">
 			<a href="#" tabindex="11" class="btn btn-default busqueda resetBtn">
 		        <span class="glyphicon glyphicon-plus"></span>
-		        Crear				        
-		    </a>		
+		        Crear
+		    </a>
 		</div>
-			<div class="panel-body">	
+			<div class="panel-body">
 				<div class="row" >
 					<br/>
 					<div class="col-xs-12">
 			        {{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
-			        
+
 			        <div class="form-group">
 				        {{ Form::label('empresa_id', 'Nombre:', array('class' => 'control-label col-md-4')) }}
 				        <div class="col-md-6">
@@ -32,13 +32,13 @@
 				            {{ Form::hidden('empresa_id', null) }}
 				        </div>
 				    </div>
-					
+
 					{{ Form::close() }}
 
 					<div class="form-group">
 		                {{ Form::label('tipo', 'Tipo:', array('class' => 'control-label col-md-4')) }}
 		                <div class="col-md-6">
-		                    {{ Form::select('tipo', array('' => '','1' => 'Empresario','2' => 'Empresaria','3' => 'Propietario','4' => 'Propietaria','5' => 'Representante'), null, array('class' => 'form-control', 'data-placeholder' => 'Seleccione un tipo')) }}  
+		                    {{ Form::select('tipo', array('' => '','1' => 'Empresario','2' => 'Empresaria','3' => 'Propietario','4' => 'Propietaria','5' => 'Representante'), null, array('class' => 'form-control', 'data-placeholder' => 'Seleccione un tipo')) }}
 		                </div>
 		            </div>
 
@@ -60,7 +60,7 @@
 
 					            @foreach ($empresas as $empresa)
 					            <tr>
-					                <td class="text-center">{{ $empresa->empresas->nombre}}</td>
+					                <td class="text-center"> <a href="{{ route('editarEmpresa', array($empresa->empresas->id)) }}">{{ $empresa->empresas->nombre}}</a> </td>
 					            </tr>
 					            @endforeach
 
@@ -107,6 +107,14 @@
     $tipos = array(1 => 'Empresaria', 2 => 'Propietaria', 3 => 'Representante', 4 => 'Empresario', 5 => 'Propietario');
     $departamentos = array('' => 'Seleccione una opción' ) + Departamento::all()->lists('departamento', 'id');
     $municipios = array('' => 'Seleccione una opción' ) + Municipio::all()->lists('municipio', 'id');
+    $Categoria = array('' => 'Seleccione una opción','1' => 'Empresa','2' => 'Grupo','3' => 'Individual','4' => 'Emprendedor', '5' => 'Cooperativa');
+    $Clasificacion = array(
+	        						1 => 'Emprendedor',
+	        						2 => 'Micro-empresa',
+	        						3 => 'Subsistencia',
+	        						4 => 'Grupo Asociativo Empresas',
+	            					5 => 'Pequeña Empresa');
+    $constitucion = array('' => 'Seleccione una opción', 1 => 'Persona Natural', 2 => 'Persona Juridica', 3 => 'Gpo de empresas', 4 => 'Gpo de Emprendedores', 5 => 'UDP', 6 => 'Informal Natural' );
 
 ?>
 
@@ -119,12 +127,17 @@
 			<div class="panel-heading">
 				<a href="#" tabindex="11" class="btn btn-default busqueda resetBtn">
 			        <span class="glyphicon glyphicon-search"></span>
-			        Buscar				        
-			    </a>		
+			        Buscar
+			    </a>
 			</div>
+				<div class="panel-body">
+					<div class="row">
+               	<div class="col-md-12">
+               		@include('clientes/empresas/form')
 
-               	@include('clientes/empresas/form')
-               	
+               	</div>
+               </div>
+				</div>
 			<div class="row">
 				    <div class="col-xs-6">
 				        <center>

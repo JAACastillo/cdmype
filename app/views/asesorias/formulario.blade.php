@@ -4,6 +4,11 @@
     Material Asesoría
 @stop
 
+<style type="text/css">
+.bootstrap-filestyle{
+    margin-top:5px;
+}
+</style>
 <?php
     if ($asesoria->exists):
         $formulario = array('route' => array('asesorias.update', $asesoria->id), 'id' => 'validar', 'method' => 'PATCH', 'class' => 'form-horizontal', 'files' => 'true');

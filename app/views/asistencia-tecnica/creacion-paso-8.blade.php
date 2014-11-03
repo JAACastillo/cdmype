@@ -8,7 +8,7 @@
 <div class="row {{$oculto}} imprimir" >
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
-	<div class="panel panel-default">
+	<div class="panel panel-default animated fadeIn">
 		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar" id="cambiar"><span class="glyphicon glyphicon-pencil"></span> &nbsp  Modificar acta </a></div>
 			<div class="panel-body">
 				<div class="form-group">
@@ -37,22 +37,22 @@
 <div class="row">
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
-		<div class="panel panel-default">
+		<div class="panel panel-default animated fadeIn">
 		<div class="panel-heading"> <a href="#" class="btn btn-primary cambiar {{$oculto}}" id="cambiar"><span class="glyphicon glyphicon-chevron-left"></span> &nbsp Cancelar </a></div>
 			<div class="panel-body">
 			<br/>		
 			<div class="row">
-				<div class="col-xs-11">
+				<div class="col-xs-12">
 					{{Form::hidden('attermino_id')}}
 					<div class="form-group">
 		                {{ Form::label('estado', 'Estado:', array('class' => 'control-label col-md-4')) }}
-		                <div class="col-md-7">
+		                <div class="col-md-6">
 		                    {{ Form::select('estado', array('' => 'Seleccione una opción', '1' => 'Conformidad','2' => 'Rechazo'), $acta->estado, array('class' => 'form-control')) }} 
 		                </div>
 		            </div>
 					<div class="form-group">
 		                {{ Form::label('fecha', 'Fecha:', array('class' => 'control-label col-md-4')) }}
-		                <div class="col-md-7">
+		                <div class="col-md-6">
 		                    <input type="date" name="fecha" value='{{$acta->fecha}}'class="form-control" data-date='{"startView": 2, "openOnFocus": true}'/ > 
 		                </div>
 		            </div>

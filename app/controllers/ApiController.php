@@ -7,19 +7,19 @@ class ApiController extends BaseController {
     //EMPRESARIO
     public function getEmpresario() 
     {
-		$term =  Input::get('term');
-        
-        $empresarios = Empresario::where('nombre', 'LIKE', "%" . $term . "%")
-            ->get();
-		
-        $results[] = array();
-        array_shift($results);
-        foreach ($empresarios as $empresario) 
-        {
-		    $results[] = array('label' => $empresario->nombre, 'value' => $empresario->id);
-		}
-		
-        return $results;
+    		$term =  Input::get('term');
+            
+            $empresarios = Empresario::where('nombre', 'LIKE', "%" . $term . "%")
+                ->get();
+    		
+            $results[] = array();
+            array_shift($results);
+            foreach ($empresarios as $empresario) 
+            {
+    		    $results[] = array('label' => $empresario->nombre, 'value' => $empresario->id);
+    		}
+    		
+           return Response::json( $results, 200, array('content-type' => 'application/json', 'Access-Control-Allow-Origin' => '*'));
     }
 
     //EMPRESA
@@ -30,15 +30,13 @@ class ApiController extends BaseController {
         $empresas = Empresa::where('nombre', 'LIKE', "%" . $term . "%")
             ->get();
 
-        $results[] = array();
-        array_shift($results);
-		
+        $results = array();
         foreach ($empresas as $empresa) 
         {
 		    $results[] = array('label' => $empresa->nombre, 'value' => $empresa->id);
 		}
 		
-        return $results;
+        return Response::json( $results, 200, array('content-type' => 'application/json', 'Access-Control-Allow-Origin' => '*'));
     }
 
     //EMPRESA
@@ -51,7 +49,9 @@ class ApiController extends BaseController {
             foreach ($municipios as $fila) {
                $opciones .= "<option value=' $fila->id '> $fila->municipio</option>";
             }
-             return $opciones;
+             
+
+             return Response::make($opciones, 200,  array('content-type' => 'text/html', 'Access-Control-Allow-Origin' => '*')) ;//->header('Accces-Control-Allow-Origin: *');
          }
 
     }
@@ -66,8 +66,8 @@ class ApiController extends BaseController {
                 case 'usuarios':
                     return Redirect::to('buscar/usuarios/'.$nombre);
                     break;
-                case 'empresarios':
-                    return Redirect::to('buscar/empresarios/'.$nombre);
+                case 'capacitaciones':
+                    return Redirect::to('buscar/capacitaciones/'.$nombre);
                     break;
                 case 'empresas':
                     return Redirect::to('buscar/empresas/'.$nombre);
@@ -76,7 +76,7 @@ class ApiController extends BaseController {
                     return Redirect::to('buscar/consultores/'.$nombre);
                     break;
                 case 'terminos':
-                    return Redirect::to('buscar/terminos/'.$nombre);
+                    return Redirect::to('buscar/atecnicas/'.$nombre);
                 case 'material':
                     return Redirect::to('buscar/material/'.$nombre);
                     break;
@@ -93,11 +93,11 @@ class ApiController extends BaseController {
             return View::make('usuarios.lista', compact('usuarios'));
         }
 
-        public function getEmpresarios($nombre) {
-            $empresarios = Empresario::where('nombre','LIKE',"%".$nombre."%")
-                ->orderBy('nombre','asc')
+        public function getCapacitaciones($nombre) {
+            $capterminos = CapTermino::where('tema','LIKE',"%".$nombre."%")
+                ->orderBy('tema','asc')
                 ->paginate();
-            return View::make('clientes.empresarios.lista', compact('empresarios'));
+            return View::make('capacitaciones.lista', compact('capterminos'));
         }
 
         public function getEmpresas($nombre) {
@@ -114,11 +114,11 @@ class ApiController extends BaseController {
             return View::make('consultores.lista', compact('consultores'));
         }
 
-        public function getAtterminos($nombre) {
+        public function getATecnicas($nombre) {
             $atterminos = AtTermino::where('tema','LIKE',"%".$nombre."%")
-                ->orderBy('nombre','asc')
+                ->orderBy('tema','asc')
                 ->paginate();
-            return View::make('asistecia-tecnica.lista', compact('atterminos'));
+            return View::make('asistencia-tecnica.lista', compact('atterminos'));
         }
 
         public function getMaterial($nombre){

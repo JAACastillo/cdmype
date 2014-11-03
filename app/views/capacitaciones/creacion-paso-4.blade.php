@@ -25,8 +25,8 @@ Capacitaciones
 <br/>
 <div class="row animated fadeIn">
 	{{Form::open()}}
-	<div class="col-xs-1"></div>
-	<div class="col-xs-10">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
 	<div class="panel panel-default">
 		<div class="panel-body">
 			<div class="row">
@@ -36,8 +36,8 @@ Capacitaciones
 	        			<table class="table table-bordered">
 				            <tr class="active">
 				                <th class="text-center">Nombre</th>
-				                <th class="text-center">Correo</th>
-				                <th class="text-center">Telefonos</th>
+				                <th class="text-center hidden-xs hidden-sm">Correo</th>
+				                <th class="text-center hidden-xs hidden-sm">Telefonos</th>
 				                <th class="text-center">Oferta</th>
 				                <th class="text-center">Opciones</th>
 				            </tr>
@@ -45,8 +45,8 @@ Capacitaciones
 				            @foreach ($consultores as $consultor)
 				            <tr>
 				                <td>{{ $consultor->consultor->nombre }}</td>
-				                <td class="text-center">{{ $consultor->consultor->correo }}</td>
-				                <td class="text-center" style="width:100px">{{ $consultor->consultor->telefono }}</td>
+				                <td class="text-center hidden-xs hidden-sm">{{ $consultor->consultor->correo }}</td>
+				                <td class="text-center hidden-xs hidden-sm" style="width:100px">{{ $consultor->consultor->telefono }}</td>
 				                <td class="text-center"> 
 				                	<a href="{{route('capOferta', $consultor->doc_oferta)}}" target="_blank">
 				                		{{ $consultor->doc_oferta}}
@@ -84,7 +84,7 @@ Capacitaciones
 		{{Form::close()}}
 	</div>
 	</div>
-	<div class="col-xs-1"></div>
+	<div class="col-md-1"></div>
 </div>
 
 

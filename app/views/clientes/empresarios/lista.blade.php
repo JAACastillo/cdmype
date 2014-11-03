@@ -30,10 +30,10 @@
             <tbody>
             @foreach ($empresarios as $empresario)
             <tr>
-                <td>{{ $empresario->nombre }}</td>
-                <td class="text-center">
+                <td style="width:300px"> <a href="{{route('editarEmpresario', array($empresario->id))}}">{{ $empresario->nombre }}</a></td>
+                <td>
                     @foreach($empresario->empresa as $empresa)
-                    <h5>{{ $empresa->empresas->nombre }}</h5>
+                    <a href="{{ route('editarEmpresa', array($empresa->empresas->id)) }}"><h5>{{ $empresa->empresas->nombre }}</h5></a>
                     @endforeach
                 </td>
                 <td class="text-center">{{ $empresario->correo }}</td>
@@ -50,7 +50,5 @@
             </tbody>
         </table>
     </div>
-    {{-- Paginar Con el valor Puesto en Modelo en la variable perPage--}}
-    {{-- $empresarios->links() --}}
 
 @stop

@@ -1,9 +1,10 @@
 @extends('menu')
 
+
 @section('escritorio')
 <!-- Migas de Pan -->
 <ol class="breadcrumb">
-  <li><a  href="#">CDMYPE</a></li>
+  <li><a  href="{{url('/')}}">CDMYPE</a></li>
   <li class="active"> @yield('cabecera', 'Inicia sesión') </li>
 </ol>
 
@@ -36,6 +37,5 @@
             <!-- derecha -->
         </div>
 </div>
-
 
 @stop

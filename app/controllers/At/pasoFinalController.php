@@ -4,31 +4,31 @@
 	utilizado para guardar las ofertas a los consultores
 	Imprimir el contrato
 	Imprimir el acta
-	Dar por finalizada la at.	
+	Dar por finalizada la at.
 */
 
 class pasoFinalController extends BaseController{
-	
+
     public function oferta($id)
     {
         try {
-            
+
         $id2 = Math::to_base_10($id, 62) - 100000;
 
         //return $id;
         $at = AtTermino::find($id2);
         $consultores =  $at
                         ->consultores()
-                        ->paginate();
+                        ->paginate(3500);
 
 
         $pasoActual = 4;
         $pasoReal = $at->pasoReal;
-        return View::make('asistencia-tecnica/creacion-paso-4', 
+        return View::make('asistencia-tecnica/creacion-paso-4',
                 compact('consultores', 'id', 'pasoActual', 'id', 'pasoReal'));
 
         } catch (Exception $e) {
-            App::abort(404);    
+            App::abort(404);
         }
 
     }
@@ -58,11 +58,11 @@ class pasoFinalController extends BaseController{
             $at->save();
             return Redirect::route('atPaso', $id2);
         }
-        
+
         return Redirect::back()->with('msj', 'Agrege un documento');
 
         } catch (Exception $e) {
-            App::abort(404);    
+            App::abort(404);
         }
     }
 
@@ -72,7 +72,7 @@ class pasoFinalController extends BaseController{
         $file->move($destinationPath, $fileName);
         return $fileName;
     }
- 
+
 
     public function consultor($id){
         try {
@@ -85,18 +85,18 @@ class pasoFinalController extends BaseController{
         //return $consultores;
         $pasoActual = 5;
         $pasoReal = $at->pasoReal;
-        return View::make('asistencia-tecnica/creacion-paso-5', 
+        return View::make('asistencia-tecnica/creacion-paso-5',
             compact('consultores', 'id', 'pasoActual', 'pasoReal'));
 
         } catch (Exception $e) {
-            App::abort(404);    
+            App::abort(404);
         }
 
     }
 
     public function consultorSeleccionar($id){
         try {
-            
+
         $consultorID = Input::get('consultor');
 
         if (!is_null($consultorID)) {
@@ -104,9 +104,9 @@ class pasoFinalController extends BaseController{
                 $consultor = AtConsultor::find($consultorID);
                 $consultor->estado = 2;
                 $consultor->save();
-            
+
                 $id2 = Math::to_base_10($id, 62) - 100000;
-                
+
 
                 $at = AtTermino::find($id2);
                 $at->estado = 4;
@@ -118,7 +118,7 @@ class pasoFinalController extends BaseController{
 
             return Redirect::back()->with('msj', 'Seleccione un consultor');
         } catch (Exception $e) {
-            App::abort(404);    
+            App::abort(404);
         }
 
     }
@@ -127,9 +127,9 @@ class pasoFinalController extends BaseController{
     public function contrato($id){
 
         try {
-            
+
         $id2 = Math::to_base_10($id) - 100000;
-        
+
         $at = AtTermino::find($id2);
 
 
@@ -142,8 +142,8 @@ class pasoFinalController extends BaseController{
         $ampliacion = new AmpliacionContrato;
         $atcontrato = new AtContrato;
         $atcontrato->attermino_id = $id2;
-        $atcontrato->fecha_inicio = date("Y-m-j");
-        $atcontrato->fecha_final = date("Y-m-j");
+        $atcontrato->fecha_inicio = date('Y-m-d');
+        $atcontrato->fecha_final = date('Y-m-d');
 
         $oculto = 'oculto';
         $visible = 'visible';
@@ -151,10 +151,10 @@ class pasoFinalController extends BaseController{
         $pasoReal = $at->pasoReal;
         $method = "post";
         $action = array('method' => 'PATH', 'id' => 'validar', 'class' => 'form-horizontal');
-        return View::make('asistencia-tecnica/creacion-paso-7', 
+        return View::make('asistencia-tecnica/creacion-paso-7',
                     compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible', 'ampliacion'));
         } catch (Exception $e) {
-            App::abort(404);    
+            App::abort(404);
         }
 
     }
@@ -162,7 +162,7 @@ class pasoFinalController extends BaseController{
 
     public function contratoGuardar($id){
         try {
-            
+
         $data = Input::all();
         $contrato = new AtContrato;
         if($contrato->guardar($data, 1)){
@@ -178,7 +178,7 @@ class pasoFinalController extends BaseController{
                         ->withErrors($contrato->errores)
                         ->withInput();
         } catch (Exception $e) {
-            App::abort(404);    
+            App::abort(404);
         }
     }
 
@@ -186,10 +186,15 @@ class pasoFinalController extends BaseController{
     public function contratada($id){
 
         try{
+        //return "hoal";
         $id2 = Math::to_base_10($id) - 100000;
-           
+
         $at = AtTermino::find($id2);
+
+       // return $at;
         $atcontrato = $at->contrato;
+           //return $atcontrato;
+
 
         if($at->ampliacion){
             $ampliacion = $at->ampliacion;
@@ -200,18 +205,18 @@ class pasoFinalController extends BaseController{
         }
         else{
             $ampliacion = new AmpliacionContrato;
-            $ampliacion->fecha = date("Y-m-j");
+            $ampliacion->fecha = date('Y-m-d');
         }
         $oculto = 'visible';
         $visible = 'oculto';
         $pasoActual = 6;
         $pasoReal = $at->pasoReal;
         $action = array('method' => 'PATH', 'id' => 'validar', 'class' => 'form-horizontal');
-        return View::make('asistencia-tecnica/creacion-paso-7', 
+        return View::make('asistencia-tecnica/creacion-paso-7',
                     compact('atcontrato', 'id', 'pasoActual', 'action', 'pasoReal', 'oculto', 'visible', 'ampliacion'));
 
         } catch (Exception $e) {
-            App::abort(404);    
+            App::abort(404);
         }
 
     }
@@ -221,12 +226,12 @@ class pasoFinalController extends BaseController{
         $id = Math::to_base_10($id) - 100000;
 
         $at = AtTermino::find($id);
-        $contrato = AtContrato::find($at->contrato->id);  
+        $contrato = AtContrato::find($at->contrato->id);
         $at->estado = 5;
         $at->save();
         if($contrato->guardar($data, 1))
             return Redirect::route('atPaso', $id);
-        
+
 
         return Redirect::route('atPasoContratada', $id)
                         ->withErrors($contrato->errores)
@@ -239,14 +244,19 @@ class pasoFinalController extends BaseController{
 
         $consultor = $at->consultorSeleccionado->consultor;
         $empresa = $at->empresa;
-        $empresario = $empresa->representante->empresarios;
+        // $empresario = $empresa->representante->empresarios;
+        $empresario = Empresario::find($at->empresario_id);
+
+        // if($consultor->sexo == 'Mujer')
+
+        $consultor->denominacion = ($consultor->sexo == 'Mujer'? 'la consultora': 'el consultor');
 
         $pdf = App::make('dompdf');
         //$pdf->loadHTML('<h1>Test</h1>');
-        $pdf->loadView('pdf.contratoAt', 
+        $pdf->loadView('pdf.contratoAt',
                 compact('at', 'consultor', 'empresa', 'empresario', 'contrato'));
         return $pdf->stream();
-    
+
     }
 
     public function ampliacion($id){
@@ -293,7 +303,7 @@ class pasoFinalController extends BaseController{
         //return $empresario;
         $pdf = App::make('dompdf');
         //$pdf->loadHTML('<h1>Test</h1>');
-        $pdf->loadView('pdf.atAmpliacion', 
+        $pdf->loadView('pdf.atAmpliacion',
                 compact('ampliacion', 'nombre', 'solicitante'));
         return $pdf->stream();
     }
@@ -301,7 +311,7 @@ class pasoFinalController extends BaseController{
 
     public function acta($id){
         try {
-            
+
         $idAt = Math::to_base_10($id, 62) - 100000;
 
         $at = AtTermino::find($idAt);
@@ -318,7 +328,7 @@ class pasoFinalController extends BaseController{
         }else{
             $acta = new acta;
             $acta->attermino_id = $idAt;
-            $acta->fecha = date('Y-m-j');
+            $acta->fecha = date('Y-m-d');
         }
 
 
@@ -328,9 +338,9 @@ class pasoFinalController extends BaseController{
         return View::make('asistencia-tecnica/creacion-paso-8',
             compact('acta', 'pasoActual', 'pasoReal', 'id', 'oculto', 'visible'));
         } catch (Exception $e) {
-            App::abort(404);    
+            App::abort(404);
         }
-        
+
     }
 
 
@@ -375,7 +385,8 @@ class pasoFinalController extends BaseController{
 
         $empresa = $at->empresa;
         $consultor = $at->consultorSeleccionado;
-        $empresario = $empresa->representante;
+        // $empresario = $empresa->representante;
+        $empresario = Empresario::find($at->empresario_id);
         $contrato = $at->contrato;
         $acta = $at->acta;
 
@@ -384,16 +395,50 @@ class pasoFinalController extends BaseController{
         //return $empresario;
         $pdf = App::make('dompdf');
         //$pdf->loadHTML('<h1>Test</h1>');
-        $pdf->loadView('pdf.atActa', 
+        $pdf->loadView('pdf.atActa',
                 compact('at', 'consultor', 'empresa', 'empresario', 'contrato', 'acta'));
         return $pdf->stream();
 
     }
 
 
+    public function informe($id){
+         try {
 
+        $idAt = Math::to_base_10($id, 62) - 100000;
 
+        $attermino = AtTermino::find($idAt);
+        $atcontrato = $attermino->contrato;
 
+        $pasoReal = $attermino->pasoReal;
+        $pasoActual = 8;
+
+        return View::make('asistencia-tecnica/creacion-paso-final', compact('attermino','atcontrato','pasoActual', 'pasoReal', 'id', 'oculto', 'visible'));
+        } catch (Exception $e) {
+            App::abort(404);
+        }
+
+    }
+
+    public function informeGuardar($id){
+
+        // return "hola";
+        $id2 = Math::to_base_10($id, 62) - 100000;
+        $informe = Input::file('informe');
+        $at = AtTermino::find($id2);
+        $at->informe = $this->guardarInforme($informe[0]);
+        $at->save();
+
+        return Redirect::back();
+
+    }
+
+    private function guardarInforme($file){
+        $destinationPath = 'assets/at/';
+        $fileName = $file->getClientOriginalName();
+        $file->move($destinationPath, $fileName);
+        return $fileName;
+    }
 
 
 

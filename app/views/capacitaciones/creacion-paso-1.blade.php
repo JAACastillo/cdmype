@@ -10,8 +10,12 @@ Capacitaciones
 <br/>
 
 {{ Form::model($captermino, $accion) }}
+@if($captermino->exists)
+	<a class="btn btn-default" href="{{route('pdfCap', $captermino->id)}}" data-toggle="tooltip" data-placement="bottom" title="Imprimir F1" target="_blank"> <span class="glyphicon glyphicon-print"></span>&nbsp TDR</a>
+@endif
 @include('errores', array('errors' => $errors))
 <div class="row animated fadeIn">
+	<br>
     <div class="col-xs-12 col-md-6">
         <div class="panel panel-default">
             <div class="panel-body">

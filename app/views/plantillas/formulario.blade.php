@@ -28,5 +28,5 @@
             <!-- derecha -->
         </div>
     </div>
-    
+
 @stop

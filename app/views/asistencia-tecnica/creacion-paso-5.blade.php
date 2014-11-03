@@ -21,7 +21,7 @@
 @endif
 
 <br/>
-<div class="row">
+<div class="row animated fadeIn">
 	{{Form::open()}}
 	<div class="col-xs-1"></div>
 	<div class="col-xs-10">
@@ -33,8 +33,8 @@
 	        			<table class="table table-bordered">
 				            <tr class="active">
 				                <th class="text-center">Nombre</th>
-				                <th class="text-center">Correo</th>
-				                <th class="text-center">Telefonos</th>
+				                <th class="text-center hidden-xs hidden-sm">Correo</th>
+				                <th class="text-center hidden-xs hidden-sm">Telefonos</th>
 				                <th class="text-center">Oferta</th>
 				                <th class="text-center">Opciones</th>
 				            </tr>
@@ -42,8 +42,8 @@
 				            @foreach ($consultores as $consultor)
 				            <tr>
 				                <td>{{ $consultor->consultor->nombre }}</td>
-				                <td class="text-center">{{ $consultor->consultor->correo }}</td>
-				                <td class="text-center" style="width:100px">{{ $consultor->consultor->telefono }}</td>
+				                <td class="text-center hidden-xs hidden-sm">{{ $consultor->consultor->correo }}</td>
+				                <td class="text-center hidden-xs hidden-sm" style="width:100px">{{ $consultor->consultor->telefono }}</td>
 				                <td class="text-center"> 
 				                	<a href="{{route('atOferta', $consultor->doc_oferta)}}" target="_blank">
 				                		{{ $consultor->doc_oferta}}

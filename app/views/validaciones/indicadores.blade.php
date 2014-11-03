@@ -21,9 +21,9 @@ $(document).ready(function() {
             },
             ventaNacional: {
                 validators: {
-                    notEmpty: {
-                        message: 'Campo requerido.'
-                    }
+                    // notEmpty: {
+                    //     message: 'Campo requerido.'
+                    // }
                 }
             },  
             'productos[]': {

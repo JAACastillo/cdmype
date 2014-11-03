@@ -7,17 +7,18 @@
 
 @section('contenido')
 
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Dispositivos Moviles -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </button>
-      <a class="active navbar-brand" href="{{url('/')}}">CDMYPE</a>
+      </a>
+      <a class="active navbar-brand hidden-sm hidden-md" href="{{url('/')}}">CDMYPE</a>
+      <!-- <a class="active navbar-brand visible-sm visible-md" href="{{url('/')}}"><span class="glyphicon glyphicon-home"></span></a> -->
     </div>
 
     <!-- Menu -->
@@ -35,64 +36,12 @@
         <li><a href="{{ route('consultores') }}">Consultores</a></li>
         <li><a href="{{ route('asistencia-tecnica') }}">Asistencia Técnica</a></li>
         <li><a href="{{ route('capacitaciones') }}">Capacitación</a></li>
+        <li><a href="{{ route('eventos.index') }}">Eventos</a></li>
       </ul>
 
       <!-- Buscador -->
-      <div class="hidden-sm hidden-xs">
-          {{ Form::open(array('url' => '/buscar/buscar', 'method' => 'post', 'id' => 'validador', 'class' => 'navbar-form navbar-left', 'role' => 'search')) }}
-            <div class="input-group">
-              <span class="input-group-addon glyphicon glyphicon-search"></span>
-              {{ Form::text('buscar', null, array('placeholder' => 'Buscar', 'class' => 'form-control buscador')) }}
-            </div> 
-                <div class="btn-group">
-                  <button type="submit"class="btn btn-primary ladda-button" data-style="expand-right">
-                  Buscar
-                  </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-                  </button>
-                  <a type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                      <span class="caret"></span>
-                      <span class="sr-only">Toggle Dropdown</span>
-                  </a>
-                  <div class="dropdown-menu" role="menu">
-                    <div class="radio">
-                      <label>
-                        &nbsp<input type="radio" name="tabla" value="usuarios" checked>
-                        &nbsp Usuario
-                      </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        &nbsp<input type="radio" name="tabla" value="empresarios">
-                        &nbsp Empresario
-                      </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        &nbsp<input type="radio" name="tabla" value="empresas">
-                        &nbsp Empresa
-                      </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        &nbsp<input type="radio" name="tabla" value="consultores">
-                        &nbsp Consultor
-                      </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        &nbsp<input type="radio" name="tabla" value="terminos">
-                        &nbsp Asistencia Técnica
-                      </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                        &nbsp<input type="radio" name="tabla" value="material">
-                        &nbsp Material Asesoría
-                      </label>
-                    </div>
-                  </div>
-                </div>
-          {{ Form::close() }}
+      <div class=" hidden-xs hidden-sm hidden-md animated fadeIn">
+          @include('buscador')
       </div>
 
       <!-- Menu Derecho -->
@@ -117,31 +66,85 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-	<div>
-    <br/>
-    <br/>
+  <div>
     <div id="fondoLoader"></div>
     <div id="loader"></div>
+    <!-- Buscador -->
+    <a class="visible-xs visible-sm visible-md pull-right" id="opcionBuscar" style="font-size:16px;cursor:pointer;z-index:1000;position:absolute;top:60px;right:15px;" data-toggle="tooltip" data-placement="bottom" title="Buscador"><span class="glyphicon glyphicon-search"></span></a>
+    <div class="row opcionBuscar oculto">
+        <div class="row visible-xs visible-sm animated bounceInDown">
+          <br><br>
+        @include("buscador2")
+        <br><br>
+        </div>
+        <br><br>
+    </div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="titulo"></h4>
+      </div>
+      <div class="modal-body">
+        {{ Form::hidden('bandera', null, array('id' => 'myModalBandera')) }}
+        <div class="row">
+          <div class="col-xs-12">
+          {{ Form::textarea('texto', null, array('placeholder' => 'Introdusca el texto...', 'rows' => '12', 'class' => 'form-control', 'id' => 'texto', 'autofocus')) }}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a type="button" data-dismiss="modal" style="cursor: pointer">Cancelar</a>  &nbsp  &nbsp
+        <a type="button" class="btn btn-primary ocultarModal" >Guardar</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
     @yield('escritorio')
   </div>
 
 @section('script')
 
 <script type="text/javascript">
-$("#validador").submit(function () {  
-    if($(".buscador").val().length < 1) {  
+
+//Validar buscador
+$("#validador").submit(function () {
+    if($(".buscador").val().length < 1) {
         $.growl("No ha ingresado el texto a buscar!", {
             type: "danger",
             allow_dismiss: false,
             animate: {
                 enter: 'animated bounceIn',
                 exit: 'animated bounceOut'
-            }                               
-        });  
-        return false;  
-    }  
-    return true;  
+            }
+        });
+        return false;
+    }
+    return true;
 });
+
+$("#validador2").submit(function () {
+    if($(".buscador2").val().length < 1) {
+        $.growl("No ha ingresado el texto a buscar!", {
+            type: "danger",
+            allow_dismiss: false,
+            animate: {
+                enter: 'animated bounceIn',
+                exit: 'animated bounceOut'
+            }
+        });
+        return false;
+    }
+    return true;
+});
+
+$('#opcionBuscar').on('click', function(){
+    $('.opcionBuscar').toggle("fadeIn");
+})
 
 </script>
 

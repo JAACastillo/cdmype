@@ -20,11 +20,11 @@
         <table class="table table-bordered datatable">
             <thead>
             <tr class="active">
-                <th class="text-center">ID</th>
+                <th class="text-center hidden-xs hidden-sm">ID</th>
                 <th class="text-center">Tema</th>
                 <th class="text-center">Area</th>
-                <th class="text-center">Encargado</th>
-                <th class="text-center">Consultor</th>
+                <th class="text-center hidden-xs hidden-sm">Encargado</th>
+                <th class="text-center hidden-xs">Consultor</th>
                 <th class="text-center">Estado</th>
                 <th class="text-center">Opciones</th>
             </tr>
@@ -32,13 +32,20 @@
             <tbody>
             @foreach ($capterminos as $captermino)
             <tr>
-                <td class="text-center" style="width:25px">{{ $captermino->id }}</td><td>
+                <td class="text-center hidden-xs hidden-sm" style="width:25px">{{ $captermino->id }}</td>
+                <td>
                     <a href="{{route('capPaso', $captermino->id)}}">{{ $captermino->tema }}
                     </a>
                 </td>
                 <td>{{ $captermino->especialidad->sub_especialidad }}</td>
-                <td>{{ $captermino->usuario->nombre }}</td>
-                <td> @if($captermino->pasoReal > 6){{ $captermino->consultorSeleccionado->consultor->nombre }} @endif </td>
+                <td class="hidden-xs hidden-sm">{{ $captermino->usuario->nombre }}</td>
+                <td class="hidden-xs">
+                    @if($captermino->pasoReal > 6)
+                    <a href="{{ route('editarConsultor', array($captermino->consultorSeleccionado->consultor->id)) }}">
+                    {{ $captermino->consultorSeleccionado->consultor->nombre }}
+                    </a>
+                    @endif
+                </td>
                 <td class="text-center">{{ $captermino->estado }}</td>
                 <td class="text-center">
                     <a href="{{ route('capModificarTermino', array($captermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>

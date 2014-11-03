@@ -22,7 +22,7 @@
 @endif
 
 <br/>
-<div class="row">
+<div class="row animated fadeIn">
 	<div class="col-xs-1"></div>
 	<div class="col-xs-10">
 	<div class="panel panel-default">
@@ -38,18 +38,20 @@
 					<div class="table-responsive">
 	        			<table class="table table-bordered">
 				            <tr class="active">
+				                <th class="text-center">ID</th>
 				                <th class="text-center">Nombre</th>
-				                <th class="text-center">Correo</th>
-				                <th class="text-center">Telefonos</th>
+				                <th class="text-center hidden-xs hidden-sm">Correo</th>
+				                <th class="text-center hidden-xs">Telefonos</th>
 				                <th class="text-center">Especialidad</th>
 				                <th class="text-center">Opciones</th>
 				            </tr>
 
 				            @foreach ($consultores as $consultor)
 				            <tr>
+				                <td>{{ $consultor->consultor->id }}</td>
 				                <td>{{ $consultor->consultor->nombre }}</td>
-				                <td class="text-center">{{ $consultor->consultor->correo }}</td>
-				                <td class="text-center" style="width:100px">{{ $consultor->consultor->telefono }}</td>
+				                <td class="text-center hidden-xs hidden-sm">{{ $consultor->consultor->correo }}</td>
+				                <td class="text-center hidden-xs" style="width:100px">{{ $consultor->consultor->telefono }}</td>
 				                <td class="text-center"> {{$consultor->especialidad->sub_especialidad}}</td>
 				                <td class="text-center" style="width:100px">
 				                    <input name="consultores[]" type="checkbox" data-content="Seleccionar" value="{{$consultor->consultor->id}}" checked >

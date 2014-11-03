@@ -22,9 +22,9 @@
         <thead>
         <tr class="active">
             <th class="text-center">Asesoría</th>
-            <th class="text-center">Descripción</th>
-            <th class="text-center">Creador</th>
-            <th class="text-center">Modificado</th>
+            <th class="text-center hidden-xs hidden-sm">Descripción</th>
+            <th class="text-center hidden-xs hidden-sm">Creador</th>
+            <th class="text-center hidden-xs hidden-sm">Modificado</th>
             <th class="text-center">Material</th>
             <th class="text-center">Opciones</th>
         </tr>
@@ -33,9 +33,9 @@
         @foreach ($asesorias as $asesoria)
         <tr>
             <td>{{ $asesoria->nombre  }}</td>
-            <td class="text-center">{{ $asesoria->descripcion }}</td>
-            <td class="text-center">{{ $asesoria->usuario->nombre }}</td>
-            <td class="text-center">
+            <td class="text-center hidden-xs hidden-sm">{{ $asesoria->descripcion }}</td>
+            <td class="text-center hidden-xs hidden-sm">{{ $asesoria->usuario->nombre }}</td>
+            <td class="text-center hidden-xs hidden-sm">
                 @if($asesoria->modificado)
                     {{$asesoria->editado->nombre}}
                 @endif

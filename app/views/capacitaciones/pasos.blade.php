@@ -1,4 +1,4 @@
-<?php 
+<?php
 	$pasos  = array(
 				    array(
 				        "label"  => "TDR",
@@ -37,7 +37,7 @@
 				    ),
 				    array(
 				        "label" => "Finalizada",
-				        "enlace" => "capacitaciones",
+				        "enlace" => "capPasoInforme",
 				        "rows"   => 2
 				    )
 				);
@@ -49,11 +49,11 @@
 	<div class="btn-group col-xs-12">
 	 	@foreach($pasos as $paso)
 
-		  	<a href="{{route($paso['enlace'], $id)}}" type="button"  
-		  		{{($step > $pasoReal ? 'disabled' : '')}} 
-		  		class="{{($pasoActual == $step ? 'active btn btn-primary' : 'btn btn-default')}}  
-		  		col-xs-{{$paso['rows']}}">
-		  		Paso {{$step++}}<br/> 
+		  	<a href="{{route($paso['enlace'], $id)}}" type="button"
+		  		{{($step > $pasoReal ? 'disabled' : '')}}
+		  		class="{{($pasoActual == $step ? 'active btn btn-primary' : 'btn btn-default')}}
+		  		col-md-{{$paso['rows']}}">
+		  		Paso {{$step++}}<br/>
 		  		<strong> {{$paso['label']}} </strong>
 		  	</a>
 		@endforeach

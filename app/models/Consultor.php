@@ -49,7 +49,7 @@ class Consultor extends Eloquent {
         {        
             $reglas = array(
                 'nit' => 'required|unique:consultores',
-                'dui' => 'required|unique:consultores',
+                //'dui' => 'required|unique:consultores',
                 'nombre' => 'required|max:100',
                 'correo' => 'email|required|max:75|unique:consultores',
                 'municipio_id' => 'required',
@@ -61,7 +61,7 @@ class Consultor extends Eloquent {
             if ($this->exists) 
             {
                 $reglas['nit'] .= ',nit,' . $this->id;
-                $reglas['dui'] .= ',dui,' . $this->id;
+                // $reglas['dui'] .= ',dui,' . $this->id;
                 $reglas['correo'] .= ',correo,' . $this->id;
             }
             

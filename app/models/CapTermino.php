@@ -20,9 +20,10 @@ class CapTermino extends Eloquent {
         'nota',
         'estado',
         'especialidad_id',
-        'usuario_id'
+        'usuario_id',
+        'informe'
     );
-    
+
     /* Guardar */
 
         public function guardar($datos,$accion)
@@ -33,24 +34,24 @@ class CapTermino extends Eloquent {
             $date = strtotime($datos['fecha_lim']);
             $datos['fecha_lim'] = date('Y-m-d', $date);
 
-            if($this->validar($datos)) 
+            if($this->validar($datos))
             {
                 $this->fill($datos);
                 $this->save();
                 $id = $this->id;
                 $bitacora = new Bitacora;
-                
+
                 $campos = array(
                     'usuario_id' => Auth::user()->id,
                     'tabla' => 20,
                     'tabla_id' => $id,
                     'accion' => $accion
                 );
-                
+
                 $bitacora->guardar($campos);
                 return true;
             }
-            
+
             return false;
         }
 
@@ -63,8 +64,8 @@ class CapTermino extends Eloquent {
                 'tema' => 'required|max:500',
                 'categoria' => 'required',
                 'descripcion' => 'required|max:3000',
-                'obj_general' => 'required|max:500',
-                'obj_especifico' => 'required|max:500',
+                'obj_general' => 'required|max:2000',
+                'obj_especifico' => 'required|max:5000',
                 'productos' => 'required|max:3000',
                 'lugar' => 'required|max:1000',
                 'fecha' => 'required',
@@ -75,14 +76,14 @@ class CapTermino extends Eloquent {
                 'especialidad_id' => 'required',
                 'usuario_id' => 'required'
             );
-        
+
             $validador = Validator::make($datos,$reglas);
-            
-            if($validador->passes()) 
+
+            if($validador->passes())
                 return true;
-            
+
             $this->errores = $validador->errors();
-            
+
             return false;
         }
 
@@ -92,7 +93,7 @@ class CapTermino extends Eloquent {
 
             return $this->consultores()
                         ->where("doc_oferta", "!=", "")
-                        ->get(); 
+                        ->get();
 
         }
         public function getConsultorSeleccionadoAttribute()
@@ -113,7 +114,7 @@ class CapTermino extends Eloquent {
         //Pasos
             public function getPasoRealAttribute(){
                 switch ($this->estado) {
-                    case 'Creado':                       
+                    case 'Creado':
                         return 2;
                         break;
                     case 'Enviado':
@@ -149,20 +150,20 @@ class CapTermino extends Eloquent {
            return date('d/m/Y', $date);
         }
 
-    
+
     /* Relaciones */
 
-        public function usuario() 
+        public function usuario()
         {
             return $this->belongsTo('User');
         }
 
-        public function especialidad() 
+        public function especialidad()
         {
             return $this->belongsTo('SubEspecialidad');
         }
 
-        public function consultores() 
+        public function consultores()
         {
             return $this->hasMany('CapConsultor','captermino_id');
         }

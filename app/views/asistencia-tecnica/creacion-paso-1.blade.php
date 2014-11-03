@@ -1,4 +1,3 @@
-
 @extends('menu')
 
 @section('titulo')
@@ -20,24 +19,24 @@ AT Paso empresa
         animate: {
             enter: 'animated bounceIn',
             exit: 'animated bounceOut'
-        }                               
+        }
     });
 </script>
 @stop
 @endif
 
-<div class="row">
+<div class="row animated fadeIn">
 	<div class="col-xs-2"></div>
 	<div class="col-xs-8">
 		<div class="panel panel-default">
 			<div class="panel-body">
-			<br/>		
+			<br/>
 			<div class="row">
 				<div class="col-xs-11">
 			        <div class="form-group">
 				        {{ Form::label('empresa_id', 'Empresa:', array('class' => 'control-label col-md-4')) }}
                 		<div class="col-md-7">
-                    	{{ Form::hidden('empresa_id',null) }}                		
+                    	{{ Form::hidden('empresa_id',null) }}
                     	{{ Form::text('empresa', null, array('placeholder' => 'Nombre de la empresa', 'class' => 'form-control getEmpresa', 'data-url' => 'empresa', 'autofocus')) }}
                 		</div>
 				    </div>

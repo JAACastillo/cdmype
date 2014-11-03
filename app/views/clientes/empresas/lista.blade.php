@@ -22,27 +22,27 @@
             <tr class="active">
                 <th class="text-center">Nombre</th>
                 <th class="text-center">Propietario</th>
-                <th class="text-center">Categoria</th>
-                <th class="text-center">Municipio</th>
+                <th class="text-center hidden-xs hidden-sm">Categoria</th>
+                <th class="text-center hidden-xs hidden-sm">Municipio</th>
                 <th class="text-center">Opciones</th>
             </tr>
             </thead>
             <tbody>
             @foreach ($empresas as $empresa)
             <tr>
-                <td>{{ $empresa->nombre }}</td>
+                <td style="width:300px" ><a href="{{route('editarEmpresa', array($empresa->id))}}">{{ $empresa->nombre }}</a></td>
 
-                <td >
+                <td>
                 @foreach($empresa->empresarios as $empresario)
-                 
-                    <h5>{{ $empresario->empresarios->nombre }} <small>{{$empresario->tipo}}</small></h5>
-                    
+
+                    <a  href="{{ route('editarEmpresario', array($empresario->empresarios->id)) }}"><h5>{{ $empresario->empresarios->nombre }} <small>{{$empresario->tipo}}</small></h5></a>
+
                 @endforeach
                 </td>
 
 
-                <td class="text-center">{{ $empresa->categoria }}</td>
-                <td class="text-center">{{ $empresa->municipio->municipio }}</td>
+                <td class="text-center hidden-xs hidden-sm">{{ $empresa->categoria }}</td>
+                <td class="text-center hidden-xs hidden-sm">{{ $empresa->municipio->municipio }}</td>
                 <td class="text-center">
                     <a href="{{ route('editarEmpresa', array($empresa->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
                     <a href="{{ route('verEmpresa', array($empresa->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>

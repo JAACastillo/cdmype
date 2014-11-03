@@ -47,17 +47,22 @@ Route::get('asistencia-tecnica/paso/acta/{id}', ['as' => 'atPasoActa', 'uses' =>
 Route::post('asistencia-tecnica/paso/acta/{id}', ['as' => 'atPasoActa', 'uses' => 'pasoFinalController@actaGuardar']);
 Route::get('asistencia-tecnica/paso/acta-imprimir/{id}', ['as' => 'atPasoActaImprimir', 'uses' => 'pasoFinalController@actaPdf']);
 
+Route::get('asistencia-tecnica/paso/informe/{id}', ['as' => 'atPasoInforme', 'uses' => 'pasoFinalController@informe']);
+Route::post('asistencia-tecnica/paso/informe/{id}', ['as' => 'atPasoInformeGuardar', 'uses' => 'pasoFinalController@informeGuardar']);
 
 
-
-Route::get("asistencia-tecnica/ofertas/{oferta}", 
+Route::get("asistencia-tecnica/ofertas/{oferta}",
 			['as' => 'atOferta', function($oferta) { return Redirect::to('assets/ofertas/' . $oferta); }]
 
 	);
 
 Route::get('asistencias-tecnicas', ['as' => 'asistencia-tecnica', 'uses' => 'AtTerminoController@index']);
 
-
+Route::get('at/{doc}', ['as' => 'atInforme', 'uses' =>
+    function($doc){
+        return Redirect::to('assets/at/'. $doc);
+    }
+    ]);
 
 
 /*

@@ -67,7 +67,7 @@
  	</div>
  </div>
  <div>
- 	<p><strong>3. Productos Esperandos</strong></p>
+ 	<p><strong>2. Productos Esperados</strong></p>
  	<p>
  		Al finalizar la asistencia técnica, donde el consultor contratado deberá hacer visitas in situ para desarrollar el trabajo siguiente:
  		<?php
@@ -84,7 +84,7 @@
  </div>
 
  	<div>
- 		<p><strong>4. Oferta técnica y económica</strong></p>
+ 		<p><strong>3. Oferta técnica y económica</strong></p>
  		La oferta técnica y económica deberá ser presentada de acuerdo al siguiente contenido, ver anexo de oferta:
  		<ul>
  			<li>Descripción de la empresa(s).</li>
@@ -95,14 +95,24 @@
  		</ul>
  	</div>
  	<div>
- 		<p><strong>5. Tiempo de ejecución de la asistencia técnica: </strong></p>
+ 		<p><strong>4. Tiempo de ejecución de la asistencia técnica: </strong></p>
  		<p>{{$at->tiempo_ejecucion}} horas efectivas, de las cuales el {{$at->trabajo_local}}% debe ser trabajo en el local del empresario, y el {{100 - $at->trabajo_local}}% restante trabajo en oficina para redacción de informes y cualquier otro trabajo que el proceso requiera. Esta relación puede variar dependiendo del tipo de trabajo a realizar y debe ir justificado en la planificación de actividades de la oferta técnica.</p>
  	</div>
  	<div>
- 		<p><strong>6.Plazo de presentación de ofertas:  </strong></p>
+ 		<p><strong>5. Plazo de presentación de ofertas:  </strong></p>
  		<p>
- 			Presentar su oferta Técnica y Económica a mas tardar en la fecha {{$at->fecha}}, ya sea por medio electrónico a cmercado.unicaes@gmail.com, {{$asesor->email}}, físico en la oficina CDMYPE ubicada en Universidad Católica de El Salvador-Centro Regional Ilobasco o en el enlace proporcionado en el correo. 
+ 			Presentar su oferta Técnica y Económica a mas tardar en la fecha {{$at->fecha}}, ya sea por medio electrónico a cdmype.unicaes@gmail.com, {{$asesor->email}} o físico en la oficina CDMYPE ubicada en Universidad Católica de El Salvador-Centro Regional Ilobasco.
+ 			No se tomaran en cuenta las ofertas sin firma del consultor, ni ofertas recibidas después de la fecha establecida.
 
+ 		</p>
+ 	</div>
+ 	<div>
+ 		<p><strong>6. Financiamiento:  </strong></p>
+ 		<p>
+ 			El valor máximo a cofinanciar por el desarrollo de la asistencia técnica es de <strong>${{$at->financiamiento}}</strong>.
+ 			@if( $at->aporte > 0)
+ 				Más un aporte empresarial de <strong>{{$at->aporte}} %</strong>
+ 			@endif
  		</p>
  	</div>
 </div>

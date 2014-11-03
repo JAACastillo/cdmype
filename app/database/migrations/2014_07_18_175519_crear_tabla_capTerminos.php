@@ -15,8 +15,8 @@ class CrearTablaCapTerminos extends Migration {
             $table->enum('categoria', array('Emprendedoras y empresarias de los Departamentos de Cabañas, Cuscatlán y San Vicente.',
                                               'Empresarios de los departamentos de Cabañas, Cuscatlán y San Vicente.'));
             $table->string('descripcion', 3000);
-            $table->string('obj_general', 500);
-            $table->string('obj_especifico', 500);
+            $table->string('obj_general', 2000);
+            $table->string('obj_especifico', 2000);
             $table->string('productos',3000);
             $table->string('lugar',1000);
             $table->date('fecha');

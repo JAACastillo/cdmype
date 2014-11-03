@@ -18,42 +18,44 @@ class AtTermino extends Eloquent {
         'estado',
         'especialidad_id',
         'usuario_id',
-        'empresa_id'
+        'empresa_id',
+        'empresario_id',
+        'informe'
     );
-    
+
 
     /* Guardar */
 
-     public function guardar($datos,$accion) 
+     public function guardar($datos,$accion)
         {
             $date = strtotime($datos['fecha']);
 
             $datos['fecha'] = date('Y-m-d', $date);
-            if($this->validar($datos)) 
+            if($this->validar($datos))
             {
                 $this->fill($datos);
                 $this->save();
                 $id = $this->id;
                 $bitacora = new Bitacora;
-                
+
                 $campos = array(
                     'usuario_id' => Auth::user()->id,
                     'tabla' => 10,
                     'tabla_id' => $id,
                     'accion' => $accion
                 );
-                
+
                 $bitacora->guardar($campos);
                 return true;
             }
-            
+
             return false;
         }
 
 
     /* Validaciones */
 
-        public function validar($datos) 
+        public function validar($datos)
         {
             $reglas = array(
                 'tema' => 'required|max:500',
@@ -67,20 +69,21 @@ class AtTermino extends Eloquent {
                 'aporte' => 'required',
                 'especialidad_id' => 'required',
                 'usuario_id' => 'required',
-                'empresa_id' => 'required'
+                'empresa_id' => 'required',
+                'empresario_id' => 'required'
             );
-        
+
             $validador = Validator::make($datos,$reglas);
-            
-            if($validador->passes()) 
+
+            if($validador->passes())
                 return true;
-            
+
             $this->errores = $validador->errors();
-            
+
             return false;
         }
 
-    
+
 
         //Atributos
 
@@ -89,7 +92,7 @@ class AtTermino extends Eloquent {
 
             return $this->consultores()
                         ->where("doc_oferta", "!=", "")
-                        ->get(); 
+                        ->get();
             //Return "Ofertantes";
         }
 
@@ -104,7 +107,7 @@ class AtTermino extends Eloquent {
 
         public function getPasoRealAttribute(){
             switch ($this->estado) {
-            case 'Creado':                       
+            case 'Creado':
                 return 3;
                 break;
             case 'Enviado':
@@ -123,16 +126,16 @@ class AtTermino extends Eloquent {
                 return 8;
                 break;
             default:
-            
+
                 return 8;
-            
+
                 break;
         }
 
         }
-     
 
-     
+
+
         // public function getContratoAttribute()
         // {
         //     return $this->contratos()
@@ -144,22 +147,22 @@ class AtTermino extends Eloquent {
     /* Relaciones */
 
         //
-        public function usuario() 
+        public function usuario()
         {
             return $this->belongsTo('User');
         }
 
-        public function especialidad() 
+        public function especialidad()
         {
             return $this->belongsTo('SubEspecialidad');
         }
 
-        public function empresa() 
+        public function empresa()
         {
             return $this->belongsTo('Empresa');
         }
 
-        public function consultores() 
+        public function consultores()
         {
             return $this->hasMany('AtConsultor','attermino_id');
         }
@@ -171,7 +174,7 @@ class AtTermino extends Eloquent {
         public function acta(){
             return $this->hasOne('Acta','attermino_id');
         }
-        
+
         public function ampliacion(){
             return $this->hasOne('AmpliacionContrato', 'attermino_id');
         }

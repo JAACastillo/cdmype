@@ -21,22 +21,22 @@ class Empresa extends Eloquent {
 
     /* Validaciones */
 
-        public function guardar($datos,$accion) 
+        public function guardar($datos,$accion)
         {
-            if($this->validar($datos)) 
+            if($this->validar($datos))
             {
                 $this->fill($datos);
                 $this->save();
                 $id = $this->id;
                 $bitacora = new Bitacora;
-                
+
                 $campos = array(
                     'usuario_id' => Auth::user()->id,
                     'tabla' => 9,
                     'tabla_id' => $id,
                     'accion' => $accion
                 );
-                
+
                 $bitacora->guardar($campos);
                 return true;
             }
@@ -61,9 +61,9 @@ class Empresa extends Eloquent {
         return 2;
     }
 
-    /* Fin atributos personalizados */ 
-        public function validar($datos) 
-        {        
+    /* Fin atributos personalizados */
+        public function validar($datos)
+        {
             $rules = array(
                 'categoria' => 'required',
                 'nombre' => 'required',
@@ -71,10 +71,10 @@ class Empresa extends Eloquent {
                 'direccion' => 'required',
                 'clasificacion' => 'required'
             );
-            
+
             $validator = Validator::make($datos,$rules);
-            
-            if($validator->passes()) 
+
+            if($validator->passes())
                 return true;
 
             $this->errores = $validator->errors();
@@ -89,22 +89,22 @@ class Empresa extends Eloquent {
 
 	/* Relaciones */
 
-        public function atenciones() 
+        public function atenciones()
         {
             return $this->hasMany('Atencion','empresa_id');
         }
 
-        public function atTerminos() 
+        public function atTerminos()
         {
             return $this->hasMany('AtTermino','empresa_id');
         }
 
-        public function empresarios() 
+        public function empresarios()
         {
             return $this->hasMany('EmpresaEmpresario','empresa_id');
         }
 
-        public function municipio() 
+        public function municipio()
         {
             return $this->belongsTo('Municipio');
         }

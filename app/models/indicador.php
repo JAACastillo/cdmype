@@ -51,7 +51,7 @@ class indicador extends Eloquent {
                 'fechaInicio'			=> 'required|date',
 
 		        //'contabilidadFormal'	=> 'required',
-		        'ventaNacional'   		=> 'required',
+		        // 'ventaNacional'   		=> 'required',
 		        //'costoProduccion'		=> 'required',
 		        //'financiamiento'		=> 'required',
 		        //'capitalSemilla'		=> 'required',

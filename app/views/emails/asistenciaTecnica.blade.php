@@ -13,4 +13,4 @@
 <br/>
 <a href="{{route('pdfAt', $atTermino->id)}}" target="_blank">TERMINOS DE REFENCIA (PDF)</a>
 <br/>
-<a href="{{route('formatoF7', 'F7 FORMATO OFERTA TÉCNICA Y ECONÓMICA.docx')}}" target="_blank">FORMATO OFERTA TÉCNICA Y ECONÓMICA (WORD)</a>
+<a href="{{route('f7', 'F7 FORMATO OFERTA TECNICA Y ECONOMICA.docx')}}" target="_blank">FORMATO OFERTA TÉCNICA Y ECONÓMICA (WORD)</a>

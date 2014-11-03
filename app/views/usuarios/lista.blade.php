@@ -21,7 +21,7 @@
             <thead>
             <tr class="active">
                 <th class="text-center">Nombre</th>
-                <th class="text-center">Correo Electrónico</th>
+                <th class="text-center hidden-xs hidden-sm">Correo Electrónico</th>
                 <th class="text-center">Tipo de usuario</th>
                 <th class="text-center">Opciones</th>
             </tr>
@@ -30,7 +30,7 @@
             @foreach ($usuarios as $usuario)
             <tr>
                 <td>{{ $usuario->nombre }}</td>
-                <td>{{ $usuario->email }}</td>
+                <td class="hidden-xs hidden-sm">{{ $usuario->email }}</td>
                 <td class="text-center">{{ $usuario->tipo }}</td>
                 <td class="text-center">
                     <a href="{{ route('editarUsuario', array($usuario->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>

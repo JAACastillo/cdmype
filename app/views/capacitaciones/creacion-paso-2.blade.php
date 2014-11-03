@@ -24,8 +24,8 @@ Capacitaciones
 
 <br/>
 <div class="row animated fadeIn">
-	<div class="col-xs-1"></div>
-	<div class="col-xs-10">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
 	<div class="panel panel-default">
 		<div class="panel-body">
 		<?php
@@ -35,27 +35,29 @@ Capacitaciones
 
 			{{Form::hidden('idCaptermino', $id)}}
 			<div class="row">
-				<div class="col-xs-12">
+				<div class="col-sm-12">
 					<div class="table-responsive">
 	        			<table class="table table-bordered">
 				            <tr class="active">
 				                <th class="text-center">Nombre</th>
-				                <th class="text-center">Correo</th>
-				                <th class="text-center">Telefonos</th>
+				                <th class="text-center hidden-xs hidden-sm">Correo</th>
+				                <th class="text-center hidden-xs">Telefonos</th>
 				                <th class="text-center">Especialidad</th>
 				                <th class="text-center">Opciones</th>
 				            </tr>
 
 				            @foreach ($consultores as $consultor)
-				            <tr>
-				                <td>{{ $consultor->consultor->nombre }}</td>
-				                <td class="text-center">{{ $consultor->consultor->correo }}</td>
-				                <td class="text-center" style="width:100px">{{ $consultor->consultor->telefono }}</td>
-				                <td> {{$consultor->especialidad->sub_especialidad}}</td>
-				                <td class="text-center" style="width:100px">
-				                    <input name="consultores[]" type="checkbox" data-content="Seleccionar" value="{{$consultor->consultor->id}}" checked >
-				                </td>
-				            </tr>
+					           @if($consultor->consultor)
+					            <tr>
+					                <td>{{ $consultor->consultor->nombre }}</td>
+					                <td class="text-center hidden-xs hidden-sm">{{ $consultor->consultor->correo }}</td>
+					                <td class="text-center hidden-xs" style="width:100px">{{ $consultor->consultor->telefono }}</td>
+					                <td> {{$consultor->especialidad->sub_especialidad}}</td>
+					                <td class="text-center" style="width:100px">
+					                    <input name="consultores[]" type="checkbox" data-content="Seleccionar" value="{{$consultor->consultor->id}}" checked >
+					                </td>
+					            </tr>
+					            @endif
 				            @endforeach
 
 	        			</table>
@@ -88,7 +90,7 @@ Capacitaciones
 		</div>
 	</div>
 	</div>
-	<div class="col-xs-1"></div>
+	<div class="col-md-1"></div>
 </div>
 
 {{ $consultores->links() }}

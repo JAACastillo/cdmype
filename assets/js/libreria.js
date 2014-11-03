@@ -1,11 +1,15 @@
 (function($){
     var servidor = "http://www.cri.catolica.edu.sv/cdmype/sistema";
     var _servidor1 = servidor + '/api/';
-    
+
     $(window).load(function(){ //patch fix size of select box
         $('.chosen-container').css('width', '100%');
         $('#fondoLoader').fadeOut(1000);
         $('#loader').fadeOut(1000);
+
+        $('.datatable').on( 'search.dt', function () { animar(); } ).dataTable();
+        $('.dataeventos').on( 'page.dt', function () { animarE(); } ).dataTable();
+        $('.datanoticias').on( 'page.dt', function () { animarN(); } ).dataTable();
     });
 
 // Botones animados
@@ -37,8 +41,6 @@
     $("[type='checkbox']").bootstrapSwitch();
 
 //DataTable
-    $(document).ready(function() {
-    
     function animar() {
         var animacion="fadeInDown";
         $('td').addClass("animated " +  animacion);
@@ -46,13 +48,26 @@
         setTimeout(function() {
             $('td').removeClass("animated " +  animacion);
         }, 1000);
-    }
-    
- 
-    $('.datatable')
-        .on( 'search.dt', function () { animar(); } )
-        .dataTable();
-    } );
+    };
+
+    function animarN() {
+        var animacion="pulse";
+        $('.datanoticias').addClass("animated " +  animacion);
+
+        setTimeout(function() {
+            $('.datanoticias').removeClass("animated " +  animacion);
+        }, 1000);
+    };
+
+    function animarE() {
+        var animacion="pulse";
+        $('.dataeventos').addClass("animated " +  animacion);
+
+        setTimeout(function() {
+            $('.dataeventos').removeClass("animated " +  animacion);
+        }, 1000);
+    };
+
 
     $('.datatable').dataTable({
         "language": {
@@ -76,6 +91,56 @@
         "ordering": true,
         "info":     true
     });
+// Notificaciones Dashboard
+    $('.dataeventos').dataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ .",
+            "zeroRecords": "Ningun registro encontrado.",
+            "info": "Mostrando desde _START_ hasta _END_ de _TOTAL_ registros",
+            "infoEmpty": "No hay registros.",
+            "infoFiltered": "(Filtrado de _MAX_ Registros.)",
+            "search": "Buscar:",
+            "oPaginate": {
+            "sFirst": "<span class='glyphicon glyphicon-chevron-left'></span>",
+            "sLast": "<span class='glyphicon glyphicon-chevron-right'></span>",
+            "sNext": "<span>»</span>",
+            "sPrevious": "<span>«</span>"
+            }
+        },
+        "aLengthMenu": [[7, 15, 30, -1], [7, 15, 30, "Todos"]],
+        "iDisplayLength": 4,
+        "pagingType": "full_numbers",
+        "paging":   true,
+        "ordering": false,
+        "searching": false,
+        "sDom": '<<t>p>',
+        "info": false
+    });
+
+    $('.datanoticias').dataTable({
+        "language": {
+            "lengthMenu": "Mostrar _MENU_ .",
+            "zeroRecords": "Ningun registro encontrado.",
+            "info": "Mostrando desde _START_ hasta _END_ de _TOTAL_ registros",
+            "infoEmpty": "No hay registros.",
+            "infoFiltered": "(Filtrado de _MAX_ Registros.)",
+            "search": "Buscar:",
+            "oPaginate": {
+            "sFirst": "<span class='glyphicon glyphicon-chevron-left'></span>",
+            "sLast": "<span class='glyphicon glyphicon-chevron-right'></span>",
+            "sNext": "<span>»</span>",
+            "sPrevious": "<span>«</span>"
+            }
+        },
+        "aLengthMenu": [[7, 15, 30, -1], [7, 15, 30, "Todos"]],
+        "iDisplayLength": 6,
+        "pagingType": "full_numbers",
+        "paging":   true,
+        "ordering": false,
+        "searching": false,
+        "sDom": '<<t>p>',
+        "info": false
+    });
 
 //Selector
 
@@ -91,7 +156,7 @@
     }
 
 // Popup Especialidades-Consultores
-              
+
     $("[data-toggle='modal']").click(function(){
       $.ajax({
             url: servidor + "/consultor/especialidades/" + $(this).data('id'),
@@ -130,7 +195,7 @@
 
 //Eliminacion de registros
 
-      $('.delete').click(function(e) 
+      $('.delete').click(function(e)
         {
             e.preventDefault();
             if(confirm('Esta seguro de borrar la fila?'))
@@ -140,17 +205,17 @@
                 var _action = $(_form).attr('action').replace('TERM_ID', _id);
                 var _row = $(this).parents('tr');
                 _row.fadeOut(1000);
-            
-                $.post(_action, $(_form).serialize(), function(result) 
+
+                $.post(_action, $(_form).serialize(), function(result)
                 {
-                    if(result.success) 
+                    if(result.success)
                     {
-                        setTimeout(function() 
+                        setTimeout(function()
                         {
                             _row.delay(1000).remove();
                         }, 1000);
-                    } 
-                    else 
+                    }
+                    else
                         _row.show();
                 }, 'json');
             }
@@ -158,16 +223,16 @@
 
     //Autocompletar
 
-        $(document).ready(function(e) 
+        $(document).ready(function(e)
         {
             $('.getEmpresario').autocompletar(
-                { 
+                {
                     hd: '#empresario_id',
                     sv: _servidor1
                 });
-            
+
             $('.getEmpresa').autocompletar(
-                { 
+                {
                     hd: '#empresa_id',
                     sv: _servidor1
                 });
@@ -175,14 +240,14 @@
 
         jQuery.fn.autocompletar = function(opcion)
         {
-        var configuracion = 
+        var configuracion =
             {
                 hd: ' ',
                 sv: ' '
             }
-        
+
         var option = $.extend(configuracion, opcion);
-        
+
         $(this).autocomplete(
             {
 
@@ -192,7 +257,7 @@
                 $(this).val(ui.item.label);
                 return false;
             },
-            select: function(event,ui) 
+            select: function(event,ui)
                 {
                     $(this).val(ui.item.label);
                     if(configuracion.hd != ' ')

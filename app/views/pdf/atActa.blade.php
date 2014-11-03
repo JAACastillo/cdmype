@@ -53,16 +53,16 @@
 		<br>
 		<br>
 
-		El sr(a). <strong>{{$empresario->empresarios->nombre}}</strong>, {{$empresario->tipo}} de <strong>{{$empresa->nombre}}</strong>, con
+		El sr(a). <strong>{{$empresario->nombre}}</strong>, {{$empresario->tipo}} de <strong>{{$empresa->nombre}}</strong>, con
 		<br>
-		DUI #{{$empresario->empresarios->dui}}
+		DUI #{{$empresario->dui}}
 		<br>
-		NIT #{{$empresario->empresarios->nit}}
+		NIT #{{$empresario->nit}}
 
 		<br>
 		<br>
 
-		Declara 
+		Declara
 		@if ($acta->estado == "Conformidad")
 			 <strong> aceptar a conformidad </strong>
 		@else
@@ -75,12 +75,12 @@
 					$ano = date('Y', $date);
 				?>
 
-				
+
 		el trabajo realizado por el consultor <strong> {{$consultor->consultor->nombre}}</strong>, con número de NIT
 		{{$consultor->consultor->nit}}, de acuerdo al contrato suscrito con fecha {{$dia}} de {{$mes}} de {{$ano}}
-		y autoriza al <strong> CDMYPE Ilobasco</strong>, hacer efectivo el pago de la suma de <strong> US${{$contrato->pagoCdmype}} </strong> que 
+		y autoriza al <strong> CDMYPE Ilobasco</strong>, hacer efectivo el pago de la suma de <strong> US${{$contrato->pagoCdmype}} </strong> que
 		corresponde el cofinanciamiento del programa y la suma <strong> US${{$contrato->pagoEmpresario}}</strong>, que corresponde
-		al cofinanciamiento del aporte empresarial que ha entregado para la realización de la asistecia técnica 
+		al cofinanciamiento del aporte empresarial que ha entregado para la realización de la asistecia técnica
 		denominada <strong> "{{$at->tema}}"</strong> de la cual firma de recibido el informe final.
 	</p>
 <br>
@@ -91,17 +91,11 @@
 	<div class="firmas">
 		<div class="firm empresario">
 			F._____________________	<br/>
-			{{$empresario->empresarios->nombre}} <br/>
-			NIT # {{$empresario->empresarios->nit}} <br/>
+			{{$empresario->nombre}} <br/>
+			NIT # {{$empresario->nit}} <br/>
 			Empresario
 		</div>
 	</div>
 </div>
 </body>
 </html>
-
-
-
-
-
-

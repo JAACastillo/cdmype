@@ -41,12 +41,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            {{ Form::label('meta', 'Meta propuesta:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-8">
-                                {{Form::text('meta', null, array('class' => 'form-control', 'placeholder' => 'Meta del Proyecto'))}}
-                            </div>
-                        </div>
-                        <div class="form-group">
                             {{ Form::label('fechaInicio', 'Fecha Inicio:', array('class' => 'control-label col-md-4')) }}
                             <div class="col-md-8">
                                 <input type="date" name="fechaInicio" class="form-control"  value="{{$proyecto->fechaInicio}}">

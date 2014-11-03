@@ -38,9 +38,6 @@ $(document).ready(function() {
             },
             dui: {
                 validators: {
-                    notEmpty: {
-                        message: 'Campo requerido'
-                    },
                     regexp: {
                         regexp: /(^([0-9]{8,8}[-]{1,1}[0-9]{1,1})|^)$/,
                         message: 'DUI invalido'

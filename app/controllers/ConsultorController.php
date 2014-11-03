@@ -6,7 +6,7 @@ class ConsultorController extends BaseController {
 	{
         $consultores = Consultor::orderBy('nombre','asc')
             ->with("municipio")
-            ->paginate();
+            ->paginate(10000000000);
 
         $consultorEspecialidad = ConsultorEspecialidad::all();
         
@@ -145,7 +145,7 @@ class ConsultorController extends BaseController {
              $datos[] = $especialidad->especialidad->sub_especialidad;
         }
         
-        return Response::json($datos);
+        return Response::json($datos, 200,  array('content-type' => 'application/json', 'Access-Control-Allow-Origin' => '*'));
     }
 
 //Actualizar las especialidades

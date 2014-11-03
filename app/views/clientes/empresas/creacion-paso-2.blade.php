@@ -5,25 +5,25 @@
 @include('clientes.empresas/pasos')
 
 <div>
-@include('errores', array('errors' => $errors))
+
 {{ Form::model($empresaEmpresario, array('route' => 'pasoEmpresariosGuardar', 'method' => 'POST', 'id' => 'validar2', 'class' => 'form-horizontal','role' => 'form')) }}
 
 <div class="row visible buscar">
-	<div class="col-xs-1"></div>
-	<div class="col-xs-10">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
 		<div class="panel panel-default">
 		<div class="panel-heading">
 			<a href="#" tabindex="11" class="btn btn-default busqueda resetBtn">
 		        <span class="glyphicon glyphicon-plus"></span>
-		        Crear				        
-		    </a>		
+		        Crear
+		    </a>
 		</div>
 			<div class="panel-body">
-				<div class="row col-xs-12" >
+				<div class="row" >
 					<div class="col-xs-12">
-					    <br/>
+						@include('errores', array('errors' => $errors))
 				        {{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
-				        
+
 				        <div class="form-group">
 					        {{ Form::label('empresario_id', 'Nombre:', array('class' => 'control-label col-md-4')) }}
 					        <div class="col-md-6">
@@ -32,52 +32,24 @@
 					            {{ Form::hidden('empresario_id', null) }}
 					        </div>
 					    </div>
-						
+
 						{{ Form::close() }}
 
 						<div class="form-group">
 			                {{ Form::label('tipo', 'Tipo:', array('class' => 'control-label col-md-4')) }}
 			                <div class="col-md-6">
-			                    {{ Form::select('tipo', array('' => 'Seleccione una opción','1' => 'Empresario','2' => 'Empresaria','3' => 'Propietario','4' => 'Propietaria','5' => 'Representante'), null, array('class' => 'form-control', 'data-placeholder' => 'Seleccione un tipo')) }} 
+			                    {{ Form::select('tipo', $empresaEmpresario->tipos, null, array('class' => 'form-control', 'data-placeholder' => 'Seleccione un tipo')) }}
 			                </div>
 			            </div>
 
 		                	{{ Form::hidden('empresa_id', $empresaEmpresario->empresa_id) }}
 
 		            </div>
-		            <!-- Tabla de Socios -->
-		            <div class="col-xs-1"></div>
-		            <div class="col-xs-10">
-		            	<?php
-    		        		$empleados = EmpresaEmpresario::Where('empresa_id', '=', $id)->get();
-                		?>
-                		@if($empleados!="[]")
-		            	<div class="table-responsive">
-					        <table class="table table-bordered">
-					            <tr class="active">
-					                <th class="text-center">Nombre</th>
-					                <th class="text-center">Tipo</th>
-					            </tr>
-
-					            @foreach ($empleados as $empleado)
-					            <tr>
-					                <td class="text-center">{{ $empleado->empresarios->nombre}}</td>
-					                <td class="text-center">{{ $empleado->tipo }}</td>
-					            </tr>
-					            @endforeach
-
-					        </table>
-					    </div>
-					    @endif
-
-		            </div>
-		            <div class="col-xs-1"></div>
 
 	            </div>
 
 			<div class="row">
 				    <div class="col-xs-6">
-				    	<br/>
 				        <center>
 				        <a href="javascript:history.back()">
 				        <span class="glyphicon glyphicon-chevron-left"></span>
@@ -86,11 +58,9 @@
 				        </center>
 				    </div>
 				    <div class="col-xs-6">
-				    	<br/>
 				        <center>
 				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
-				        Siguiente
-				        <span class="glyphicon glyphicon-chevron-right"></span>
+				        <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp Guardar
 				        </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
 				        </button>
 				        </center>
@@ -98,14 +68,45 @@
 			</div>
 			</div>
 		</div>
+		<?php
+    		$empleados = EmpresaEmpresario::Where('empresa_id', '=', $id)->get();
+    		$empresa = Empresa::find($id);
+		?>
+        @if($empleados!="[]")
+			<div class="panel panel-default">
+				<div class="panel-body">
+				   	<!-- Tabla de Socios -->
+		            <div class="col-md-2"></div>
+		            <div class="col-md-8">
+		            	<div class="table-responsive">
+					        <table class="table table-bordered">
+					        	<caption align="top" style="font-size:18px; margin-bottom:15px;"> <strong>Empresa:</strong>  {{$empresa->nombre}}</caption>
+					            <tr class="active">
+					                <th class="text-center">Empresarios</th>
+					                <th class="text-center">Tipo</th>
+					            </tr>
+					            @foreach ($empleados as $empleado)
+					            <tr>
+					                <td>&nbsp &nbsp <a href="{{ route('editarEmpresario', array($empleado->empresarios->id)) }}">{{ $empleado->empresarios->nombre}} </td>
+					                <td class="text-center">{{ $empleado->tipo }}</td>
+					            </tr>
+					            @endforeach
+					        </table>
+					    </div>
+		            </div>
+		            <div class="col-md-2"></div>
+				</div>
+			<br>
+			</div>
+			@endif
 		</div>
-	<div class="col-xs-1"></div>
+	<div class="col-md-1"></div>
 </div>
 {{ Form::close() }}
 
 <?php
     $empresario = new Empresario;
-    
+
     $sexos = array(1 => 'Mujer', 2 => 'Hombre');
     $tipos = array(1 => 'Empresaria', 2 => 'Propietaria', 3 => 'Representante', 4 => 'Empresario', 5 => 'Propietario');
     $departamentos = array('' => 'Seleccione una opción' ) + Departamento::all()->lists('departamento', 'id');
@@ -119,15 +120,16 @@
 {{ Form::open(array('route' => array('pasoEmpresarios', $empresaEmpresario->empresa_id), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form')) }}
 <br>
 <div class="row oculto empresario" id="empresario">
-	<div class="col-xs-1"></div>
-	<div class="col-xs-10">
+	<div class="col-md-1"></div>
+	<div class="col-md-10">
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<a href="#" tabindex="11" class="btn btn-default busqueda resetBtn">
 			        <span class="glyphicon glyphicon-search"></span>
-			        Buscar				        
-			    </a>		
+			        Buscar
+			    </a>
 			</div>
+			<div class="panel-body">
                	@include('clientes/empresarios/form')
             <br>
 			<div class="row">
@@ -142,17 +144,17 @@
 				    <div class="col-xs-6">
 				        <center>
 				        <button type="submit" tabindex="11" class="btn btn-primary ladda-button" data-style="expand-right">
-				        	Guardar
-				        <span class="glyphicon glyphicon-chevron-right"></span>
+				        <span class="glyphicon glyphicon-floppy-disk"></span>&nbsp Guardar
 				        </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
 				        </button>
 				        </center>
 				    </div>
 			</div>
+			</div>
 			<br>
     	</div>
 	</div>
-	<div class="col-xs-1"></div>
+	<div class="col-md-1"></div>
 </div>
 {{ Form::close() }}
 @stop

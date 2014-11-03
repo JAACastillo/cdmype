@@ -4,6 +4,7 @@
 $(document).ready(function() {
 
 	$('#validar').bootstrapValidator({
+        excluded: ':disabled',
         message: 'Valor no valido',
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
@@ -20,9 +21,6 @@ $(document).ready(function() {
             },
             nit: {
                 validators: {
-                    notEmpty: {
-                        message: 'Campo requerido.'
-                    },
                     regexp: {
                         regexp: /(^([0-9]{4,4}[-]{1,1}[0-9]{6,6}[-]{1,1}[0-9]{3,3}[-]{1,1}[0-9]{1,1})|^)$/,
                         message: 'NIT invalido'
@@ -31,9 +29,10 @@ $(document).ready(function() {
             },
             registro_iva: {
                 validators: {
-                    notEmpty: {
-                        message: 'Campo requerido.'
-                    }
+                    // regexp: {
+                    //     regexp: /(^([0-9]{5,5}[-]{1,1}[0-9]{1,1})|^)$/,
+                    //     message: 'Registo de Iva invalido'
+                    // }
                 }
             },
             categoria: {
@@ -94,10 +93,10 @@ $(document).ready(function() {
             },
             descripcion:{
                 validators: {
-                    regexp: {
-                        regexp: /^[a-zñÑáéíóú -ÁÉÍÓÚA-Z0-9_\.]+$/,
-                        message: 'No se permiten caracteres especiales'
-                    }
+                    // regexp: {
+                    //     regexp: /^[a-zñÑáéíóú -ÁÉÍÓÚA-Z0-9_\r\n.]+$/,
+                    //     message: 'No se permiten caracteres especiales'
+                    // }
                 }
             }            
         }

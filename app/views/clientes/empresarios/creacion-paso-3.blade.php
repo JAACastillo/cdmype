@@ -17,15 +17,15 @@
 		<div class="panel-heading">
 			<a href="#" tabindex="11" class="btn btn-default busqueda resetBtn">
 		        <span class="glyphicon glyphicon-plus"></span>
-		        Crear				        
-		    </a>		
+		        Crear
+		    </a>
 		</div>
-			<div class="panel-body">	
+			<div class="panel-body">
 				<div class="row col-xs-12" >
 					<div class="col-xs-12">
 					    <br/>
 				        {{ Form::open(array('url' => '/buscar', 'method' => 'post', 'role' => 'search')) }}
-				        
+
 				        <div class="form-group">
 					        {{ Form::label('empresario_id', 'Nombre:', array('class' => 'control-label col-md-4')) }}
 					        <div class="col-md-6">
@@ -34,13 +34,13 @@
 					            {{ Form::hidden('empresario_id', null) }}
 					        </div>
 					    </div>
-						
+
 						{{ Form::close() }}
 
-						<div class="form-group">
+							<div class="form-group">
 			                {{ Form::label('tipo', 'Tipo:', array('class' => 'control-label col-md-4')) }}
 			                <div class="col-md-6">
-			                    {{ Form::select('tipo', array('' => 'Seleccione una opción','1' => 'Empresario','2' => 'Empresaria','3' => 'Propietario','4' => 'Propietaria','5' => 'Representante'), null, array('class' => 'form-control', 'data-placeholder' => 'Seleccione un tipo')) }} 
+			                    {{ Form::select('tipo', array('' => 'Seleccione una opción','1' => 'Empresario','2' => 'Empresaria','3' => 'Propietario','4' => 'Propietaria','5' => 'Representante'), null, array('class' => 'form-control', 'data-placeholder' => 'Seleccione un tipo')) }}
 			                </div>
 			            </div>
 
@@ -63,7 +63,7 @@
 
 					            @foreach ($empleados as $empleado)
 					            <tr>
-					                <td>&nbsp &nbsp &nbsp{{ $empleado->empresarios->nombre}}</td>
+					                <td>&nbsp &nbsp &nbsp <a href="{{ route('editarEmpresario', array($empleado->empresarios->id)) }}">{{ $empleado->empresarios->nombre}} </a></td>
 					                <td class="text-center">{{ $empleado->tipo }}</td>
 					            </tr>
 					            @endforeach
@@ -107,7 +107,7 @@
 
 <?php
     $empresario = new Empresario;
-    
+
     $sexos = array(1 => 'Mujer', 2 => 'Hombre');
     $tipos = array(1 => 'Empresaria', 2 => 'Propietaria', 3 => 'Representante', 4 => 'Empresario', 5 => 'Propietario');
     $departamentos = array('' => 'Seleccione una opción' ) + Departamento::all()->lists('departamento', 'id');
@@ -127,12 +127,22 @@
 			<div class="panel-heading">
 				<a href="#" tabindex="11" class="btn btn-default busqueda resetBtn">
 			        <span class="glyphicon glyphicon-search"></span>
-			        Buscar				        
-			    </a>		
+			        Buscar
+			    </a>
 			</div>
-			
+			<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
                	@include('clientes/empresarios/form')
-            
+               		<div class="form-group">
+			                {{ Form::label('tipo2', 'Tipo:', array('class' => 'control-label col-md-4')) }}
+			                <div class="col-md-5">
+			                    {{ Form::select('tipo2', array('' => 'Seleccione una opción','1' => 'Empresario','2' => 'Empresaria','3' => 'Propietario','4' => 'Propietaria','5' => 'Representante'), null, array('class' => 'form-control', 'data-placeholder' => 'Seleccione un tipo', 'required')) }}
+			                </div>
+			            </div>
+			         </div>
+					</div>
+			</div>
 			<div class="row">
 				    <div class="col-xs-6">
 				        <center>

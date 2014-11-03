@@ -5,11 +5,11 @@ class AtTerminoController extends BaseController {
 //Listar
 	public function index()
 	{
- 
+
         $attermino = AtTermino//::orderBy('tema','asc')
             ::with('especialidad', 'empresa', 'usuario', 'consultores', 'contrato')
-            ->paginate();
-        
+            ->paginate(1000000);
+
         return View::make('asistencia-tecnica.lista')
             ->with('atterminos', $attermino);
 	}
@@ -17,14 +17,14 @@ class AtTerminoController extends BaseController {
     public function eliminarAsistencia($id)
     {
         $attermino = AtTermino::find($id);
-        
+
             if(is_null($attermino))
                 App::abort(404);
-            
-            else 
+
+            else
             {
                 $attermino->delete();
-                
+
                 $bitacora = new Bitacora;
                 $campos = array(
                     'usuario_id' => Auth::user()->id,
@@ -32,7 +32,7 @@ class AtTerminoController extends BaseController {
                     'tabla_id' => $id,
                     'accion' => 3
                 );
-                
+
                 $bitacora->Guardar($campos);
                 return Redirect::back();
             }
@@ -45,9 +45,9 @@ class AtTerminoController extends BaseController {
 
 //inicio de los pasos.
 
-    //Redirecciona al paso en el que se encuent ra la AT. 
+    //Redirecciona al paso en el que se encuent ra la AT.
     //llamado desde el listado
-    public function Paso($id) 
+    public function Paso($id)
     {
         $at = AtTermino::find($id);
 
@@ -56,9 +56,9 @@ class AtTerminoController extends BaseController {
         $id2 = Math::to_base($id2, 62);
 
         try {
-            
+
         switch ($at->estado) {
-            case 'Creado':                       
+            case 'Creado':
                 return Redirect::route('atPasoConsultor', $id2);
                 break;
             case 'Enviado':
@@ -74,7 +74,7 @@ class AtTerminoController extends BaseController {
                 return Redirect::route('atPasoActa', $id2);
                 break;
             case 'Finalizada':
-                return Redirect::route('atPasoActa', $id2);
+                return Redirect::route('atPasoInforme', $id2);
                 break;
             default:
                 case 'Finalizada':
@@ -83,9 +83,9 @@ class AtTerminoController extends BaseController {
                 # code...
                 break;
         }
-        
+
         } catch (Exception $e) {
-            App::abort(404);            
+            App::abort(404);
         }
 
     }
@@ -98,14 +98,14 @@ class AtTerminoController extends BaseController {
             ->paginate();
         // $attermino = new AtTermino;
         // $datos = Input::all();
-        
-        // if($attermino->guardar($datos,'1')) 
-        
-       
+
+        // if($attermino->guardar($datos,'1'))
+
+
         return View::make('asistencia-tecnica.creacion-paso-3')
             ->with('consultores', $consultores);
-        
-        // else 
+
+        // else
         //     return Redirect::route('crearTermino', array(Input::get('empresario_id'),Input::get('empresa_id')))
         //         ->withInput()->withErrors($attermino->errors);
 	}
@@ -117,8 +117,8 @@ class AtTerminoController extends BaseController {
         // $atcontrato = AtTermino::find($id)->atcontratos;
         // $acta = AtTermino::find($id)->actas;
         // $historia = Empresario::find($attermino->empresario_id)->historias;
-        
-        // if(is_null($attermino)) 
+
+        // if(is_null($attermino))
         //     App::abort(404);
 
         // return View::make('asistencia/termino/show')
@@ -142,17 +142,17 @@ class AtTerminoController extends BaseController {
 	public function update($id)
 	{
 		$attermino = AtTermino::find($id);
-        
-        if(is_null($attermino)) 
+
+        if(is_null($attermino))
             App::abort(404);
-        
+
         $datos = Input::all();
         $datos['usuario_id'] = $attermino->usuario_id;
-        
-        if($attermino->guardar($datos,'2')) 
+
+        if($attermino->guardar($datos,'2'))
             return Redirect::route('asistencia-tecnica.index');
-        
-        else 
+
+        else
             return Redirect::route('asistencia-tecnica.edit', $attermino->id)
                 ->withInput()
                 ->withErrors($attermino->errores);
@@ -164,27 +164,27 @@ class AtTerminoController extends BaseController {
 	public function destroy($id)
 	{
         $attermino = AtTermino::find($id);
-        
+
         if(is_null($attermino))
             App::abort(404);
-        
-        else 
+
+        else
         {
             $attermino->softdelete();
             $bitacora = new Bitacora;
-            
+
             $campos = array(
                 'usuario_id' => Auth::user()->id,
                 'tabla' => 4,
                 'tabla_id' => $id,
                 'accion' => 3
             );
-            
+
             $bitacora->Guardar($campos);
             return Redirect::route('atterminos.index');
         }
 	}
 
-    
+
 
 }

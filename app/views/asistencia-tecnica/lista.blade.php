@@ -20,14 +20,14 @@
         <table class="table table-bordered datatable">
             <thead>
             <tr class="active">
-                <th class="text-center">ID</th>
+                <th class="text-center hidden-xs hidden-sm">ID</th>
                 <th>Tema</th>
                 <th>Empresa</th>
-                <th>Area</th>
-                <th>Encargado</th>
-                <th class="text-center">Inicio</th>
-                <th class="text-center">Finalización</th>
-                <th>Consultor</th>
+                <th class="hidden-xs hidden-sm">Area</th>
+                <th class="hidden-xs hidden-sm">Encargado</th>
+                <th class="text-center hidden-xs hidden-sm">Inicio</th>
+                <th class="text-center hidden-xs hidden-sm">Finalización</th>
+                <th class="hidden-xs">Consultor</th>
                 <th class="text-center">Estado</th>
                 <th class="text-center">Opciones</th>
             </tr>
@@ -35,17 +35,23 @@
             <tbody>
             @foreach ($atterminos as $attermino)
             <tr>
-                <td class="text-center" style="width:25px">{{ $attermino->id }}</td>
+                <td class="text-center hidden-xs hidden-sm" style="width:25px">{{ $attermino->id }}</td>
                 <td>
                     <a href="{{route('atPaso', $attermino->id)}}">{{ $attermino->tema }}
                     </a>
                 </td>
-                <td>{{ $attermino->empresa->nombre }}</td>
-                <td>{{ $attermino->especialidad->sub_especialidad }}</td>
-                <td>{{ $attermino->usuario->nombre }}</td>
-                <td class="text-center">@if($attermino->pasoReal > 6) {{ $attermino->contrato->Inicio}} @endif</td>
-                <td class="text-center">@if($attermino->pasoReal > 6){{ $attermino->contrato->final }} @endif</td>
-                <td>@if($attermino->pasoReal > 5){{ $attermino->consultorSeleccionado->consultor->nombre }} @endif</td>
+                <td><a href="{{ route('editarEmpresa', array($attermino->empresa->id)) }}">{{ $attermino->empresa->nombre }}</a></td>
+                <td class="hidden-xs hidden-sm">{{ $attermino->especialidad->sub_especialidad }}</td>
+                <td class="hidden-xs hidden-sm">{{ $attermino->usuario->nombre }}</td>
+                <td class="text-center hidden-xs hidden-sm">@if($attermino->pasoReal > 6) {{ $attermino->contrato->Inicio}} @endif</td>
+                <td class="text-center hidden-xs hidden-sm">@if($attermino->pasoReal > 6){{ $attermino->contrato->final }} @endif</td>
+                <td class="hidden-xs">
+                    @if($attermino->pasoReal > 5)
+                    <a href="{{ route('editarConsultor', array($attermino->consultorSeleccionado->consultor->id)) }}">
+                    {{ $attermino->consultorSeleccionado->consultor->nombre }}
+                    </a>
+                    @endif
+                </td>
                 <td class="text-center">{{ $attermino->estado }}</td>
                 <td class="text-center">
                     <a href="{{ route('atPaso', array($attermino->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>

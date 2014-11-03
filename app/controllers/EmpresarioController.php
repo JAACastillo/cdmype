@@ -5,16 +5,16 @@ class EmpresarioController extends BaseController {
 	public function index()
 	{
         $empresarios = Empresario::orderBy('nombre','asc')
-            ->paginate();
-        
+            ->paginate(1000000000);
+
         return View::make('clientes.empresarios.lista', compact('empresarios'));
 	}
 
 	public function verEmpresario($id)
 	{
         $empresario = Empresario::find($id);
-        
-        if(is_null($empresario)) 
+
+        if(is_null($empresario))
             App::abort(404);
 
         return View::make('clientes.empresarios.ver', compact('empresario'));
@@ -37,7 +37,7 @@ class EmpresarioController extends BaseController {
         $sexos = array(1 => 'Mujer', 2 => 'Hombre');
         $tipos = array(1 => 'Empresaria', 2 => 'Propietaria', 3 => 'Representante', 4 => 'Empresario', 5 => 'Propietario');
         $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
-            $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id'); 
+            $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');
 
         $empresario->sexo = array_search($empresario->sexo,$sexos);
         $empresario->tipo = array_search($empresario->tipo,$tipos);
@@ -46,7 +46,7 @@ class EmpresarioController extends BaseController {
 
         $accion = array('route' => array('actualizarEmpresario', $id), 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
-            return View::make('clientes.empresarios.creacion-paso-1', compact('empresario', 'accion', 
+            return View::make('clientes.empresarios.creacion-paso-1', compact('empresario', 'accion',
                 'departamentos','municipios','id','pasoActual','pasoReal'));
 	}
 
@@ -54,16 +54,16 @@ class EmpresarioController extends BaseController {
 	public function actualizarEmpresario($id)
 	{
         $empresario = Empresario::find($id);
-        
-        if(is_null($empresario)) 
+
+        if(is_null($empresario))
             App::abort(404);
-        
+
         $data = Input::all();
-        
-        if($empresario->guardar($data,'2')) 
+
+        if($empresario->guardar($data,'2'))
             return Redirect::route('empresarios');
-        
-        else 
+
+        else
             return Redirect::back()->withInput()->withErrors($empresario->errores);
 	}
 
@@ -72,22 +72,22 @@ class EmpresarioController extends BaseController {
 	public function eliminarEmpresario($id)
 	{
 		$empresario = Empresario::find($id);
-        
-        if(is_null($empresario)) 
+
+        if(is_null($empresario))
             App::abort(404);
-        
-        else 
+
+        else
         {
             $empresario->delete();
             $bitacora = new Bitacora;
-            
+
             $campos = array(
                 'usuario_id' => Auth::user()->id,
                 'tabla' => 2,
                 'tabla_id' => $id,
                 'accion' => 3
             );
-            
+
             $bitacora->Guardar($campos);
             return Redirect::route('empresarios.index');
         }
@@ -104,11 +104,11 @@ class EmpresarioController extends BaseController {
         $pasoReal = 1;
         $id =0;
         $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
-        $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id'); 
+        $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');
 
         $accion = array('route' => 'guardarEmpresario', 'method' => 'POST', 'id' => 'validar', 'class' => 'form-horizontal','role' => 'form');
 
-        return View::make('clientes.empresarios.creacion-paso-1', compact('empresario', 
+        return View::make('clientes.empresarios.creacion-paso-1', compact('empresario',
             'accion', 'departamentos','municipios','id','pasoActual','pasoReal'));
     }
 
@@ -116,14 +116,14 @@ class EmpresarioController extends BaseController {
     {
 
         $empresario = new Empresario;
-        $datos = Input::all(); 
+        $datos = Input::all();
 
         if($empresario->guardar($datos,'1'))
         {
             return  Redirect::route('pasoEmpresa', $empresario->id);
         }
         else
-        { 
+        {
              return Redirect::back()->withInput()->withErrors($empresario->errores);
         }
 
@@ -148,7 +148,7 @@ class EmpresarioController extends BaseController {
 
         return View::make('clientes.empresarios.creacion-paso-2', compact('empresaEmpresario','id','pasoActual','pasoReal'));
     }
-    
+
     public function guardarEmpresa()
         {
             $idEmpresa = Input::get('empresa_id');
@@ -156,27 +156,27 @@ class EmpresarioController extends BaseController {
 
             $empresa = Empresa::find($idEmpresa);
             if(!is_null($empresa))
-            {   
+            {
 
                 $empresaEmpresario = new EmpresaEmpresario;
                 $datos = Input::all();
-                
-                if($empresaEmpresario->guardar($datos,'1')) 
+
+                if($empresaEmpresario->guardar($datos,'1'))
                     return  Redirect::route('pasoSocios', $idEmpresario);
-                
-                else 
+
+                else
                     return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
 
             }
-            
+
             return Redirect::back()->withInput()->withErrors(['no-existe' => 'Lo siento no he encontrado la Empresa']);
 
     }
-    
+
     public function empresaNueva($idEmpresario){
 
             $empresa = new Empresa;
-            $datos = Input::all(); 
+            $datos = Input::all();
 
             if($empresa->guardar($datos,'1'))
             {
@@ -190,12 +190,12 @@ class EmpresarioController extends BaseController {
                 return  Redirect::route('pasoSocios',$idEmpresario);
             }
             else
-            { 
+            {
                  return Redirect::back()->withInput()->withErrors($empresario->errores);
             }
     }
 
-    
+
 
     public function socios($idEmpresario)
     {
@@ -224,12 +224,12 @@ class EmpresarioController extends BaseController {
             $idEmpresa = $var->empresa_id;
 
             $empresario = new Empresario;
-            $datos = Input::all(); 
+            $datos = Input::all();
 
             if($empresario->guardar($datos,'1'))
             {
                 $empresarioEmpresa = new EmpresaEmpresario;
-                $empresarioEmpresa->tipo = 3;
+                $empresarioEmpresa->tipo = Input::get('tipo2');
                 $empresarioEmpresa->empresario_id = $empresario->id;
                 $empresarioEmpresa->empresa_id = $idEmpresa;
 
@@ -238,7 +238,7 @@ class EmpresarioController extends BaseController {
                 return Redirect::back();
             }
             else
-            { 
+            {
                  return Redirect::back()->withInput()->withErrors($empresario->errores);
             }
         }
@@ -251,20 +251,20 @@ class EmpresarioController extends BaseController {
 
         $empresario = Empresario::find($idEmpresario);
         if(!is_null($empresario))
-        {   
+        {
 
             $empresaEmpresario = new EmpresaEmpresario;
             $datos = Input::all();
-            
-            if($empresaEmpresario->guardar($datos,'1')) 
+
+            if($empresaEmpresario->guardar($datos,'1'))
                 return  Redirect::back();
-            else 
+            else
                 return Redirect::back()->withInput()->withErrors($empresaEmpresario->errores);
 
         }
-        
+
         return Redirect::back()->withInput()->withErrors(['no-existe' => 'Lo siento no he encontrado el empresario']);
-        
+
     }
 
     public function termino($idEmpresa)

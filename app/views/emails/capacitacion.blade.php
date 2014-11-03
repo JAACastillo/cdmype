@@ -1,6 +1,6 @@
 <?php
 	$captermino = CapTermino::find($id);
-	$cortar = explode("-",$captermino->fecha);
+	$cortar = explode("-",$captermino->fecha_lim);
     $fecha = $cortar[2] . ' de ' . $cortar[1] . ' de ' . $cortar[0];
     
 ?>
@@ -10,6 +10,6 @@
 	En los siguientes enlaces se encuentran los formatos con los cuales podrán presentar la oferta técnica y económica. La fecha limite para la presentación de la oferta es {{ $fecha }}.
 </p>
 <br/>
-<a href="http://www.cri.catolica.edu.sv/cdmype/sistema/capacitaciones/pdf/{{$id}}" target="_blank">TERMINOS DE REFENCIA (PDF)</a>
+<a href="{{route('pdfCap', $captermino->id)}}" target="_blank">TERMINOS DE REFENCIA (PDF)</a>
 <br/>
-<a href="http://www.cri.catolica.edu.sv/cdmype/sistema/assets/F7 FORMATO OFERTA TÉCNICA Y ECONÓMICA.docx">FORMATO OFERTA TÉCNICA Y ECONÓMICA (WORD)</a>
+<a href="{{route('f7', 'F7 FORMATO OFERTA TECNICA Y ECONOMICA.docx')}}" target="_blank">FORMATO OFERTA TÉCNICA Y ECONÓMICA (WORD)</a>

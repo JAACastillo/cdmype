@@ -20,12 +20,13 @@ input[name="productos[0]"]{
 
 
     {{Form::hidden('empresa_id', null)}}
-
-<div class="row">
+<div class="row animated fadeIn">
         @if(isset($imprimir))
             <div class="panel-heading">
                 <a class="btn btn-default" href="{{route('f1PDF', $indicador->empresa_id)}}" data-toggle="tooltip" data-placement="bottom" title="Imprimir F1" target="_blank"> <span class="glyphicon glyphicon-print"></span>&nbsp F1</a>
             </div>
+        @else 
+        <br>
         @endif
     <div class="col-xs-12 col-md-6">
         <div class="panel panel-default">
@@ -46,7 +47,7 @@ input[name="productos[0]"]{
                         </div>
 		                <div class="form-group">
 		                    {{ Form::label('ventaNacional', 'Venta Nacional:', array('class' => 'control-label col-md-4')) }}
-		                    <div class="col-md-4">
+		                    <div class="col-md-5">
 							    <div class="input-group">
 							      <div class="input-group-addon">$</div>
 		                        	{{ Form::number('ventaNacional', $indicador->ventaNacional, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => 'any')) }}
@@ -55,7 +56,7 @@ input[name="productos[0]"]{
 		                </div>
 		                <div class="form-group">
 		                    {{ Form::label('ventaExportacion', 'Venta de Exportación:', array('class' => 'control-label col-md-4')) }}
-		                    <div class="col-md-4">
+		                    <div class="col-md-5">
 							    <div class="input-group">
 							      <div class="input-group-addon">$</div>
 		                        	{{ Form::number('ventaExportacion', $indicador->ventaExportacion, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => 'any')) }}
@@ -65,7 +66,7 @@ input[name="productos[0]"]{
 		                </div>
                         <div class="form-group">
                             {{ Form::label('costoProduccion', 'Costo de Producción:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="input-group">
                                   <div class="input-group-addon">$</div>
                                     {{ Form::number('costoProduccion', $indicador->costoProduccion, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => 'any')) }}
@@ -76,7 +77,7 @@ input[name="productos[0]"]{
 
                         <div class="form-group">
                             {{ Form::label('financiamiento', 'Financiamiento:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="input-group">
                                   <div class="input-group-addon">$</div>
                                     {{ Form::number('financiamiento', $indicador->financiamiento, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => 'any')) }}
@@ -86,7 +87,7 @@ input[name="productos[0]"]{
                         </div>
                         <div class="form-group">
                             {{ Form::label('capitalSemilla', 'Capital Semilla:', array('class' => 'control-label col-md-4')) }}
-                            <div class="col-md-4">
+                            <div class="col-md-5">
                                 <div class="input-group">
                                   <div class="input-group-addon">$</div>
                                     {{ Form::number('capitalSemilla', $indicador->capitalSemilla, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000000', 'step' => 'any')) }}
