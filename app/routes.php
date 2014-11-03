@@ -71,9 +71,11 @@
     require(__DIR__ . '/routes/eventos.php');
 
     /* Index */
-        Route::get('/', function() {
-            return View::make('dashboard');
-        });
+        // Route::get('/', function() {
+        //     return View::make('dashboard');
+        // });
+
+    Route::get('/', ['as' => 'dashboard'  ,'uses' => 'DashboardController@dashboard']);
 
     /* Cerrar Sesion */
         Route::get('/logout', 'AutenticacionController@get_logOut');

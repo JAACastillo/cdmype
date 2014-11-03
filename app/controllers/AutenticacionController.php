@@ -41,5 +41,4 @@ class AutenticacionController extends BaseController {
         return Redirect::to('/');
     }
 
-
 }
