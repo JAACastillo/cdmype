@@ -60,7 +60,7 @@ Route::get('asistencias-tecnicas', ['as' => 'asistencia-tecnica', 'uses' => 'AtT
 
 Route::get('at/{doc}', ['as' => 'atInforme', 'uses' =>
     function($doc){
-        return Redirect::to('assets/at/'. $doc);
+        return Redirect::to('assets/informes/'. $doc);
     }
     ]);
 
