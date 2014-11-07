@@ -1,0 +1,1 @@
+/Applications/XAMPP/xamppfiles/htdocs/atcdmype/app/views/eventos/show.blade.php
