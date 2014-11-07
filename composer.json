@@ -8,7 +8,8 @@
 		"barryvdh/laravel-dompdf": "0.4.*"
 	},
 	"require-dev": {
-		"barryvdh/laravel-debugbar": "1.*"
+		"barryvdh/laravel-debugbar": "1.*",
+		"way/generators": "~3.0"
 	},
 	"autoload": {
 		"classmap": [
