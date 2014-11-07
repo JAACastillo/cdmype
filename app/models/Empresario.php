@@ -17,7 +17,7 @@ class Empresario extends Eloquent {
         'celular'
     );
        
-
+ 
     /* Guardar */
 
         public function guardar($datos,$accion) 
@@ -90,5 +90,10 @@ class Empresario extends Eloquent {
         {
             return $this->belongsTo('Municipio','municipio_id');
         }
+
+        public function eventos(){
+            return $this->hasMany('EventoEmpresarios', 'empresario_id');
+        }
+
     
 }

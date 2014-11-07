@@ -6,13 +6,33 @@
         Eventos
         <span class="glyphicon glyphicon-chevron-down pull-right"></span>
         <span class="pull-right">&nbsp;&nbsp;</span>
-        <span class="pull-right badge alert-danger">7</span>
+        <span class="pull-right badge alert-danger">{{count($eventos)}}</span>
     </h4>
       </a>
+
   </div>
   <div id="tres" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
     <div class="panel-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr class="active">
+                <th class="text-center">Fecha</th>
+                <th>Tema</th>
+                <th>Organizador</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach ($eventos as $evento)
+            <tr>
+              <td> {{$evento['fecha']}} </td>                
+              <td> {{$evento['nombre']}} </td>                
+              <td> {{$evento['tipo']}} </td>                
+            </tr>
+            @endforeach
+            </tbody>
+        </table>
+      </div> 
     </div>
   </div>
 </div>

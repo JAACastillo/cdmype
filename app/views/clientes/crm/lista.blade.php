@@ -9,16 +9,17 @@
     </div>
     <div class="col-md-6">
 
-      <!-- Proyectos Trabajados -->
+      <!-- capacitaciones -->
+      @include('clientes.crm.capacitaciones')
+
+      <!-- eventos -->
       @include('clientes.crm.eventos')
 
-      <!-- Capacitaciones -->
-    <!-- -->
 
     </div>
     <div class="col-md-6">
-      <!-- Eventos -->
-      @include('clientes.crm.asesorias')
+      <!-- asistencia tecnica -->
+      @include('clientes.crm.at')
 
       <!-- Asesorias -->
       @include('clientes.crm.anotaciones')

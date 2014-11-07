@@ -7,4 +7,9 @@ class EventoEmpresarios extends \Eloquent {
 	public function empresario(){
 		return $this->belongsTo('Empresario');
 	}
-}
+
+
+	public function evento(){
+		return $this->belongsTo('Evento');
+	}
+} 

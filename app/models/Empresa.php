@@ -105,7 +105,7 @@ class Empresa extends Eloquent {
         }
 
         public function municipio()
-        {
+        { 
             return $this->belongsTo('Municipio');
         }
 
@@ -115,6 +115,10 @@ class Empresa extends Eloquent {
 
         public function proyectos(){
             return $this->hasMany('proyecto', 'empresa_id');
+        }
+
+        public function at(){
+            return $this->hasMany('AtTermino', 'empresa_id');
         }
 
 }
