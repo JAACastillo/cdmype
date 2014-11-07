@@ -241,7 +241,7 @@ class CapTerminoController extends BaseController {
                 $cap = CapTermino::find($id);
                 $consultores =  $cap
                                 ->consultores()
-                                ->paginate();
+                                ->paginate(1000);
                 $pasoActual = 4;
                 $pasoReal = $cap->pasoReal;
                 return View::make('capacitaciones.creacion-paso-3',
@@ -277,7 +277,7 @@ class CapTerminoController extends BaseController {
 
             private function guardarOferta($file){
                 $destinationPath = 'assets/ofertas/';
-                $fileName = $file->getClientOriginalName();
+                $fileName = time() . '.' .  \Str::lower($file->getClientOriginalExtension());
                 $file->move($destinationPath, $fileName);
                 return $fileName;
             }
@@ -566,8 +566,8 @@ class CapTerminoController extends BaseController {
             }
 
             private function guardarInforme($file){
-                $destinationPath = 'assets/cap/';
-                $fileName = $file->getClientOriginalName();
+                $destinationPath = 'assets/informes/';
+                $fileName = time() . '.' .  \Str::lower($file->getClientOriginalExtension());
                 $file->move($destinationPath, $fileName);
                 return $fileName;
             }

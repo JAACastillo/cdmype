@@ -51,7 +51,7 @@
 
 	Route::get('cap/{doc}', ['as' => 'CapInforme', 'uses' =>
     function($doc){
-        return Redirect::to('assets/cap/'. $doc);
+        return Redirect::to('assets/informes/'. $doc);
     }
     ]);
 

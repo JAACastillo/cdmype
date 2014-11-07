@@ -85,7 +85,7 @@ Capacitaciones
 
 			            @foreach ($asistencias as $asistencia)
 			            <tr>
-			                <td>{{ $asistencia->empresario->nombre}}</td>
+			                <td> <a  href="{{ route('editarEmpresario', array($asistencia->empresario->id)) }}">{{ $asistencia->empresario->nombre}}</a></td>
 			                <td class="text-center hidden-xs">
 								@foreach($asistencia->empresario->empresa as $empresario)
 	        					<h5 style="margin:0px">{{ $empresario->empresas->nombre }}</h5>

@@ -25,7 +25,7 @@ Route::get('empresas', ['as' => 'empresas', 'uses' => 'EmpresaController@index']
 	Route::post('empresas/paso/empresario/{idEmpresa}', ['as' => 'pasoEmpresarios', 'uses' => 'EmpresaController@empresarioNuevo']);
 	Route::post('empresas/paso/empresario', ['as' => 'pasoEmpresariosGuardar', 'uses' => 'EmpresaController@empresarioGuardar']);
 
-	// indicadores 
+	// indicadores
 	Route::get('empresas/paso/indicadores/{idEmpresa}', ['as' => 'empresaPasoIndicadores', 'uses' => 'EmpresaController@indicadores']);
 	Route::post('empresas/paso/indicadores/{idEmpresa}', ['as' => 'empresaPasoIndicadores', 'uses' => 'EmpresaController@indicadoresGuardar']);
 
@@ -34,7 +34,7 @@ Route::get('empresas', ['as' => 'empresas', 'uses' => 'EmpresaController@index']
 	Route::get('empresas/paso/indicador/pdf/{idEmpresa}', ['as' => 'f1PDF', 'uses' => 'EmpresaController@f1']);
 
 
-	Route::get('empresas/paso/termino/{idEmpresa}', ['as' => 'pasoTerminoEmpresa', 'uses' => 'EmpresaController@termino']);            
+	Route::get('empresas/paso/termino/{idEmpresa}', ['as' => 'pasoTerminoEmpresa', 'uses' => 'EmpresaController@termino']);
 
 
 
@@ -49,6 +49,9 @@ Route::get('empresas', ['as' => 'empresas', 'uses' => 'EmpresaController@index']
 	Route::get('empresas/paso/proyecto/seguimiento/{idProyecto}', ['as' => 'empresaPasoSeguimientoProyecto', 'uses' => 'EmpresaController@seguimientoProyecto']);
 	Route::post('empresas/paso/proyecto/seguimiento/{idProyecto}', ['as' => 'empresaPasoSeguimientoProyecto', 'uses' => 'EmpresaController@seguimientoProyectoGuardar']);
 
+	// CRM
 
+	Route::get('empresas/proyectos/{idEmpresa}', ['as' => 'crm', 'uses' => 'CrmController@crm']);
+	Route::post('empresas/proyectos/anotaciones', ['as' => 'anotaciones', 'uses' => 'CrmController@anotaciones']);
 
 

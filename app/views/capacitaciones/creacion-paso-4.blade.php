@@ -16,7 +16,7 @@ Capacitaciones
         animate: {
             enter: 'animated bounceIn',
             exit: 'animated bounceOut'
-        }                               
+        }
     });
 </script>
 @stop
@@ -47,9 +47,9 @@ Capacitaciones
 				                <td>{{ $consultor->consultor->nombre }}</td>
 				                <td class="text-center hidden-xs hidden-sm">{{ $consultor->consultor->correo }}</td>
 				                <td class="text-center hidden-xs hidden-sm" style="width:100px">{{ $consultor->consultor->telefono }}</td>
-				                <td class="text-center"> 
+				                <td class="text-center">
 				                	<a href="{{route('capOferta', $consultor->doc_oferta)}}" target="_blank">
-				                		{{ $consultor->doc_oferta}}
+				                		Ver Oferta
 				                	</a>
 				                </td>
 				                <td class="text-center" style="width:100px">

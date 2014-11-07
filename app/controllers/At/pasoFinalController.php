@@ -68,7 +68,7 @@ class pasoFinalController extends BaseController{
 
     private function guardarOferta($file){
         $destinationPath = 'assets/ofertas/';
-        $fileName = $file->getClientOriginalName();
+        $fileName = time() . '.' .  \Str::lower($file->getClientOriginalExtension());//$file->getClientOriginalName();
         $file->move($destinationPath, $fileName);
         return $fileName;
     }
@@ -434,8 +434,8 @@ class pasoFinalController extends BaseController{
     }
 
     private function guardarInforme($file){
-        $destinationPath = 'assets/at/';
-        $fileName = $file->getClientOriginalName();
+        $destinationPath = 'assets/informes/';
+        $fileName = time() . '.' .  \Str::lower($file->getClientOriginalExtension());
         $file->move($destinationPath, $fileName);
         return $fileName;
     }

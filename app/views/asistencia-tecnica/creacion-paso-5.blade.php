@@ -14,7 +14,7 @@
         animate: {
             enter: 'animated bounceIn',
             exit: 'animated bounceOut'
-        }                               
+        }
     });
 </script>
 @stop
@@ -44,10 +44,9 @@
 				                <td>{{ $consultor->consultor->nombre }}</td>
 				                <td class="text-center hidden-xs hidden-sm">{{ $consultor->consultor->correo }}</td>
 				                <td class="text-center hidden-xs hidden-sm" style="width:100px">{{ $consultor->consultor->telefono }}</td>
-				                <td class="text-center"> 
+				                <td class="text-center">
 				                	<a href="{{route('atOferta', $consultor->doc_oferta)}}" target="_blank">
-				                		{{ $consultor->doc_oferta}}
-				                	</a>
+				                		Ver Oferta				                	</a>
 				                </td>
 				                <td class="text-center" style="width:70px">
 				                    <input type="radio" name="consultor" value="{{$consultor->id}}" data-content="Seleccionar" data-toggle="tooltip" data-placement="bottom" title="Seleccionar">

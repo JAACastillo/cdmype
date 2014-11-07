@@ -30,7 +30,7 @@
             <tbody>
             @foreach ($empresas as $empresa)
             <tr>
-                <td style="width:300px" ><a href="{{route('editarEmpresa', array($empresa->id))}}">{{ $empresa->nombre }}</a></td>
+                <td style="width:300px" ><a href="{{route('crm', array($empresa->id))}}">{{ $empresa->nombre }}</a></td>
 
                 <td>
                 @foreach($empresa->empresarios as $empresario)

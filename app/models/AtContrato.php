@@ -16,7 +16,7 @@ class AtContrato extends Eloquent {
 
        /* Guardar */
 
-        public function guardar($datos,$accion) 
+        public function guardar($datos,$accion)
         {
             $date = strtotime($datos['fecha_inicio']);
             $datos['fecha_inicio'] = date('Y-m-d', $date);
@@ -24,20 +24,20 @@ class AtContrato extends Eloquent {
             $date = strtotime($datos['fecha_final']);
             $datos['fecha_final'] = date('Y-m-d', $date);
 
-            if($this->validar($datos)) 
+            if($this->validar($datos))
             {
                 $this->fill($datos);
                 $this->save();
                 $id = $this->id;
                 $bitacora = new Bitacora;
-                
+
                 $campos = array(
                     'usuario_id' => Auth::user()->id,
                     'tabla' => 12,
                     'tabla_id' => $id,
-                    'accion' => $accion 
+                    'accion' => $accion
                 );
-                
+
                 $bitacora->guardar($campos);
                 return true;
             }
@@ -69,7 +69,7 @@ class AtContrato extends Eloquent {
 
         /* Validaciones */
 
-        public function validar($datos) 
+        public function validar($datos)
         {
             $reglas = array(
                 'duracion' => 'required',
@@ -80,20 +80,27 @@ class AtContrato extends Eloquent {
                 'lugar_firma' => 'required',
                 'attermino_id' => 'required'
             );
-            
+
             $validador = Validator::make($datos,$reglas);
 
-            if($validador->passes()) 
+            if($validador->passes())
                 return true;
-                
+
             $this->errores = $validador->errors();
-            
+
             return false;
+        }
+
+
+        public function getVencidaAttribute(){
+            $hoy = strtotime(date("d-m-Y", time()));
+            $vencimiento = strtotime( $this->attributes['fecha_final']);
+            return ($hoy > $vencimiento);
         }
 
 	/* RELACIÓN */
 
-        public function terminos() 
+        public function terminos()
         {
             return $this->belongsTo('AtTermino','attermino_id');
         }

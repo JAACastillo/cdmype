@@ -19,7 +19,7 @@ Capacitaciones
         animate: {
             enter: 'animated bounceIn',
             exit: 'animated bounceOut'
-        }                               
+        }
     });
 </script>
 @stop
@@ -50,7 +50,7 @@ Capacitaciones
 
 					            @foreach ($asistencias as $asistencia)
 					            <tr>
-					                <td>{{ $asistencia->empresario->nombre}}</td>
+					                <td><a  href="{{ route('editarEmpresario', array($asistencia->empresario->id)) }}">{{ $asistencia->empresario->nombre}}</a></td>
 					                <td class="text-center hidden-xs">
 										@foreach($asistencia->empresario->empresa as $empresario)
                     					<h5 style="margin:0px">{{ $empresario->empresas->nombre }}</h5>
@@ -63,7 +63,7 @@ Capacitaciones
 								@else
 									<input name="asistencias[]" type="checkbox" data-content="Seleccionar" value="{{$asistencia->id}}" >
 								@endif
-				                    
+
 				                	</td>
 					            </tr>
 					            @endforeach
@@ -74,7 +74,7 @@ Capacitaciones
 					    <br/>
 					    <div class="row">
 						    <div class="col-xs-6">
-						        
+
 						    </div>
 						    <div class="col-xs-6">
 						    	<center>

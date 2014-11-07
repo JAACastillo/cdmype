@@ -12,13 +12,13 @@ class EmpresaEmpresario extends Eloquent {
         'empresario_id',
         'empresa_id'
     );
-       
+
 
     /* Guardar */
 
-        public function guardar($datos,$accion) 
+        public function guardar($datos,$accion)
         {
-            if($this->validar($datos)) 
+            if($this->validar($datos))
             {
                 $this->fill($datos);
                 $this->save();
@@ -30,7 +30,7 @@ class EmpresaEmpresario extends Eloquent {
                     'tabla_id' => $id,
                     'accion' => $accion
                 );
-                
+
                 $bitacora->guardar($campos);
                 return true;
             }
@@ -39,18 +39,18 @@ class EmpresaEmpresario extends Eloquent {
         }
 
     /* Validaciones */
-    
-        public function validar($datos) 
-        {        
+
+        public function validar($datos)
+        {
             $reglas = array(
                 'tipo' => 'required',
                 'empresario_id' => 'required',
                 'empresa_id' => 'required'
             );
-            
+
             $validador = Validator::make($datos,$reglas);
 
-            if($validador->passes()) 
+            if($validador->passes())
                 return true;
 
             $this->errores = $validador->errors();
@@ -60,12 +60,16 @@ class EmpresaEmpresario extends Eloquent {
 	/* Relaciones */
 
         //
-        public function empresas() 
+        public function empresas()
         {
             return $this->belongsTo('Empresa','empresa_id');
         }
 
-        public function empresarios() 
+//asistencia a capacitaciones del empresario
+        public function capacitaciones(){
+            return $this->hasMany('asistencia', 'empresario_id');
+        }
+        public function empresarios()
         {
             return $this->belongsTo('Empresario','empresario_id');
         }
