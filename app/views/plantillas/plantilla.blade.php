@@ -49,6 +49,9 @@
 
             {{ HTML::script('assets/js/bootstrap-filestyle.js') }}
 
+            {{ HTML::script('assets/js/underscore-min.js') }}
+            {{ HTML::script('assets/js/calendar.js') }}
+
        <!-- Para las fechas
  <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
 
@@ -64,5 +67,6 @@
          </script>
 
             @yield("script")
+            @yield("script2")
     </body>
 </html>

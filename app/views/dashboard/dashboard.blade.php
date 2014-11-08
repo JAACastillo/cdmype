@@ -3,12 +3,12 @@
 @section('escritorio')
 
 @section('script')
-	<script type="text/javascript">
-		$(window).load(function(){
-	        $('.dashbord').fadeIn(1000);
-	    });
-		$( "#cont" ).removeClass( "container" ).addClass( "container-fluid" );
-	</script>
+
+
+<script type="text/javascript">
+	$('.dashbord').fadeIn(1000);
+	$( "#cont" ).removeClass( "container" ).addClass( "container-fluid" );
+</script>
 @stop
 
 <style>
@@ -74,7 +74,6 @@
 		padding: 7px;
 	}
 </style>
-
 <div class="row dashbord animated fadeIn oculto">
 	<!-- columna 1 -->
 	<div class="col-md-7">
@@ -89,8 +88,8 @@
 	<!-- columna 2 -->
 	<div class="col-md-5">
 		<!-- Notificaciones -->
-		<div class="row animated pulse">
-			@include('dashboard.notificaciones')
+		<div class="row animated pulse" style="background-color: #FFFFFF">
+			@include('salidas.index')
 		</div>
 		<!-- Tareas Comunes -->
 		<div class="row animated pulse">
