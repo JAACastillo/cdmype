@@ -49,6 +49,8 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $Nombre }}<span class="caret">  </span></a>
           <ul class="dropdown-menu" role="menu">
+            <li><a href="{{ route('dashboard') }}"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
+            <li><a href="{{ url('salidas') }}"><span class="glyphicon glyphicon-calendar"></span>  Calendario</a></li>
             <li><a href="{{ route('editarUsuario', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-pencil"></span>  Editar</a></li>
               @if(Auth::user()->tipo == 'Administrador')
                 <li><a href="{{ route('usuarios') }}"><span class="glyphicon glyphicon-user"></span>  Usuarios</a></li>

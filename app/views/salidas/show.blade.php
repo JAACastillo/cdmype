@@ -1,0 +1,1 @@
+C:\xampp\htdocs\cdmype\app/views/salidas/show.blade.php

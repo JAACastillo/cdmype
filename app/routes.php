@@ -76,6 +76,7 @@
         // });
 
     Route::get('/', ['as' => 'dashboard'  ,'uses' => 'DashboardController@dashboard']);
+    Route::resource('salidas', 'SalidasController');
 
     /* Cerrar Sesion */
         Route::get('/logout', 'AutenticacionController@get_logOut');
@@ -85,6 +86,9 @@
 
     //Buscar
         Route::controller('buscar', 'ApiController');
+
+    //Calendario
+        Route::get('calendario', 'CalendarioController@eventos');
 
     //Pagina error
 

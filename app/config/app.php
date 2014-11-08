@@ -126,6 +126,7 @@ return array(
 		//Providers personalizados
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
+		'Way\Generators\GeneratorsServiceProvider'
 
 	),
 
