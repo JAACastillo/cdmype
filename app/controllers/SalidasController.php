@@ -12,6 +12,17 @@ class SalidasController extends \BaseController {
 	{
 		$salida = new Salida;
 		$asesores = User::all()->lists('nombre', 'id');
+date_default_timezone_set('America/El_Salvador');
+		// return date_default_timezone_get();
+		$hoy = date("d/m/Y");                       // 10, 3, 2001
+		$hora = date("H:i");                         // 17:16:18
+
+// return $hora;
+		$salida->fecha_inicio = $hoy;
+		$salida->fecha_final = $hoy;
+		$salida->hora_salida = $hora;
+		$salida->hora_regreso = $hora;
+
 		return View::make('salidas.create', compact('salida', 'asesores'));
 	}
 

@@ -1,9 +1,10 @@
 
 
-<!-- <a href="{{route('salidas.create')}}" type="button" class="btn btn-default">Crear</a> -->
 <div class="row">
    <div class="col-md-12 text-center">
       <div class="form-inline">
+            <a href="{{route('salidas.create')}}" type="button" class="btn btn-success .icon-add pull-left">Crear</a>
+
          <div class="btn-group">
             <button class="btn btn-primary ladda-button" data-style="expand-right" data-calendar-nav="prev"><<
                   </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>

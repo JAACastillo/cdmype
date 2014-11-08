@@ -27,29 +27,26 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                {{ Form::label('fecha_inicio', 'Fecha:', array('class' => 'control-label col-md-4')) }}
-                <div class="col-md-3">
-                    <input name="fecha_inicio" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$salida->fecha_inicio}}" class="form-control" />
-                </div>
-                <div class="col-md-3">
-                    <input name="fecha_final" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$salida->fecha_final}}" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group">
-              {{ Form::label('hora_inicio', 'Hora de inicio:', array('class' => 'control-label col-md-4')) }}
-              <div class="col-md-3">
-                  {{ Form::time('hora_salida', $salida->hora_salida, array('class' => 'form-control hora')) }}
-              </div>
-              <div class="col-md-3">
-                  {{ Form::time('hora_regreso', $salida->hora_regreso, array('class' => 'form-control hora')) }}
-              </div>
-            </div>
-            <div class="form-group">
               {{ Form::label('lugar_destino', 'Lugar:', array('class' => 'control-label col-md-4')) }}
               <div class="col-md-6">
                   {{ Form::text('lugar_destino', null, array('placeholder' => 'Tema de Capacitación', 'class' => 'form-control')) }}
               </div>
             </div>
+            <div class="form-group ">
+                <div class="col-md-2 col-md-offset-3">
+                    <input name="fecha_inicio" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$salida->fecha_inicio}}" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                  {{ Form::time('hora_salida', $salida->hora_salida, array('class' => 'form-control hora')) }}
+                </div>
+                <div class="col-md-2">
+                    {{ Form::time('hora_regreso', $salida->hora_regreso, array('class' => 'form-control hora')) }}
+                </div>
+                <div class="col-md-2"> 
+                    <input name="fecha_final" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$salida->fecha_final}}" class="form-control" />
+                </div>
+            </div>
+            
             <div class="form-group">
                {{ Form::label('encargado', 'Encargado:', array('class' => 'control-label col-md-4')) }}
                <div class="col-md-6">

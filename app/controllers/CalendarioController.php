@@ -4,20 +4,23 @@ class CalendarioController extends BaseController {
 
    public function eventos(){
 
-
     $salidas = Salida::all();
     $evetos  = [];
 
     foreach ($salidas as $salida) {
+
+
+      $addTime = 21600000; //6 horas
+
       $combinada = $salida->fecha_inicio . ' ' . $salida->hora_salida;
-      $combinadaFinal = $salida->fecha_final . ' ' . $salida->hora_regreso;
+      $combinadaFinal = $salida->fecha_final. ' ' . $salida->hora_regreso;
       $eventos[] = array(
                            "id"       => $salida->id,
                             "title"   => $salida->lugar_destino,
                             "url"     =>"http://example.com",
                             "class"   =>"event-important",
-                            "start"   => (strtotime($combinada) * 1000) + 86400000, // Milliseconds
-                            "end"     => (strtotime($combinadaFinal) * 1000 )  + 86400000// Milliseconds
+                            "start"   => (strtotime($combinada) * 1000) + $addTime,//+ 86400000, // Milliseconds
+                            "end"     => (strtotime($combinadaFinal) * 1000 )  + $addTime//  + 86400000// Milliseconds
                         );
     }
 

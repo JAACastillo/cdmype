@@ -52,11 +52,14 @@
             {{ HTML::script('assets/js/underscore-min.js') }}
             {{ HTML::script('assets/js/calendar.js') }}
 
-       <!-- Para las fechas
+     <!--    Para las fechas -->
  <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
 
  <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
--->
+
+
+{{ date_default_timezone_set('America/El_Salvador')}}
+
          <script>
              webshims.setOptions('waitReady', false);
              webshims.setOptions('forms-ext', {types: 'date'});

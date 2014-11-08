@@ -34,7 +34,6 @@ Capacitaciones
 			</div>
 			<div class="panel-body">
 				<!-- Tabla de Asistencia -->
-		            <div class="col-md-12"></div>
 		            	<?php
     		        		$asistencias = Asistencia::Where('captermino_id', '=', $id)->Where('asistira', '=', 'Si')->get();
                 		?>
