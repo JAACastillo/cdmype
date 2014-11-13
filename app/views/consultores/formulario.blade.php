@@ -33,7 +33,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-xs-12">       
+                    <div class="col-xs-12">
                         <div class="form-group">
                             {{ Form::label('nombre', 'Nombre:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
@@ -43,7 +43,7 @@
                         <div class="form-group">
                             {{ Form::label('sexo', 'Sexo:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
-                                {{ Form::select('sexo', array('' => 'Seleccione el sexo','1' => 'Mujer','2' => 'Hombre'), null, array('class' => 'form-control')) }} 
+                                {{ Form::select('sexo', array('' => 'Seleccione el sexo','1' => 'Mujer','2' => 'Hombre'), null, array('class' => 'form-control')) }}
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,7 +67,7 @@
                         <div class="form-group">
                         {{ Form::label('departamento', 'Departamento:', array('class' => 'control-label col-md-3')) }}
                         <div class="col-md-9">
-                            {{ Form::select('departamento', $departamentos, null, array('class' => 'form-control select1')) }} 
+                            {{ Form::select('departamento', $departamentos, null, array('class' => 'form-control select1')) }}
                         </div>
                         </div>
                     </div>

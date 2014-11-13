@@ -69,6 +69,7 @@
     require(__DIR__ . '/routes/atterminos.php');
     require(__DIR__ . '/routes/capacitaciones.php');
     require(__DIR__ . '/routes/eventos.php');
+    require(__DIR__ . '/routes/agenda.php');
 
     /* Index */
         // Route::get('/', function() {
@@ -86,9 +87,6 @@
 
     //Buscar
         Route::controller('buscar', 'ApiController');
-
-    //Calendario
-        Route::get('calendario', 'CalendarioController@eventos');
 
     //Pagina error
 

@@ -3,44 +3,44 @@
 class ApiController extends BaseController {
 
  /* AUTOCOMPLEMENTAR */
-    
+
     //EMPRESARIO
-    public function getEmpresario() 
+    public function getEmpresario()
     {
     		$term =  Input::get('term');
-            
+
             $empresarios = Empresario::where('nombre', 'LIKE', "%" . $term . "%")
                 ->get();
-    		
+
             $results[] = array();
             array_shift($results);
-            foreach ($empresarios as $empresario) 
+            foreach ($empresarios as $empresario)
             {
     		    $results[] = array('label' => $empresario->nombre, 'value' => $empresario->id);
     		}
-    		
+
            return Response::json( $results, 200, array('content-type' => 'application/json', 'Access-Control-Allow-Origin' => '*'));
     }
 
     //EMPRESA
-    public function getEmpresa() 
+    public function getEmpresa()
     {
 		$term =  Input::get('term');
-        
+
         $empresas = Empresa::where('nombre', 'LIKE', "%" . $term . "%")
             ->get();
 
         $results = array();
-        foreach ($empresas as $empresa) 
+        foreach ($empresas as $empresa)
         {
 		    $results[] = array('label' => $empresa->nombre, 'value' => $empresa->id);
 		}
-		
+
         return Response::json( $results, 200, array('content-type' => 'application/json', 'Access-Control-Allow-Origin' => '*'));
     }
 
     //EMPRESA
-    public function getMunicipios($id) 
+    public function getMunicipios($id)
     {
         if (!empty($id)) {
             $opciones = "<option value=''> Seleccione una opción</option>";
@@ -49,7 +49,7 @@ class ApiController extends BaseController {
             foreach ($municipios as $fila) {
                $opciones .= "<option value=' $fila->id '> $fila->municipio</option>";
             }
-             
+
 
              return Response::make($opciones, 200,  array('content-type' => 'text/html', 'Access-Control-Allow-Origin' => '*')) ;//->header('Accces-Control-Allow-Origin: *');
          }
@@ -127,5 +127,26 @@ class ApiController extends BaseController {
                 ->paginate();
             return View::make('asesorias.lista', compact('asesorias'));
         }
+
+
+
+
+
+//proyectos
+
+        public function getProyectos($id){
+            $proyectos = proyecto::where('empresa_id', $id)
+                                 ->get(array('id', 'nombre as name'));
+
+            return Response::json($proyectos, 200);
+        }
+
+        public function getActividades($id){
+            $actividades = actividadesProyecto::where('proyecto_id', $id)
+                                              ->get(array('id', 'nombre as name'));
+
+            return Response::json($actividades, 200);
+        }
+
 
 }

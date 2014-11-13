@@ -14,7 +14,7 @@ class SalidasController extends \BaseController {
 		$asesores = User::all()->lists('nombre', 'id');
 date_default_timezone_set('America/El_Salvador');
 		// return date_default_timezone_get();
-		$hoy = date("d/m/Y");                       // 10, 3, 2001
+		$hoy = date("Y-m-d");                       // 10, 3, 2001
 		$hora = date("H:i");                         // 17:16:18
 
 // return $hora;
@@ -29,7 +29,7 @@ date_default_timezone_set('America/El_Salvador');
 
 	public function store()
 	{
-		$data = Input::only('observacion','fecha_inicio','fecha_final','hora_salida','hora_regreso','lugar_destino','justificacion','objetivo','encargado');
+		$data = Input::only('observacion','fecha_inicio','fecha_fin','hora_salida','hora_regreso','lugar_destino','justificacion','objetivo','encargado');
 		$participantes = Input::get('participantes');
 		$salida = new Salida;
 

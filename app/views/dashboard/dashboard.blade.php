@@ -96,5 +96,6 @@
 			@include('dashboard.shortcut')
 		</div>
 	</div>
+
 </div>
 @stop

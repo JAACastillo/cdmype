@@ -1,34 +1,24 @@
 
-
-<div class="row">
-   <div class="col-md-12 text-center">
+<div class="row" style="padding-top: 7px;">
+   <div class="col-md-5 pull-left">
+      <h3 style="margin-left: 15px;"></h3>
+   </div>
+   <div class="col-md-7 pull-right">
       <div class="form-inline">
-            <a href="{{route('salidas.create')}}" type="button" class="btn btn-success .icon-add pull-left">Crear</a>
-
-         <div class="btn-group">
-            <button class="btn btn-primary ladda-button" data-style="expand-right" data-calendar-nav="prev"><<
+         <div class="btn-group ">
+            <button class="btn btn-primary " data-style="expand-right" data-calendar-nav="prev"><<
                   </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
             </button>
-            <!-- <button class="btn" data-calendar-nav="today">Hoy
-                  </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-            </button> -->
-        <!--  </div>
-
-         <div class="btn-group"> -->
-            <button class="btn btn-info ladda-button" data-style="expand-right" data-calendar-view="year">Año
+            <button class="btn btn-info " data-style="expand-right" data-calendar-view="year">Año
                   </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
             </button>
-            <button class="btn btn-info ladda-button" data-style="expand-right active" data-calendar-view="month">Mes
+            <button class="btn btn-info " data-style="expand-right active" data-calendar-view="month">Mes
                   </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
             </button>
-            <button class="btn btn-info ladda-button" data-style="expand-right" data-calendar-view="week">Semana
+            <button class="btn btn-info " data-style="expand-right" data-calendar-view="week">Semana
                   </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
             </button>
-           <!--  <button class="btn btn-primary ladda-button" data-style="expand-right" data-calendar-view="day">Día
-                  </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-            </button> -->
-
-            <button class="btn btn-primary ladda-button" data-style="expand-right" data-calendar-nav="next"> >>
+            <button class="btn btn-primary " data-style="expand-right" data-calendar-nav="next"> >>
                   </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
             </button>
          </div>
@@ -38,12 +28,31 @@
 </div>
 
 <div class="row" >
+
    <div class="col-md-12">
-      <div id="calendar"></div>
+      <div id="calendar" class="context-menu-one box menu-1"></div>
+
    </div>
 </div>
 
+
 @section('script2')
+
+<div class="modal fade" id="events-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+               <h3 class="modal-title">Event</h3>
+            </div>
+            <div class="modal-body" style="height: 400px">
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+         </div>
+      </div>
+
 <script type="text/javascript">
 (function($){
    var calendar = $("#calendar").calendar(
@@ -52,8 +61,15 @@
        events_source: "/cdmype/calendario",
          language: 'es-ES',
          time_start: '8:00',
-         time_end: '17:00'
+         time_end: '17:00',
+         modal : "#events-modal",
+         modal_type : "iframe",
+      onAfterViewLoad: function(view) {
+         $('h3').text(this.getTitle());
+         // $("#calendar").calendar({modal : "#events-modal", modal_type : "ajax", modal_title : function (e) { return e.title }})
+      }
    });
+
 
    $('.btn-group button[data-calendar-nav]').each(function()
    {
@@ -78,17 +94,6 @@
       calendar.setOptions({first_day: value});
       calendar.view();
    });
-   $('#events-in-modal').change(function()
-   {
-      // var val = $(this).is(':checked') ? $(this).val() : null;
-      calendar.setOptions(
-         {
-            modal: true,
-            modal_type:'iframe'
-         }
-      );
-   });
-
 }(jQuery));
 
 </script>

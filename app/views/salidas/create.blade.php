@@ -42,11 +42,11 @@
                 <div class="col-md-2">
                     {{ Form::time('hora_regreso', $salida->hora_regreso, array('class' => 'form-control hora')) }}
                 </div>
-                <div class="col-md-2"> 
+                <div class="col-md-2">
                     <input name="fecha_final" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$salida->fecha_final}}" class="form-control" />
                 </div>
             </div>
-            
+
             <div class="form-group">
                {{ Form::label('encargado', 'Encargado:', array('class' => 'control-label col-md-4')) }}
                <div class="col-md-6">

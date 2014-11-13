@@ -1,5 +1,6 @@
 (function($){
-    var servidor = "http://www.cri.catolica.edu.sv/cdmype/sistema";
+    // var servidor = "http://www.cri.catolica.edu.sv/cdmype/sistema";
+    var servidor = "/cdmype";
     var _servidor1 = servidor + '/api/';
 
     $(window).load(function(){ //patch fix size of select box
@@ -248,6 +249,11 @@
 
         var option = $.extend(configuracion, opcion);
 
+
+        // var input = $('input');
+        // input.val('xxx');
+        // input.trigger('input');
+
         $(this).autocomplete(
             {
 
@@ -260,8 +266,13 @@
             select: function(event,ui)
                 {
                     $(this).val(ui.item.label);
-                    if(configuracion.hd != ' ')
-                    $(configuracion.hd).val(ui.item.value);
+                    if(configuracion.hd != ' '){
+                        $(configuracion.hd).val(ui.item.value);
+                        $(configuracion.hd).trigger('input');
+                    }
+                    // var input = $('#empresa_id');
+                    // input.val('xxx');
+
                     return false;
                 }
             });
@@ -279,5 +290,33 @@
             };
           });
 
+//Menu context
+    $(function(){
+        $.contextMenu({
+            selector: '.context-menu-one',
+            callback: function(key, options) {
+                var m = "clicked: " + key;
+                if(key == 'agenda')
+                    window.location.href = 'agenda';
+                else
+                    window.location.href = 'salidas/create';
+                //window.console && console.log(m) || alert(m);
+            },
+            items: {
+                "agenda": {name: "Agendar", icon: "edit"},
+                "salidas": {name: "Salidas", icon: "edit"},
+                // "cut": {name: "Cut", icon: "cut"},
+                // "copy": {name: "Copy", icon: "copy"},
+                // "paste": {name: "Paste", icon: "paste"},
+                // "delete": {name: "Delete", icon: "delete"},
+                // "sep1": "---------",
+                // "quit": {name: "Quit", icon: "quit"}
+            }
+        });
+
+        $('.context-menu-one').on('click', function(e){
+            console.log('clicked', this);
+        })
+    });
 
 })(jQuery)
