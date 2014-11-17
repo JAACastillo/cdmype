@@ -22,13 +22,13 @@ class CreateAsesoriasTable extends Migration {
 			$table->time('hora_inicio');
 			$table->time('hora_fin');
 			$table->enum('tipo', array('Seguimiento','Inicial'));
-			$table->integer('especialidad');
-			$table->integer('proyecto_id');
+			$table->integer('especialidad')->default(0);
+			$table->integer('proyecto_id')->default(0);
 			$table->integer('actividad');
 			$table->text('detalle');
 			$table->enum('estado', array('Programada','Completada', 'Cancelada'));
 			$table->integer('user_id');
-			$table->integer('empresario_id');
+			$table->integer('empresa_id');
 			$table->timestamps();
 		});
 	}

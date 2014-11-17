@@ -14,8 +14,10 @@
    <div class="row">
      <div class="col-xs-12">
        <div class="page-header">
-         <a href="{{route('editarAsesoria', $asesoria->id)}}" class="glyphicon glyphicon-pencil agregar btn btn-primary pull-left"></a>
-           <h2>&nbsp;{{$asesoria->titulo}}</h2>
+          <a href="{{route('editarAsesoria', $asesoria->id)}}" class="glyphicon glyphicon-pencil agregar btn btn-primary pull-left"></a>
+          <h2>&nbsp;{{$asesoria->titulo}}</h2>
+          <a href="{{route('bitacora', $asesoria->id)}}" target="_blank" class="glyphicon glyphicon-print agregar btn btn-primary pull-right"></a>
+          
        </div>
      </div>
    </div>
@@ -47,10 +49,12 @@
                    <dd><p>{{$asesoria->especialidades->especialidad}}</p></dd>
            </div>
 
-           <div class="form-group">
-               <dt class="text-left">{{ Form::label('actividad', 'Proyecto:', array('class' => 'control-label')) }}</dt>
-                   <dd><p>{{$asesoria->proyecto->nombre}}</p></dd>
-           </div>
+              @if($asesoria->proyecto_id != 0)
+               <div class="form-group">
+                   <dt class="text-left">{{ Form::label('actividad', 'Proyecto:', array('class' => 'control-label')) }}</dt>
+                       <dd><p>{{$asesoria->proyecto->nombre}}</p></dd>
+               </div>
+              @endif
          </div>
       </div>
       <div class="col-xs-4">
@@ -63,10 +67,13 @@
                <dt class="text-left">{{ Form::label('fecha_inicio', 'Estado:', array('class' => 'control-label')) }}</dt>
                    <dd><p>{{ $asesoria->estado }}</p></dd>
            </div>
-           <div class="form-group">
-               <dt class="text-left">{{ Form::label('organizacion', 'Actividad:', array('class' => 'control-label')) }}</dt>
-                   <dd><p>{{$asesoria->actividad()->nombre}}</p></dd>
-           </div>
+
+           @if($asesoria->actividad != 0)
+               <div class="form-group">
+                   <dt class="text-left">{{ Form::label('organizacion', 'Actividad:', array('class' => 'control-label')) }}</dt>
+                       <dd><p>{{$asesoria->actividad()->nombre}}</p></dd>
+               </div>
+            @endif
          </div>
       </div>
       <div class="col-xs-12">

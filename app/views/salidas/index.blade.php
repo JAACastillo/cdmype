@@ -1,7 +1,7 @@
 
 <div class="row" style="padding-top: 7px;">
-   <div class="col-md-5 pull-left">
-      <h3 style="margin-left: 15px;"></h3>
+   <div class="col-md-5 pull-left title">
+      <h4 style="margin-left: 15px;"></h4>
    </div>
    <div class="col-md-7 pull-right">
       <div class="form-inline">
@@ -65,7 +65,7 @@
          modal : "#events-modal",
          modal_type : "iframe",
       onAfterViewLoad: function(view) {
-         $('h3').text(this.getTitle());
+         $('.title h4').text(this.getTitle());
          // $("#calendar").calendar({modal : "#events-modal", modal_type : "ajax", modal_title : function (e) { return e.title }})
       }
    });

@@ -7,18 +7,18 @@ class CalendarioController extends BaseController {
     $salidas = Salida::all();
     $evetos  = [];
     $addTime = 21600000; //6 horas
-      // foreach ($salidas as $salida) {
-      //   $combinada = $salida->fecha_inicio . ' ' . $salida->hora_salida;
-      //   $combinadaFinal = $salida->fecha_final. ' ' . $salida->hora_regreso;
-      //   $eventos[] = array(
-      //                        "id"       => $salida->id,
-      //                         "title"   => $salida->lugar_destino,
-      //                         "url"     =>"http://localhost/cdmype",
-      //                         "class"   =>"event-important",
-      //                         "start"   => (strtotime($combinada) * 1000) + $addTime,//+ 86400000, // Milliseconds
-      //                         "end"     => (strtotime($combinadaFinal) * 1000 )  + $addTime//  + 86400000// Milliseconds
-      //                     );
-      // }
+      foreach ($salidas as $salida) {
+        $combinada = $salida->fecha_inicio . ' ' . $salida->hora_salida;
+        $combinadaFinal = $salida->fecha_inicio. ' ' . $salida->hora_regreso;
+        $eventos[] = array(
+                             "id"       => $salida->id,
+                              "title"   => $salida->lugar_destino,
+                              "url"     =>"http://localhost/cdmype",
+                              "class"   =>"event-important",
+                              "start"   => (strtotime($combinada) * 1000) + $addTime,//+ 86400000, // Milliseconds
+                              "end"     => (strtotime($combinadaFinal) * 1000 )  + $addTime//  + 86400000// Milliseconds
+                          );
+      }
 
     //agregando asesorias al calendario
       $asesorias = Asesoria::where('user_id', Auth::user()->id)->get();
@@ -81,6 +81,8 @@ class CalendarioController extends BaseController {
 
       $tipoActividad = Input::get('tipoActividad');
 
+
+// return $tipoActividad;
       if($tipoActividad == 1){
           $data = Input::only('titulo', 'municipio_id', 'fecha_inicio', 'fecha_fin', 'hora_inicio', 'hora_fin', 'especialidad','proyecto_id', 'actividad', 'detalle', 'estado','tipo', 'empresa_id' );
           $data['user_id'] = Auth::user()->id;
@@ -213,5 +215,17 @@ class CalendarioController extends BaseController {
           }
             return Redirect::back()->withInput()->withErrors($reunion->errores);
     }
+
+    //bitacora de seguimiento
+    public function bitacora($id){
+
+      $asesoria = Asesoria::find($id);
+       $pdf = App::make('dompdf');
+        //$pdf->loadHTML('<h1>Test</h1>');
+        // $pdf->loadView('pdf.bitacora', compact('asesoria'));
+        return $pdf->stream();
+    }
+
+
 
 }

@@ -88,5 +88,7 @@ class Asesoria extends \Eloquent {
         {
             return actividadesProyecto::find($this->actividad);
         }
-
+        public function asesor(){
+            return $this->belongsTo('User', 'user_id');
+        }
 }

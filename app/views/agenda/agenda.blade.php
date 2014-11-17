@@ -1,3 +1,4 @@
+
 @extends('menu')
 
 @section('escritorio')
@@ -48,7 +49,7 @@
             <br>
             @include('agenda.cabecera')
             <br>
-            {{ Form::hidden('tipoActividad', 1, array('ng-model' => 'actividadTipo')) }}
+            {{ Form::text('tipoActividad', 1, array('ng-model' => 'actividadTipo')) }}
             <div class="row form-horizontal">
                <div class="col-md-12">
                <!-- Nav tabs -->

@@ -18,7 +18,7 @@ class CreateReunionesTable extends Migration {
 			$table->string('titulo');
 			$table->integer('user_id');
 			$table->integer('municipio_id');
-			$table->enum('organizacion', array('CDMYPE','CONAMYPE','Capacitación'));
+			$table->enum('organizacion', array('CDMYPE','CONAMYPE','Capacitación', 'Otra Institución'));
 			$table->date('fecha_inicio');
 			$table->date('fecha_fin');
 			$table->time('hora_inicio');

@@ -59,10 +59,10 @@
             {{ HTML::script('assets/js/jquery.contextMenu.js') }}
             {{ HTML::script('assets/js/jquery.ui.position.js') }}
 
-     <!--    Para las fechas
- <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+         <!-- Para las fechas -->
+ <!-- <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
 
- <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>-->
+ // <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script> -->
 
 {{-- date_default_timezone_set('America/El_Salvador')--}}
 

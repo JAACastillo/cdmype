@@ -45,7 +45,7 @@
 		overflow: auto;
 	}
 	.tdr{
-		height: 330px;
+		height: 336px;
 		margin: 0;
 		overflow: auto;
 	}

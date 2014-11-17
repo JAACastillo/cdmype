@@ -17,3 +17,7 @@
       Route::get('agenda/reunion/{id}', ['as' => 'verReunion', 'uses' => 'CalendarioController@reunion']);
       Route::get('agenda/reunion/editar/{id}', ['as' => 'editarReunion', 'uses' => 'CalendarioController@editarReunion']);
       Route::post('agenda/reunion/editar/{id}', ['as' => 'editarReunion', 'uses' => 'CalendarioController@actualizarReunion']);
+
+
+      //bitacora de seguimiento
+      Route::get('agenda/bitacora/{id}', ['as' => 'bitacora', 'uses' => 'CalendarioController@bitacora']);
