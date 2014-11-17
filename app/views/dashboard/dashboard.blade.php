@@ -89,7 +89,7 @@
 	<div class="col-md-5">
 		<!-- Notificaciones -->
 		<div class="row animated pulse" style="background-color: #FFFFFF">
-			@include('salidas.index')
+			@include('salidas.calendario')
 		</div>
 		<!-- Tareas Comunes -->
 		<div class="row animated pulse">

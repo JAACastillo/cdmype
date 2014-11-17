@@ -13,7 +13,7 @@ class CalendarioController extends BaseController {
         $eventos[] = array(
                              "id"       => $salida->id,
                               "title"   => $salida->lugar_destino,
-                              "url"     =>"http://localhost/cdmype",
+                              "url"     =>"http://localhost/cdmype/salidas/" . $salida->id,
                               "class"   =>"event-important",
                               "start"   => (strtotime($combinada) * 1000) + $addTime,//+ 86400000, // Milliseconds
                               "end"     => (strtotime($combinadaFinal) * 1000 )  + $addTime//  + 86400000// Milliseconds
@@ -220,9 +220,9 @@ class CalendarioController extends BaseController {
     public function bitacora($id){
 
       $asesoria = Asesoria::find($id);
-       $pdf = App::make('dompdf');
+      $pdf = App::make('dompdf');
         //$pdf->loadHTML('<h1>Test</h1>');
-        // $pdf->loadView('pdf.bitacora', compact('asesoria'));
+      $pdf->loadView('pdf.bitacora', compact('asesoria'));
         return $pdf->stream();
     }
 

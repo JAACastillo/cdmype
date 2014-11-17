@@ -60,44 +60,42 @@
             return $pdf->stream();
         }]);
 
-    require(__DIR__ . '/routes/configuraciones.php');
-    require(__DIR__ . '/routes/asesorias.php');
-    require(__DIR__ . '/routes/usuarios.php');
-    require(__DIR__ . '/routes/empresas.php');
-    require(__DIR__ . '/routes/empresarios.php');
-    require(__DIR__ . '/routes/consultores.php');
-    require(__DIR__ . '/routes/atterminos.php');
-    require(__DIR__ . '/routes/capacitaciones.php');
-    require(__DIR__ . '/routes/eventos.php');
-    require(__DIR__ . '/routes/agenda.php');
+        require(__DIR__ . '/routes/configuraciones.php');
+        require(__DIR__ . '/routes/asesorias.php');
+        require(__DIR__ . '/routes/usuarios.php');
+        require(__DIR__ . '/routes/empresas.php');
+        require(__DIR__ . '/routes/empresarios.php');
+        require(__DIR__ . '/routes/consultores.php');
+        require(__DIR__ . '/routes/atterminos.php');
+        require(__DIR__ . '/routes/capacitaciones.php');
+        require(__DIR__ . '/routes/eventos.php');
+        require(__DIR__ . '/routes/agenda.php');
+        require(__DIR__ . '/routes/salidas.php');
 
-    /* Index */
-        // Route::get('/', function() {
-        //     return View::make('dashboard');
-        // });
+        /* Index */
+            // Route::get('/', function() {
+            //     return View::make('dashboard');
+            // });
 
-    Route::get('/', ['as' => 'dashboard'  ,'uses' => 'DashboardController@dashboard']);
-    Route::resource('salidas', 'SalidasController');
+        Route::get('/', ['as' => 'dashboard'  ,'uses' => 'DashboardController@dashboard']);
 
-    /* Cerrar Sesion */
-        Route::get('/logout', 'AutenticacionController@get_logOut');
-
-
+        /* Cerrar Sesion */
+            Route::get('/logout', 'AutenticacionController@get_logOut');
 
 
-    //Buscar
-        Route::controller('buscar', 'ApiController');
+        //Buscar
+            Route::controller('buscar', 'ApiController');
 
-    //Pagina error
+        //Pagina error
 
-        App::error(function($exception, $code)
-        {
-            switch ($code)
+            App::error(function($exception, $code)
             {
-                case 404:
-                    return Response::view('pagina_404', array(), 404);
-            }
-        });
+                switch ($code)
+                {
+                    case 404:
+                        return Response::view('pagina_404', array(), 404);
+                }
+            });
 
     });
 

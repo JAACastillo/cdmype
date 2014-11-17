@@ -16,10 +16,9 @@ class CreateSalidasTable extends Migration {
 		{
 			$table->increments('id');
 			$table->date('fecha_inicio');
-			$table->date('fecha_final');
 			$table->time('hora_salida');
 			$table->time('hora_regreso');
-			$table->text('lugar_destino');
+			$table->integer('lugar_destino');
 			$table->integer('participantes');
 			$table->text('justificacion');
 			$table->text('objetivo');

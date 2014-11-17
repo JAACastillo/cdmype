@@ -4,7 +4,6 @@ class Salida extends \Eloquent {
 	protected $fillable = array('estado',
                         'observacion',
                         'fecha_inicio',
-                        'fecha_final',
                         'hora_salida',
                         'hora_regreso',
                         'lugar_destino',
@@ -29,4 +28,18 @@ class Salida extends \Eloquent {
        $bitacora->guardar($campos);
        return true;
      }
+
+
+     //relaciones
+
+     public function municipio()
+     {
+        return $this->belongsTo('Municipio', 'lugar_destino');
+     }
+
+     public function responsable()
+     {
+        return $this->belongsTo('User', 'encargado');
+     }
 }
+

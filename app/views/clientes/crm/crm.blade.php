@@ -27,7 +27,7 @@
       border: 8px solid gray;
    }
    .panel{
-      margin-bottom: 5px;
+      margin-bottom: -30px 0px 0px 0px;
    }
    .agregar{
       font-size: 12px;

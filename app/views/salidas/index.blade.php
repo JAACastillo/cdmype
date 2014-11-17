@@ -1,102 +1,41 @@
+@extends('menu')
 
-<div class="row" style="padding-top: 7px;">
-   <div class="col-md-5 pull-left title">
-      <h4 style="margin-left: 15px;"></h4>
-   </div>
-   <div class="col-md-7 pull-right">
-      <div class="form-inline">
-         <div class="btn-group ">
-            <button class="btn btn-primary " data-style="expand-right" data-calendar-nav="prev"><<
-                  </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-            </button>
-            <button class="btn btn-info " data-style="expand-right" data-calendar-view="year">Año
-                  </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-            </button>
-            <button class="btn btn-info " data-style="expand-right active" data-calendar-view="month">Mes
-                  </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-            </button>
-            <button class="btn btn-info " data-style="expand-right" data-calendar-view="week">Semana
-                  </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-            </button>
-            <button class="btn btn-primary " data-style="expand-right" data-calendar-nav="next"> >>
-                  </span><span class="ladda-spinner"></span><span class="ladda-spinner"></span>
-            </button>
-         </div>
+@section('escritorio')
+<style type="text/css"> .page-header{margin-top: 10px;} </style>
+
+<h1 class="page-header">Salidas</h1>
+
+<div class="row">
+   {{ Form::open(array('route' => array('salidasPdf'), 'method' => 'POST', 'class' => 'form-inline', 'role' => 'form', 'target' => '_blank')) }}
+   <div class="col-md-6 col-md-offset-3">
+      <div class="form-group col-md-3">
+         <label>Firma:</label>
+         <select name="firma" id="inputFirma" class="form-control" required="required">
+            <option value="1">Director</option>
+            <option value="2">Directora</option>
+         </select>
       </div>
-
+      <div class="form-group col-md-3">
+         <label>Mes:</label>
+         {{ Form::select('mes', $meses, date('m'), ['class' => 'form-control']) }}
+      </div>
+      <div class="form-group col-md-3">
+         <label>Año:</label>
+         {{ Form::number('ano', date('Y'), array('class' => 'form-control text-center', 'min' => '2011', 'max' => date('Y'), 'step' => '1', 'placeholder' =>'año')) }}
+      </div>
+      <div class="form-group col-md-3">
+         <label>&nbsp;</label>
+         <button type="submit" tabindex="11" class="btn btn-primary btn-block ladda-button" data-style="expand-right">
+           <span class="glyphicon glyphicon-print"></span>
+           <span class="ladda-spinner"></span><span class="ladda-spinner"></span>
+         </button>
+      </div>
    </div>
+   {{Form::close()}}
 </div>
 
-<div class="row" >
+<hr>
 
-   <div class="col-md-12">
-      <div id="calendar" class="context-menu-one box menu-1"></div>
+@include('salidas.calendario')
 
-   </div>
-</div>
-
-
-@section('script2')
-
-<div class="modal fade" id="events-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-         <div class="modal-content">
-            <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-               <h3 class="modal-title">Event</h3>
-            </div>
-            <div class="modal-body" style="height: 400px">
-            </div>
-            <div class="modal-footer">
-               <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>
-         </div>
-      </div>
-
-<script type="text/javascript">
-(function($){
-   var calendar = $("#calendar").calendar(
-   {
-       tmpl_path: "app/views/salidas/tmpls/",
-       events_source: "/cdmype/calendario",
-         language: 'es-ES',
-         time_start: '8:00',
-         time_end: '17:00',
-         modal : "#events-modal",
-         modal_type : "iframe",
-      onAfterViewLoad: function(view) {
-         $('.title h4').text(this.getTitle());
-         // $("#calendar").calendar({modal : "#events-modal", modal_type : "ajax", modal_title : function (e) { return e.title }})
-      }
-   });
-
-
-   $('.btn-group button[data-calendar-nav]').each(function()
-   {
-      var $this = $(this);
-      $this.click(function()
-      {
-         calendar.navigate($this.data('calendar-nav'));
-      });
-   });
-   $('.btn-group button[data-calendar-view]').each(function()
-   {
-      var $this = $(this);
-      $this.click(function()
-      {
-         calendar.view($this.data('calendar-view'));
-      });
-   });
-   $('#first_day').change(function()
-   {
-      var value = $(this).val();
-      value = value.length ? parseInt(value) : null;
-      calendar.setOptions({first_day: value});
-      calendar.view();
-   });
-}(jQuery));
-
-</script>
 @stop
-
-
