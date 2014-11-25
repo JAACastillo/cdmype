@@ -2,33 +2,73 @@
 
 class CalendarioController extends BaseController {
 
-  public function eventos(){
+ public function eventos(){
 
-    $salidas = Salida::all();
+    $urlBase = "http://localhost/cdmype/sistema/";
+    
+
+    $start = Input::get('from') / 1000;
+    $end   = Input::get('to') / 1000;
+    $start = date("Y-m-d", $start);
+    $end = date("Y-m-d", $end);
+
+
+// return $start . " / " . $end;
+//Consultas a la base de datos
+    $salidas      = Salida::whereBetween('fecha_inicio', array($start, $end))
+                            ->get();
+    $reuniones    = Reunione::whereBetween('fecha_inicio', array($start, $end))
+                            ->where('user_id', Auth::user()->id)->get();
+    $asesorias    = Asesoria::whereBetween('fecha_inicio', array($start, $end))
+                            ->where('user_id', Auth::user()->id)->get();
+    $ats  = AtTermino::with('contrato')->
+                        where("usuario_id", Auth::user()->id)->
+                        // where('estado', 'Contratada')->
+                        whereHas('contrato', function($q) use ($start, $end){
+                                  $q->whereBetween('fecha_final', array($start, $end));
+                              })->select('id', 'tema', 'fecha')
+                              ->get();
+// return $ats;
     $evetos  = [];
+
     $addTime = 21600000; //6 horas
+
+      foreach ($ats as $at) {
+        $combinada = ($at->contrato->fecha_final . ' ' . '10:00:00');
+        $eventos[] = array(
+                             "id"       => $at->id,
+                              "title"   => 'AT: ' . $at->tema,// . "/" . $at->fecha, //. ((strtotime($combinada) * 1000) + $addTime),
+                              // "url"     =>  $urlBase . "salidas/" . $at->id,
+                              "class"   =>"event-important",
+                              "start"   => (strtotime($combinada) * 1000) + $addTime,//+ 86400000, // Milliseconds
+                              "end"     => (strtotime($combinada) * 1000 )  + $addTime //  + 86400000// Milliseconds
+                          );
+      }
+
+    
+    // return Response::json(array("success" => 1, "result" => $eventos), 200);
+
       foreach ($salidas as $salida) {
         $combinada = $salida->fecha_inicio . ' ' . $salida->hora_salida;
         $combinadaFinal = $salida->fecha_inicio. ' ' . $salida->hora_regreso;
         $eventos[] = array(
                              "id"       => $salida->id,
-                              "title"   => $salida->lugar_destino,
-                              "url"     =>"http://localhost/cdmype/salidas/" . $salida->id,
-                              "class"   =>"event-important",
+                              "title"   => $salida->municipio->municipio,
+                              "url"     =>  $urlBase . "salidas/" . $salida->id,
+                              "class"   =>"event-warning",
                               "start"   => (strtotime($combinada) * 1000) + $addTime,//+ 86400000, // Milliseconds
                               "end"     => (strtotime($combinadaFinal) * 1000 )  + $addTime//  + 86400000// Milliseconds
                           );
       }
 
     //agregando asesorias al calendario
-      $asesorias = Asesoria::where('user_id', Auth::user()->id)->get();
       foreach ($asesorias as $salida) {
         $combinada = $salida->fecha_inicio . ' ' . $salida->hora_inicio;
         $combinadaFinal = $salida->fecha_fin. ' ' . $salida->hora_fin;
         $eventos[] = array(
                              "id"       => $salida->id,
                               "title"   => $salida->titulo,
-                              "url"     => "http://localhost/cdmype/agenda/asesoria/" . $salida->id,
+                              "url"     =>  $urlBase . "agenda/asesoria/" . $salida->id,
                               "class"   =>"event-success",
                               "start"   => (strtotime($combinada) * 1000) + $addTime,//+ 86400000, // Milliseconds
                               "end"     => (strtotime($combinadaFinal) * 1000 )  + $addTime//  + 86400000// Milliseconds
@@ -36,23 +76,24 @@ class CalendarioController extends BaseController {
       }
 
     //agregando reuniones al calendario
-      $reuniones = Reunione::where('user_id', Auth::user()->id)->get();
       foreach ($reuniones as $salida) {
         $combinada = $salida->fecha_inicio . ' ' . $salida->hora_inicio;
         $combinadaFinal = $salida->fecha_fin. ' ' . $salida->hora_fin;
         $eventos[] = array(
                              "id"       => $salida->id,
                               "title"   => $salida->titulo,
-                              "url"     => "http://localhost/cdmype/agenda/reunion/"  . $salida->id,
+                              "url"     =>  $urlBase . "agenda/reunion/"  . $salida->id,
                               "class"   =>"event-information",
                               "start"   => (strtotime($combinada) * 1000) + $addTime,//+ 86400000, // Milliseconds
                               "end"     => (strtotime($combinadaFinal) * 1000 )  + $addTime//  + 86400000// Milliseconds
                           );
       }
 
+
+
+
     return Response::json(array("success" => 1, "result" => $eventos), 200);
   }
-
   public function agenda(){
 
     date_default_timezone_set('America/El_Salvador');

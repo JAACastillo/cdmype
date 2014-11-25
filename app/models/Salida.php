@@ -41,5 +41,9 @@ class Salida extends \Eloquent {
      {
         return $this->belongsTo('User', 'encargado');
      }
+
+     public function participantes(){
+        return $this->hasMany('participante');
+     }
 }
 

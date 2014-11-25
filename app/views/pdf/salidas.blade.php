@@ -63,7 +63,7 @@
                 {{date("g:i a", strtotime($salida->hora_salida));}}<br>{{date("g:i a", strtotime($salida->hora_regreso));}}
               </td>
               <td style="text-align: center;">
-                {{$salida->municipio->municipio}}
+                {{$salida->municipio}}
               </td>
               <td>
                 <?php
