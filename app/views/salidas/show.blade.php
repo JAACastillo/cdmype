@@ -51,6 +51,10 @@
                 <dt class="text-left">{{ Form::label('objetivo', 'Objetivo:', array('class' => 'control-label')) }}</dt>
                     <dd><p>{{$salida->objetivo}}</p></dd>
             </div>
+            <div class="form-group">
+                <dt class="text-left">{{ Form::label('observacion', 'Observación:', array('class' => 'control-label')) }}</dt>
+                    <dd><p>{{$salida->observacion}}</p></dd>
+            </div>
          </div>
       </div>
    </div>

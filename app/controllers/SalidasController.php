@@ -73,7 +73,7 @@ class SalidasController extends \BaseController {
 
       $salida->participantes = $datos;
 
-		return View::make('salidas.create', compact('salida', 'municipios', 'asesores'));
+		return View::make('salidas.edit', compact('salida', 'municipios', 'asesores'));
 
 	}
 
@@ -91,7 +91,7 @@ class SalidasController extends \BaseController {
         if($salida->guardar($datos,'2')){
 
             if($this->actualizarParticipantes($id,$participantes)){
-                return Redirect::route('salidas.index');
+                return Redirect::route('salidas.show', $salida->id);
             }
             else{
                 return Redirect::back()->withInput()->withErrors(['Error' => 'No se han podido actualizar los participantes']);

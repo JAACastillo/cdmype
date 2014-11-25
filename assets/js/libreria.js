@@ -1,6 +1,6 @@
 (function($){
-    // var servidor = "http://www.cri.catolica.edu.sv/cdmype/sistema";
-    var servidor = "/cdmype";
+    var servidor = "http://www.cri.catolica.edu.sv/cdmype/sistema";
+    // var servidor = "/cdmype";
     var _servidor1 = servidor + '/api/';
 
     $(window).load(function(){ //patch fix size of select box
