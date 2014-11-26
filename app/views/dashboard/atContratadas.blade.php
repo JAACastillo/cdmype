@@ -1,5 +1,3 @@
-<div role="tabpanel" class="tab-pane fade in active" id="ultimosAT">
-    <div class="table-responsive">
       <table class="table table-bordered">
           <thead>
           <tr class="active">
@@ -33,5 +31,3 @@
           @endforeach
           </tbody>
       </table>
-    </div>
-</div>

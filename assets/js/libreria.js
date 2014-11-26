@@ -278,6 +278,24 @@
             });
         };
 
+        //Previsualizar
+        $('.previsualizar').click(function(e)
+        {
+            $("#texto").val($(this).val());
+            $("#myModalBandera").val($(this).attr("name"));
+            var nombre = $('#myModalBandera').val();
+            $("#titulo").text($("label[for=" + nombre + "]").text());
+            $('#myModal').modal('show');
+        });
+
+        $('.ocultarModal').click(function(e)
+        {
+            var text = $("#texto").val();
+            var nombre = $('#myModalBandera').val();
+            $("textarea[name=" + nombre + "]").val(text);
+            $('#myModal').modal('hide')
+        });
+
         $(".select1").change(function(){
             if ($(".select1").val()) {
             $.ajax({

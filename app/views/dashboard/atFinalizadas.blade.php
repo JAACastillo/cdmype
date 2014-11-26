@@ -1,5 +1,4 @@
-<div role="tabpanel" class="tab-pane fade" id="admonAt">
-    <div class="table-responsive">
+
       <table class="table table-bordered">
           <thead>
           <tr class="active">
@@ -27,5 +26,3 @@
           @endforeach
           </tbody>
       </table>
-    </div>
-</div>
