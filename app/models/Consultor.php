@@ -14,6 +14,8 @@ class Consultor extends Eloquent {
         'direccion',
         'sexo',
         'telefono',
+        'empresa',
+        'iva',
         'celular'
     );    
     

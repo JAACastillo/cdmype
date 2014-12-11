@@ -35,6 +35,18 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="form-group">
+                            {{ Form::label('empresa', 'Empresa:', array('class' => 'control-label col-md-3')) }}
+                            <div class="col-md-9">
+                                {{ Form::text('empresa', null, array('placeholder' => 'Nombre empresa', 'class' => 'form-control')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('iva', 'IVA:', array('class' => 'control-label col-md-3')) }}
+                            <div class="col-md-9">
+                                {{ Form::text('iva', null, array('placeholder' => 'Nombre empresa', 'class' => 'form-control')) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
                             {{ Form::label('nombre', 'Nombre:', array('class' => 'control-label col-md-3')) }}
                             <div class="col-md-9">
                                 {{ Form::text('nombre', null, array('placeholder' => 'Nombre', 'class' => 'form-control', 'autofocus')) }}

@@ -54,7 +54,7 @@ class AtContrato extends Eloquent {
         }
         public function getFinalAttribute(){
 
-            $date = strtotime($this->fecha_final);
+            $date = strtotime($this->fecha_final);  
            return date('d/m/Y', $date);
         }
 

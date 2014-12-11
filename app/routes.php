@@ -71,6 +71,7 @@
         require(__DIR__ . '/routes/eventos.php');
         require(__DIR__ . '/routes/agenda.php');
         require(__DIR__ . '/routes/salidas.php');
+        require(__DIR__ . '/routes/panel.php');
 
         /* Index */
             // Route::get('/', function() {

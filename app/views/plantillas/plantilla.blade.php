@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title> @yield('titulo', 'CDMYPE - Inicio de Sesión') </title>
+        <title> @yield('titulo', 'CDMYPE - Sistema CDMYPE') </title>
         <meta charset="UTF-8">
         <meta name=description content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel='shortcut icon' href='/cdmype/sistema/assets/img/favicon.png'>
         <!-- CSS -->
-            <!-- Bootstrap -->
-
-            {{ HTML::style('assets/css/estilus.css', array('media' => 'screen')) }}
+        {{ HTML::style('assets/css/estilus.css', array('media' => 'screen')) }}
 
     </head>
     <body>

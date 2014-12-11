@@ -19,6 +19,16 @@
           <br><br>
           <div class="row">
             <center>
+                <br />
+                <br />
+                <br />
+                  <a class="btn btn-success" href="{{route('atRecepcion', $attermino->id)}}" target="_blank">
+                      <span class="glyphicon glyphicon glyphicon-print"></span>&nbsp
+                      Acta de Recepción
+                    </a>                
+                <br />
+                <br />
+
                     <a class="btn btn-default" href="{{route('pdfAt', $attermino->id)}}" data-toggle="tooltip" data-placement="bottom" title="Imprimir F1" target="_blank"> <span class="glyphicon glyphicon-print"></span>&nbsp TDR</a>
                     <br>
                     <br>

@@ -4,7 +4,7 @@ class CalendarioController extends BaseController {
 
  public function eventos(){
 
-    $urlBase = "http://localhost/cdmype/sistema/";
+    $urlBase = "http://cri.catolica.edu.sv/cdmype/sistema/";
     
 
     $start = Input::get('from') / 1000;

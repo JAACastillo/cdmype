@@ -65,6 +65,9 @@ Route::get('at/{doc}', ['as' => 'atInforme', 'uses' =>
     ]);
 
 
+Route::get('asistencia-tecnica/recepcion/{id}', ['as' => 'atRecepcion', 'uses' => 'pasoFinalController@recepcion']);
+
+Route::get('asistencia-tecnica/recibo-aporte/{id}', ['as' => 'aporteEmpresario', 'uses' => 'pasoFinalController@aporteCdmype']);
 /*
 	Route::get('asistencia-tecnica/paso/empresa', ['as' => 'atPasoEmpresa', 'uses' => 'AtTerminoController@empresa']);
 	Route::get('asistencia-tecnica/paso/empresa', ['as' => 'atPasoEmpresa', 'uses' => 'AtTerminoController@empresa']);

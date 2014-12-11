@@ -442,4 +442,55 @@ class pasoFinalController extends BaseController{
 
 
 
+
+    //Recepcion de at
+    public function recepcion($id){
+        $asistencia = AtTermino::with('empresa', 'contrato', 'acta', 'empresa')
+                                ->find($id);
+        $consultor  = $asistencia->consultorSeleccionado;
+        $acta       = $asistencia->acta;
+        $contrato   = $asistencia->contrato;
+        $empresa   = $asistencia->empresa;
+        
+    date_default_timezone_set('America/El_Salvador');
+
+       $time = time();
+                   // 7 days; 24 hours; 60 mins; 60 secs
+        $hora = date("g:i a", $time);
+// echo 'Next Week: '. date('Y-m-d', $nextWeek) ."\n";
+
+        //return $empresario;
+        $pdf = App::make('dompdf');
+        //$pdf->loadHTML('<h1>Test</h1>');
+        $pdf->loadView('pdf.recepcionBienes',
+                compact('asistencia', 'consultor', 'contrato', 'acta', 'empresa', 'hora'));
+        return $pdf->stream();
+    }
+
+    public function aporteEmpresario($id){
+            $asistencia = AtTermino::with('empresa', 'contrato', 'acta', 'empresa')
+                                    ->find($id);
+            $consultor  = $asistencia->consultorSeleccionado;
+            // $acta       = $asistencia->acta;
+            $contrato   = $asistencia->contrato;
+            // $empresa   = $asistencia->empresa;
+        $pago = round($contrato->pagoEmpresario,2);
+        $concepto = "Pago de servicio de consultoría correspondiente al aporte empresarial por desarrollo de asistencia técnica denominada:";
+        $concepto = $concepto . $asistencia->tema;
+        $fecha = $contrato->fecha_final;
+            
+        date_default_timezone_set('America/El_Salvador');
+
+           $time = time();
+                       // 7 days; 24 hours; 60 mins; 60 secs
+            $hora = date("g:i a", $time);
+    // echo 'Next Week: '. date('Y-m-d', $nextWeek) ."\n";
+
+            //return $empresario;
+            $pdf = App::make('dompdf');
+            //$pdf->loadHTML('<h1>Test</h1>');
+            $pdf->loadView('pdf.aporteEmpresarial',
+                    compact('consultor', 'pago', 'concepto', 'fecha', 'consultor'));
+            return $pdf->stream();
+    }
 }
