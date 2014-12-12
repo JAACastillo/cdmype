@@ -23,7 +23,7 @@ class CapTermino extends Eloquent {
         'usuario_id',
         'informe'
     );
-
+ 
     /* Guardar */
 
         public function guardar($datos,$accion)

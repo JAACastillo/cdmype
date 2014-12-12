@@ -19,6 +19,11 @@
           <br><br>
           <div class="row">
             <center>
+                    <a class="btn btn-success" href="{{route('capRecepcion', $captermino->id)}}" target="_blank">
+                      <span class="glyphicon glyphicon glyphicon-print"></span>&nbsp
+                      Acta de recepcion
+                    </a>
+                    <br><br>
                     <a class="btn btn-default" href="{{route('pdfCap', $captermino->id)}}" data-toggle="tooltip" data-placement="bottom" title="Imprimir F1" target="_blank"> <span class="glyphicon glyphicon-print"></span>&nbsp TDR</a>
                     <br>
                     <br>

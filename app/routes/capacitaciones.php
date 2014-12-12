@@ -61,3 +61,4 @@
 
 	);
 	Route::get('capacitaciones/paso/{id}', ['as' => 'capPaso', 'uses' => 'CapTerminoController@Paso']);
+	Route::get('capacitaciones/recepcion/{id}', ['as' => 'capRecepcion', 'uses' => 'CapTerminoController@recepcion']);

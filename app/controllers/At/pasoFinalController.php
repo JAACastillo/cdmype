@@ -448,9 +448,13 @@ class pasoFinalController extends BaseController{
         $asistencia = AtTermino::with('empresa', 'contrato', 'acta', 'empresa')
                                 ->find($id);
         $consultor  = $asistencia->consultorSeleccionado;
-        $acta       = $asistencia->acta;
+        $fecha       = $asistencia->acta->fecha;
         $contrato   = $asistencia->contrato;
-        $empresa   = $asistencia->empresa;
+        $empresa   = $asistencia->empresa; 
+
+        $servicio['tipo'] = "SERVICIOS DE ASISTENCIA TÉCNICA";
+        $servicio['descripcion'] = "Asistencia técnica denominada: " . $asistencia->tema . " para la empresa " . $empresa->nombre;
+        $servicio['pago'] = $contrato->pagoEmpresario;
         
     date_default_timezone_set('America/El_Salvador');
 
@@ -463,7 +467,7 @@ class pasoFinalController extends BaseController{
         $pdf = App::make('dompdf');
         //$pdf->loadHTML('<h1>Test</h1>');
         $pdf->loadView('pdf.recepcionBienes',
-                compact('asistencia', 'consultor', 'contrato', 'acta', 'empresa', 'hora'));
+                compact('fecha', 'servicio', 'hora', 'consultor'));
         return $pdf->stream();
     }
 

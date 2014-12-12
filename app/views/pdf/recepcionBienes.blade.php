@@ -19,7 +19,7 @@
 	     .clausula {color: #707070  }
 	   </style>
 
-	<title>Contrato de trabajo</title>
+	<title>Acta de recepcion</title>
 </head>
 <body>
 
@@ -36,7 +36,7 @@
 
 				<?php
 					$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-					$date = strtotime($acta->fecha);
+					$date = strtotime($fecha);
 					$dia = date('d', $date);
 					$mes = $meses[date('m', $date) - 1];
 					$ano = date('Y', $date);
@@ -44,7 +44,7 @@
 
 
 					$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-					$date = strtotime($acta->fecha);
+					$date = strtotime($fecha);
 					$diaActa = date('d', $date);
 					$mesActa = $meses[date('m', $date) - 1];
 					$anoActa = date('Y', $date);
@@ -52,8 +52,8 @@
 
 <div id="contenido">
 	<h4 style="text-align:center">
-		ACTA DE CONFORMIDAD DE ASISTENCIA TÉCNICA <br>
-		"SERVICIOS DE ASISTENCIA TÉCNICA"
+		ACTA DE RECEPCIÓN DE BIENES Y SERVICIOS <br>
+		"{{$servicio['tipo']}}"
 	</h4>
 	<br>
 	<br>
@@ -79,9 +79,9 @@
 		</tr>
 		<tr>
 			<td style="text-align:center"> 1</td>
-			<td>Asistencia Técnica denominada: "<b>{{$asistencia->tema}}</b>" para <b>{{$empresa->nombre}}</b></td>
-			<td  style="text-align:center">$ {{$contrato->pago}}</td>
-			<td style="text-align:center">TOTAL</td>
+			<td> {{$servicio['descripcion']}}</b></td>
+			<td  style="text-align:center">$ {{round($servicio['pago'],2)}}</td>
+			<td style="text-align:center">$ {{round($servicio['pago'],2)}}</td>
 		</tr>
 	</table>	
 	<br>

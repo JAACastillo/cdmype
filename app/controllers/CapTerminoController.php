@@ -572,4 +572,36 @@ class CapTerminoController extends BaseController {
                 return $fileName;
             }
 
+
+    public function recepcion($id){
+        $capacitacion = CapTermino::with('contratos')
+                                    ->find($id);
+        $consultor  = $capacitacion->consultorSeleccionado;
+        $fecha       = $capacitacion->fecha;
+        $contrato   = $capacitacion->contratos;
+        // $empresa   = $capacitacion->empresa; 
+
+        $servicio['tipo'] = "SERVICIOS DE CAPACITACIÓN";
+        $servicio['descripcion'] = "Capacitación denominada: " . $capacitacion->tema . " para " . $capacitacion->categoria;
+        $servicio['pago'] = $contrato->pago;
+            
+        date_default_timezone_set('America/El_Salvador');
+
+        $time = time();
+                       // 7 days; 24 hours; 60 mins; 60 secs
+        $hora = date("g:i a", $time);
+    // echo 'Next Week: '. date('Y-m-d', $nextWeek) ."\n";
+
+            //return $empresario;
+        $pdf = App::make('dompdf');
+            //$pdf->loadHTML('<h1>Test</h1>');
+        $pdf->loadView('pdf.recepcionBienes',
+                compact('fecha', 'servicio', 'hora', 'consultor'));
+            return $pdf->stream();
+    }
+
+
+
+
+
 }
