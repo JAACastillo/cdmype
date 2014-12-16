@@ -50,6 +50,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ $Nombre }}<span class="caret">  </span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="{{ route('dashboard') }}"><span class="glyphicon glyphicon-home"></span>  Inicio</a></li>
+            <li><a href="{{ url('panel') }}"><span class="fa fa-dashboard fa-fw"></span>  Dashboard</a></li>
             <li><a href="{{ url('salidas') }}"><span class="glyphicon glyphicon-calendar"></span>  Calendario</a></li>
             <li><a href="{{ route('editarUsuario', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-pencil"></span>  Editar</a></li>
               @if(Auth::user()->tipo == 'Administrador')
@@ -59,7 +60,7 @@
               @endif
             <li><a href="{{ route('configuraciones') }}"><span class="glyphicon glyphicon-wrench"></span>  Configuración</a></li>
             <li class="divider"></li>
-            <li><a href="/cdmype/sistema/logout"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
+            <li><a href="{{route('logout')}}"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
           </ul>
         </li>
       </ul>
@@ -93,7 +94,7 @@
         {{ Form::hidden('bandera', null, array('id' => 'myModalBandera')) }}
         <div class="row">
           <div class="col-xs-12">
-          {{ Form::textarea('texto', null, array('placeholder' => 'Introdusca el texto...', 'rows' => '12', 'class' => 'form-control', 'id' => 'texto', 'autofocus')) }}
+          {{ Form::textarea('texto', null, array('placeholder' => 'Introduzca el texto...', 'rows' => '12', 'class' => 'form-control', 'id' => 'texto', 'autofocus')) }}
           </div>
         </div>
       </div>

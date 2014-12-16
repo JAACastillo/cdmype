@@ -92,7 +92,7 @@
 	ILOBASCO, {{$dia}} de {{$mes}} de {{$ano}}
 	<br>
 
-	<div style="height:300px; background-color:red; margin:20px 0px">
+	<div style="height:300px;margin:20px 0px">
 		<div class="left">
 			<br>
 				NOMBRE: {{$consultor->consultor->nombre}}

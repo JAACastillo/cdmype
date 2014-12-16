@@ -92,4 +92,6 @@
     </script>
 
 {{ HTML::script('assets/js/panel.js')}}
+{{ HTML::script('assets/js/metis-menu.js')}}
+{{ HTML::script('assets/js/sb-admin-2.js')}}
 </section>

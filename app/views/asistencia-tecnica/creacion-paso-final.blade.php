@@ -19,8 +19,20 @@
           <br><br>
           <div class="row">
             <center>
-                <br />
-                <br />
+              <div class="col-md-4">
+                <a class="btn btn-success" href="{{route('aporteEmpresario', $attermino->id)}}" target="_blank">
+                    <span class="glyphicon glyphicon glyphicon-print"></span>&nbsp
+                    Recibo de aporte
+                  </a> 
+              </div>
+                                 
+                <div class="col-md-4">
+                  <a class="btn btn-success" href="{{route('pagoAporte', $attermino->id)}}" target="_blank">
+                      <span class="glyphicon glyphicon glyphicon-print"></span>&nbsp
+                      Pago Aporte
+                    </a> 
+
+                </div>
                 <br />
                   <a class="btn btn-success" href="{{route('atRecepcion', $attermino->id)}}" target="_blank">
                       <span class="glyphicon glyphicon glyphicon-print"></span>&nbsp

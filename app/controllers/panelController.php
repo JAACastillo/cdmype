@@ -6,7 +6,7 @@ class panelController extends BaseController {
 	public function index(){
 
 		$asesorias 		= Asesoria::where('estado', 'Completada')->get();
-		$asesores = User::all();//where('tipo', 'Asesor')->get();
+		$asesores = User::where('tipo', 'Asesor')->get();
 		return View::make('panel.index', compact('asesores'));
 	}
 

@@ -479,7 +479,7 @@ class pasoFinalController extends BaseController{
             $contrato   = $asistencia->contrato;
             // $empresa   = $asistencia->empresa;
         $pago = round($contrato->pagoEmpresario,2);
-        $concepto = "Pago de servicio de consultoría correspondiente al aporte empresarial por desarrollo de asistencia técnica denominada:";
+        $concepto = "Pago correspondiente al aporte empresarial por desarrollo de asistencia técnica denominada:";
         $concepto = $concepto . $asistencia->tema;
         $fecha = $contrato->fecha_final;
             
@@ -495,6 +495,34 @@ class pasoFinalController extends BaseController{
             //$pdf->loadHTML('<h1>Test</h1>');
             $pdf->loadView('pdf.aporteEmpresarial',
                     compact('consultor', 'pago', 'concepto', 'fecha', 'consultor'));
+            return $pdf->stream();
+    }
+    public function pagoAporte($id){
+            $asistencia = AtTermino::with('empresa', 'contrato', 'acta', 'empresa')
+                                    ->find($id);
+            // $consultor  = $asistencia->consultorSeleccionado;
+            // // $acta       = $asistencia->acta;
+            $contrato   = $asistencia->contrato;
+            $empresa   = $asistencia->empresa;
+        $pago = round($contrato->pagoEmpresario,2);
+        $concepto = "Pago correspondiente al aporte empresarial del $asistencia->aporte %
+                    por desarrollo de asistencia técnica denominada: '";
+        $concepto = $concepto . $asistencia->tema;
+        $concepto = $concepto . "' Para: " . $empresa->nombre;
+        // $fecha = $contrato->fecha_final;
+            
+        // date_default_timezone_set('America/El_Salvador');
+
+        //    $time = time();
+        //                // 7 days; 24 hours; 60 mins; 60 secs
+        //     $hora = date("g:i a", $time);
+    // echo 'Next Week: '. date('Y-m-d', $nextWeek) ."\n";
+
+            //return $empresario;
+            $pdf = App::make('dompdf');
+            //$pdf->loadHTML('<h1>Test</h1>');
+            $pdf->loadView('pdf.pagoAporte',
+                    compact('concepto', 'pago'));
             return $pdf->stream();
     }
 }
