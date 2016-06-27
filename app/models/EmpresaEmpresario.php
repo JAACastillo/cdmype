@@ -65,10 +65,6 @@ class EmpresaEmpresario extends Eloquent {
             return $this->belongsTo('Empresa','empresa_id');
         }
 
-//asistencia a capacitaciones del empresario
-        public function capacitaciones(){
-            return $this->hasMany('asistencia', 'empresario_id');
-        }
         public function empresarios()
         {
             return $this->belongsTo('Empresario','empresario_id');

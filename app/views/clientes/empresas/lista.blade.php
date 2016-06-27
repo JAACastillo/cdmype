@@ -23,7 +23,9 @@
                 <th class="text-center">Nombre</th>
                 <th class="text-center">Propietario</th>
                 <th class="text-center hidden-xs hidden-sm">Categoria</th>
+                <th class="text-center hidden-xs hidden-sm">Direccion</th>
                 <th class="text-center hidden-xs hidden-sm">Municipio</th>
+                <th class="text-center hidden-xs hidden-sm">Departamento</th>
                 <th class="text-center">Opciones</th>
             </tr>
             </thead>
@@ -42,7 +44,9 @@
 
 
                 <td class="text-center hidden-xs hidden-sm">{{ $empresa->categoria }}</td>
+                <td class="text-center hidden-xs hidden-sm">{{ $empresa->direccion}}</td>
                 <td class="text-center hidden-xs hidden-sm">{{ $empresa->municipio->municipio }}</td>
+                <td class="text-center hidden-xs hidden-sm">{{ $empresa->municipio->departamento->departamento }}</td>
                 <td class="text-center">
                     <a href="{{ route('editarEmpresa', array($empresa->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="left" title="Editar"> </a>
                     <a href="{{ route('verEmpresa', array($empresa->id)) }}" class="btn btn-default btn-xs glyphicon glyphicon-user" data-toggle="tooltip" data-placement="top" title="Ver"> </a>

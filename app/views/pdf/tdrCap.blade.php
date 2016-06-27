@@ -41,7 +41,7 @@
  		<strong>1. Presentación</strong>
  	</p>
  	<p style="margin-left:25px">
- 		NOMBRE DE LA EMPRESA/GRUPO: {{$cap->categoria}} <br><br>
+ 		NOMBRE DE LA EMPRESA/GRUPO: {{$cap->categoria}}.<br><br>
  		DESCRIPCIÓN SUMARIA DEL GRUPO: La capacitación <strong>“{{$cap->tema}}”</strong>. {{$cap->descripcion}}
  	</p>
  </div>
@@ -68,7 +68,7 @@
  	</div>
  </div>
  <div>
- 	<p><strong>3. Productos Esperandos:</strong></p>
+ 	<p><strong>3. Productos Esperados:</strong></p>
  	<p>
  		<?php
 			$productos = explode("\r\n", $cap->productos)
@@ -84,8 +84,8 @@
  	<p>
  		Otros productos solicitados:
  		<br><br>
-		Diploma de participación. <br>
-		Almuerzo y 2 refrigerios. <br>
+		Diploma de participación.<br>
+		Almuerzo y 2 refrigerios.<br>
 		Material Didáctico para el desarrollo de actividades durante el evento.
  	</p>
  </div>
@@ -108,12 +108,33 @@
 			$date2 = strtotime($cap->fecha_lim)
 		?>
  		<p><strong>5. Lugar y Fecha de ejecución de capacitación: </strong></p>
- 		<p> La capacitación se llevará a cabo en las instalaciones de la Universidad Católica de El Salvador, Centro Regional de Ilobasco, ubicadas en el Km. 51 ½ Carretera a Ilobasco, Cantón Agua Zarca, Ilobasco, Cabañas el día {{date('d', $date)}} de {{$meses[date('m', $date) - 1]}} de {{date('Y', $date)}} de 8:00 am a 12md y 1:00 pm a 4:00 pm, cumpliendo con un total de 8 horas de capacitación.</p>
+ 		<!-- <p> La capacitación se llevará a cabo en las instalaciones de Jovenesen, ubicada en Sensuntepeque los dias 12 y 19 de Noviembre de 1:00 pm a 5:00, cumpliendo con un total de 8 horas de capacitación.</p> -->
+ 		<p> La capacitación se llevará a cabo en las instalaciones de {{$cap->lugar}}, el día
+
+
+ 			{{date('d', $date)}} de {{$meses[date('m', $date) - 1]}} de {{date('Y', $date)}}
+ 			de
+
+ 			<?php $str = '2013-08-21 ' . $cap->hora_ini;
+			// echo $str
+			echo date('h:00', strtotime($str));
+			?>
+			a
+			<?php $str = '2013-08-21 ' . $cap->hora_fin;
+			// echo $str
+			echo date('h:00', strtotime($str));
+			?>, {{$cap->nota}}
+
+ 		cumpliendo con un total de 8 horas de capacitación.</p>
  	</div>
  	<div>
  		<p><strong>6. Plazo de presentación de ofertas:  </strong></p>
  		<p>
- 			Fecha límite: {{date('d', $date2)}} de {{$meses[date('m', $date2) - 1]}} de {{date('Y', $date2)}}. <br><br>
+ 			Fecha límite:
+ 				{{date('d', $date2)}} de {{$meses[date('m', $date2) - 1]}} de {{date('Y', $date2)}}.
+
+
+ 			<br><br>
 			Forma de recepción: de forma electrónica (en formato pdf) al correo cmercado.unicaes@gmail.com  ó de forma física en las Instalaciones de la Universidad, no se tomarán en cuenta ofertas sin la firma del consultor. <br><br>
 			Para cualquier información adicional contactarse al Tel. 2378-1500 Ext. 136.
  		</p>
@@ -123,9 +144,9 @@
  		<p>
  			El valor máximo a financiar por el CDMYPE es de $ 430.00. No existe cofinanciamiento por parte del empresario. <br><br>
 
-			La asistencia mínima es de 12 participantes y la máxima de 25. <br><br>
+			La asistencia mínima es de 12 participantes y la máxima de 25. <!-- <br><br>
 
-			La Universidad cuenta con servicio de cafetería, la cual puede ser una opción para proveer la alimentación, puede contactarse con Cafetería al Tel. 2378-1500, ext. 158, para pedir menús y cotizaciones.
+			La Universidad cuenta con servicio de cafetería, la cual puede ser una opción para proveer la alimentación, puede contactarse con Cafetería al Tel. 2378-1500, ext. 158, para pedir menús y cotizaciones. -->
  		</p>
  	</div>
 </div>

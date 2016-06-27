@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html>
 <head>
 	<link rel="stylesheet" type="text/css" href="assets/css/normalize.css">
@@ -53,7 +53,11 @@
 		<br>
 		<br>
 
-		El sr(a). <strong>{{$empresario->nombre}}</strong>, {{$empresario->tipo}} de <strong>{{$empresa->nombre}}</strong>, con
+		El sr(a). <strong>{{$empresario->nombre}}</strong>, {{$empresario->tipo}} 
+
+		@if($empresario->nombre != $empresa->nombre)
+			de <strong>{{$empresa->nombre}}</strong>, con
+		@endif
 		<br>
 		DUI #{{$empresario->dui}}
 		<br>
@@ -76,11 +80,23 @@
 				?>
 
 
-		el trabajo realizado por el consultor <strong> {{$consultor->consultor->nombre}}</strong>, con número de NIT
+		el trabajo realizado por
+		@if($consultor->consultor->empresa)
+			 la empresa consultora <b>{{$consultor->consultor->empresa }} </b> representada por 
+		@elseif($consultor->consultor->sexo == 'Mujer')
+			la consultora
+		@else
+			el consultor
+		@endif
+
+		<strong> {{$consultor->consultor->nombre}}</strong>, con número de NIT
 		{{$consultor->consultor->nit}}, de acuerdo al contrato suscrito con fecha {{$dia}} de {{$mes}} de {{$ano}}
-		y autoriza al <strong> CDMYPE Ilobasco</strong>, hacer efectivo el pago de la suma de <strong> US${{$contrato->pagoCdmype}} </strong> que
-		corresponde el cofinanciamiento del programa y la suma <strong> US${{$contrato->pagoEmpresario}}</strong>, que corresponde
-		al cofinanciamiento del aporte empresarial que ha entregado para la realización de la asistecia técnica
+		y autoriza al <strong> CDMYPE Ilobasco</strong>, hacer efectivo el pago de la suma de <strong> US${{round($contrato->pagoCdmype,2)}} </strong> que
+		corresponde el cofinanciamiento del programa 
+		@if($contrato->pagoEmpresario > 0)
+			y la suma <strong> US${{round($contrato->pagoEmpresario,2)}}</strong>, que corresponde al cofinanciamiento del aporte empresarial 
+		@endif
+		que ha entregado para la realización de la asistecia técnica
 		denominada <strong> "{{$at->tema}}"</strong> de la cual firma de recibido el informe final.
 	</p>
 <br>

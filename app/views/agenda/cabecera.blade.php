@@ -6,7 +6,7 @@
    </div>
    <div class="col-md-5">
       <div class="form-group">
-          {{ Form::select('municipio_id', $municipios, $municipio, array('class' => 'form-control')) }}
+          {{ Form::select('municipio_id', $municipios, $municipio, array('class' => 'form-control chosen-select')) }}
       </div>
    </div>
    <div class="form-group">

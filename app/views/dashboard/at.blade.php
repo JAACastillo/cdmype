@@ -15,9 +15,13 @@
                         <h6 class="glyphicon glyphicon glyphicon-tasks icono"></h6>
                         <span>Sesiones Atrazadas</span>
                        </a></li>
-                       <li role="presentation"><a href="#atproceso" role="tab" data-toggle="tab">
+                       <li role="presentation"><a href="#atcontratadas" role="tab" data-toggle="tab">
                         <h6 class="glyphicon glyphicon-cog icono"></h6>
                         <span>AT Contratadas</span>
+                     </a></li>
+                     <li role="presentation"><a href="#atproceso" role="tab" data-toggle="tab">
+                        <h6 class="glyphicon glyphicon-cog icono"></h6>
+                        <span>AT en Proceso</span>
                      </a></li>
                      </ul>
 
@@ -34,9 +38,14 @@
                         @include('dashboard.sesiones')
                         </div>
                       </div>
-                      <div role="tabpanel" class="tab-pane fade" id="atproceso">
+                      <div role="tabpanel" class="tab-pane fade" id="atcontratadas">
                         <div class="table-responsive">
                           @include('dashboard.atContratadas')
+                        </div>
+                      </div>
+                      <div role="tabpanel" class="tab-pane fade" id="atproceso">
+                        <div class="table-responsive">
+                          @include('dashboard.atEnProceso')
                         </div>
                       </div>
                      </div>

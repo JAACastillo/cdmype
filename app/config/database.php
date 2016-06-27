@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'bd_cdmype',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'bdcri.2016*',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

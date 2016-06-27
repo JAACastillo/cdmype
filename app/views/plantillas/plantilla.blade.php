@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title> @yield('titulo', 'CDMYPE - Sistema CDMYPE') </title>
-        <meta charset="UTF-8">
+        <title> @yield('titulo', 'CDMYPE - Inicio de Sesión') </title>
+        <meta charset="utf-8">
         <meta name=description content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel='shortcut icon' href='/cdmype/sistema/assets/img/favicon.png'>
         <!-- CSS -->
-        {{ HTML::style('assets/css/estilus.css', array('media' => 'screen')) }}
+            <!-- Bootstrap -->
+
+            {{ HTML::style('assets/css/estilus.css', array('media' => 'screen')) }}
 
     </head>
     <body>
@@ -58,9 +60,9 @@
             {{ HTML::script('assets/js/jquery.ui.position.js') }}
 
          <!-- Para las fechas -->
- <!-- <script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+<script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
 
- // <script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script> -->
+<script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
 
 {{-- date_default_timezone_set('America/El_Salvador')--}}
 

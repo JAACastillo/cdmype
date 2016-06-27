@@ -118,36 +118,32 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 		public function movimientos() 
 	    {
-			return $this->hasMany('Movimiento','usuario_id');
+			return $this->hasmany('Movimiento','usuario_id');
 		}
 
 		public function bitacoras() 
 	    {
-			return $this->hasMany('Bitacora','usuario_id');
+			return $this->hasmany('Bitacora','usuario_id');
 		}
 
 		public function capTerminos() 
 	    {
-			return $this->hasMany('CapTermino','usuario_id');
+			return $this->hasmany('CapTermino','usuario_id');
 		}    
 
 		public function atterminos() 
 	    {
-			return $this->hasMany('AtTermino','usuario_id');
+			return $this->hasmany('AtTermino','usuario_id');
 		}
 
 		public function atenciones() 
 	    {
-			return $this->hasMany('Atencion','usuario_id');
+			return $this->hasmany('Atencion','usuario_id');
 		}
 
 	    public function historia() 
 	    {
-			return $this->hasMany('Historia', 'usuario_id');
-		}
-
-		public function asesorias(){
-			return $this->hasMany('Asesoria', 'user_id');
+			return $this->hasmany('Historia', 'usuario_id');
 		}
 
 }

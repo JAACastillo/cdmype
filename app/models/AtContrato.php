@@ -54,17 +54,19 @@ class AtContrato extends Eloquent {
         }
         public function getFinalAttribute(){
 
-            $date = strtotime($this->fecha_final);  
+            $date = strtotime($this->fecha_final);
            return date('d/m/Y', $date);
         }
 
 
         public function getPagoCdmypeAttribute(){
-            return ($this->pago * ($this->aporte)/100);
+            if($this->aporte)
+                return ($this->pago * ($this->aporte) / 100);
+            return $this->pago;
         }
 
         public function getPagoEmpresarioAttribute(){
-            return ($this->pago * ((100 - $this->aporte)/100));
+            return $this->pago - $this->getPagoCdmypeAttribute();
         }
 
         /* Validaciones */

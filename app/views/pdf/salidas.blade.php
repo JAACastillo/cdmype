@@ -14,8 +14,8 @@
         .datos {margin-left: 10px;}
 
         .firmas .firm { display: inline-block; position: absolute; text-align: center;}
-        .director {float: right; margin-left: -800px}
-        .decano {float: right; margin-left: 600; position: absolute;}
+        .director {float: right; margin-left: -750px}
+        .decano {float: right; margin-left: 550; position: absolute;}
 
       </style>
     <?php
@@ -45,7 +45,8 @@
                <th>FECHA</th>
                <th>HORARIO</th>
                <th>LUGAR A VISITAR</th>
-               <th>PARTICIPANTES</th>
+              <th>No. PARTICIPANTES </th>
+               <th>NOMBRES</th>
                <th>JUSTIFICACION DE LA ACTIVIDAD</th>
                <th>OBJETIVO DE LA ACTIVIDAD</th>
               <th>ASESOR RESPONSABLE</th>
@@ -63,12 +64,16 @@
                 {{date("g:i a", strtotime($salida->hora_salida));}}<br>{{date("g:i a", strtotime($salida->hora_regreso));}}
               </td>
               <td style="text-align: center;">
-                {{$salida->municipio}}
+                {{$salida->municipio->municipio}}
               </td>
+             <?php
+		$participantes = Participante::where('salida_id', $salida->id)->get();
+		
+               ?>
+
+             <td> {{ sizeof($participantes)  }}
               <td>
-                <?php
-                $participantes = Participante::where('salida_id', $salida->id)->get();
-                ?>
+  
                 @foreach ($participantes as $participante)
                     <span>{{$participante->participante->nombre}}</span><br>
                 @endforeach
@@ -76,7 +81,7 @@
               <td>{{$salida->justificacion}}</td>
               <td>{{$salida->objetivo}}</td>
               <td>{{$salida->responsable->nombre}}</td>
-              <td>{{$salida->estado}}</td>
+              <td>{{--- $salida->estado --}}</td>
               <td>{{$salida->observacion}}</td>
             </tr>
             @endforeach

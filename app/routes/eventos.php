@@ -3,18 +3,23 @@
 Route::resource('eventos', 'EventosController');
 
 
-Route::get('eventos/participantes/{idEvento}', 
+Route::get('eventos/participantes/{idEvento}',
 			[
-				'as' => 'eventosParticipantes', 
+				'as' => 'eventosParticipantes',
 				'uses' => 'EventosController@participantes'
 			 ]);
-Route::post('eventos/participantes/{idEvento}', 
+Route::post('eventos/participantes/{idEvento}',
 			[
-				'as' => 'eventosParticipantes', 
+				'as' => 'eventosParticipantes',
 				'uses' => 'EventosController@participantesGuardar'
 			 ]);
-Route::get('eventos/participantes/pdf/{idEvento}', 
+Route::get('eventos/participantes/pdf/{idEvento}',
 			[
-				'as' => 'eventosParticipantesPdf', 
+				'as' => 'eventosParticipantesPdf',
 				'uses' => 'EventosController@participantesPDF'
+			 ]);
+Route::post('eventos/participantes/correo/{id}',
+			[
+				'as' => 'eventosParticipantesCorreo',
+				'uses' => 'EventosController@participantesCorreo'
 			 ]);

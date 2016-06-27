@@ -17,6 +17,7 @@ class pasoConsultoresController extends BaseController
         $consultores = ConsultorEspecialidad::Where('subespecialidad_id', '=', $at->especialidad_id)
                         ->with('especialidad', 'consultor')
                         ->paginate(1000);
+        // return $consultores;
         return View::make('asistencia-tecnica/creacion-paso-3', 
                 compact('consultores', 'id', 'pasoActual', 'pasoReal'));
 
@@ -41,8 +42,8 @@ class pasoConsultoresController extends BaseController
                 foreach ($consultores as $consultor) {
                     $consul = $at->consultores()
                             ->where('consultor_id', '=', $consultor);
-                    if(!$consul->count() > 0)
-                    {
+                    // if()
+                    // {
                         $consultorAT = new AtConsultor;
                         $consultorAT->attermino_id = $id;
                         $consultorAT->consultor_id = $consultor;
@@ -53,13 +54,13 @@ class pasoConsultoresController extends BaseController
                                             $consultorAT->consultor->correo, 
                                             $consultorAT->consultor->nombre,
                                             $tema
-                                        )
+                                        ) && !$consul->count() > 0
                         )
                         {
                             $consultorAT->save();
                         }
                         
-                    }
+                    // }
                     $banderaConsultor = 1;
                 }
                 if($banderaConsultor == 1)
@@ -84,7 +85,7 @@ class pasoConsultoresController extends BaseController
 //fin de los pasos
    private function mailOferta($template, $id, $email, $nombreConsultor, $tema)
     {
-        try {
+    
                     
             Mail::send($template,array('id' => $id),function($message) use ($id, $email, $nombreConsultor, $tema) {
                
@@ -92,10 +93,10 @@ class pasoConsultoresController extends BaseController
                         ->subject('TDR - ' . $tema);
             });
             return 1;
-        } catch (Exception $e) {
-            return 0;  
-        }
-
-    }
+      
+       
+        
+}
+   
 
 }

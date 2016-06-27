@@ -18,7 +18,7 @@ Participantes al evento
 		        animate: {
 		            enter: 'animated bounceIn',
 		            exit: 'animated bounceOut'
-		        }                               
+		        }
 		    });
 		</script>
 	@stop
@@ -29,9 +29,9 @@ Participantes al evento
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<a href="{{route('eventosParticipantesPdf', $id)}}" target="_blank" class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Imprimir convocatoria"><span class="glyphicon glyphicon-print"></span> &nbsp PDF</a>
+				<a class="btn btn-primary pull-right" data-toggle="modal" href='#modal-id'><span class="glyphicon glyphicon-envelope"></span></a>
 			</div>
 			<div class="panel-body">
-				
 
 				<div class="row col-xs-12">
 				        <div class="form-group">
@@ -47,11 +47,11 @@ Participantes al evento
 				        	<span class="glyphicon glyphicon-save"></span>
 				        	<span class="ladda-spinner"></span><span class="ladda-spinner"></span>
 				        	</button>
-	    				</div>	
+	    				</div>
 					        {{ Form::close() }}
 					    </div>
 	    		</div>
-	    			
+
 
 	    			<!-- Tabla de Asistencia -->
 		            <div class="col-xs-1"></div>
@@ -80,11 +80,11 @@ Participantes al evento
 					        </table>
 					    </div>
 					    @endif
-						
+
 						<br/>
 					    <br/>
-					    
-						
+
+
 		            </div>
 		            <div class="col-xs-1"></div>
 
@@ -113,6 +113,28 @@ Participantes al evento
 
 	<div class="col-xs-1"></div>
 </div>
+
+<div class="modal fade" id="modal-id">
+	<div class="modal-dialog">
+			{{Form::open(array('route' => array('eventosParticipantesCorreo', $id), 'method' => 'POST'))}}
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Correo</h4>
+			</div>
+			<div class="modal-body">
+				{{ Form::text('asunto', null, array('placeholder' => 'Asunto', 'required', 'class' => 'form-control','autofocus')) }}
+				<br>
+				{{ Form::textarea('nota', null, array('placeholder' => 'Nota del correo', 'required', 'rows' => '6', 'class' => 'form-control')) }}
+			</div>
+			<div class="modal-footer">
+				<a href=""#  data-dismiss="modal">Cancelar</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" class="btn btn-primary">Enviar</button>
+			</div>
+		</div><!-- /.modal-content -->
+		{{Form::close()}}
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 @stop
 

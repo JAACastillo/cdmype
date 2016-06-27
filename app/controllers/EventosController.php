@@ -150,7 +150,7 @@ class EventosController extends \BaseController {
 		$evento = Evento::find($id);
 		$asistencias = EventoEmpresarios::with('empresario', 'empresario.empresa', 'empresario.empresa.empresas')
 										->where("evento_id", $id)->get();
-		
+
 
 		$pdf = App::make('dompdf');
 		$pdf->loadView('pdf.eventoParticipantes', compact('evento', 'asistencias'))->setOrientation('landscape');
@@ -158,6 +158,40 @@ class EventosController extends \BaseController {
 	}
 
 
+	public function participantesCorreo($id)
+	{
+		$participantes = EventoEmpresarios::where('evento_id', $id)->get();
+		$asunto = Input::get('asunto');
+		$nota = Input::get('nota');
+
+		foreach ($participantes as $participante) {
+			if (!empty($participante->empresario->correo)) {
+
+				$this->correo('emails.eventos',
+                           $id,
+                           $participante->empresario->correo,
+                           $participante->empresario->nombre,
+                           $asunto,
+                           $nota
+                       );
+			 } ;
+
+		}
+
+		return Redirect::back();
+
+	}
+
+	private function correo($template, $id, $email, $nombreEmpresario, $asunto, $nota)
+   {
+
+       Mail::send($template,array('id' => $id, 'nota' => $nota, 'nombreEmpresario' => $nombreEmpresario),function($message) use ($id, $email, $nombreEmpresario, $asunto, $nota) {
+
+           $message->to($email, $nombreEmpresario)
+                   ->subject($asunto);
+       });
+
+   }
 
 }
 

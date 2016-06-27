@@ -7,6 +7,7 @@
 	Dar por finalizada la at.
 */
 
+
 class pasoFinalController extends BaseController{
 
     public function oferta($id)
@@ -68,7 +69,7 @@ class pasoFinalController extends BaseController{
 
     private function guardarOferta($file){
         $destinationPath = 'assets/ofertas/';
-        $fileName = time() . '.' .  \Str::lower($file->getClientOriginalExtension());//$file->getClientOriginalName();
+        $fileName = time() . $file->getClientOriginalName();// .  '.' .  \Str::lower($file->getClientOriginalExtension());//$file->getClientOriginalName();
         $file->move($destinationPath, $fileName);
         return $fileName;
     }
@@ -142,8 +143,11 @@ class pasoFinalController extends BaseController{
         $ampliacion = new AmpliacionContrato;
         $atcontrato = new AtContrato;
         $atcontrato->attermino_id = $id2;
+        $atcontrato->duracion = $at->tiempo_ejecucion;
+        $atcontrato->lugar_firma = 'Ilobasco';
         $atcontrato->fecha_inicio = date('Y-m-d');
-        $atcontrato->fecha_final = date('Y-m-d');
+        $atcontrato->fecha_final = \Carbon\Carbon::now()->addWeeks($at->tiempo_ejecucion)->format('Y-m-d');
+        $atcontrato->aporte = 100 - $at->aporte;
 
         $oculto = 'oculto';
         $visible = 'visible';
@@ -164,6 +168,7 @@ class pasoFinalController extends BaseController{
         try {
 
         $data = Input::all();
+
         $contrato = new AtContrato;
         if($contrato->guardar($data, 1)){
             $id2 = $id;
@@ -171,6 +176,9 @@ class pasoFinalController extends BaseController{
             $at = AtTermino::find($id);
             $at->estado = 5;
             $at->save();
+
+            $contrato->fecha_final = \Carbon\Carbon::now()->addWeeks($contrato->duracion);
+            $contrato->save();
             return Redirect::route('atPasoContratada', $id2);
         }
 
@@ -227,6 +235,7 @@ class pasoFinalController extends BaseController{
 
         $at = AtTermino::find($id);
         $contrato = AtContrato::find($at->contrato->id);
+        $data['fecha_final'] = \Carbon\Carbon::createFromFormat('Y-m-d', $data['fecha_inicio'])->addWeeks($data['duracion']);
         $at->estado = 5;
         $at->save();
         if($contrato->guardar($data, 1))
@@ -249,7 +258,10 @@ class pasoFinalController extends BaseController{
 
         // if($consultor->sexo == 'Mujer')
 
-        $consultor->denominacion = ($consultor->sexo == 'Mujer'? 'la consultora': 'el consultor');
+        if($consultor->empresa)
+            $consultor->denominacion = 'la empresa consultora';
+        else
+            $consultor->denominacion = ($consultor->sexo == 'Mujer'? 'la consultora': 'el consultor');
 
         $pdf = App::make('dompdf');
         //$pdf->loadHTML('<h1>Test</h1>');
@@ -296,7 +308,7 @@ class pasoFinalController extends BaseController{
         if($ampliacion->solicitante == "Consultor")
             $solicitante = $at->consultorSeleccionado->consultor;
         else
-            $solicitante = $at->empresa->representante->empresarios;
+            $solicitante =   Empresario::find($at->empresario_id);;
 
         $solicitante->calidad = $ampliacion->solicitante;
         //return $solicitante;
@@ -454,7 +466,7 @@ class pasoFinalController extends BaseController{
 
         $servicio['tipo'] = "SERVICIOS DE ASISTENCIA TÉCNICA";
         $servicio['descripcion'] = "Asistencia técnica denominada: " . $asistencia->tema . " para la empresa " . $empresa->nombre;
-        $servicio['pago'] = $contrato->pagoEmpresario;
+        $servicio['pago'] = $contrato->pagoCdmype;
         
     date_default_timezone_set('America/El_Salvador');
 
@@ -481,7 +493,10 @@ class pasoFinalController extends BaseController{
         $pago = round($contrato->pagoEmpresario,2);
         $concepto = "Pago correspondiente al aporte empresarial por desarrollo de asistencia técnica denominada:";
         $concepto = $concepto . $asistencia->tema;
-        $fecha = $contrato->fecha_final;
+        // if($asistencia->ampliacion)
+        //     $fecha = $asistencia->ampliacion->fechaRecibo($contrato->fecha_final);
+        // else
+        $fecha = $asistencia->acta->fecha;
             
         date_default_timezone_set('America/El_Salvador');
 
@@ -495,6 +510,8 @@ class pasoFinalController extends BaseController{
             //$pdf->loadHTML('<h1>Test</h1>');
             $pdf->loadView('pdf.aporteEmpresarial',
                     compact('consultor', 'pago', 'concepto', 'fecha', 'consultor'));
+            // return View::make('pdf.aporteEmpresarial',
+            //         compact('consultor', 'pago', 'concepto', 'fecha', 'consultor'));
             return $pdf->stream();
     }
     public function pagoAporte($id){

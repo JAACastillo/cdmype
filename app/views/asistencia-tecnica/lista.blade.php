@@ -23,6 +23,7 @@
                 <th class="text-center hidden-xs hidden-sm">ID</th>
                 <th>Tema</th>
                 <th>Empresa</th>
+                <th>Pago</th>
                 <th class="hidden-xs hidden-sm">Area</th>
                 <th class="hidden-xs hidden-sm">Encargado</th>
                 <th class="text-center hidden-xs hidden-sm">Inicio</th>
@@ -41,6 +42,10 @@
                     </a>
                 </td>
                 <td><a href="{{ route('editarEmpresa', array($attermino->empresa->id)) }}">{{ $attermino->empresa->nombre }}</a></td>
+                <td>
+                    ${{round(($attermino->contrato['pago'] * ($attermino->contrato['aporte']) / 100),2)}} - 
+                    ${{round($attermino->contrato['pago'] - ($attermino->contrato['pago'] * ($attermino->contrato['aporte']) / 100),2)}} 
+                </td>
                 <td class="hidden-xs hidden-sm">{{ $attermino->especialidad->sub_especialidad }}</td>
                 <td class="hidden-xs hidden-sm">{{ $attermino->usuario->nombre }}</td>
                 <td class="text-center hidden-xs hidden-sm">@if($attermino->pasoReal > 6) {{ $attermino->contrato->Inicio}} @endif</td>

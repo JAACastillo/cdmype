@@ -23,7 +23,7 @@ class CapTermino extends Eloquent {
         'usuario_id',
         'informe'
     );
- 
+
     /* Guardar */
 
         public function guardar($datos,$accion)
@@ -174,6 +174,10 @@ class CapTermino extends Eloquent {
 
         public function asistencia(){
             return $this->hasOne('Asistencia', 'captermino_id');
+        }
+
+        public function envios(){
+            return $this->hasMany('CapacitacionEnvios', 'capacitacion_id');
         }
 
 

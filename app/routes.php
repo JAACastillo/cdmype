@@ -25,12 +25,12 @@
     }
     ]);
 
-    Route::get('correo', function(){
-        $usuario = User::find(1);
-        $pass = "11231123";
-        return View::make('emails.usuarioCreado', compact('usuario', 'pass'));
+    // Route::get('correo', function(){
+    //     $usuario = User::find(1);
+    //     $pass = "11231123";
+    //     return View::make('emails.usuarioCreado', compact('usuario', 'pass'));
 
-    });
+    // });
 
     //AutoComplementar
         Route::controller('api', 'ApiController');//Ver Especialidades

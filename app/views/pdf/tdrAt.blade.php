@@ -96,7 +96,7 @@
  	</div>
  	<div>
  		<p><strong>4. Tiempo de ejecución de la asistencia técnica: </strong></p>
- 		<p>{{$at->tiempo_ejecucion}} horas efectivas, de las cuales el {{$at->trabajo_local}}% debe ser trabajo en el local del empresario, y el {{100 - $at->trabajo_local}}% restante trabajo en oficina para redacción de informes y cualquier otro trabajo que el proceso requiera. Esta relación puede variar dependiendo del tipo de trabajo a realizar y debe ir justificado en la planificación de actividades de la oferta técnica.</p>
+ 		<p> En {{$at->tiempo_ejecucion}} semanas, con un minimo de 30 horas, de las cuales el {{$at->trabajo_local}}% debe ser trabajo en el local del empresario, y el {{100 - $at->trabajo_local}}% restante trabajo en oficina para redacción de informes y cualquier otro trabajo que el proceso requiera. Esta relación puede variar dependiendo del tipo de trabajo a realizar y debe ir justificado en la planificación de actividades de la oferta técnica.</p>
  	</div>
  	<div>
  		<p><strong>5. Plazo de presentación de ofertas:  </strong></p>

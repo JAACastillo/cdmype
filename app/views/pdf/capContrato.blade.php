@@ -5,7 +5,7 @@
 	<style>
 	     @page { margin: 100px 90px; }
 	     #header {margin: 0px; position: fixed; left: 0px; top: -76px; right: 0px;  text-align: center; }
-	     #footer { position: fixed; left: 0px; bottom: -140px; right: 0px; height: 150px;  }
+	     #footer { position: fixed; left: 0px; bottom: -155px; right: 0px; height: 150px;  }
 	     #footer .page:after { content: counter(page, upper-roman); }
 	     #contenido {font-family: "arial black" ;margin: 0px; padding: 0px; text-align:justify; font-size: 14px; line-height: 20px}
 	     #footer .left {float: left}
@@ -47,26 +47,20 @@
 
 <div id="contenido">
 	<h4 style="text-align:center">
-		CONTRATO PROFESIONAL ENTRE CONSULTOR Y EL CDMYPE PARA LA
+		CONTRATO PROFESIONAL ENTRE {{Mb_strtoupper($consultor->denominacion)}} Y EL CDMYPE PARA LA
 		PRESTACIÓN DE SERVICIOS DE CAPACITACIÓN
 	</h4>
 
 	<p>
 	NOSOTROS, UNIVERSIDAD CÁTOLICA DE EL SALVADOR, en su calidad de Centro de
 	Desarrollo de la Micro y Pequeña Empresa CDMYPE y
-	{{$consultor->nombre}},
-	mayor de edad, de nacionalidad salvadoreña, del domicilio de
-	{{$consultor->direccion}}
-	con Documento Único de Identidad (DUI), número
-	{{$consultor->dui}}
-	, quien en adelante se denominará
-		@if($consultor->sexo == 'Mujer')
-			la consultora
-		@else
-			el consultor
-		@endif
-	, convenimos celebrar el presente contrato con el objeto de que realice a favor
-	y a satisfacción de: CDMYPE, UNICAES-Ilobasco, la capacitación denominada:
+	@if($consultor->empresa)
+		la empresa {{$consultor->empresa}} con número de Registro Tributario {{$consultor->iva}}, representada por
+	@endif
+	
+	{{$consultor->nombre}},	mayor de edad, de nacionalidad salvadoreña, del domicilio de {{$consultor->direccion}}
+	con Documento Único de Identidad (DUI), número {{$consultor->dui}}, quien en adelante se denominará {{$consultor->denominacion}}
+	, convenimos celebrar el presente contrato con el objeto de que realice a favor	y a satisfacción de: CDMYPE, UNICAES-Ilobasco, la capacitación denominada:
 	{{ $capacitacion->tema}}, para un grupo de empresarios, ubicados en: los Departamentos de Cabañas, San Vicente y Cuscatlán.
 
 	<p>Las partes sujetamos el contrato en referencia a las siguientes cláusulas:</p>
@@ -74,7 +68,7 @@
 
 	<p class="clausula">PRIMERA: PRODUCTOS ESPERADOS </p>
 
-	Los productos esperados a realizar por el consultor son los siguientes de acuerdo a los solicitados en los TDR:
+	Los productos esperados a realizar por {{$consultor->denominacion}} son los siguientes de acuerdo a los solicitados en los TDR:
 
 		<?php
 			$productos = explode("\r\n", $capacitacion->productos)
@@ -93,25 +87,25 @@
 		$horas = $h2 - $h1;
 	?>
 
-	El presente contrato tendrá una duración de OCHO HORAS, la capacitación brindada el dia {{$dia}} de {{$mes}} de {{$ano}}. Durante este período el consultor se compromete a hacer cumplir las actividades objeto de este contrato contenidas en la oferta técnica y económica y a dar fiel cumplimiento a los compromisos establecidos en los planes de trabajo aprobados y productos esperados.
+	El presente contrato tendrá una duración de OCHO HORAS, la capacitación brindada el dia {{$dia}} de {{$mes}} de {{$ano}}. Durante este período {{$consultor->denominacion}} se compromete a hacer cumplir las actividades objeto de este contrato contenidas en la oferta técnica y económica y a dar fiel cumplimiento a los compromisos establecidos en los planes de trabajo aprobados y productos esperados.
 
 <br/>
 	<p class="clausula">TERCERA: INFORMES </p>
 
-	El consultor se obliga a presentar en tiempo y forma al CDMYPE UNICAES el informe final de la capacitación brindada a los empresarios.
+	{{ucfirst($consultor->denominacion)}} se obliga a presentar en tiempo y forma al CDMYPE UNICAES el informe final de la capacitación brindada a los empresarios.
 
 <br/>
 	<p class="clausula">CUARTA: FORMA DE PAGO </p>
 
-	El CDMYPE UNICAES, en virtud de este contrato, pagará al consultor en concepto de honorarios por la capacitación efectuada, la cantidad de $ {{$contrato->pago }} (INCLUYE IVA) que corresponde al 100% del costo total de la capacitación.
+	El CDMYPE UNICAES, en virtud de este contrato, pagará a {{$consultor->denominacion}} en concepto de honorarios por la capacitación efectuada, la cantidad de $ {{$contrato->pago }} (INCLUYE IVA) que corresponde al 100% del costo total de la capacitación.
 
 	No se reconocerá ninguna cantidad anticipadamente ni adicional. La forma de pago será: un solo
 	pago al final de la capacitación.
 
-	<p class="clausula">QUINTA: SELECCIÓN DEL CONSULTOR </p>
+	<p class="clausula">QUINTA: SELECCIÓN DE {{Mb_strtoupper($consultor->denominacion)}} </p>
 
 
-	El CDMYPE, selecciona al consultor: {{$consultor->nombre}}, de los consultores que ofertaron según el siguiente listado:
+	El CDMYPE, selecciona a {{$consultor->denominacion}}: {{$consultor->nombre}}, de los consultores que ofertaron según el siguiente listado:
 		<ol>
 			@foreach($capacitacion->ofertantes as $ofertante)
 				<li>
@@ -124,16 +118,16 @@
 
 		<ol>
 			<li>
-				El Consultor se obliga a guardar estricta confidencialidad sobre la información obtenida de los participantes.
+				{{ucwords($consultor->denominacion)}} se obliga a guardar estricta confidencialidad sobre la información obtenida de los participantes.
 			</li>
 			<li>
-				El Consultor no podrá desarrollar más de 3 consultorías de manera simultánea.
+				{{ucwords($consultor->denominacion)}} no podrá desarrollar más de 3 consultorías de manera simultánea.
 			</li>
 			<li>
-				El Consultor se obliga entregar un informe final al CDMYPE de la capacitación realizada.
+				{{ucwords($consultor->denominacion)}} se obliga entregar un informe final al CDMYPE de la capacitación realizada.
 			</li>
 			<li>
-				Al finalizar la capacitación, el consultor presentará factura de consumidor final a nombre de
+				Al finalizar la capacitación, {{$consultor->denominacion}} presentará factura de consumidor final a nombre de
 				CDMYPE-UNICAES, por la cantidad correspondiente al costo de la capacitación.
 			</li>
 			<li>
@@ -143,7 +137,8 @@
 
 	<p class="clausula">
 		SEPTIMA: TERMINACIÓN.
-		El contrato podrá darse por terminado según las causas siguientes:
+		<br>
+		<span style='color:#000000'>El contrato podrá darse por terminado según las causas siguientes:</span>
 		<ol type="a">
 			<li> Por común acuerdo entre las partes; </li>
 			<li> a solicitud de una de las partes, por motivo de fuerza mayor debidamente justificado y aceptado por la otra; </li>
@@ -152,7 +147,7 @@
 			<li> Por faltas a la ética profesional. </li>
 		</ol>
 
-		Cuando el contrato se dé por terminado por las razones descritas en los literales (a), (c) y (d) las cuales sean imputables a la empresa (s) beneficiaria (s). El CDMYPE UNICAES, a su discreción, podrá reconocer al consultor los gastos razonables que hubiere efectuado, siempre que éstos estén justificados y se compruebe en forma fehaciente que corresponden al objeto de este contrato.
+		Cuando el contrato se dé por terminado por las razones descritas en los literales (a), (c) y (d) las cuales sean imputables a la(s) empresa (s) beneficiaria (s). El CDMYPE UNICAES, a su discreción, podrá reconocer a {{$consultor->denominacion}} los gastos razonables que hubiere efectuado, siempre que éstos estén justificados y se compruebe en forma fehaciente que corresponden al objeto de este contrato.
 
 <br/>
 			<p class="clausula"> OCTAVA: OBLIGACIONES DE LOS EMPRESARIOS. </p>
@@ -164,7 +159,7 @@
 					Destinar el tiempo requerido para la ejecución de la capacitación.
 				</li>
 				<li>
-					Implementar las recomendaciones realizadas por el consultor para el logro de los objetivos de la
+					Implementar las recomendaciones realizadas por {{$consultor->denominacion}} para el logro de los objetivos de la
 					capacitación.
 				</li>
 				<li>
@@ -175,13 +170,8 @@
 			<p class="clausula"> NOVENA: VIGENCIA, ORDEN DE INICIO</p>
 
 
-			Este contrato entrará en vigencia a partir de la fecha de su firma y a partir de la misma autoriza al
-			@if($consultor->sexo == 'Mujer')
-				consultora
-			@else
-				consultor
-			@endif
-			a dar inicio a la capacitación.
+			Este contrato entrará en vigencia a partir de la fecha de su firma y a partir de la misma autoriza a 
+			{{$consultor->denominacion}} dar inicio a la capacitación.
 
 			En fe de lo cual firmamos el presente contrato en original, en {{$contrato->lugar_firma}} a los {{$dia}} días del mes
 			de {{$mes}} de {{$ano}}.

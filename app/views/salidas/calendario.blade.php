@@ -58,7 +58,7 @@
    var calendar = $("#calendar").calendar(
    {
        tmpl_path: "app/views/salidas/tmpls/",
-       events_source: "/cdmype/calendario",
+       events_source: "/cdmype/sistema/calendario",
          language: 'es-ES',
          time_start: '8:00',
          time_end: '17:00',

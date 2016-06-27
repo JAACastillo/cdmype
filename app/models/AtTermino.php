@@ -60,8 +60,8 @@ class AtTermino extends Eloquent {
             $reglas = array(
                 'tema' => 'required|max:500',
                 'obj_general' => 'required|max:500',
-                'obj_especifico' => 'required|max:500',
-                'productos' => 'required|max:3000',
+                'obj_especifico' => 'required',
+                'productos' => 'required',
                 'tiempo_ejecucion' => 'numeric|required',
                 'trabajo_local' => 'numeric|required',
                 'fecha' => 'required',

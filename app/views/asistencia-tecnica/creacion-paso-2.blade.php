@@ -21,7 +21,7 @@
                         <div class="form-group">
                            {{ Form::label('tema', 'Tema:', array('class' => 'control-label col-md-4')) }}
                         <div class="col-md-8">
-                           {{ Form::textarea('tema', null, array('placeholder' => 'Tema de la Asistencia Técnica', 'rows' => '2', 'class' => 'form-control', 'autofocus')) }}
+                           {{ Form::textarea('tema', null, array('placeholder' => 'Tema de la Asistencia Técnica', 'rows' => '2', 'class' => 'form-control ', 'autofocus')) }}
                         </div>
                      </div>
                       <div class="form-group">
@@ -79,8 +79,8 @@
                      {{ Form::label('tiempo_ejecucion', 'Tiempo de Ejecucion:', array('class' => 'control-label col-md-4')) }}
                      <div class="col-md-4">
                         <div class="input-group">
-                           {{ Form::number('tiempo_ejecucion', $attermino->tiempo_ejecucion, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000', 'step' => '1', 'placeholder' =>'Horas')) }}
-                        <div class="input-group-addon">Horas</div>
+                           {{ Form::number('tiempo_ejecucion', $attermino->tiempo_ejecucion, array('class' => 'form-control text-center', 'min' => '1', 'max' => '1000', 'step' => '1')) }}
+                        <div class="input-group-addon">Weeks</div>
                         </div>
                      </div>
                   </div>
@@ -169,6 +169,11 @@
 {{ Form::close() }}
 
 @section('script')
+<script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
+<script>
+  // tinymce.init({selector:'textarea#texto'});
+</script>
+
 @include('validaciones.asistencia')
 @stop
 @stop

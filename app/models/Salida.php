@@ -1,7 +1,7 @@
 <?php
 
 class Salida extends \Eloquent {
-	protected $fillable = array('estado',
+  protected $fillable = array('estado',
                         'observacion',
                         'fecha_inicio',
                         'hora_salida',

@@ -7,8 +7,7 @@ class CapTerminoController extends BaseController {
 	public function index()
 	{
 
-        $capterminos = CapTermino::orderBy('tema','asc')
-            ->paginate();
+        $capterminos = CapTermino::all();
 
         return View::make('capacitaciones.lista', compact('capterminos'));
 	}
@@ -137,8 +136,8 @@ class CapTerminoController extends BaseController {
                 $pasoActual = 1;
                 $pasoReal = $captermino->pasoReal;
                 $especialidades = array('' => 'Seleccione una opción') + SubEspecialidad::all()->lists('sub_especialidad', 'id');
-                $dataCategoria = array(1 => 'Emprendedoras y empresarias de los Departamentos de Cabañas, Cuscatlán y San Vicente.', 2 => 'Empresarios de los departamentos de Cabañas, Cuscatlán y San Vicente.');
-                $captermino->categoria = array_search($captermino->categoria, $dataCategoria);
+                // $dataCategoria = array(1 => 'Emprendedoras y empresarias de los Departamentos de Cabañas, Cuscatlán y San Vicente.', 2 => 'Empresarios de los departamentos de Cabañas, Cuscatlán y San Vicente.');
+                // $captermino->categoria = array_search($captermino->categoria, $dataCategoria);
 
                 $captermino->fechaa = date('Y-m-d');
                 $captermino->fecha_limite = date('Y-m-d');
@@ -172,7 +171,7 @@ class CapTerminoController extends BaseController {
                 $pasoReal = $cap->pasoReal;
                 $consultores = ConsultorEspecialidad::Where('subespecialidad_id', '=', $cap->especialidad_id)
                         ->with('especialidad', 'consultor')
-                        ->paginate();
+                        ->paginate(1000);
                 return View::make('capacitaciones.creacion-paso-2',
                 compact('consultores', 'id', 'pasoActual', 'pasoReal'));
             }
@@ -185,11 +184,20 @@ class CapTerminoController extends BaseController {
                 if ($consultores != "") {
                     $banderaConsultor = 0;
                     $cap = CapTermino::find($id);
+                    
+                    $envio = new CapacitacionEnvios;
+                    $envio->fill([
+                            'user_id' => Auth::user()->id,
+                            'fecha_limite' => $cap->fecha_lim,
+                            'capacitacion_id' => $cap->id
+                        ]); 
+                    $envio->save();
+
 
                     foreach ($consultores as $consultor) {
                         $consul = $cap->consultores()
-                                ->where('consultor_id', '=', $consultor);
-                        if(!$consul->count() > 0)
+                                ->where('consultor_id', '=', $consultor)->first();
+                        if(! $consul)
                         {
                             $consultorAT = new CapConsultor;
                             $consultorAT->estado = 1;
@@ -197,13 +205,9 @@ class CapTerminoController extends BaseController {
                             $consultorAT->captermino_id = $id;
                             $consultorAT->consultor_id = $consultor;
                             $consultorAT->save();
-
-                            $this->mailOferta('emails.capacitacion',
-                                                $id,
-                                                $consultorAT->consultor->correo,
-                                                $consultorAT->consultor->nombre
-                                            );
-
+                        }
+                        if($consul['consultor']){
+                            $this->mailOferta('emails.capacitacion', $id,$consul->consultor->correo,$consul->consultor->nombre);
                         }
                         $banderaConsultor = 1;
                     }
@@ -519,6 +523,12 @@ class CapTerminoController extends BaseController {
 
                 $pdf = App::make('dompdf');
 
+
+                if($consultor->empresa)
+                    $consultor['denominacion'] = 'la empresa consultora';
+                else
+                    $consultor['denominacion'] =  ($consultor->sexo == 'Mujer' ? "la consultora" : "el consultor");
+
                 $pdf->loadView('pdf.capContrato',
                         compact('capacitacion', 'consultor', 'contrato'));
                 return $pdf->stream();
@@ -536,6 +546,21 @@ class CapTerminoController extends BaseController {
                 return $pdf->stream();
 
             }
+
+            public function pdfEnvio($id){
+                $envio = CapacitacionEnvios::find($id);
+                $cap = $envio->capacitacion;
+                $cap->fecha_lim = $envio->fecha_limite;
+                    # code...
+                    // break;
+                // $cap = CapTermino::find($id);
+                $pdf = App::make('dompdf');
+                $pdf->loadView('pdf.tdrCap',
+                        compact('cap', 'empresa'));
+                return $pdf->stream();
+
+            }
+
 
 
             public function informe($id){
@@ -571,8 +596,6 @@ class CapTerminoController extends BaseController {
                 $file->move($destinationPath, $fileName);
                 return $fileName;
             }
-
-
     public function recepcion($id){
         $capacitacion = CapTermino::with('contratos')
                                     ->find($id);
@@ -599,9 +622,5 @@ class CapTerminoController extends BaseController {
                 compact('fecha', 'servicio', 'hora', 'consultor'));
             return $pdf->stream();
     }
-
-
-
-
 
 }

@@ -17,8 +17,8 @@ class pasoTerminosController extends BaseController{
 
         //valores por defecto
         $attermino->trabajo_local = "70";
-        $attermino->aporte = "30";
-        $attermino->tiempo_ejecucion = "30";
+        $attermino->aporte = "5.5";
+        $attermino->tiempo_ejecucion = "4";
         $attermino->empresarios = $empleados;
         $attermino->empresa_id = $idEmpresa;
         $attermino->fecha = $fecha;

@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     @foreach ($asesoria as $asesoria)
-    <tr>
+    <tr class="danger">
         <td>
             <a href="{{route('verAsesoria', $asesoria->id)}}">{{ substr($asesoria->titulo, 0, 30) }} ...
             </a>

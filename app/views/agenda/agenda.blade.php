@@ -49,7 +49,7 @@
             <br>
             @include('agenda.cabecera')
             <br>
-            {{ Form::text('tipoActividad', 1, array('ng-model' => 'actividadTipo')) }}
+            {{ Form::text('tipoActividad', 1, array('ng-model' => 'actividadTipo', 'class' => 'oculto')) }}
             <div class="row form-horizontal">
                <div class="col-md-12">
                <!-- Nav tabs -->

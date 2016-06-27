@@ -4,8 +4,8 @@ class CalendarioController extends BaseController {
 
  public function eventos(){
 
+    //$urlBase = "http://localhost/cdmype/sistema/";
     $urlBase = "http://cri.catolica.edu.sv/cdmype/sistema/";
-    
 
     $start = Input::get('from') / 1000;
     $end   = Input::get('to') / 1000;
@@ -29,7 +29,7 @@ class CalendarioController extends BaseController {
                               })->select('id', 'tema', 'fecha')
                               ->get();
 // return $ats;
-    $evetos  = [];
+    $eventos  = [];
 
     $addTime = 21600000; //6 horas
 
@@ -45,7 +45,7 @@ class CalendarioController extends BaseController {
                           );
       }
 
-    
+
     // return Response::json(array("success" => 1, "result" => $eventos), 200);
 
       foreach ($salidas as $salida) {
@@ -55,7 +55,7 @@ class CalendarioController extends BaseController {
                              "id"       => $salida->id,
                               "title"   => $salida->municipio->municipio,
                               "url"     =>  $urlBase . "salidas/" . $salida->id,
-                              "class"   =>"event-warning",
+                              "class"   =>"event-special",
                               "start"   => (strtotime($combinada) * 1000) + $addTime,//+ 86400000, // Milliseconds
                               "end"     => (strtotime($combinadaFinal) * 1000 )  + $addTime//  + 86400000// Milliseconds
                           );

@@ -74,7 +74,7 @@
 	                        <input name="fecha_inicio" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$atcontrato->fecha_inicio}}" class="form-control" />
 	                    </div>
 	                </div>
-	                <div class="form-group">
+	                <div class="form-group hidden">
 	                     {{ Form::label('fecha_final', 'Fecha de finalización:', array('class' => 'control-label col-md-4', "data-date"=>'{"startView": 2, "openOnMouseFocus": true}', "placeholder"=>"yyyy-mm-dd")) }}
 	                    <div class="col-md-4">
 	                        <input name="fecha_final" type="date" data-date='{"startView": 2, "openOnFocus": true}' value="{{$atcontrato->fecha_final}}" class="form-control" />
@@ -98,7 +98,7 @@
 	                    	</div>
 	                    </div>
 	                </div>
-	                <div class="form-group">
+	                <div class="form-group hidden">
 	                     {{ Form::label('aporte', 'Aporte de CDMYPE:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-3">
 	                    	<div class="input-group">

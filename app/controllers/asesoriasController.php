@@ -5,7 +5,7 @@ class asesoriasController extends \BaseController {
 	public function index()
 	{
 
-		$asesorias = asesorias::paginate();
+		$asesorias = asesorias::all();
 		return View::make('asesorias.lista', compact('asesorias'));
 	}
 
@@ -50,7 +50,7 @@ class asesoriasController extends \BaseController {
 
     private function guardarAsesoria($file){
     	try {
-    	
+
 	        $destinationPath = 'assets/asesorias/';
 	        $fileName = $file->getClientOriginalName();
 	        $file->move($destinationPath, $fileName);
@@ -60,7 +60,7 @@ class asesoriasController extends \BaseController {
     		App::abort(404);
     	}
     }
- 
+
 
 	public function show($id)
 	{
@@ -73,7 +73,7 @@ class asesoriasController extends \BaseController {
 		//
 		$asesoria = asesorias::find($id);
 		return View::make('asesorias.formulario', compact('asesoria'));
-		
+
 	}
 
 
@@ -86,11 +86,11 @@ class asesoriasController extends \BaseController {
 
 		$data['creador'] = $asesoria->creador;
 		$data['modificado'] = Auth::user()->id;
-		
+
 		if($asesoria->guardar($data, 1)){
 			$materiales = Input::file('material');
 			if(count($materiales)>0){
-				
+
 				foreach ($materiales as $material) {
 					if ($material != "") {
 					$nombreMaterial = $this->guardarAsesoria($material);
@@ -103,7 +103,7 @@ class asesoriasController extends \BaseController {
 					}
 				}
 			}
-			
+
 			return Redirect::route('asesorias');
 		}
 

@@ -59,7 +59,9 @@
 	<br>
 		La Universidad Católica de El Salvador Centro Regional de Ilobasco sede Cabañas, el <b> día {{$dia}} de {{$mes}}
 		de {{$ano}}</b>, hace constar que ha recibido a su entera satisfacción los servicios 
-		@if($consultor->consultor->sexo == 'Mujer')
+		@if($consultor->consultor->empresa)
+			de la empresa consultora <b>{{$consultor->consultor->empresa }} </b> representada por 
+		@elseif($consultor->consultor->sexo == 'Mujer')
 			de la consultora
 		@else
 			del consultor
@@ -88,7 +90,7 @@
 	<br>
 
 	Y para constancia de lo anterior, firmamos la presente en la ciudad de Ilobasco, departamento
-	de Cabañas, a las {{$hora}}, del {{$diaActa}} de {{$mesActa}} de {{$anoActa}}.
+	de Cabañas, a las 4:00pm, del {{$diaActa}} de {{$mesActa}} de {{$anoActa}}.
 
 	<br>
 	<br>
@@ -107,7 +109,10 @@
 		<div class="firm consultor">
 			F._____________________	<br/>
 			{{$consultor->consultor->nombre}} <br/>
-			@if($consultor->consultor->sexo == 'Mujer')
+			@if($consultor->consultor->empresa)
+				Representante de empresa<br>
+				{{$consultor->consultor->empresa}}
+			@elseif($consultor->consultor->sexo == 'Mujer')
 				Consultora
 			@else
 				Consultor

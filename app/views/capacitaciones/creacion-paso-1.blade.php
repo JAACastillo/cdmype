@@ -11,7 +11,10 @@ Capacitaciones
 
 {{ Form::model($captermino, $accion) }}
 @if($captermino->exists)
-	<a class="btn btn-default" href="{{route('pdfCap', $captermino->id)}}" data-toggle="tooltip" data-placement="bottom" title="Imprimir F1" target="_blank"> <span class="glyphicon glyphicon-print"></span>&nbsp TDR</a>
+	<a class="btn btn-default" href="{{route('pdfCap', $captermino->id)}}" data-toggle="tooltip" data-placement="bottom" title="Imprimir TDR" target="_blank"> <span class="glyphicon glyphicon-print"></span>&nbsp TDR</a>
+	@foreach($captermino->envios as $envio)
+		<a class="btn btn-default" href="{{route('pdfEnvio', $envio->id)}}" data-toggle="tooltip" data-placement="bottom" title="Imprimir TDR" target="_blank"> <span class="glyphicon glyphicon-print"></span>&nbsp {{$envio->fecha_limite}}</a>
+	@endforeach
 @endif
 @include('errores', array('errors' => $errors))
 <div class="row animated fadeIn">
@@ -21,28 +24,25 @@ Capacitaciones
             <div class="panel-body">
                 <div class="row">
                     <div class="col-xs-12"> 
-                        <div class="form-group">
+                       <!--  <div class="form-group">
 		                     {{ Form::label('encabezado', 'Encabezado:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
 		                        {{ Form::text('encabezado', null, array('placeholder' => 'Encabezado', 'class' => 'form-control','autofocus')) }}        
 		                    </div>
-		                </div>
+		                </div> -->
 		                <div class="form-group">
 		                     {{ Form::label('tema', 'Tema:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
-		                        {{ Form::text('tema', null, array('placeholder' => 'Tema de Capacitación', 'class' => 'form-control')) }}
+		                        {{ Form::text('tema', null, array('placeholder' => 'Tema de Capacitación', 'class' => 'form-control','autofocus')) }}
 		                    </div>
 		                </div>
 		                <div class="form-group">
 		                    {{ Form::label('categoria', 'Categoria:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
-		                        {{ Form::select('categoria', array(
-		                                              '' => 'Seleccione una opción',
-		                                              '1' => 'Emprendedoras y empresarias de los Departamentos de Cabañas, Cuscatlán y San Vicente.',
-		                                              '2' => 'Empresarios de los departamentos de Cabañas, Cuscatlán y San Vicente.'), null, array('class' => 'form-control')) }}
+		                    	{{ Form::textarea('categoria', null, array('placeholder' => 'Categoria de la capacitacion', 'rows' => '2', 'class' => 'form-control')) }}
 		                    </div>
 		                </div>
-		                <div class="form-group">
+		                <div class="form-group">p
 		                    {{ Form::label('descripcion', 'Descripción:', array('class' => 'control-label col-md-4')) }}
 		                    <div class="col-md-8">
 		                        {{ Form::textarea('descripcion', null, array('placeholder' => 'Descripción de la Empresa/Grupo', 'rows' => '2', 'class' => 'form-control')) }}
@@ -111,7 +111,7 @@ Capacitaciones
 	                <div class="form-group">
 	                    {{ Form::label('nota', 'Nota:', array('class' => 'control-label col-md-4')) }}
 	                    <div class="col-md-8">
-	                        {{ Form::textarea('nota', null, array('placeholder' => 'Nota (opcional)', 'rows' => '2', 'class' => 'form-control')) }}
+	                        {{ Form::textarea('nota', null, array('placeholder' => 'Nota (opcional)', 'rows' => '4', 'class' => 'form-control')) }}
 	                    </div>                
 	                </div>
 	                <div class="form-group">

@@ -7,7 +7,6 @@
             <li>
                 <a href="#" ng-click="asesor(0)"><i class="fa fa-group fa-fw"></i> Asesores<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
-                    
                     @foreach($asesores as $asesor)
                         <li> 
                           <a href="#" ng-click="asesor({{$asesor->id}})">  {{$asesor->nombre}} </a>

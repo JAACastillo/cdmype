@@ -9,12 +9,12 @@ class ConsultorController extends BaseController {
             ->paginate(10000000000);
 
         $consultorEspecialidad = ConsultorEspecialidad::all();
-
+        
         return View::make('consultores.lista', compact('consultores', 'consultorEspecialidad'));
 	}
 
 	public function crearConsultor()
-	{
+	{ 
 		$consultor = new Consultor;
 
 		$especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
@@ -30,7 +30,7 @@ class ConsultorController extends BaseController {
         $consultor = new Consultor;
         $datos = Input::all();
         $subespecialidades = Input::get('especialidad_id');
-
+        
         if($consultor->guardar($datos,'1'))
         {
             foreach($subespecialidades as $subespecialidad) {
@@ -40,10 +40,10 @@ class ConsultorController extends BaseController {
                 $ConsultorEspecialidad->save();
             }
 
-            return Redirect::route('consultores');
+            return Redirect::route('consultores');  
         }
         else
-        {
+        { 
             return Redirect::back()->withInput()->withErrors($consultor->errores);
         }
 	}
@@ -52,9 +52,9 @@ class ConsultorController extends BaseController {
 	{
         $consultor = Consultor::find($id);
 
-        if(is_null($consultor))
+        if(is_null($consultor)) 
             App::abort(404);
-
+        
         return View::make('consultores.ver', compact('consultor'));
 	}
 
@@ -62,16 +62,16 @@ class ConsultorController extends BaseController {
 	public function editarConsultor($id)
 	{
         $consultor = Consultor::find($id);
-        if(is_null($consultor))
+        if(is_null($consultor)) 
             App::abort(404);
-
+        
         $consultorEspecialidad = ConsultorEspecialidad::Where('consultor_id', '=', $id)->get();
         $especialidades = SubEspecialidad::all()->lists('sub_especialidad', 'id');
         $departamentos = array('' => 'Seleccione una opción') + Departamento::all()->lists('departamento', 'id');
-        $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');
+        $municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');      
         $dataSexo = array('' => 'Seleccione el sexo', 1 => 'Mujer', 2 => 'Hombre');
 
-        foreach ($consultorEspecialidad as $item)
+        foreach ($consultorEspecialidad as $item) 
         {
             $datos[] = $item->subespecialidad_id;
         }
@@ -80,7 +80,7 @@ class ConsultorController extends BaseController {
         $consultor->departamento = $consultor->municipio->departamento_id;
         $consultor->sexo = array_search($consultor->sexo, $dataSexo);
         $consultor->municipio = array_search($consultor->municipio_id, $municipios);
-
+        
 
         return View::make('consultores.formulario', compact('consultor', 'especialidades','departamentos', 'municipios'));
 	}
@@ -89,10 +89,10 @@ class ConsultorController extends BaseController {
 	public function actualizarConsultor($id)
 	{
         $consultor = Consultor::find($id);
-
-        if(is_null($consultor))
+        
+        if(is_null($consultor)) 
             App::abort(404);
-
+        
         $datos = Input::all();
         $subespecialidades = Input::get('especialidad_id');
 
@@ -105,21 +105,21 @@ class ConsultorController extends BaseController {
                 return Redirect::back()->withInput()->withErrors(['Error' => 'No se han podido actualizar las especialidades']);
             }
         }
-        else
+        else 
             return Redirect::back()->withInput()->withErrors($consultor->errores);
 	}
 
 	public function eliminarConsultor($id)
 	{
         $consultor = Consultor::find($id);
-
+        
         if(is_null($consultor))
             App::abort(404);
-
-        else
+        
+        else 
         {
             $consultor->delete();
-
+            
             $bitacora = new Bitacora;
             $campos = array(
                 'usuario_id' => Auth::user()->id,
@@ -127,7 +127,7 @@ class ConsultorController extends BaseController {
                 'tabla_id' => $id,
                 'accion' => 3
             );
-
+            
             $bitacora->Guardar($campos);
             return Redirect::route('consultores');
         }
@@ -144,7 +144,7 @@ class ConsultorController extends BaseController {
         {
              $datos[] = $especialidad->especialidad->sub_especialidad;
         }
-
+        
         return Response::json($datos, 200,  array('content-type' => 'application/json', 'Access-Control-Allow-Origin' => '*'));
     }
 
@@ -165,8 +165,8 @@ class ConsultorController extends BaseController {
                 $ConsultorEspecialidad->subespecialidad_id = $subespecialidad;
                 $ConsultorEspecialidad->save();
         }
-
-        return true;
+        
+        return true;   
     }
 
 }

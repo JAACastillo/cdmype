@@ -1,23 +1,12 @@
 @extends('plantillas.plantilla')
 
 @include('menu')
- 
-@stop
-
-
-
 {{ HTML::style('assets/css/sb-admin-2.css', array('media' => 'screen')) }}
 {{ HTML::style('assets/css/metisMenu.min.css', array('media' => 'screen')) }}
 {{ HTML::style('assets/css/timeline.css', array('media' => 'screen')) }}
 {{ HTML::style('assets/css/base.css', array('media' => 'screen')) }}
 {{ HTML::style('assets/css/clean.css', array('media' => 'screen')) }}
-
-
-
-
-{{ HTML::script('assets/js/jquery.min.js')}}
 {{ HTML::script('assets/js/angular.min.js')}}
-
 {{ HTML::script('assets/js/bouil.chart.js')}}
 {{ HTML::script('assets/js/datepicker.js')}}
 
@@ -26,10 +15,8 @@
     <div id="wrapper">
     	@include('panel.menu')
     </div>
-<br/>  
-
     <div id="page-wrapper">
-        <div class="row">
+        <div >
             <!-- <div class="col-lg-1">
                 fechasasdfasdfasdf
             </div>

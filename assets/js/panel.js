@@ -78,7 +78,7 @@ var app = angular.module('panel', ['googlechart'])
 		$log.info('servicio iniciado')
 		defer = $q.defer();
 
-		$http.get('/cdmype/panel/asesor/' + asesor + "?from=" + from + '&to=' + to)
+		$http.get('/cdmype/sistema/panel/asesor/' + asesor + "?from=" + from + '&to=' + to)
 			.success( function (data){
 				defer.resolve(data);
 			})
@@ -92,7 +92,7 @@ var app = angular.module('panel', ['googlechart'])
 	function grafica(asesor, from, to){
 		defer = $q.defer();
 
-		$http.get('/cdmype/panel/grafica/' + asesor + "?from=" + from + '&to=' + to)
+		$http.get('/cdmype/sistema/panel/grafica/' + asesor + "?from=" + from + '&to=' + to)
 			.success( function (data){
 				defer.resolve(data);
 			})

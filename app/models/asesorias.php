@@ -11,12 +11,12 @@ class asesorias extends Eloquent {
         'creador',
         'modificado'
     );
-
-    /* Guardar */
+    
+    /* Guardar */ 
 
         public function guardar($datos,$accion)
         {
-            if($this->validar($datos))
+            if($this->validar($datos)) 
             {
                 $this->fill($datos);
                 $this->save();
@@ -28,7 +28,7 @@ class asesorias extends Eloquent {
                     'tabla_id' => $id,
                     'accion' => $accion
                 );
-
+                
                 $bitacora->guardar($campos);
                 return true;
             }
@@ -37,16 +37,16 @@ class asesorias extends Eloquent {
 
     /* Validación de Campos */
 
-        public function validar($datos)
+        public function validar($datos) 
         {
             $reglas = array(
                 'nombre' => 'required',
                 'descripcion' => 'required',
                 'creador' => 'required'
             );
-
+            
             $validador = Validator::make($datos,$reglas);
-
+            
             if($validador->passes())
                 return true;
 
@@ -56,7 +56,7 @@ class asesorias extends Eloquent {
 
     /* Relaciones */
 
-        public function material()
+        public function material() 
         {
             return $this->hasMany('asesoriaMaterial','asesoria_id');
         }
@@ -68,5 +68,5 @@ class asesorias extends Eloquent {
         public function editado(){
             return $this->belongsTo('user', 'modificado');
         }
-
+        
 }

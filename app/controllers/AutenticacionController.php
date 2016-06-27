@@ -24,8 +24,8 @@ class AutenticacionController extends BaseController {
             'password' => Input::get('contrasena')
         );
 
-        if(Auth::attempt($datos, Input::get('remember-me', 0)))
-            return Redirect::to('/');
+        if(Auth::attempt($datos, 1)){
+            return Redirect::to('/');}
         else
             return Redirect::to('login')
                     ->with('mensaje_error', 'Tus datos son incorrectos')

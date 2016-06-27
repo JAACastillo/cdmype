@@ -52,6 +52,11 @@
 	<p>
 	NOSOTROS, Universidad Católica de El Salvador y CDMYPE-Ilobasco, en su calidad de Centro de
 	Desarrollo de la Micro y Pequeña Empresa CDMYPE y
+
+	@if($consultor->empresa)
+		la empresa {{$consultor->empresa}} con número de Registro Tributario {{$consultor->iva}}, representada por
+	@endif
+
 	{{$consultor->nombre}},
 	mayor de edad, de nacionalidad salvadoreña, del domicilio de
 	{{$consultor->direccion}}
@@ -79,11 +84,12 @@
 	con Documento Único de Identidad (DUI), número {{$empresario->dui}}, la asistencia técnica
 	denominada: "<em>{{$at->tema}}</em> "
 
+	<span style="display: block;">Las partes sujetamos el contrato en referencia a las siguientes cláusulas:</span>
+
 
 	<p class="clausula">PRIMERA: PRODUCTOS ESPERADOS </p>
 
 	Los productos esperados a realizar por {{$consultor->denominacion}} son los siguientes de acuerdo a los solicitados en los TDR:
-	Al finalizar la asistencia técnica, donde {{$consultor->denominacion}} deberá hacer visitas in situ para desarrollar el trabajo siguiente:
 
 		<?php
 			$productos = explode("\r\n", $at->productos)
@@ -95,7 +101,7 @@
 				</li>
 			@endforeach
 		</ul>
-<br/>
+
 	<p class="clausula"> SEGUNDA: PLAZO </p>
 
 
@@ -120,32 +126,22 @@
 <br/>
 	<p class="clausula">CUARTA: FORMA DE PAGO </p>
 
-	El CDMYPE-Ilobasco, en virtud de este contrato y una vez {{$empresario->nombre}} manifieste por
-	escrito su conformidad con el servicio recibido y con el visto bueno del CDMYPE-Ilobasco, pagará al
-	consultor en concepto de honorarios por la asistencia técnica efectuada, la cantidad de $
+	El CDMYPE-Ilobasco, en virtud de este contrato y una vez {{$empresario->nombre}}, manifieste por
+	escrito su conformidad con el servicio recibido y con el visto bueno del CDMYPE-Ilobasco, pagará a 
+	{{$consultor->denominacion}} en concepto de honorarios por la asistencia técnica efectuada, la cantidad de $
 	<?php if ($at->aporte != 0) {
-		echo round(($contrato->pago * ($contrato->aporte/100)),2);
+		echo round($contrato->pagoCdmype,2);
 	}else{
-		echo $contrato->pago;
+		echo round($contrato->pago,2);
 	}
 	?>
-	(incluye	IVA) que corresponde al
-	<?php if ($at->aporte != 0) {
-		echo $contrato->aporte;
-	}else{
-		echo "100";
-	}
-	?> % del costo total de la consultoría.
+	(incluye	IVA) que corresponde al {{$contrato->aporte}} % del costo total de la consultoría.
 
-	<?php if ($at->aporte != 0) {
-	 echo "Para completar el pago a ";
-	 echo $consultor->denominacion;
-	 echo " el aporte del empresario será de ";
-	 echo round($contrato->pago * ((100 - $contrato->aporte)/100),2);
-	 echo " que es un ";
-	 echo (100 - $contrato->aporte);
-	 echo "% de total de la consultoría.";
-	}?>
+	@if ($contrato->aporte != 100) 
+		Para completar el pago a {{$consultor->denominacion}}
+		el aporte del empresario será de $ {{round($contrato->pagoEmpresario, 2)}} que es un {{(100 - $contrato->aporte)}}
+		% de total de la consultoría.
+	@endif
 
 	No se reconocerá ninguna cantidad anticipadamente ni adicional. La forma de pago será: un solo
 	pago al final de la asistencia técnica, siempre que el empresario firme el acta de conformidad de la
@@ -157,12 +153,24 @@
 	<p class="clausula">QUINTA: SELECCIÓN DE CONSULTOR </p>
 
 
-	{{$empresario->nombre}}, manifiesta haber seleccionado a {{$consultor->nombre}}, consultor que
-	presentó oferta al CDMYPE y se detalla en el siguiente listado:
+	{{$empresario->nombre}}, manifiesta haber seleccionado a 
+
+	@if($consultor->empresa)
+		{{$consultor->empresa}} representada por 
+	@endif
+
+	{{$consultor->nombre}}, 
+
+
+	del siguiente listado de consultores que presentaron ofertas a CDMYPE:
 		<ol>
 			@foreach($at->ofertantes as $ofertante)
 				<li>
-					{{$ofertante->consultor->nombre}}
+					@if($ofertante->consultor->empresa)
+						{{$ofertante->consultor->empresa}}
+					@else
+						{{$ofertante->consultor->nombre}}
+					@endif
 				</li>
 			@endforeach
 		</ol>
@@ -182,12 +190,10 @@
 			<?php if ($at->aporte != 0) {
 			echo "<li>
 				El pago del aporte empresarial deberá ser realizado únicamente en las oficinas del CDMYPE o a
-				través de depósito bancario, para que, luego de la firma del presente contrato,";
+				través de depósito bancario, para que, luego de la firma del presente contrato, ";
 
 			echo  $consultor->denominacion;
-			echo "entregue al
-				empresario factura o crédito fiscal correspondiente al monto pagado.
-			</li>";
+			echo " entregue al empresario factura o crédito fiscal correspondiente al monto pagado.</li>";
 			}?>
 
 			<li>
@@ -223,10 +229,10 @@
 	</p>
 		El contrato podrá darse por terminado según las causas siguientes:
 		<ol type="a">
-			<li> Por común acuerdo entre las partes; </li>
-			<li> Por solicitud de una de las partes, por motivo de fuerza mayor debidamente justificado y aceptado por la otra; </li>
-			<li> Si cualquiera de las partes incumpliere cualquier obligación derivada del presente contrato; </li>
-			<li> Por causas imprevistas que hicieren imposible obtener la consultoría contratada, dando aviso a la otra parte con quince días de anticipación a la fecha de suspensión del contrato; </li>
+			<li> Por común acuerdo entre las partes. </li>
+			<li> Por solicitud de una de las partes, por motivo de fuerza mayor debidamente justificado y aceptado por la otra. </li>
+			<li> Si cualquiera de las partes incumpliere cualquier obligación derivada del presente contrato. </li>
+			<li> Por causas imprevistas que hicieren imposible obtener la consultoría contratada, dando aviso a la otra parte con quince días de anticipación a la fecha de suspensión del contrato. </li>
 			<li> Por faltas a la ética profesional. </li>
 		</ol>
 		Cuando el contrato se dé por terminado por las razones descritas en los literales (b), (c) y (d) las cuales sean imputables a la(s) empresa(s) beneficiaria(s). El CDMYPE, a su discreción, podrá
@@ -272,8 +278,8 @@
 
 
 			Este contrato entrará en vigencia a partir de la fecha de su firma y a partir de la misma autoriza a
-			{{$consultor->nombre}} a dar inicio a la asistencia técnica. Cualquier prórroga del contrato deberá ser solicitada al
-			CDMYPE, argumentando los motivos. El CDMYPE determinará la validez o no dicha solicitud.
+			{{$consultor->nombre}} a dar inicio a la asistencia técnica.
+			<br>
 			En fe de lo cual firmamos el presente contrato en original en {{$contrato->lugar_firma}} a los {{$dia}} días del mes
 			de {{$mes}} del año {{$ano}}.
 	</p>
@@ -289,17 +295,15 @@
 		<div class="firm empresario">
 			F._____________________	<br/>
 			{{$empresario->nombre}} <br/>
-			@if($empresario->sexo == 'Mujer')
-				Propietaria
-			@else
-				Propietario
-			@endif
+			{{$empresario->empresa[0]->tipo}}
 
 		</div>
 		<div class="firm consultor">
 			F._____________________	<br/>
 			{{$consultor->nombre}} <br/>
-			@if($consultor->sexo == 'Mujer')
+			@if($consultor->empresa)
+				Representante empresa consultora <br>{{$consultor->empresa}}
+			@elseif($consultor->sexo == 'Mujer')
 				Consultora
 			@else
 				Consultor

@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'timezone' => 'UTC',
+	'timezone' => 'America/El_Salvador',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -126,7 +126,6 @@ return array(
 		//Providers personalizados
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Barryvdh\DomPDF\ServiceProvider',
-		'Way\Generators\GeneratorsServiceProvider'
 
 	),
 

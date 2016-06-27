@@ -22,9 +22,11 @@ class SalidasController extends \BaseController {
 		$municipios = array('' => 'Seleccione una opción') + Municipio::all()->lists('municipio', 'id');
 		$salida->fecha_inicio = $hoy;
 		$salida->fecha_final = $hoy;
-		$salida->hora_salida = $hora;
-		$salida->hora_regreso = $hora;
-		$salida->participantes = [1,2,3,4,5,6,7,8,9,10,11,12];
+		$salida->hora_salida = "08:30";//$hora;
+		$salida->hora_regreso = "16:00";//$hora;
+		$salida->participantes = [2,3,4,5,6,7,8,12];
+		$salida->objetivo = "Brindar los servicios de asesoría a nuevos clientes que les permita mejorar sus empresas orientadas a la generación de impacto económico";
+		$salida->justificacion = "Debido a las grandes distancias que hay entre la Universidad y los lugares donde están establecidas las empresas se dificulta que estos puedan visitar el centro por tal razón existe la necesidad de realizar visitas a estos";
 
 		return View::make('salidas.create', compact('salida', 'asesores', 'municipios'));
 	}
@@ -106,7 +108,7 @@ class SalidasController extends \BaseController {
 	{
 		//
 	}
- 
+
 
 	public function pdf()
 	{
@@ -114,7 +116,9 @@ class SalidasController extends \BaseController {
 		$mes = Input::get('mes');
 		$firma = Input::get('firma');
 
-		$salidas = Salida::whereRaw('YEAR(fecha_inicio) = ? and MONTH(fecha_inicio) = ?', [$ano, $mes])->get();
+		$salidas = Salida::whereRaw('YEAR(fecha_inicio) = ? and MONTH(fecha_inicio) = ?', [$ano, $mes])
+							->orderBy('fecha_inicio', 'ASC')
+							->get();
 
       $pdf = App::make('dompdf');
       $pdf->loadView('pdf.salidas', compact('salidas', 'ano', 'mes', 'firma'))->setOrientation('landscape');;

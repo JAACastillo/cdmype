@@ -52,7 +52,7 @@
 					<th>CORREO ELÉCTRONICO</th>
 					<th>DUI</th>
 					<th>NIT</th>
-					<th>COMENTARIOS</th>
+					<th>SECTOR ECONOMICO</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -72,7 +72,11 @@
 						<td style="text-align:center; width:100px">{{ $asistencia->empresario->correo }}</td>
 						<td style="text-align:center; width:70px">{{ $asistencia->empresario->dui }}</td>
 						<td style="text-align:center; width:110px">{{ $asistencia->empresario->nit }}</td>
-						<td style="text-align:center; width:150px"> </td>
+						<td style="text-align:center; width:150px"> 
+							@foreach($asistencia->empresario->empresa as $empresario)
+                    			<h5 style="margin:0px; width:100px">{{ $empresario->empresas->sector_economico }}</h5>
+                			@endforeach
+						</td>
 				</tr>
 				<?php
 				$num++;

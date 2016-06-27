@@ -1,4 +1,4 @@
-<?php # http://www.lawebdelprogramador.com # tiene que recibir la hora inicial y la hora final 
+<?php # http://www.lawebdelprogramador.com # tiene que recibir la hora inicial y la hora final
 	function RestarHoras($horaini,$horafin) { $horai=substr($horaini,0,2); $mini=substr($horaini,3,2); $segi=substr($horaini,6,2); $horaf=substr($horafin,0,2); $minf=substr($horafin,3,2); $segf=substr($horafin,6,2); $ini=((($horai*60)*60)+($mini*60)+$segi); $fin=((($horaf*60)*60)+($minf*60)+$segf); $dif=$fin-$ini; $difh=floor($dif/3600); $difm=floor(($dif-($difh*3600))/60); $difs=$dif-($difm*60)-($difh*3600); return date("H:i",mktime($difh,$difm,$difs)); } ?>
 
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
 	     #header {margin: 0px; position: fixed; left: 0px; top: -76px; right: 0px;  text-align: center; }
 	     #header { position: fixed; left: 0px; bottom: -130px; right: 0px; height: 120px;  }
 	       #footer { position: fixed; left: 0px; bottom: -140px; right: 0px; height: 150px;  }
-	    
+
 	     #footer .page:after { content: counter(page, upper-roman); }
 	     #contenido {font-family: "arial black" ;margin: 0px; padding: 0px; text-align:justify; font-size: 13px; line-height: 15px}
 	     #header .left {position: absolute; float: left}
@@ -31,6 +31,11 @@
 
 	     .borderRightNone{border-right: 1px solid #ffffff;}
 	     .borderBottomNone{border-bottom: 1px solid #ffffff;}
+
+
+	     .firmas .firm { display: inline-block; position: absolute; text-align: center;}
+        .propietario {float: right; margin-left: -400px}
+        .asesor {float: right; margin-left: 300; position: absolute;}
 
 	   </style>
 
@@ -56,14 +61,14 @@
 <div id="contenido">
 <table >
 	<tr>
-		<td width="280px"> 
-			Fecha: <span class='raya' width="10px">  {{$asesoria->fecha_inicio}} </span>
+		<td width="320px">
+			Fecha: <span class='raya' width="10px">  {{date("d-m-Y", strtotime($asesoria->fecha_inicio)); }} </span>
 		</td>
 		<td width="150px">
-			Hora de llegada: <span class='raya'>  {{$asesoria->hora_inicio}} </span>
+			Hora de llegada: <span class='raya'> {{date("g:i a", strtotime($asesoria->hora_inicio));}} </span>
 		</td>
 		<td width="150px">
-			Hora de Salida: <span class='raya'>  {{$asesoria->hora_fin}} </span>
+			Hora de Salida: <span class='raya'>  {{date("g:i a", strtotime($asesoria->hora_fin));}} </span>
 		</td>
 	</tr>
 	<tr>
@@ -115,13 +120,13 @@
 	</tr>
 	<tr >
 		<td height="35px" >
-			
+
 		</td>
 		<td >
-			
+
 		</td>
 		<td style="text-align:center">
-			<?php 
+			<?php
 				echo RestarHoras($asesoria->hora_inicio, $asesoria->hora_fin);
 			?>
 		</td>
@@ -135,7 +140,7 @@
 	</tr>
 	<tr>
 		<td colspan="4" class="text-left" height="100px" >
-			
+
 		</td>
 	</tr>
 	<tr>
@@ -171,6 +176,18 @@
 	</tr>
 </table>
 
+<br><br><br><br><br>
+<div class="firmas">
+ <div class="firm propietario">
+   <p>F.____________________________</p>
+   <p>Nombre.____________________________</p>
+   <p>Propietario o Representante</p>
+ </div>
+ <div class="firm asesor">
+   <p>F.____________________________</p>
+   <p>Firma Asesor CDMYPE</p>
+ </div>
+</div>
 
 </div>
 </body>

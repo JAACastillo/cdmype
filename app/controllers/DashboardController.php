@@ -6,39 +6,26 @@ class DashboardController extends BaseController {
 
     public function dashboard(){
 
-        $userID = 1; // Auth::user()->id;
+        $userID = Auth::user()->id;
         $today = date('Y-m-d');
 
-        $ultimosAt = AtTermino::with('contrato', 'empresa')
-                                ->where('usuario_id', '=', $userID)
-                                ->where('estado', 'contratada')
-                                ->orderBy('fecha', 'asc')->get();
-
+        // Seciones Atrazadas
         $asesoria = Asesoria::where('estado', '=', 'Programada')
                                 ->where('fecha_inicio', '<', $today)
                                 ->orderBy('fecha_inicio', 'asc')->get();
-
-        $materiales = asesorias::where('creador', '=', $userID)->count();
-
-        $proyectos = proyecto::where('asesor', '=', $userID)->count();
 
         // $atFinalizadas = AtTermino::with('contrato', 'empresa')
         //                         ->where('usuario_id', '=', $userID)
         //                         ->where('estado', 'finalizada')
         //                         ->orderBy('fecha', 'asc')->get();
-        // $AtFinalizar = AtTermino::with('contrato', 'empresa')
-        //                         ->where('usuario_id', '=', $userID)
-        //                         ->where('estado', '!=', "contratada")
-        //                         ->where('estado', '!=', "finalizada")
-        //                         ->orderBy('fecha', 'desc')->take(4)->get();
 
+        // Ahora
         $ahora = AtTermino::with('contrato', 'empresa')
                                 ->where('usuario_id', '=', $userID)
                                 ->where('fecha','=',$today)
                                 ->orderBy('fecha', 'asc')->get()->toArray();
-
-        $as = Asesoria::where('fecha_inicio', $today)->orderBy('fecha_inicio', 'asc')->get();
-
+        $as = Asesoria::where('fecha_inicio', $today)->where('user_id', '=', $userID)->orderBy('fecha_inicio', 'asc')->get();
+        $re = Reunione::where('fecha_inicio', $today)->where('user_id', '=', $userID)->orderBy('fecha_inicio', 'asc')->get();
         foreach ($as as $ase) {
             $ahora[] = array(
                 'id' => $ase->id,
@@ -47,6 +34,44 @@ class DashboardController extends BaseController {
                 'fecha' => $ase->fecha_inicio
             );
         }
+        foreach ($re as $reu) {
+            $ahora[] = array(
+                'id' => $reu->id,
+                'informe'  => 'reunion',
+                'tema' => $reu->titulo,
+                'fecha' => $reu->fecha_inicio
+            );
+        }
+
+
+        if ($userID == 9)
+        {
+            // Contratadas
+            $ultimosAt = AtTermino::with('contrato', 'empresa')
+                                    ->where('estado', 'contratada')
+                                    ->orderBy('fecha', 'asc')->take(10)->get();
+            // En Proceso
+            $AtFinalizar = AtTermino::with('contrato', 'empresa')
+                                    ->where('estado', '!=', "finalizada")
+                                    ->orderBy('fecha', 'desc')->take(10)->get();
+        }else{
+            // Contratadas
+            $ultimosAt = AtTermino::with('contrato', 'empresa')
+                                    ->where('usuario_id', '=', $userID)
+                                    ->where('estado', 'contratada')
+                                    ->orderBy('fecha', 'asc')->take(10)->get();
+            // En Proceso
+            $AtFinalizar = AtTermino::with('contrato', 'empresa')
+                                    ->where('usuario_id', '=', $userID)
+                                    ->where('estado', '!=', "finalizada")
+                                    ->orderBy('fecha', 'desc')->take(10)->get();
+        }
+
+
+        $materiales = asesorias::where('creador', '=', $userID)->count();
+        $proyectos = proyecto::where('asesor', '=', $userID)->count();
+
+        // Eventos
 
         $eventos = Evento::where('fecha', '>=', $today)
                            ->get()
@@ -74,7 +99,7 @@ class DashboardController extends BaseController {
       // return Response::json($eventos);
 
 
-        return View::make('dashboard.dashboard', compact('ultimosAt', 'asesoria', 'ahora' ,'materiales', 'proyectos', 'eventos'));
+        return View::make('dashboard.dashboard', compact('ultimosAt', 'asesoria', 'AtFinalizar', 'ahora' ,'materiales', 'proyectos', 'eventos'));
     }
 
 }

@@ -51,7 +51,7 @@
 	<br>
 	<br>
 		Yo <strong>{{$solicitante->nombre}}</strong> en mi calidad de {{$solicitante->calidad }}, solicito una ampliación
-		de {{$ampliacion->tiempo_ampliacion}} {{$ampliacion->periodo}} para la finalización de la asistencia técnica
+		de {{$ampliacion->tiempo_ampliacion}} {{strtolower($ampliacion->periodo)}} para la finalización de la asistencia técnica
 		llamada <strong>"{{$nombre}}"</strong>, por las siguientes razones.
 		<br>
 		<br>

@@ -1,4 +1,5 @@
 <?php
+use Carbon\Carbon;
 class AmpliacionContrato extends Eloquent {
     
     protected $table = 'ampliacionescontratos';
@@ -13,6 +14,8 @@ class AmpliacionContrato extends Eloquent {
         'attermino_id',
         'solicitante'
     );
+
+    protected $periodo = ['day', 'week', 'month'];
     
     /* Guardar */
 
@@ -58,6 +61,23 @@ class AmpliacionContrato extends Eloquent {
 
             $this->errores = $validador->errors();
             return false;
+        }
+
+        public function fechaRecibo($fecha){
+            // 'return '
+            $fecha = Carbon::parse($fecha);
+            switch ($this->attributes['periodo']) {
+                case 'Dias':
+                    $fecha = $fecha->addDays($this->attributes['tiempo_ampliacion']);
+                    break;
+                case 'Semanas':
+                    $fecha = $fecha->addWeek($this->attributes['tiempo_ampliacion']);
+                    break;
+                case 'Meses':
+                    $fecha = $fecha->addMonth($this->attributes['tiempo_ampliacion']);
+                    break;
+            }
+            return $fecha->format('Y/m/d');
         }
 
     /* Relaciones */
