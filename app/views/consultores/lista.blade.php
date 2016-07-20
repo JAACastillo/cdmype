@@ -21,6 +21,7 @@
     <table class="table table-bordered datatable">
         <thead>
         <tr class="active">
+            <th class="text-center">ID</th>
             <th class="text-center">Nombre</th>
             <th class="text-center">Municipio</th>
             <th class="text-center hidden-xs hidden-sm">Correo Electrónico</th>
@@ -31,6 +32,7 @@
         <tbody>
         @foreach ($consultores as $consultor)
         <tr>
+            <td class="text-center">{{ $consultor->id }}</td>
             <td><a href="{{route('editarConsultor', array($consultor->id))}}">{{ $consultor->nombre  }}</a></td>
             <td class="text-center">{{ $consultor->municipio->municipio }}</td>
             <td class="text-center hidden-xs hidden-sm">{{ $consultor->correo }}</td>
