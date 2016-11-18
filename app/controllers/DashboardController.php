@@ -102,4 +102,8 @@ class DashboardController extends BaseController {
         return View::make('dashboard.dashboard', compact('ultimosAt', 'asesoria', 'AtFinalizar', 'ahora' ,'materiales', 'proyectos', 'eventos'));
     }
 
+    public function reportesat(){
+        return "holta";
+    }
+
 }

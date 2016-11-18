@@ -79,6 +79,8 @@
             // });
 
         Route::get('/', ['as' => 'dashboard'  ,'uses' => 'DashboardController@dashboard']);
+        
+        Route::get('/reportesat', ['as' => 'reportesat'  ,'uses' => 'DashboardController@reportesat']);
 
         /* Cerrar Sesion */
             Route::get('/logout', ['as' => 'logout', 'uses' => 'AutenticacionController@get_logOut']);

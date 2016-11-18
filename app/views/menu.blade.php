@@ -59,6 +59,7 @@
                 <li><a href="{{ route('verUsuario', array(Auth::user()->id)) }}"><span class="glyphicon glyphicon-user"></span>  Mi Perfil</a></li>
               @endif
             <li><a href="{{ route('configuraciones') }}"><span class="glyphicon glyphicon-wrench"></span>  Configuración</a></li>
+            <li><a href="{{ route('reportesat') }}"><span class="glyphicon glyphicon-wrench"></span>  Reporte</a></li>
             <li class="divider"></li>
             <li><a href="{{route('logout')}}"><span class="glyphicon glyphicon-off"></span>  Cerrar Sessión</a></li>
           </ul>
